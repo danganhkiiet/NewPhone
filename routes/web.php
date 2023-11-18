@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DienThoaiController;
+use App\Http\Controllers\NhaCungCapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,5 @@ use App\Http\Controllers\DienThoaiController;
 */
 
 Route::get('/',[DienThoaiController::class,'danhSach'])->name('dien-thoai.danh-sach');
+
+Route::get('/nha-cung-cap/danh-sach',[NhaCungCapController::class,'danhSach'])->name('nha-cung-cap.danh-sach');
