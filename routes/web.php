@@ -7,6 +7,7 @@ use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\BoNhoTrongController;
+use App\Http\Controllers\CongSacController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,6 +101,12 @@ Route::get('/camera-truoc/xoa{id}',[CameraTruocController::class,'xoa'])->name('
 
 
 //cong sac
+Route::get('/cong-sac/danh-sach',[CongSacController::class,'danhSach'])->name('cong-sac.danh-sach');
+Route::get('/cong-sac/them-moi',[CongSacController::class,'themMoi'])->name('cong-sac.them-moi');
+Route::post('/cong-sac/them-moi',[CongSacController::class,'xuLyThemMoi'])->name('cong-sac.xu-ly-them-moi');
+Route::get('/cong-sac/cap-nhat/{id}',[CongSacController::class,'capNhat'])->name('cong-sac.cap-nhat');
+Route::post('/cong-sac/cap-nhat/{id}',[CongSacController::class,'xuLyCapNhat'])->name('cong-sac.xu-ly-cap-nhat');
+Route::post('/cong-sac/xoa/{id}',[CongSacController::class,'xoa'])->name('cong-sac.xoa');
 
 
 
