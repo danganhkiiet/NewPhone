@@ -17,7 +17,20 @@
                     </div>
                 </div>
                 <!-- PAGE-HEADER END -->
-
+                <!-- Thong bao -->
+                @if (session('thong_bao'))
+                    <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
+                        <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
+                            <span class="alert-inner--icon me-2"><i class="fe fe-thumbs-up"></i></span>
+                            <strong>Thành công</strong>
+                        </p>
+                        <p class="py-3 px-5"> {{ session('thong_bao') }}</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
+                <!-- ket thuc thong bao -->
                 <!-- Row -->
                 <div class="row">
                     <div class="row row-sm">
@@ -25,39 +38,64 @@
                             <div class="card">
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
-                                    <div class="btn"  style="    position: relative;left: 78%;">
-                                        <a href="" class="btn btn-primary-light ">Thêm mới</a>
+                                    <div class="btn" style="position: relative;left: 78%;">
+                                        <a href="{{ route('nha-cung-cap.them-moi') }}" class="btn btn-primary-light ">Thêm
+                                            mới</a>
                                     </div>
+                                    <!-- form tim kiem -->
+                                    <form action="" class="form-inline" role="form"
+                                        style="position: relative;left: 45%;">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="ten"
+                                                placeholder="Nhập tên bạn muốn tìm" />
+                                            <button type="submit">
+                                                <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit"
+                                                    href="#">
+                                                    <i class="fe fe-search"></i>
+                                                </a>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <!-- ket thuc form tim kiem -->
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table editable-table table-nowrap table-bordered table-edit">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Age</th>
-                                                    <th>Gender</th>
-                                                    <th>Edit</th>
+                                                    <th>Tên</th>
+                                                    <th>Địa Chỉ</th>
+                                                    <th>Email</th>
+                                                    <th>Số Điện Thoại</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lstnhacungcap as $nhacungcap)
+                                                @foreach ($lst_nhacungcap as $nhacungcap)
                                                     <tr>
-                                                        <td>{{$nhacungcap->ten}}</td>
-                                                        <td>{{$nhacungcap->dia_chi}}</td>
-                                                        <td>{{$nhacungcap->email}}</td>
-                                                        <td>{{$nhacungcap->so_dien_thoai}}</td>
+                                                        <td>{{ $nhacungcap->ten }}</td>
+                                                        <td>{{ $nhacungcap->dia_chi }}</td>
+                                                        <td>{{ $nhacungcap->email }}</td>
+                                                        <td>{{ $nhacungcap->so_dien_thoai }}</td>
                                                         <td style="width: 100px">
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit">
+                                                                title="Edit"
+                                                                href="{{ route('nha-cung-cap.cap-nhat', ['id' => $nhacungcap->id]) }}">
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
+                                                            <form method="POST" action="{{route('nha-cung-cap.xoa',['id'=>$nhacungcap->id])}}">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger fs-14 text-white delete-icn"
+                                                                    title="Delete">
+                                                                    <i class="fe fe-delete"></i>
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        {{ $lst_nhacungcap->links() }}
                                     </div>
                                 </div>
                             </div>
