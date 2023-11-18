@@ -8,11 +8,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Camera Sau</h1>
+                        <h1 class="page-title">Camera Trước</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('camera-sau.danh-sach') }}">Camera sau</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('camera-truoc.danh-sach') }}">Camera trước</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
                         </ol>
                     </div>
@@ -22,7 +22,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header border-bottom">
-                                    <h3 class="card-title">Cập nhật thông tin bộ nhớ</h3>
+                                    <h3 class="card-title">Cập nhật thông tin Camera trước</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -32,8 +32,8 @@
                                                 <div class="card card-body pd-20 pd-md-40 border shadow-none">
                                                     <h4 class="card-title">Nhập thông tin</h4>
                                                     <div class="form-group">
-                                                        <label class="form-label" for="ten">Thông tin camera sau</label>
-                                                        <input class="form-control"  name="ten" id="ten" value="{{$camera_sau->ten }}" type="text" required>
+                                                        <label class="form-label" for="ten">Thông tin camera trước</label>
+                                                        <input class="form-control"  name="ten" id="ten" value="{{$camera_truoc->ten }}" type="text" required>
                                                     </div>
                                                     <button class="btn btn-primary btn-block" type="submit">Cập nhật</button>
                                                 </div>

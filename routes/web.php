@@ -1,7 +1,8 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CameraSauController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CameraTruocController;
 use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
@@ -19,8 +20,25 @@ use App\Http\Controllers\BoNhoTrongController;
 //dien thoai
 Route::get('/',[DienThoaiController::class,'danhSach'])->name('dien-thoai.danh-sach');
 
+
+
+
+
+
+
+
+
+
+
 //nhacungcap
 Route::get('/nha-cung-cap/danh-sach',[NhaCungCapController::class,'danhSach'])->name('nha-cung-cap.danh-sach');
+
+
+
+
+
+
+
 
 //khachhang
 Route::get('/khach-hang/danh-sach',[KhachHangController::class,'danhSach'])->name('khach-hang.danh-sach');
@@ -30,6 +48,7 @@ Route::get('/khach-hang/cap-nhat{id}',[KhachHangController::class,'capNhat'])->n
 Route::post('/khach-hang/cap-nhat{id}',[KhachHangController::class,'xuLyCapNhat'])->name('khach-hang.xu-ly-cap-nhat');
 Route::get('/khach-hang/xoa{id}',[KhachHangController::class,'xoa'])->name('khach-hang.xoa');
 
+
 //bo nho trong
 Route::get('/bo-nho-trong/danh-sach',[BoNhoTrongController::class,'danhSach'])->name('bo-nho-trong.danh-sach');
 Route::get('/bo-nho-trong/them-moi',[BoNhoTrongController::class,'themMoi'])->name('bo-nho-trong.them-moi');
@@ -38,6 +57,7 @@ Route::get('/bo-nho-trong/cap-nhat{id}',[BoNhoTrongController::class,'capNhat'])
 Route::post('/bo-nho-trong/cap-nhat{id}',[BoNhoTrongController::class,'xuLyCapNhat'])->name('bo-nho-trong.xu-ly-cap-nhat');
 Route::get('/bo-nho-trong/xoa{id}',[BoNhoTrongController::class,'xoa'])->name('bo-nho-trong.xoa');
 
+
 //camera sau
 Route::get('/camera-sau/danh-sach',[CameraSauController::class,'danhSach'])->name('camera-sau.danh-sach');
 Route::get('/camera-sau/them-moi',[CameraSauController::class,'themMoi'])->name('camera-sau.them-moi');
@@ -45,3 +65,105 @@ Route::post('/camera-sau/them-moi',[CameraSauController::class,'xuLyThemMoi'])->
 Route::get('/camera-sau/cap-nhat{id}',[CameraSauController::class,'capNhat'])->name('camera-sau.cap-nhat');
 Route::post('/camera-sau/cap-nhat{id}',[CameraSauController::class,'xuLyCapNhat'])->name('camera-sau.xu-ly-cap-nhat');
 Route::get('/camera-sau/xoa{id}',[CameraSauController::class,'xoa'])->name('camera-sau.xoa');
+
+
+//camera truoc
+Route::get('/camera-truoc/danh-sach',[CameraTruocController::class,'danhSach'])->name('camera-truoc.danh-sach');
+Route::get('/camera-truoc/them-moi',[CameraTruocController::class,'themMoi'])->name('camera-truoc.them-moi');
+Route::post('/camera-truoc/them-moi',[CameraTruocController::class,'xuLyThemMoi'])->name('camera-truoc.xu-ly-them-moi');
+Route::get('/camera-truoc/cap-nhat{id}',[CameraTruocController::class,'capNhat'])->name('camera-truoc.cap-nhat');
+Route::post('/camera-truoc/cap-nhat{id}',[CameraTruocController::class,'xuLyCapNhat'])->name('camera-truoc.xu-ly-cap-nhat');
+Route::get('/camera-truoc/xoa{id}',[CameraTruocController::class,'xoa'])->name('camera-truoc.xoa');
+
+
+//chipset
+
+
+
+
+
+
+
+
+//cong nghe mang hinh
+
+
+
+
+
+
+
+
+//cong sac
+
+
+
+
+
+
+
+
+//do phan giai mang hinh
+
+
+
+
+
+
+
+
+//dung luong ram
+
+
+
+
+
+
+
+
+//he dieu hanh
+
+
+
+
+
+
+
+
+//khang nuoc
+
+
+
+
+
+
+
+
+//the sim
+
+
+
+
+
+
+
+
+//pin
+
+
+
+
+
+
+
+
+//tinh nang mang hinh
+
+
+
+
+
+
+
+
+//mau

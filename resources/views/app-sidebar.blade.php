@@ -45,7 +45,7 @@
                         <li class="side-menu-label1"><a href="javascript:void(0)">Màu</a></li>
                         <li><a href="{{ route('bo-nho-trong.danh-sach') }}" class="slide-item">Bộ nhớ trong</a></li>
                         <li><a href="{{ route('camera-sau.danh-sach') }}"class="slide-item">Camera sau</a></li>
-                        <li><a href="#"class="slide-item">Camera trước</a></li>
+                        <li><a href="{{ route('camera-truoc.danh-sach') }}"class="slide-item">Camera trước</a></li>
                         <li><a href="#"class="slide-item">Chipset</a></li>
                         <li><a href="#"class="slide-item">Công nghệ màn hình</a></li>
                         <li><a href="#"class="slide-item">Cổng sạc</a></li>
@@ -57,6 +57,7 @@
                         <li><a href="#"class="slide-item">Thẻ sim</a></li>
                         <li><a href="#"class="slide-item">Pin</a></li>
                         <li><a href="#"class="slide-item">Tính năng màn hình</a></li>
+                        <li><a href="#"class="slide-item">Màu</a></li>
                     </ul>
                 </li>
                 <li class="slide">
