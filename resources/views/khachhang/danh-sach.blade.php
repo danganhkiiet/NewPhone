@@ -7,11 +7,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Nhà Cung Cấp</h1>
+                        <h1 class="page-title">Khách Hàng</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Nhà Cung Cấp</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Khách Hàng</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
                         </ol>
                     </div>
@@ -35,19 +35,20 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Age</th>
-                                                    <th>Gender</th>
+                                                    <th>Họ tên</th>
+                                                    <th>Địa chỉ</th>
+                                                    <th>Email</th>
+                                                    <th>Số điện thoại</th>
                                                     <th>Edit</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_nhacungcap as $nhacungcap)
+                                                @foreach ($lst_khachhang as $kh)
                                                     <tr>
-                                                        <td>{{$nhacungcap->ten}}</td>
-                                                        <td>{{$nhacungcap->dia_chi}}</td>
-                                                        <td>{{$nhacungcap->email}}</td>
-                                                        <td>{{$nhacungcap->so_dien_thoai}}</td>
+                                                        <td>{{$kh->ten}}</td>
+                                                        <td>{{$kh->dia_chi}}</td>
+                                                        <td>{{$kh->email}}</td>
+                                                        <td>{{$kh->so_dien_thoai}}</td>
                                                         <td style="width: 100px">
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
                                                                 title="Edit">
