@@ -45,4 +45,14 @@ class NhaCungCapController extends Controller
 
         return redirect()->route('nha-cung-cap.danh-sach')->with('thong_bao','Cập nhật thành công');
     }
+    public function xoa($id){
+        $nha_cung_cap=NhaCungCap::find($id);
+       
+        if(empty($nha_cung_cap)){
+            return "xóa thất bại";
+        }
+        $nha_cung_cap->delete();
+        return redirect()->route('nha-cung-cap.danh-sach')->with('thong_bao','Xóa thành công');
+    }
+    
 }

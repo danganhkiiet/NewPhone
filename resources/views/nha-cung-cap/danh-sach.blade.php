@@ -38,18 +38,21 @@
                             <div class="card">
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
-                                    <div class="btn"  style="position: relative;left: 78%;">
-                                        <a href="{{ route('nha-cung-cap.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
+                                    <div class="btn" style="position: relative;left: 78%;">
+                                        <a href="{{ route('nha-cung-cap.them-moi') }}" class="btn btn-primary-light ">Thêm
+                                            mới</a>
                                     </div>
                                     <!-- form tim kiem -->
-                                    <form action="" class="form-inline" role="form" style="position: relative;left: 45%;">
+                                    <form action="" class="form-inline" role="form"
+                                        style="position: relative;left: 45%;">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="ten" placeholder="Nhập tên bạn muốn tìm"/>
+                                            <input type="text" class="form-control" name="ten"
+                                                placeholder="Nhập tên bạn muốn tìm" />
                                             <button type="submit">
-                                                <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                title="Edit" href="#" >
-                                                <i class="fe fe-search"></i>
+                                                <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit"
+                                                    href="#">
+                                                    <i class="fe fe-search"></i>
                                                 </a>
                                             </button>
                                         </div>
@@ -61,11 +64,10 @@
                                         <table class="table editable-table table-nowrap table-bordered table-edit">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Age</th>
-                                                    <th>Gender</th>
-                                                    <th>Edit</th>
+                                                    <th>Tên</th>
+                                                    <th>Địa Chỉ</th>
+                                                    <th>Email</th>
+                                                    <th>Số Điện Thoại</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -77,15 +79,23 @@
                                                         <td>{{ $nhacungcap->so_dien_thoai }}</td>
                                                         <td style="width: 100px">
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{route('nha-cung-cap.cap-nhat',['id'=>$nhacungcap->id])}}">
+                                                                title="Edit"
+                                                                href="{{ route('nha-cung-cap.cap-nhat', ['id' => $nhacungcap->id]) }}">
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
+                                                            <form method="POST" action="{{route('nha-cung-cap.xoa',['id'=>$nhacungcap->id])}}">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger fs-14 text-white delete-icn"
+                                                                    title="Delete">
+                                                                    <i class="fe fe-delete"></i>
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        {{$lst_nhacungcap->links()}}
+                                        {{ $lst_nhacungcap->links() }}
                                     </div>
                                 </div>
                             </div>
