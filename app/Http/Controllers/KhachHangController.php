@@ -16,7 +16,7 @@ class khachhangController extends Controller
         return view('khach-hang/danh-sach', compact('lst_khach_hang'));
     }
     public function themMoi(){
-        return view('khach_hang/them-moi');
+        return view('khach-hang/them-moi');
     }
     public function xuLyThemMoi(Request $request){
        $khach_hang = new khachhang();

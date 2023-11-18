@@ -7,11 +7,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Bộ nhớ trong</h1>
+                        <h1 class="page-title">Camera Sau</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('khach-hang.danh-sach') }}">Bộ nhớ trong</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('camera-sau.danh-sach') }}">Camera sau</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
                         </ol>
                     </div>
@@ -40,7 +40,7 @@
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn"  style="position: relative;left: 78%;">
-                                        <a href="{{ route('bo-nho-trong.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
+                                        <a href="{{ route('camera-sau.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
                                     </div>
                                     <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form" style="position: relative;left: 45%;">
@@ -68,17 +68,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_bo_nho_trong as $bnt)
+                                                @foreach ($lst_camera_sau as $cmrs)
                                                     <tr>
-                                                        <td>{{$bnt->id}}</td>
-                                                        <td>{{$bnt->ten}}</td>
+                                                        <td>{{$cmrs->id}}</td>
+                                                        <td>{{$cmrs->ten}}</td>
                                                         <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{ route('bo-nho-trong.cap-nhat',['id' => $bnt->id]) }}" >
+                                                                title="Edit" href="{{ route('camera-sau.cap-nhat',['id' => $cmrs->id]) }}" >
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
                                                             <a class="btn btn-danger fs-14 text-white delete-icn"
-                                                                title="Delete" href="{{ route('bo-nho-trong.xoa',['id' => $bnt->id]) }}" >
+                                                                title="Delete" href="{{ route('camera-sau.xoa',['id' => $cmrs->id]) }}" >
                                                                 <i class="fe fe-delete"></i>
                                                             </a>
                                                         </td>
@@ -86,7 +86,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        {{ $lst_bo_nho_trong->links() }}
+                                        {{ $lst_camera_sau->links() }}
                                     </div>
                                   
                                 </div>
