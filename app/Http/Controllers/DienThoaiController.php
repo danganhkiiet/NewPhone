@@ -11,7 +11,6 @@ class DienThoaiController extends Controller
      */
     public function danhSach()
     {
-        //
         return view('layout');
     }
 
