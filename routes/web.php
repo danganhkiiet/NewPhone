@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\KichThuocManHinhController;
 use App\Http\Controllers\MauController;
 use Illuminate\Support\Facades\Route;
 
@@ -172,11 +173,13 @@ Route::get('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'capNhat'])->
 Route::post('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'xuLyCapNhat'])->name('khang-nuoc.xu-ly-cap-nhat');
 Route::post('/khang-nuoc/xoa/{id}',[KhangNuocController::class,'xoa'])->name('khang-nuoc.xoa');
 
-
-
-
-
-
+//kich thuoc man hinh
+Route::get('/kich-thuoc-man-hinh/danh-sach',[KichThuocManHinhController::class,'danhSach'])->name('kich-thuoc-man-hinh.danh-sach');
+Route::get('/kich-thuoc-man-hinh/them-moi',[KichThuocManHinhController::class,'themMoi'])->name('kich-thuoc-man-hinh.them-moi');
+Route::post('/kich-thuoc-man-hinh/them-moi',[KichThuocManHinhController::class,'xuLyThemMoi'])->name('kich-thuoc-man-hinh.xu-ly-them-moi');
+Route::get('/kich-thuoc-man-hinh/cap-nhat/{id}',[KichThuocManHinhController::class,'capNhat'])->name('kich-thuoc-man-hinh.cap-nhat');
+Route::post('/kich-thuoc-man-hinh/cap-nhat/{id}',[KichThuocManHinhController::class,'xuLyCapNhat'])->name('kich-thuoc-man-hinh.xu-ly-cap-nhat');
+Route::get('/kich-thuoc-man-hinh/xoa/{id}',[KichThuocManHinhController::class,'xoa'])->name('kich-thuoc-man-hinh.xoa');
 
 //the sim
 

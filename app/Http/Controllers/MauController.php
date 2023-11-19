@@ -16,13 +16,13 @@ class MauController extends Controller
         return view('thong-so-dien-thoai/mau/danh-sach', compact('lst_mau'));
     }
     public function themMoi(){
-        return view('mau.them-moi');
+        return view('thong-so-dien-thoai/mau/them-moi');
     }
     public function xuLyThemMoi(Request $request){
        $mau = new Mau();
        $mau->ten = $request->ten;
        $mau->save();
-       return redirect()->route('thong-so-dien-thoai/mau/danh-sach')->with('thong_bao','Thêm mới thành công');
+       return redirect()->route('mau.danh-sach')->with('thong_bao','Thêm mới thành công');
     }
     
     public function capNhat($id){
