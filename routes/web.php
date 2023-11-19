@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\KichThuocManHinhController;
 use App\Http\Controllers\MauController;
+use App\Http\Controllers\TheSimController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CameraSauController;
@@ -182,14 +183,12 @@ Route::post('/kich-thuoc-man-hinh/cap-nhat/{id}',[KichThuocManHinhController::cl
 Route::get('/kich-thuoc-man-hinh/xoa/{id}',[KichThuocManHinhController::class,'xoa'])->name('kich-thuoc-man-hinh.xoa');
 
 //the sim
-
-
-
-
-
-
-
-
+Route::get('/the-sim/danh-sach',[TheSimController::class,'danhSach'])->name('the-sim.danh-sach');
+Route::get('/the-sim/them-moi',[TheSimController::class,'themMoi'])->name('the-sim.them-moi');
+Route::post('/the-sim/them-moi',[TheSimController::class,'xuLyThemMoi'])->name('the-sim.xu-ly-them-moi');
+Route::get('/the-sim/cap-nhat/{id}',[TheSimController::class,'capNhat'])->name('the-sim.cap-nhat');
+Route::post('/the-sim/cap-nhat/{id}',[TheSimController::class,'xuLyCapNhat'])->name('the-sim.xu-ly-cap-nhat');
+Route::get('/the-sim/xoa/{id}',[TheSimController::class,'xoa'])->name('the-sim.xoa');
 //pin
 
 
