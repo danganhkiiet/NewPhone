@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\KichThuocManHinhController;
 use App\Http\Controllers\MauController;
+use App\Http\Controllers\PinController;
 use App\Http\Controllers\TheSimController;
 use Illuminate\Support\Facades\Route;
 
@@ -190,14 +191,12 @@ Route::get('/the-sim/cap-nhat/{id}',[TheSimController::class,'capNhat'])->name('
 Route::post('/the-sim/cap-nhat/{id}',[TheSimController::class,'xuLyCapNhat'])->name('the-sim.xu-ly-cap-nhat');
 Route::get('/the-sim/xoa/{id}',[TheSimController::class,'xoa'])->name('the-sim.xoa');
 //pin
-
-
-
-
-
-
-
-
+Route::get('/pin/danh-sach',[PinController::class,'danhSach'])->name('pin.danh-sach');
+Route::get('/pin/them-moi',[PinController::class,'themMoi'])->name('pin.them-moi');
+Route::post('/pin/them-moi',[PinController::class,'xuLyThemMoi'])->name('pin.xu-ly-them-moi');
+Route::get('/pin/cap-nhat/{id}',[PinController::class,'capNhat'])->name('pin.cap-nhat');
+Route::post('/pin/cap-nhat/{id}',[PinController::class,'xuLyCapNhat'])->name('pin.xu-ly-cap-nhat');
+Route::get('/pin/xoa/{id}',[PinController::class,'xoa'])->name('pin.xoa');
 //tinh nang mang hinh
 
 
