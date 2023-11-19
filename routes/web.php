@@ -8,6 +8,10 @@ use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\BoNhoTrongController;
 use App\Http\Controllers\CongSacController;
+use App\Http\Controllers\DoPhanGiaiManHinhController;
+use App\Http\Controllers\DungLuongRamController;
+use App\Http\Controllers\HeDieuHanhController;
+use App\Http\Controllers\KhangNuocController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,8 +118,13 @@ Route::post('/cong-sac/xoa/{id}',[CongSacController::class,'xoa'])->name('cong-s
 
 
 
-
 //do phan giai mang hinh
+Route::get('/do-phan-giai-man-hinh/danh-sach',[DoPhanGiaiManHinhController::class,'danhSach'])->name('do-phan-giai-man-hinh.danh-sach');
+Route::get('/do-phan-giai-man-hinh/them-moi',[DoPhanGiaiManHinhController::class,'themMoi'])->name('do-phan-giai-man-hinh.them-moi');
+Route::post('/do-phan-giai-man-hinh/them-moi',[DoPhanGiaiManHinhController::class,'xuLyThemMoi'])->name('do-phan-giai-man-hinh.xu-ly-them-moi');
+Route::get('/do-phan-giai-man-hinh/cap-nhat/{id}',[DoPhanGiaiManHinhController::class,'capNhat'])->name('do-phan-giai-man-hinh.cap-nhat');
+Route::post('/do-phan-giai-man-hinh/cap-nhat/{id}',[DoPhanGiaiManHinhController::class,'xuLyCapNhat'])->name('do-phan-giai-man-hinh.xu-ly-cap-nhat');
+Route::post('/do-phan-giai-man-hinh/xoa/{id}',[DoPhanGiaiManHinhController::class,'xoa'])->name('do-phan-giai-man-hinh.xoa');
 
 
 
@@ -125,6 +134,12 @@ Route::post('/cong-sac/xoa/{id}',[CongSacController::class,'xoa'])->name('cong-s
 
 
 //dung luong ram
+Route::get('/dung-luong-ram/danh-sach',[DungLuongRamController::class,'danhSach'])->name('dung-luong-ram.danh-sach');
+Route::get('/dung-luong-ram/them-moi',[DungLuongRamController::class,'themMoi'])->name('dung-luong-ram.them-moi');
+Route::post('/dung-luong-ram/them-moi',[DungLuongRamController::class,'xuLyThemMoi'])->name('dung-luong-ram.xu-ly-them-moi');
+Route::get('/dung-luong-ram/cap-nhat/{id}',[DungLuongRamController::class,'capNhat'])->name('dung-luong-ram.cap-nhat');
+Route::post('/dung-luong-ram/cap-nhat/{id}',[DungLuongRamController::class,'xuLyCapNhat'])->name('dung-luong-ram.xu-ly-cap-nhat');
+Route::post('/dung-luong-ram/xoa/{id}',[DungLuongRamController::class,'xoa'])->name('dung-luong-ram.xoa');
 
 
 
@@ -134,6 +149,12 @@ Route::post('/cong-sac/xoa/{id}',[CongSacController::class,'xoa'])->name('cong-s
 
 
 //he dieu hanh
+Route::get('/he-dieu-hanh/danh-sach',[HeDieuHanhController::class,'danhSach'])->name('he-dieu-hanh.danh-sach');
+Route::get('/he-dieu-hanh/them-moi',[HeDieuHanhController::class,'themMoi'])->name('he-dieu-hanh.them-moi');
+Route::post('/he-dieu-hanh/them-moi',[HeDieuHanhController::class,'xuLyThemMoi'])->name('he-dieu-hanh.xu-ly-them-moi');
+Route::get('/he-dieu-hanh/cap-nhat/{id}',[HeDieuHanhController::class,'capNhat'])->name('he-dieu-hanh.cap-nhat');
+Route::post('/he-dieu-hanh/cap-nhat/{id}',[HeDieuHanhController::class,'xuLyCapNhat'])->name('he-dieu-hanh.xu-ly-cap-nhat');
+Route::post('/he-dieu-hanh/xoa/{id}',[HeDieuHanhController::class,'xoa'])->name('he-dieu-hanh.xoa');
 
 
 
@@ -143,7 +164,12 @@ Route::post('/cong-sac/xoa/{id}',[CongSacController::class,'xoa'])->name('cong-s
 
 
 //khang nuoc
-
+Route::get('/khang-nuoc/danh-sach',[KhangNuocController::class,'danhSach'])->name('khang-nuoc.danh-sach');
+Route::get('/khang-nuoc/them-moi',[KhangNuocController::class,'themMoi'])->name('khang-nuoc.them-moi');
+Route::post('/khang-nuoc/them-moi',[KhangNuocController::class,'xuLyThemMoi'])->name('khang-nuoc.xu-ly-them-moi');
+Route::get('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'capNhat'])->name('khang-nuoc.cap-nhat');
+Route::post('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'xuLyCapNhat'])->name('khang-nuoc.xu-ly-cap-nhat');
+Route::post('/khang-nuoc/xoa/{id}',[KhangNuocController::class,'xoa'])->name('khang-nuoc.xoa');
 
 
 

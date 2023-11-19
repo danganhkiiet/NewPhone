@@ -49,10 +49,10 @@
                         <li><a href="#"class="slide-item">Chipset</a></li>
                         <li><a href="#"class="slide-item">Công nghệ màn hình</a></li>
                         <li><a href="{{route('cong-sac.danh-sach')}}"class="slide-item">Cổng sạc</a></li>
-                        <li><a href="#"class="slide-item">Độ phân giải màng hình</a></li>
-                        <li><a href="#"class="slide-item">Dung lượng ram</a></li>
-                        <li><a href="#"class="slide-item">Hệ điều hành</a></li>
-                        <li><a href="#"class="slide-item">Kháng nước</a></li>
+                        <li><a href="{{route('do-phan-giai-man-hinh.danh-sach')}}"class="slide-item">Độ phân giải màng hình</a></li>
+                        <li><a href="{{route('dung-luong-ram.danh-sach')}}"class="slide-item">Dung lượng ram</a></li>
+                        <li><a href="{{route('he-dieu-hanh.danh-sach')}}"class="slide-item">Hệ điều hành</a></li>
+                        <li><a href="{{route('khang-nuoc.danh-sach')}}"class="slide-item">Kháng nước</a></li>
                         <li><a href="#"class="slide-item">Kích thước màng hình</a></li>
                         <li><a href="#"class="slide-item">Thẻ sim</a></li>
                         <li><a href="#"class="slide-item">Pin</a></li>
