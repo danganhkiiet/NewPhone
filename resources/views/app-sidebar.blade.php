@@ -56,7 +56,7 @@
                         <li><a href="{{route('kich-thuoc-man-hinh.danh-sach')}}"class="slide-item">Kích thước màng hình</a></li>
                         <li><a href="{{route('the-sim.danh-sach')}}"class="slide-item">Thẻ sim</a></li>
                         <li><a href="{{route('pin.danh-sach')}}"class="slide-item">Pin</a></li>
-                        <li><a href="#"class="slide-item">Tính năng màn hình</a></li>
+                        <li><a href="{{route('tinh-nang-man-hinh.danh-sach')}}"class="slide-item">Tính năng màn hình</a></li>
                         <li><a href="{{route('mau.danh-sach')}}"class="slide-item">Màu</a></li>
                     </ul>
                 </li>

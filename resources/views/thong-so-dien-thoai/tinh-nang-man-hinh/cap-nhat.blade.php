@@ -8,11 +8,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Tính năng màn hình</h1>
+                        <h1 class="page-title">Pin</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('tnmh.danh-sach') }}">Tính năng màn hình</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('tinh-nang-man-hinh.danh-sach') }}">Pin</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
                         </ol>
                     </div>
@@ -22,7 +22,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header border-bottom">
-                                    <h3 class="card-title">Cập nhật thông tin tính năng</h3>
+                                    <h3 class="card-title">Cập nhật thông tin pin</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -32,7 +32,7 @@
                                                 <div class="card card-body pd-20 pd-md-40 border shadow-none">
                                                     <h4 class="card-title">Nhập thông tin</h4>
                                                     <div class="form-group">
-                                                        <label class="form-label" for="ten">Thông tin tính năng</label>
+                                                        <label class="form-label" for="ten">Thông tin pin</label>
                                                         <input class="form-control"  name="ten" id="ten" value="{{$tnmh->ten }}" type="text" required>
                                                     </div>
                                                     <button class="btn btn-primary btn-block" type="submit">Cập nhật</button>

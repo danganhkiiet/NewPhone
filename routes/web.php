@@ -3,6 +3,7 @@ use App\Http\Controllers\KichThuocManHinhController;
 use App\Http\Controllers\MauController;
 use App\Http\Controllers\PinController;
 use App\Http\Controllers\TheSimController;
+use App\Http\Controllers\TinhNangManHinhController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CameraSauController;
@@ -198,14 +199,12 @@ Route::get('/pin/cap-nhat/{id}',[PinController::class,'capNhat'])->name('pin.cap
 Route::post('/pin/cap-nhat/{id}',[PinController::class,'xuLyCapNhat'])->name('pin.xu-ly-cap-nhat');
 Route::get('/pin/xoa/{id}',[PinController::class,'xoa'])->name('pin.xoa');
 //tinh nang mang hinh
-
-
-
-
-
-
-
-
+Route::get('/tinh-nang-man-hinh/danh-sach',[TinhNangManHinhController::class,'danhSach'])->name('tinh-nang-man-hinh.danh-sach');
+Route::get('/tinh-nang-man-hinh/them-moi',[TinhNangManHinhController::class,'themMoi'])->name('tinh-nang-man-hinh.them-moi');
+Route::post('/tinh-nang-man-hinh/them-moi',[TinhNangManHinhController::class,'xuLyThemMoi'])->name('tinh-nang-man-hinh.xu-ly-them-moi');
+Route::get('/tinh-nang-man-hinh/cap-nhat/{id}',[TinhNangManHinhController::class,'capNhat'])->name('tinh-nang-man-hinh.cap-nhat');
+Route::post('/tinh-nang-man-hinh/cap-nhat/{id}',[TinhNangManHinhController::class,'xuLyCapNhat'])->name('tinh-nang-man-hinh.xu-ly-cap-nhat');
+Route::get('/tinh-nang-man-hinh/xoa/{id}',[TinhNangManHinhController::class,'xoa'])->name('tinh-nang-man-hinh.xoa');
 //mau
 Route::get('/mau/danh-sach',[MauController::class,'danhSach'])->name('mau.danh-sach');
 Route::get('/mau/them-moi',[MauController::class,'themMoi'])->name('mau.them-moi');
