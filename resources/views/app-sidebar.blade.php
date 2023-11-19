@@ -46,8 +46,8 @@
                         <li><a href="{{ route('bo-nho-trong.danh-sach') }}" class="slide-item">Bộ nhớ trong</a></li>
                         <li><a href="{{ route('camera-sau.danh-sach') }}"class="slide-item">Camera sau</a></li>
                         <li><a href="{{ route('camera-truoc.danh-sach') }}"class="slide-item">Camera trước</a></li>
-                        <li><a href="#"class="slide-item">Chipset</a></li>
-                        <li><a href="#"class="slide-item">Công nghệ màn hình</a></li>
+                        <li><a href="{{ route('chipset.danh-sach') }}"class="slide-item">Chipset</a></li>
+                        <li><a href="{{ route('cong-nghe-man-hinh.danh-sach') }}"class="slide-item">Công nghệ màn hình</a></li>
                         <li><a href="#"class="slide-item">Cổng sạc</a></li>
                         <li><a href="#"class="slide-item">Độ phân giải màng hình</a></li>
                         <li><a href="#"class="slide-item">Dung lượng ram</a></li>

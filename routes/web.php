@@ -7,6 +7,8 @@ use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\BoNhoTrongController;
+use App\Http\Controllers\ChipsetController;
+use App\Http\Controllers\CongNgheManHinhController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,7 +84,12 @@ Route::get('/camera-truoc/xoa{id}',[CameraTruocController::class,'xoa'])->name('
 
 
 //chipset
-
+Route::get('/chipset/danh-sach',[ChipsetController::class,'danhSach'])->name('chipset.danh-sach');
+Route::get('/chipset/them-moi',[ChipsetController::class,'themMoi'])->name('chipset.them-moi');
+Route::post('/chipset/them-moi',[ChipsetController::class,'xuLyThemMoi'])->name('chipset.xu-ly-them-moi');
+Route::get('/chipset/cap-nhat{id}',[ChipsetController::class,'capNhat'])->name('chipset.cap-nhat');
+Route::post('/chipset/cap-nhat{id}',[ChipsetController::class,'xuLyCapNhat'])->name('chipset.xu-ly-cap-nhat');
+Route::get('/chipset/xoa{id}',[ChipsetController::class,'xoa'])->name('chipset.xoa');
 
 
 
@@ -91,7 +98,12 @@ Route::get('/camera-truoc/xoa{id}',[CameraTruocController::class,'xoa'])->name('
 
 
 //cong nghe mang hinh
-
+Route::get('/cong-nghe-man-hinh/danh-sach',[CongNgheManHinhController::class,'danhSach'])->name('cong-nghe-man-hinh.danh-sach');
+Route::get('/cong-nghe-man-hinh/them-moi',[CongNgheManHinhController::class,'themMoi'])->name('cong-nghe-man-hinh.them-moi');
+Route::post('/cong-nghe-man-hinh/them-moi',[CongNgheManHinhController::class,'xuLyThemMoi'])->name('cong-nghe-man-hinh.xu-ly-them-moi');
+Route::get('/cong-nghe-man-hinh/cap-nhat{id}',[CongNgheManHinhController::class,'capNhat'])->name('cong-nghe-man-hinh.cap-nhat');
+Route::post('/cong-nghe-man-hinh/cap-nhat{id}',[CongNgheManHinhController::class,'xuLyCapNhat'])->name('cong-nghe-man-hinh.xu-ly-cap-nhat');
+Route::get('/cong-nghe-man-hinh/xoa{id}',[CongNgheManHinhController::class,'xoa'])->name('cong-nghe-man-hinh.xoa');
 
 
 
