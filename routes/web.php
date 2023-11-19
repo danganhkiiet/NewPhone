@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\MauController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CameraSauController;
@@ -205,3 +206,9 @@ Route::post('/khang-nuoc/xoa/{id}',[KhangNuocController::class,'xoa'])->name('kh
 
 
 //mau
+Route::get('/mau/danh-sach',[MauController::class,'danhSach'])->name('mau.danh-sach');
+Route::get('/mau/them-moi',[MauController::class,'themMoi'])->name('mau.them-moi');
+Route::post('/mau/them-moi',[MauController::class,'xuLyThemMoi'])->name('mau.xu-ly-them-moi');
+Route::get('/mau/cap-nhat/{id}',[MauController::class,'capNhat'])->name('mau.cap-nhat');
+Route::post('/mau/cap-nhat/{id}',[MauController::class,'xuLyCapNhat'])->name('mau.xu-ly-cap-nhat');
+Route::get('/mau/xoa/{id}',[MauController::class,'xoa'])->name('mau.xoa');
