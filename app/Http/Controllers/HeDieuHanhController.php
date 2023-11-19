@@ -13,10 +13,10 @@ class HeDieuHanhController extends Controller
         {
             $lst_hedieuhanh=HeDieuHanh::where('ten','like','%'.$ten)->paginate(5);
         }
-        return view('he-dieu-hanh.danh-sach',compact('lst_hedieuhanh'));
+        return view('thong-so-dien-thoai.he-dieu-hanh.danh-sach',compact('lst_hedieuhanh'));
     }
     public function themMoi(){
-        return view('he-dieu-hanh.them-moi');
+        return view('thong-so-dien-thoai.he-dieu-hanh.them-moi');
     }
     public function xuLyThemMoi(Request $request){
         $request->validate([
@@ -28,7 +28,7 @@ class HeDieuHanhController extends Controller
     }
     public function capNhat($id){
         $he_dieu_hanh=HeDieuHanh::find($id);
-        return view('he-dieu-hanh.cap-nhat',compact('he_dieu_hanh'));
+        return view('thong-so-dien-thoai.he-dieu-hanh.cap-nhat',compact('he_dieu_hanh'));
     }
     
     public function xuLyCapNhat(Request $request, $id){

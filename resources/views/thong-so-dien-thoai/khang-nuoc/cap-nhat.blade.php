@@ -11,7 +11,7 @@
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('he-dieu-hanh.them-moi') }}">Kháng Nước</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('khang-nuoc.them-moi') }}">Kháng Nước</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
                         </ol>
                     </div>

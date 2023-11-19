@@ -13,10 +13,10 @@ class CongSacController extends Controller
         {
             $lst_congsac=CongSac::where('ten','like','%'.$ten)->paginate(5);
         }
-        return view('cong-sac.danh-sach',compact('lst_congsac'));
+        return view('thong-so-dien-thoai.cong-sac.danh-sach',compact('lst_congsac'));
     }
     public function themMoi(){
-        return view('cong-sac.them-moi');
+        return view('thong-so-dien-thoai.cong-sac.them-moi');
     }
     public function xuLyThemMoi(Request $request){
         $request->validate([
@@ -28,7 +28,7 @@ class CongSacController extends Controller
     }
     public function capNhat($id){
         $cong_sac=CongSac::find($id);
-        return view('cong-sac.cap-nhat',compact('cong_sac'));
+        return view('thong-so-dien-thoai.cong-sac.cap-nhat',compact('cong_sac'));
     }
     
     public function xuLyCapNhat(Request $request, $id){

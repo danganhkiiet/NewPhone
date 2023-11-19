@@ -13,10 +13,10 @@ class DungLuongRamController extends Controller
         {
             $lst_dungluongram=DungLuongRam::where('ten','like','%'.$ten)->paginate(5);
         }
-        return view('dung-luong-ram.danh-sach',compact('lst_dungluongram'));
+        return view('thong-so-dien-thoai.dung-luong-ram.danh-sach',compact('lst_dungluongram'));
     }
     public function themMoi(){
-        return view('dung-luong-ram.them-moi');
+        return view('thong-so-dien-thoai.dung-luong-ram.them-moi');
     }
     public function xuLyThemMoi(Request $request){
         $request->validate([
@@ -28,7 +28,7 @@ class DungLuongRamController extends Controller
     }
     public function capNhat($id){
         $dung_luong_ram=DungLuongRam::find($id);
-        return view('dung-luong-ram.cap-nhat',compact('dung_luong_ram'));
+        return view('thong-so-dien-thoai.dung-luong-ram.cap-nhat',compact('dung_luong_ram'));
     }
     
     public function xuLyCapNhat(Request $request, $id){

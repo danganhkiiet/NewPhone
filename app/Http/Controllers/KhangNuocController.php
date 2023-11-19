@@ -13,10 +13,10 @@ class KhangNuocController extends Controller
         {
             $lst_khangnuoc=KhangNuoc::where('ten','like','%'.$ten)->paginate(5);
         }
-        return view('khang-nuoc.danh-sach',compact('lst_khangnuoc'));
+        return view('thong-so-dien-thoai.khang-nuoc.danh-sach',compact('lst_khangnuoc'));
     }
     public function themMoi(){
-        return view('khang-nuoc.them-moi');
+        return view('thong-so-dien-thoai.khang-nuoc.them-moi');
     }
     public function xuLyThemMoi(Request $request){
         $request->validate([
@@ -28,7 +28,7 @@ class KhangNuocController extends Controller
     }
     public function capNhat($id){
         $khang_nuoc=KhangNuoc::find($id);
-        return view('khang-nuoc.cap-nhat',compact('khang_nuoc'));
+        return view('thong-so-dien-thoai.khang-nuoc.cap-nhat',compact('khang_nuoc'));
     }
     
     public function xuLyCapNhat(Request $request, $id){

@@ -13,10 +13,10 @@ class DoPhanGiaiManHinhController extends Controller
         {
             $lst_dophangiaimanhinh=DoPhanGiaiManHinh::where('ten','like','%'.$ten)->paginate(5);
         }
-        return view('do-phan-giai-man-hinh.danh-sach',compact('lst_dophangiaimanhinh'));
+        return view('thong-so-dien-thoai.do-phan-giai-man-hinh.danh-sach',compact('lst_dophangiaimanhinh'));
     }
     public function themMoi(){
-        return view('do-phan-giai-man-hinh.them-moi');
+        return view('thong-so-dien-thoai.do-phan-giai-man-hinh.them-moi');
     }
     public function xuLyThemMoi(Request $request){
         $request->validate([
@@ -28,7 +28,7 @@ class DoPhanGiaiManHinhController extends Controller
     }
     public function capNhat($id){
         $do_phan_giai_man_hinh=DoPhanGiaiManHinh::find($id);
-        return view('do-phan-giai-man-hinh.cap-nhat',compact('do_phan_giai_man_hinh'));
+        return view('thong-so-dien-thoai.do-phan-giai-man-hinh.cap-nhat',compact('do_phan_giai_man_hinh'));
     }
     
     public function xuLyCapNhat(Request $request, $id){
