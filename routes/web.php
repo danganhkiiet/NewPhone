@@ -11,6 +11,7 @@ use App\Http\Controllers\CongSacController;
 use App\Http\Controllers\DoPhanGiaiManHinhController;
 use App\Http\Controllers\DungLuongRamController;
 use App\Http\Controllers\HeDieuHanhController;
+use App\Http\Controllers\KhangNuocController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -163,7 +164,12 @@ Route::post('/he-dieu-hanh/xoa/{id}',[HeDieuHanhController::class,'xoa'])->name(
 
 
 //khang nuoc
-
+Route::get('/khang-nuoc/danh-sach',[KhangNuocController::class,'danhSach'])->name('khang-nuoc.danh-sach');
+Route::get('/khang-nuoc/them-moi',[KhangNuocController::class,'themMoi'])->name('khang-nuoc.them-moi');
+Route::post('/khang-nuoc/them-moi',[KhangNuocController::class,'xuLyThemMoi'])->name('khang-nuoc.xu-ly-them-moi');
+Route::get('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'capNhat'])->name('khang-nuoc.cap-nhat');
+Route::post('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'xuLyCapNhat'])->name('khang-nuoc.xu-ly-cap-nhat');
+Route::post('/khang-nuoc/xoa/{id}',[KhangNuocController::class,'xoa'])->name('khang-nuoc.xoa');
 
 
 
