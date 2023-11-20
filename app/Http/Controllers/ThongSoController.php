@@ -1,64 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\thong_so;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+use App\Models\ThongSo;
 class ThongSoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    //
+    public function danhSach(){
+        $lst_thong_so = ThongSo::paginate(5);
+        if($ten = request()->ten)
+        {
+            $lst_thong_so = ThongSo::where('ten','like','%'.$ten)->paginate(5);
+        }
+        return view('san-pham/thong-so/danh-sach', compact('lst_thong_so'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function themMoi(){
+        return view('san-pham/thong-so/them-moi');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function xuLyThemMoi(Request $request){
+       $mau = new ThongSo();
+       $mau->ten = $request->ten;
+       $mau->save();
+       return redirect()->route('thong-so.danh-sach')->with('thong_bao','Thêm mới thành công');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    
+    public function capNhat($id){
+        $mau = ThongSo::find($id);
+        return view('san-pham/thong-so/cap-nhat', compact('mau'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    
+    public function xuLyCapNhat(Request $request, $id){
+        $mau = ThongSo::find($id);
+        $mau->ten = $request->ten;
+        $mau->save();
+        return redirect()->route('thong-so.danh-sach')->with('thong_bao','Cập nhật thành công');
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+     public function xoa($id){
+        $mau = ThongSo::find($id);
+        $mau->delete();
+        return redirect()->route('thong-so.danh-sach')->with('thong_bao','Xóa thành công');
     }
 }

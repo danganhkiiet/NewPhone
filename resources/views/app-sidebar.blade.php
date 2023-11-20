@@ -44,7 +44,7 @@
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="#" class="slide-item">Điện thoại</a></li>
-                        <li><a href="#" class="slide-item">Thông số</a></li>
+                        <li><a href="{{route('thong-so.danh-sach')}}" class="slide-item">Thông số</a></li>
                     </ul>
                 </li>
                 <li class="slide">

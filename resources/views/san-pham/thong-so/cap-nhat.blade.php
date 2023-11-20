@@ -12,8 +12,8 @@
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Pin</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
+                            <li class="breadcrumb-item"><a href="{{ route('thong-so.danh-sach') }}">Thông số</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"></li>
                         </ol>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                                                 <div class="card card-body pd-20 pd-md-40 border shadow-none">
                                                     <h4 class="card-title">Nhập thông tin</h4>
                                                     <div class="form-group">
-                                                        <label class="form-label" for="ten">Thông tin pin</label>
-                                                        <input class="form-control"  name="ten" id="ten" value="" type="text" required>
+                                                        <label class="form-label" for="ten">Tên Thông Số</label>
+                                                        <input class="form-control"  name="ten" id="ten" value="{{$thong_so->ten}}" type="text" required>
                                                     </div>
                                                     <button class="btn btn-primary btn-block" type="submit">Cập nhật</button>
                                                 </div>

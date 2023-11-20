@@ -18,7 +18,7 @@ use App\Http\Controllers\ThongSoController;
 |
 */
 //dien thoai
-Route::get('/',[ThongSoController::class,'danhSach'])->name('dien-thoai.danh-sach');
+Route::get('/',[NhaCungCapController::class,'danhSach'])->name('dien-thoai.danh-sach');
 
 
 
@@ -55,7 +55,12 @@ Route::get('/khach-hang/xoa{id}',[KhachHangController::class,'xoa'])->name('khac
 
 
 //thong so
-
+Route::get('/thong-so/danh-sach',[ThongSoController::class,'danhSach'])->name('thong-so.danh-sach');
+Route::get('/thong-so/them-moi',[ThongSoController::class,'themMoi'])->name('thong-so.them-moi');
+Route::post('/thong-so/them-moi',[ThongSoController::class,'xuLyThemMoi'])->name('thong-so.xu-ly-them-moi');
+Route::get('/thong-so/cap-nhat/{id}',[ThongSoController::class,'capNhat'])->name('thong-so.cap-nhat');
+Route::post('/thong-so/cap-nhat/{id}',[ThongSoController::class,'xuLyCapNhat'])->name('thong-so.xu-ly-cap-nhat');
+Route::get('/thong-so/xoa/{id}',[ThongSoController::class,'xoa'])->name('thong-so.xoa');
 
 
 

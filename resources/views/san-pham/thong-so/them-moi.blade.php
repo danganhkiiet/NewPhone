@@ -12,7 +12,7 @@
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Tính năng màn hình</a></li>
+                            <li class="breadcrumb-item"><a href="#">Thông số</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
                         </ol>
                     </div>
@@ -27,13 +27,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <form method="POST" action="">
+                                    <form method="POST" action="{{ route('thong-so.them-moi') }}">
                                         @csrf
                                         <div class="col-md-10 col-lg-8 col-xl-6 mx-auto d-block">
                                             <div class="card card-body pd-20 pd-md-40 border shadow-none">
                                                 <h4 class="card-title">Nhập thông tin</h4>
                                                 <div class="form-group">
-                                                    <label class="form-label" for="ten">Tên tính năng</label>
+                                                    <label class="form-label" for="ten">Tên Thông Số</label>
                                                     <input class="form-control"  name="ten" id="ten" type="text" required>
                                                 </div>
                                                 <button class="btn btn-primary btn-block" type="submit">Tạo mới</button>

@@ -40,7 +40,7 @@
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn"  style="position: relative;left: 78%;">
-                                        <a href="#" class="btn btn-primary-light ">Thêm mới</a>
+                                        <a href="{{ route('thong-so.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
                                     </div>
                                     <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form" style="position: relative;left: 45%;">
@@ -68,17 +68,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_thong_So as $ts)
+                                                @foreach ($lst_thong_so as $ts)
                                                     <tr>
                                                         <td>{{$ts->id}}</td>
                                                         <td>{{$ts->ten}}</td>
                                                         <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{ route('tinh-nang-man-hinh.cap-nhat',['id' => $ts->id]) }}" >
+                                                                title="Edit" href="{{ route('thong-so.cap-nhat',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
                                                             <a class="btn btn-danger fs-14 text-white delete-icn"
-                                                                title="Delete" href="{{ route('tinh-nang-man-hinh.xoa',['id' => $ts->id]) }}" >
+                                                                title="Delete" href="{{ route('thong-so.xoa',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-delete"></i>
                                                             </a>
                                                         </td>
@@ -86,7 +86,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        {{ $lst_thong_So->links() }}
+                                        {{ $lst_thong_so->links() }}
                                     </div>
                                   
                                 </div>
