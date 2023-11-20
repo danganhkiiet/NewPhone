@@ -18,8 +18,9 @@ use App\Http\Controllers\ThongSoController;
 |
 */
 //dien thoai
-Route::get('/',[NhaCungCapController::class,'danhSach'])->name('dien-thoai.danh-sach');
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/',[NhaCungCapController::class,'danhSach'])->name('dien-thoai.danh-sach');
+});
 
 
 
