@@ -26,8 +26,8 @@ class ThongSoController extends Controller
     }
     
     public function capNhat($id){
-        $mau = ThongSo::find($id);
-        return view('san-pham/thong-so/cap-nhat', compact('mau'));
+        $thong_so = ThongSo::find($id);
+        return view('san-pham/thong-so/cap-nhat', compact('thong_so'));
     }
     
     public function xuLyCapNhat(Request $request, $id){
