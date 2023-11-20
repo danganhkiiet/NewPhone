@@ -39,25 +39,12 @@
                             <path
                                 d="M21.5,21h-19C2.223877,21,2,21.223877,2,21.5S2.223877,22,2.5,22h19c0.276123,0,0.5-0.223877,0.5-0.5S21.776123,21,21.5,21z M4.5,18.0888672h5c0.1326294,0,0.2597656-0.0527344,0.3534546-0.1465454l10-10c0.000061,0,0.0001221-0.000061,0.0001831-0.0001221c0.1951294-0.1952515,0.1950684-0.5117188-0.0001831-0.7068481l-5-5c0-0.000061-0.000061-0.0001221-0.0001221-0.0001221c-0.1951904-0.1951904-0.5117188-0.1951294-0.7068481,0.0001221l-10,10C4.0526733,12.3291016,4,12.4562378,4,12.5888672v5c0,0.0001831,0,0.0003662,0,0.0005493C4.0001831,17.8654175,4.223999,18.0890503,4.5,18.0888672z M14.5,3.2958984l4.2930298,4.2929688l-2.121582,2.121582l-4.2926025-4.293396L14.5,3.2958984z M5,12.7958984l6.671814-6.671814l4.2926025,4.293396l-6.6713867,6.6713867H5V12.7958984z" />
                         </svg>
-                        <span class="side-menu__label">Thông Số Điện Thoại</span><i class="angle fa fa-angle-right"></i>
+                        <span class="side-menu__label">Sản phẩm</span><i class="angle fa fa-angle-right"></i>
                     </a>
                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)">Màu</a></li>
-                        <li><a href="{{ route('bo-nho-trong.danh-sach') }}" class="slide-item">Bộ nhớ trong</a></li>
-                        <li><a href="{{ route('camera-sau.danh-sach') }}"class="slide-item">Camera sau</a></li>
-                        <li><a href="{{ route('camera-truoc.danh-sach') }}"class="slide-item">Camera trước</a></li>
-                        <li><a href="{{ route('chipset.danh-sach') }}"class="slide-item">Chipset</a></li>
-                        <li><a href="{{ route('cong-nghe-man-hinh.danh-sach') }}"class="slide-item">Công nghệ màn hình</a></li>
-                        <li><a href="{{route('cong-sac.danh-sach')}}"class="slide-item">Cổng sạc</a></li>
-                        <li><a href="{{route('do-phan-giai-man-hinh.danh-sach')}}"class="slide-item">Độ phân giải màng hình</a></li>
-                        <li><a href="{{route('dung-luong-ram.danh-sach')}}"class="slide-item">Dung lượng ram</a></li>
-                        <li><a href="{{route('he-dieu-hanh.danh-sach')}}"class="slide-item">Hệ điều hành</a></li>
-                        <li><a href="{{route('khang-nuoc.danh-sach')}}"class="slide-item">Kháng nước</a></li>
-                        <li><a href="{{route('kich-thuoc-man-hinh.danh-sach')}}"class="slide-item">Kích thước màng hình</a></li>
-                        <li><a href="{{route('the-sim.danh-sach')}}"class="slide-item">Thẻ sim</a></li>
-                        <li><a href="{{route('pin.danh-sach')}}"class="slide-item">Pin</a></li>
-                        <li><a href="{{route('tinh-nang-man-hinh.danh-sach')}}"class="slide-item">Tính năng màn hình</a></li>
-                        <li><a href="{{route('mau.danh-sach')}}"class="slide-item">Màu</a></li>
+                        <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
+                        <li><a href="#" class="slide-item">Điện thoại</a></li>
+                        <li><a href="#" class="slide-item">Thông số</a></li>
                     </ul>
                 </li>
                 <li class="slide">
