@@ -21,4 +21,9 @@ class AdminController extends Controller
         }
         return redirect()->route('admin.dang-nhap')->with('thong_bao','Đăng nhập thất bại');
     }
+    public function dangXuat(){
+        $admin=Auth::logout();
+        
+        return redirect()->route('admin.dang-nhap')->with('thong_bao','Đăng xuất thành công');
+    }
 }

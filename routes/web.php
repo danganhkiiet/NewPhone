@@ -5,7 +5,7 @@ use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\ThongSoController;
-
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +20,12 @@ use App\Http\Controllers\ThongSoController;
 //dien thoai
 Route::middleware(['auth'])->group(function () {
     Route::get('/',[NhaCungCapController::class,'danhSach'])->name('dien-thoai.danh-sach');
+    Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
 });
-
+Route::middleware(['guest'])->group(function () {
+    Route::get('/dang-nhap', [AdminController::class, 'dangNhap'])->name('admin.dang-nhap');
+    Route::post('/dang-nhap', [AdminController::class, 'xuLyDangNhap'])->name('admin.xu-ly-dang-nhap');
+});
 
 
 
