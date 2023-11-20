@@ -1,4 +1,9 @@
 <?php
+use App\Http\Controllers\KichThuocManHinhController;
+use App\Http\Controllers\MauController;
+use App\Http\Controllers\PinController;
+use App\Http\Controllers\TheSimController;
+use App\Http\Controllers\TinhNangManHinhController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CameraSauController;
@@ -184,37 +189,39 @@ Route::get('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'capNhat'])->
 Route::post('/khang-nuoc/cap-nhat/{id}',[KhangNuocController::class,'xuLyCapNhat'])->name('khang-nuoc.xu-ly-cap-nhat');
 Route::post('/khang-nuoc/xoa/{id}',[KhangNuocController::class,'xoa'])->name('khang-nuoc.xoa');
 
-
-
-
-
-
+//kich thuoc man hinh
+Route::get('/kich-thuoc-man-hinh/danh-sach',[KichThuocManHinhController::class,'danhSach'])->name('kich-thuoc-man-hinh.danh-sach');
+Route::get('/kich-thuoc-man-hinh/them-moi',[KichThuocManHinhController::class,'themMoi'])->name('kich-thuoc-man-hinh.them-moi');
+Route::post('/kich-thuoc-man-hinh/them-moi',[KichThuocManHinhController::class,'xuLyThemMoi'])->name('kich-thuoc-man-hinh.xu-ly-them-moi');
+Route::get('/kich-thuoc-man-hinh/cap-nhat/{id}',[KichThuocManHinhController::class,'capNhat'])->name('kich-thuoc-man-hinh.cap-nhat');
+Route::post('/kich-thuoc-man-hinh/cap-nhat/{id}',[KichThuocManHinhController::class,'xuLyCapNhat'])->name('kich-thuoc-man-hinh.xu-ly-cap-nhat');
+Route::get('/kich-thuoc-man-hinh/xoa/{id}',[KichThuocManHinhController::class,'xoa'])->name('kich-thuoc-man-hinh.xoa');
 
 //the sim
-
-
-
-
-
-
-
-
+Route::get('/the-sim/danh-sach',[TheSimController::class,'danhSach'])->name('the-sim.danh-sach');
+Route::get('/the-sim/them-moi',[TheSimController::class,'themMoi'])->name('the-sim.them-moi');
+Route::post('/the-sim/them-moi',[TheSimController::class,'xuLyThemMoi'])->name('the-sim.xu-ly-them-moi');
+Route::get('/the-sim/cap-nhat/{id}',[TheSimController::class,'capNhat'])->name('the-sim.cap-nhat');
+Route::post('/the-sim/cap-nhat/{id}',[TheSimController::class,'xuLyCapNhat'])->name('the-sim.xu-ly-cap-nhat');
+Route::get('/the-sim/xoa/{id}',[TheSimController::class,'xoa'])->name('the-sim.xoa');
 //pin
-
-
-
-
-
-
-
-
+Route::get('/pin/danh-sach',[PinController::class,'danhSach'])->name('pin.danh-sach');
+Route::get('/pin/them-moi',[PinController::class,'themMoi'])->name('pin.them-moi');
+Route::post('/pin/them-moi',[PinController::class,'xuLyThemMoi'])->name('pin.xu-ly-them-moi');
+Route::get('/pin/cap-nhat/{id}',[PinController::class,'capNhat'])->name('pin.cap-nhat');
+Route::post('/pin/cap-nhat/{id}',[PinController::class,'xuLyCapNhat'])->name('pin.xu-ly-cap-nhat');
+Route::get('/pin/xoa/{id}',[PinController::class,'xoa'])->name('pin.xoa');
 //tinh nang mang hinh
-
-
-
-
-
-
-
-
+Route::get('/tinh-nang-man-hinh/danh-sach',[TinhNangManHinhController::class,'danhSach'])->name('tinh-nang-man-hinh.danh-sach');
+Route::get('/tinh-nang-man-hinh/them-moi',[TinhNangManHinhController::class,'themMoi'])->name('tinh-nang-man-hinh.them-moi');
+Route::post('/tinh-nang-man-hinh/them-moi',[TinhNangManHinhController::class,'xuLyThemMoi'])->name('tinh-nang-man-hinh.xu-ly-them-moi');
+Route::get('/tinh-nang-man-hinh/cap-nhat/{id}',[TinhNangManHinhController::class,'capNhat'])->name('tinh-nang-man-hinh.cap-nhat');
+Route::post('/tinh-nang-man-hinh/cap-nhat/{id}',[TinhNangManHinhController::class,'xuLyCapNhat'])->name('tinh-nang-man-hinh.xu-ly-cap-nhat');
+Route::get('/tinh-nang-man-hinh/xoa/{id}',[TinhNangManHinhController::class,'xoa'])->name('tinh-nang-man-hinh.xoa');
 //mau
+Route::get('/mau/danh-sach',[MauController::class,'danhSach'])->name('mau.danh-sach');
+Route::get('/mau/them-moi',[MauController::class,'themMoi'])->name('mau.them-moi');
+Route::post('/mau/them-moi',[MauController::class,'xuLyThemMoi'])->name('mau.xu-ly-them-moi');
+Route::get('/mau/cap-nhat/{id}',[MauController::class,'capNhat'])->name('mau.cap-nhat');
+Route::post('/mau/cap-nhat/{id}',[MauController::class,'xuLyCapNhat'])->name('mau.xu-ly-cap-nhat');
+Route::get('/mau/xoa/{id}',[MauController::class,'xoa'])->name('mau.xoa');

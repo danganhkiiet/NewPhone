@@ -53,11 +53,11 @@
                         <li><a href="{{route('dung-luong-ram.danh-sach')}}"class="slide-item">Dung lượng ram</a></li>
                         <li><a href="{{route('he-dieu-hanh.danh-sach')}}"class="slide-item">Hệ điều hành</a></li>
                         <li><a href="{{route('khang-nuoc.danh-sach')}}"class="slide-item">Kháng nước</a></li>
-                        <li><a href="#"class="slide-item">Kích thước màng hình</a></li>
-                        <li><a href="#"class="slide-item">Thẻ sim</a></li>
-                        <li><a href="#"class="slide-item">Pin</a></li>
-                        <li><a href="#"class="slide-item">Tính năng màn hình</a></li>
-                        <li><a href="#"class="slide-item">Màu</a></li>
+                        <li><a href="{{route('kich-thuoc-man-hinh.danh-sach')}}"class="slide-item">Kích thước màng hình</a></li>
+                        <li><a href="{{route('the-sim.danh-sach')}}"class="slide-item">Thẻ sim</a></li>
+                        <li><a href="{{route('pin.danh-sach')}}"class="slide-item">Pin</a></li>
+                        <li><a href="{{route('tinh-nang-man-hinh.danh-sach')}}"class="slide-item">Tính năng màn hình</a></li>
+                        <li><a href="{{route('mau.danh-sach')}}"class="slide-item">Màu</a></li>
                     </ul>
                 </li>
                 <li class="slide">
