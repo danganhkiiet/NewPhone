@@ -68,17 +68,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_tnmh as $tnmh)
+                                                @foreach ($lst_thong_So as $ts)
                                                     <tr>
-                                                        <td>{{$tnmh->id}}</td>
-                                                        <td>{{$tnmh->ten}}</td>
+                                                        <td>{{$ts->id}}</td>
+                                                        <td>{{$ts->ten}}</td>
                                                         <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{ route('tinh-nang-man-hinh.cap-nhat',['id' => $tnmh->id]) }}" >
+                                                                title="Edit" href="{{ route('tinh-nang-man-hinh.cap-nhat',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
                                                             <a class="btn btn-danger fs-14 text-white delete-icn"
-                                                                title="Delete" href="{{ route('tinh-nang-man-hinh.xoa',['id' => $tnmh->id]) }}" >
+                                                                title="Delete" href="{{ route('tinh-nang-man-hinh.xoa',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-delete"></i>
                                                             </a>
                                                         </td>
@@ -86,7 +86,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        {{ $lst_tnmh->links() }}
+                                        {{ $lst_thong_So->links() }}
                                     </div>
                                   
                                 </div>

@@ -8,7 +8,7 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Tính năng màn hình</h1>
+                        <h1 class="page-title">Thông số điện thoại</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
