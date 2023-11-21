@@ -99,7 +99,16 @@
 
 	<!-- REPLY JS-->
 	<script src="{{asset('assets/js/reply.js')}}"></script>
-
+    <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
+    <!-- INTERNAl JQUERY.STEPS JS -->
+    <script src="/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+    <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
+    <!-- INTERNAL ACCORDION-WIZARD-FORM JS-->
+    <script src="/assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js"></script>
+    <script src="/assets/js/form-wizard.js"></script>
+    <!-- FORM WIZARD JS-->
+    <script src="/assets/plugins/formwizard/fromwizard.js"></script>
+    <script src="/assets/plugins/formwizard/jquery.smartWizard.js"></script>
 	<!-- PERFECT SCROLLBAR JS-->
 	<script src="{{asset('assets/plugins/p-scroll/perfect-scrollbar.js')}}"></script>
 	<script src="{{asset('assets/plugins/p-scroll/pscroll.js')}}"></script>

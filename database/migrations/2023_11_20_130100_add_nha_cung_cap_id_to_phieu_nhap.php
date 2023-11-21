@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dien_thoai_thong_so', function (Blueprint $table) {
-            $table->id();
-            $table->integer('san_pham_id');
-            $table->integer('thong_so_id');
-            $table->string('gia_tri');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('phieu_nhap', function (Blueprint $table) {
+            $table->string('nha_cung_cap_id');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('san_pham_thong_so');
+        Schema::table('phieu_nhap', function (Blueprint $table) {
+            //
+        });
     }
 };

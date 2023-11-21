@@ -6,6 +6,7 @@ use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\ThongSoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PhieuNhapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\AdminController;
 //dien thoai
 Route::middleware(['auth'])->group(function () {
     Route::get('/',[NhaCungCapController::class,'danhSach'])->name('dien-thoai.danh-sach');
+    Route::get('/them-moi',[NhaCungCapController::class,'themMoi'])->name('dien-thoai.danh-sach');
     Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
 });
 Route::middleware(['guest'])->group(function () {
@@ -29,8 +31,14 @@ Route::middleware(['guest'])->group(function () {
 
 
 
-
-
+//phieu nhap
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('phieu-nhap')->group(function () {
+        Route::name('phieu-nhap.')->group(function () {
+            Route::get('/them-moi',[PhieuNhapController::class,'themMoi'])->name('them-moi');
+        });
+    });
+});
 
 
 
