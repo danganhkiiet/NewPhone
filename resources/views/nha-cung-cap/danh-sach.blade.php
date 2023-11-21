@@ -77,7 +77,7 @@
                                                         <td>{{ $nhacungcap->dia_chi }}</td>
                                                         <td>{{ $nhacungcap->email }}</td>
                                                         <td>{{ $nhacungcap->so_dien_thoai }}</td>
-                                                        <td style="width: 100px">
+                                                        <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
                                                                 title="Edit"
                                                                 href="{{ route('nha-cung-cap.cap-nhat', ['id' => $nhacungcap->id]) }}">

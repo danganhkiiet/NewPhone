@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Database\Seeders\PhieuNhapSeeder;
 use Illuminate\Http\Request;
 use App\Models\PhieuNhap;
+use App\Models\NhaCungCap;
+use App\Models\ThongSo;
+use App\Models\MauSac;
+use App\Models\DungLuong;
 class PhieuNhapController extends Controller
 {
     /**
@@ -11,15 +16,31 @@ class PhieuNhapController extends Controller
      */
     public function themMoi()
     {
-        return view('hoa-don/phieu-nhap/them-moi');
+        $lst_nha_cung_cap = NhaCungCap::all();
+        return view('hoa-don/phieu-nhap/them-moi-phieu-nhap',compact('lst_nha_cung_cap'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function xuLyThemMoi(Request $request)
     {
-        //
+        //them moi phieu nhap
+        $phieu_nhap = new PhieuNhap();
+        $phieu_nhap->thong_tin_nguoi_giao = $request->thong_tin_nguoi_giao;
+        $phieu_nhap->nha_cung_cap_id=$request->nha_cung_cap_id;
+        $phieu_nhap->ngay_nhap_hang = $request->ngay_nhap_hang;
+        $phieu_nhap->tong_tien = 0;
+        $phieu_nhap->admin_id = Auth()->user()->id;
+        $phieu_nhap->save();
+        return redirect()->route('phieu-nhap.them-moi-dien-thoai');
+    }
+    public function themMoiDienThoai()
+    {
+        $lst_thong_so = ThongSo::all();
+        $lst_dung_luong = DungLuong::all();
+        $lst_mau_sac = MauSac::all();
+        return view('hoa-don/phieu-nhap/them-moi-dien-thoai',compact('lst_thong_so','lst_dung_luong','lst_mau_sac'));
     }
 
     /**

@@ -35,7 +35,9 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::prefix('phieu-nhap')->group(function () {
         Route::name('phieu-nhap.')->group(function () {
-            Route::get('/them-moi',[PhieuNhapController::class,'themMoi'])->name('them-moi');
+            Route::get('/them-moi-phieu-nhap',[PhieuNhapController::class,'themMoi'])->name('them-moi-phieu-nhap');
+            Route::get('/them-moi-dien-thoai',[PhieuNhapController::class,'themMoiDienThoai'])->name('them-moi-dien-thoai');
+            Route::post('/them-moi-phieu-nhap',[PhieuNhapController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
         });
     });
 });

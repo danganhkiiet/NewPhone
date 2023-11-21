@@ -121,6 +121,21 @@
 
 	<!-- CUSTOM JS -->
 	<script src="{{asset('assets/js/custom.js')}}"></script>
+    <!-- Amaze UI Date Picker js-->
+    <script src="/assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
+
+    <!-- Simple Date Time Picker js-->
+    <script src="/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+    <!-- jQuery UI Date Picker js -->
+    <script src="/assets/plugins/date-picker/jquery-ui.js"></script>
+    <!-- bootstrap-datepicker js (Date picker Style-01) -->
+    <script src="/assets/plugins/bootstrap-datepicker/js/datepicker.js"></script>
+    <!-- SELECT2 JS -->
+    <script src="/assets/plugins/select2/select2.full.min.js"></script>
+    <!-- BOOTSTRAP EDITABLE JS -->
+    <script src="/assets/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+    <script src="/assets/js/bootstrap-editable.js"></script>
+    <script src="/assets/js/address-editable.js"></script>
 
 </body>
 
