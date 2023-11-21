@@ -41,8 +41,8 @@
                                                     <input class="form-control"  name="dia_chi" id="dia_chi" type="text" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="form-label" for="email">Email</label>
-                                                    <input class="form-control" name="email" id="email" type="email"  required>
+                                                    <label class="form-label" for="Email">Email</label>
+                                                    <input class="form-control"  name="email" id="Email" type="email" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label" for="so_dien_thoai">Số điện thoại</label>

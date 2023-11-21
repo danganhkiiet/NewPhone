@@ -39,7 +39,7 @@
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn" style="position: relative;left: 78%;">
-                                        <a href="{{ route('nha-cung-cap.them-moi') }}" class="btn btn-primary-light ">Thêm
+                                        <a href="{{ route('tai-khoan.them-moi') }}" class="btn btn-primary-light ">Thêm
                                             mới</a>
                                     </div>
                                     <!-- form tim kiem -->
@@ -77,10 +77,10 @@
                                                         <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
                                                                 title="Edit"
-                                                                href="{{ route('nha-cung-cap.cap-nhat', ['id' => $admin->id]) }}">
+                                                                href="{{ route('tai-khoan.cap-nhat', ['id' => $admin->id]) }}">
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
-                                                            <form method="POST" action="{{route('nha-cung-cap.xoa',['id'=>$admin->id])}}">
+                                                            <form method="POST" action="{{route('tai-khoan.xoa',['id'=>$admin->id])}}">
                                                                 @csrf
                                                                 <button type="submit" class="btn btn-danger fs-14 text-white delete-icn"
                                                                     title="Delete">

@@ -34,19 +34,33 @@
                                                 <h4 class="card-title">Nhập thông tin</h4>
                                                 <div class="form-group">
                                                     <label class="form-label" for="ten">Họ tên</label>
-                                                    <input class="form-control"  name="ten" id="ten" type="text" required>
+                                                    <input class="form-control"  name="ho_ten" id="ten" type="text" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="form-label" for="email">Email</label>
-                                                    <input class="form-control" name="email" id="email" type="email"  required>
+                                                    <label class="form-label" for="Email">Email</label>
+                                                    <input class="form-control" name="email" id="Email" type="email"  required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="form-label" for="email">Password</label>
-                                                    <input class="form-control" name="password" id="password" type="password"  required>
+                                                    <label class="form-label" for="Password">Password</label>
+                                                    <input class="form-control" name="password" id="Password" type="password"  required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="form-label" for="email">Hình ảnh</label>
-                                                    <input class="form-control" multiple name="hinh_anh[]" id="hinh_anh" type="hinh_anh"  required>
+                                                    <label class="form-label" for="so_dien_thoai">Số Điện Thoại</label>
+                                                    <input class="form-control" name="so_dien_thoai" id="so_dien_thoai" type="tel"  required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h3 class="card-title">Avatar</h3>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <div>
+                                                                    <input id="demo" type="file" name="avatar" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <button class="btn btn-primary btn-block" type="submit">Tạo mới</button>
                                             </div>

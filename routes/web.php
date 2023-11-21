@@ -95,6 +95,10 @@ Route::middleware(['auth'])->group(function () {
 //tài khoản
 Route::get('/tai-khoan/danh-sach',[AdminController::class,'danhSach'])->name('tai-khoan.danh-sach');
 Route::get('/tai-khoan/them-moi',[AdminController::class,'themMoi'])->name('tai-khoan.them-moi');
+Route::post('/tai-khoan/them-moi',[AdminController::class,'xuLyThemMoi'])->name('tai-khoan.xu-ly-them-moi');
+Route::get('/tai-khoan/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('tai-khoan.cap-nhat');
+Route::post('/tai-khoan/cap-nhat/{id}',[AdminController::class,'xuLyCapNhat'])->name('tai-khoan.xu-ly-cap-nhat');
+Route::post('/tai-khoan/xoa/{id}',[AdminController::class,'xoa'])->name('tai-khoan.xoa');
 
 
 

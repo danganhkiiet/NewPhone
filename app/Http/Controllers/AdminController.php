@@ -38,4 +38,59 @@ class AdminController extends Controller
     public function themMoi(){
         return view('tai-khoan.them-moi');
     }
+    public function xuLyThemMoi(Request $request)
+    {
+        // dd($request);
+        $file=$request->avatar;
+        $path=$file->store('avatar');
+
+        $admin=Admin::create(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path]);
+
+        return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Thêm mới thành công');
+    }
+    public function capNhat($id){
+        $admin=Admin::find($id);
+        return view('tai-khoan.cap-nhat',compact('admin'));
+    }
+    public function xuLyCapNhat(Request $request,$id)
+    {
+        // dd($request);
+        if(empty($request->avatar)){
+            if(empty($request->password)){
+                $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
+                return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
+            }
+            $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai]);
+            return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
+        }
+
+      
+        if(empty($request->password)){
+
+            $file=$request->avatar;
+
+            $path=$file->store('avatar');
+            
+            $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path]);
+
+            return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
+        }
+
+        $file=$request->avatar;
+
+        $path=$file->store('avatar');
+
+        $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path]);
+        
+        return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
+    }
+    public function xoa($id){
+        $admin=Admin::find($id);
+       
+        if(empty($admin)){
+            return "xóa thất bại";
+        }
+        $admin->delete();
+        return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Xóa thành công');
+    }
 }
