@@ -26,4 +26,16 @@ class AdminController extends Controller
         
         return redirect()->route('admin.dang-nhap')->with('thong_bao','Đăng xuất thành công');
     }
+    public function danhSach(){
+        $lst_admin=Admin::paginate(5);
+
+        // if($ten = request()->ten)
+        // {
+        //     $lst_nhacungcap=NhaCungCap::where('ten','like','%'.$ten)->paginate(5);
+        // }
+        return view('tai-khoan.danh-sach',compact('lst_admin'));
+    }
+    public function themMoi(){
+        return view('tai-khoan.them-moi');
+    }
 }

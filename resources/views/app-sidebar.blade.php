@@ -97,7 +97,7 @@
                         <span class="side-menu__label">Tài khoản</span><i class="angle fa fa-angle-right"></i>
                     </a>
                     <ul class="slide-menu">
-                        <li><a href="calendar2.html" class="slide-item">Quản Trị Viên</a></li>
+                        <li><a href="{{route('tai-khoan.danh-sach')}}" class="slide-item">Quản Trị Viên</a></li>
                         <li><a href="{{ route('khach-hang.danh-sach') }}" class="slide-item">Khách hàng</a></li>
                     </ul>
                 </li>

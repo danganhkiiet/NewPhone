@@ -92,8 +92,9 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
-
-
+//tài khoản
+Route::get('/tai-khoan/danh-sach',[AdminController::class,'danhSach'])->name('tai-khoan.danh-sach');
+Route::get('/tai-khoan/them-moi',[AdminController::class,'themMoi'])->name('tai-khoan.them-moi');
 
 
 

@@ -475,7 +475,7 @@
                                             class="avatar  profile-user brround cover-image">
                                     </span>
                                     <div class="text-center p-1 d-flex d-lg-none-max">
-                                        <h6 class="mb-0" id="profile-heading">Elena<i
+                                        <h6 class="mb-0" id="profile-heading">{{Auth()->user()->ho_ten}}<i
                                                 class="user-angle ms-1 fa fa-angle-down "></i></h6>
                                     </div>
                                 </a>
