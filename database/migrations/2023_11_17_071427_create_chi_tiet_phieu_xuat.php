@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer('dien_thoai_id');
             $table->integer('phieu_xuat_id');
             $table->integer('so_luong');
-            $table->float('gia_ban');
-            $table->float('thanh_tien');
+            $table->decimal('gia_ban');
+            $table->decimal('thanh_tien');
             $table->timestamps();
             $table->softDeletes();
         });

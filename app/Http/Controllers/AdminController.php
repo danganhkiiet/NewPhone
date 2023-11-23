@@ -33,10 +33,10 @@ class AdminController extends Controller
         // {
         //     $lst_nhacungcap=NhaCungCap::where('ten','like','%'.$ten)->paginate(5);
         // }
-        return view('tai-khoan.danh-sach',compact('lst_admin'));
+        return view('tai-khoan.quan-tri-vien.danh-sach',compact('lst_admin'));
     }
     public function themMoi(){
-        return view('tai-khoan.them-moi');
+        return view('tai-khoan.quan-tri-vien.them-moi');
     }
     public function xuLyThemMoi(Request $request)
     {
@@ -50,7 +50,7 @@ class AdminController extends Controller
     }
     public function capNhat($id){
         $admin=Admin::find($id);
-        return view('tai-khoan.cap-nhat',compact('admin'));
+        return view('tai-khoan.quan-tri-vien.cap-nhat',compact('admin'));
     }
     public function xuLyCapNhat(Request $request,$id)
     {

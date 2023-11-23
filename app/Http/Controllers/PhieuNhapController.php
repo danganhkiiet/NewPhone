@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Database\Seeders\PhieuNhapSeeder;
 use Illuminate\Http\Request;
 use App\Models\PhieuNhap;
+use App\Models\ChiTietPhieuNhap;
 use App\Models\NhaCungCap;
-use App\Models\ThongSo;
+use App\Models\NhaSanXuat;
 use App\Models\MauSac;
 use App\Models\DungLuong;
+use App\Models\DienThoai;
+use App\Models\ChiTietDienThoai;
 class PhieuNhapController extends Controller
 {
     /**
@@ -37,10 +40,46 @@ class PhieuNhapController extends Controller
     }
     public function themMoiDienThoai()
     {
-        $lst_thong_so = ThongSo::all();
+        $lst_nha_san_xuat = NhaSanXuat::all();
         $lst_dung_luong = DungLuong::all();
         $lst_mau_sac = MauSac::all();
-        return view('hoa-don/phieu-nhap/them-moi-dien-thoai',compact('lst_thong_so','lst_dung_luong','lst_mau_sac'));
+        $lst_dien_thoai = DienThoai::all();
+        return view('hoa-don/phieu-nhap/them-moi-dien-thoai',compact('lst_nha_san_xuat','lst_dung_luong','lst_mau_sac','lst_dien_thoai'));
+    }
+    public function xuLyThemMoiDienThoai(Request $request)
+    {
+        // dd($request->dung_luong_id);
+        $phieu_nhap=PhieuNhap::latest('id')->first();
+        // dd($phieu_nhap->id);
+        // dd($request);
+        $tong_tien=0;
+        for($i=0;$i<count($request->dien_thoai_id);$i++){
+            $chi_tiet_dien_thoai=ChiTietDienThoai::where('dien_thoai_id',$request->dien_thoai_id[$i])->where('mau_sac_id',$request->mau_sac_id[$i])->where('dung_luong_id',$request->dung_luong_id[$i])->first();
+            // dd($chi_tiet_dien_thoai);
+            // dd($request->so_luong[$i]);
+            $soluong=$request->so_luong[$i];
+            $chi_tiet_dien_thoai->so_luong=$chi_tiet_dien_thoai->so_luong+$soluong;
+            $chi_tiet_dien_thoai->gia_ban=$request->gia_ban[$i];
+            $chi_tiet_dien_thoai->save();
+
+            $chi_tiet_phieu_nhap=new ChiTietPhieuNhap();
+            $chi_tiet_phieu_nhap->dien_thoai_id=$request->dien_thoai_id[$i];
+            $chi_tiet_phieu_nhap->phieu_nhap_id=$phieu_nhap->id;
+            $chi_tiet_phieu_nhap->so_luong=$request->so_luong[$i];
+            $chi_tiet_phieu_nhap->gia_nhap=$request->gia_nhap[$i];
+            $chi_tiet_phieu_nhap->gia_ban=$request->gia_ban[$i];
+            $chi_tiet_phieu_nhap->thanh_tien=$request->so_luong[$i]*$request->gia_nhap[$i];
+            $tong_tien+=$chi_tiet_phieu_nhap->thanh_tien;
+            $chi_tiet_phieu_nhap->save();
+            // $chi_tiet_phieu_nhap->phieu_nhap_id=$request->phieu_nhap_id;
+        }
+        $phieu_nhap->tong_tien=$tong_tien;
+        $phieu_nhap->save();
+        return redirect()->route('nha-cung-cap.danh-sach');
+    }
+    public function danhSachDienThoaiTheoNhaSanXuat(Request $request){
+        $dien_thoai = DienThoai::where('nha_san_xuat_id', $request->nha_san_xuat_id)->get();
+        return response()->json($dien_thoai);
     }
 
     /**

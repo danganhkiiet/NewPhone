@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('admin_id');
             $table->string('thong_tin_nguoi_giao');
-            $table->float('tong_tien');
+            $table->decimal('tong_tien');
             $table->dateTime('ngay_nhap_hang');
             $table->timestamps();
             $table->softDeletes();

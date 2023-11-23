@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('ten');
             $table->string('duong_dan');
+            $table->bigInteger('dien_thoai_id');
             $table->timestamps();
             $table->softDeletes();
         });
