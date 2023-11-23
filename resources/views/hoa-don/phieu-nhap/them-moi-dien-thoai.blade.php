@@ -98,9 +98,9 @@
 												<table class="table border text-nowrap text-md-nowrap table-hover">
 													<thead>
 														<tr>
-															<th>ID</th>
-															<th>Name</th>
-															<th>Position</th>
+															<th>Điện thoại</th>
+															<th>Màu sắc</th>
+															<th>Dung Lượng</th>
 															<th>Salary</th>
 														</tr>
 													</thead>
