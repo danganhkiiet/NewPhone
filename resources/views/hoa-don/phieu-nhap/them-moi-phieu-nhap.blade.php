@@ -50,7 +50,7 @@
 															<div class="input-group-text bg-primary-transparent text-primary">
 																<i class="fe fe-calendar text-20"></i>
 															</div>
-															<input class="form-control" id="ngay_nhap_hang" name="ngay_nhap_hang" type="date">
+															<input required  class="form-control" id="ngay_nhap_hang" name="ngay_nhap_hang" type="date">
 														</div>
 													</div>
                                                 </div>

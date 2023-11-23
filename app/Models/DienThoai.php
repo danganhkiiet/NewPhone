@@ -13,4 +13,11 @@ class DienThoai extends Model
     public function nha_san_xuat(){
         return $this->belongsTo(NhaSanXuat::class);
     }
+
+    public function phieuNhap(){
+        return $this->hasMany(PhieuNhap::class);
+    }
+    public function chiTietPhieuNhap(){
+        return $this->hasMany(ChiTietPhieuNhap::class);
+    }
 }

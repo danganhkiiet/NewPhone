@@ -13,4 +13,8 @@ class NhaCungCap extends Model
     use SoftDeletes;
     protected $fillable = ['ten', 'dia_chi', 'email', 'so_dien_thoai'];
     protected $table="nha_cung_cap";
+    public function phieuNhap()
+    {
+        return $this->hasMany(PhieuNhap::class);
+    }
 }

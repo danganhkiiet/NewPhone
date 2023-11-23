@@ -13,4 +13,8 @@ class Admin extends Authenticatable
     use SoftDeletes;
     protected $table="admin";
     protected $fillable=['ho_ten','email','password','so_dien_thoai','avatar'];
+    public function phieuNhap()
+    {
+        return $this->hasMany(PhieuNhap::class);
+    }
 }

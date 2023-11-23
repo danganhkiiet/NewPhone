@@ -79,7 +79,7 @@
                         </svg>
                         <span class="side-menu__label">Hóa đơn</span><i class="angle fa fa-angle-right"></i></a>
                     <ul class="slide-menu">
-                        <li><a href="{{route('phieu-nhap.them-moi-phieu-nhap')}}" class="slide-item">Phiếu Nhập</a></li>
+                        <li><a href="{{route('phieu-nhap.danh-sach')}}" class="slide-item">Phiếu Nhập</a></li>
                         <li><a href="maps2.html" class="slide-item">Phiếu Xuất</a></li>
                     </ul>
                 </li>

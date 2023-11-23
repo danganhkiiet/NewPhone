@@ -12,7 +12,8 @@
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Phiếu nhập</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+                            <li class="breadcrumb-item"><a href="#">Thêm mới phiếu nhập</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Thêm mới sản phẩm</li>
                         </ol>
                     </div>
                 </div>
@@ -22,7 +23,7 @@
                     <div class="col-lg-3 col-md-">
                         <div class="card custom-card">
                             <div class="card-header border-bottom">
-                                <h3 class="card-title">Thông tin phiếu nhập</h3>
+                                <h3 class="card-title">Thông tin điện thoại</h3>
                             </div>
                             <div class="card-body">
                                 <div class="d-flex flex-column">
@@ -85,7 +86,7 @@
                                             value="1" required>
                                     </td>
                                     {{-- <button class="btn btn-primary btn-block" type="button" onclick="themThongSo(document.getElementById('thong_so_id').value,document.getElementById('thong_so_id').options[document.getElementById('thong_so_id').selectedIndex].text )">Thêm thông số</button> --}}
-                                    <button class="btn btn-primary" id="btn-them">Thêm thông số</button>
+                                    <button class="btn btn-primary" id="btn-them">Thêm điện thoại</button>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +94,7 @@
                     <div class="col-lg-9 col-md-12">
                         <div class="card">
                             <div class="card-header border-bottom">
-                                <h3 class="card-title">Danh Sách Phiếu</h3>
+                                <h3 class="card-title">Danh Sách Điện thoại</h3>
                             </div>
                             <div class="card-body">
                                 <form class="form-horizontal" method="POST">
@@ -116,45 +117,11 @@
 
                                         </tbody>
                                     </table>
-                                    <button class="btn btn-primary" type="submit">Thêm sản phẩm</button>
+                                    <button class="btn btn-primary" type="submit">Hoàn thành phiếu nhập</button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="row row-sm">
-								<div class="col-lg-12">
-									<div class="card custom-card">
-										<div class="card-header border-bottom">
-											<h3 class="card-title">Hoverable Rows Table</h3>
-										</div>
-										<div class="card-body">
-											<p class="text-muted">To enable hover state on table rows.</p>
-											<div class="table-responsive">
-												<table class="table border text-nowrap text-md-nowrap table-hover">
-													<thead>
-														<tr>
-															<th>ID</th>
-															<th>Name</th>
-															<th>Position</th>
-															<th>Salary</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>1</td>
-															<td>Kevin Powell</td>
-															<td>Business Development Associator</td>
-															<td>$50,300</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-                </div>
-                <!-- /row -->
             </div>
         </div>
     </div>

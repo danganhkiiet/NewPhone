@@ -17,6 +17,17 @@ class PhieuNhapController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function danhSach()
+    {
+        $lst_phieu_nhap = PhieuNhap::paginate(5);
+        return view('hoa-don/phieu-nhap/danh-sach',compact('lst_phieu_nhap'));
+    }
+    public function chiTietPhieuNhap($id)
+    {
+        $lst_chi_tiet_phieu_nhap = ChiTietPhieuNhap::where('phieu_nhap_id', $id)->paginate(5);
+
+        return view('hoa-don/phieu-nhap/chi_tiet_phieu_nhap',compact('lst_chi_tiet_phieu_nhap'));
+    }
     public function themMoi()
     {
         $lst_nha_cung_cap = NhaCungCap::all();
