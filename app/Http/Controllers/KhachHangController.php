@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\khachhang;
+use Illuminate\Support\Facades\Hash;
 class khachhangController extends Controller
 {
     //
@@ -13,10 +14,10 @@ class khachhangController extends Controller
         {
             $lst_khach_hang = khachhang::where('ten','like','%'.$ten)->paginate(5);
         }
-        return view('khach-hang/danh-sach', compact('lst_khach_hang'));
+        return view('tai-khoan.khach-hang.danh-sach', compact('lst_khach_hang'));
     }
     public function themMoi(){
-        return view('khach-hang/them-moi');
+        return view('tai-khoan.khach-hang.them-moi');
     }
     public function xuLyThemMoi(Request $request){
        $khach_hang = new khachhang();
@@ -24,14 +25,14 @@ class khachhangController extends Controller
        $khach_hang->email = $request->email;
        $khach_hang->dia_chi = $request->dia_chi;
        $khach_hang->so_dien_thoai = $request->so_dien_thoai;
-       $khach_hang->password = 1;
+       $khach_hang->password = Hash::make($request->password);
        $khach_hang->save();
        return redirect()->route('khach-hang.danh-sach')->with('thong_bao','Thêm mới thành công');
     }
     
     public function capNhat($id){
         $khach_hang = khachhang::find($id);
-        return view('khach-hang/cap-nhat', compact('khach_hang'));
+        return view('tai-khoan.khach-hang.cap-nhat', compact('khach_hang'));
     }
     
     public function xuLyCapNhat(Request $request, $id){

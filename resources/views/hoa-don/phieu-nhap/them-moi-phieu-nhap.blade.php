@@ -37,7 +37,7 @@
                                                 </div>
                                                 <div class="form-group">
 													<label class="form-label" for="nha_cung_cap_id">Nhà cung cấp</label>
-													<select name="nha_cung_cap_id" class="form-control form-select" id="nha_cung_cap_id" data-bs-placeholder="Select Country">
+													<select name="nha_cung_cap_id" class="form-control form-select" value="1" id="nha_cung_cap_id" data-bs-placeholder="Select Country">
 														@foreach($lst_nha_cung_cap as $ncc)
                                                         <option value="{{$ncc->id}}">{{$ncc->ten}}</option>
                                                         @endforeach

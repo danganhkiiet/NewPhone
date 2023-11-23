@@ -21,7 +21,7 @@ use App\Http\Controllers\PhieuNhapController;
 //dien thoai
 Route::middleware(['auth'])->group(function () {
     Route::get('/',[NhaCungCapController::class,'danhSach'])->name('dien-thoai.danh-sach');
-    Route::get('/them-moi',[NhaCungCapController::class,'themMoi'])->name('dien-thoai.danh-sach');
+    Route::get('/them-moi',[DienThoaiController::class,'themMoi'])->name('dien-thoai.them-moi');
     Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
 });
 Route::middleware(['guest'])->group(function () {
@@ -36,8 +36,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('phieu-nhap')->group(function () {
         Route::name('phieu-nhap.')->group(function () {
             Route::get('/them-moi-phieu-nhap',[PhieuNhapController::class,'themMoi'])->name('them-moi-phieu-nhap');
-            Route::get('/them-moi-dien-thoai',[PhieuNhapController::class,'themMoiDienThoai'])->name('them-moi-dien-thoai');
             Route::post('/them-moi-phieu-nhap',[PhieuNhapController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
+            Route::get('/them-moi-dien-thoai',[PhieuNhapController::class,'themMoiDienThoai'])->name('them-moi-dien-thoai');
+            Route::post('/them-moi-dien-thoai',[PhieuNhapController::class,'xuLyThemMoiDienThoai'])->name('xu-ly-them-moi-dien-thoai');
+            Route::get('/danh-sach-dien-thoai-theo-nha-san-xuat',[PhieuNhapController::class,'danhSachDienThoaiTheoNhaSanXuat'])->name('danh-sach-dien-thoai-theo-nha-san-xuat');
         });
     });
 });

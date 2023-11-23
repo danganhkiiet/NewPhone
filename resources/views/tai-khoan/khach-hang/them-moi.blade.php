@@ -48,6 +48,10 @@
                                                     <label class="form-label" for="so_dien_thoai">Số điện thoại</label>
                                                     <input class="form-control"  name="so_dien_thoai" pattern="[0-9]{10}" id="so_dien_thoai" type="tel" required>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="Password">Password</label>
+                                                    <input class="form-control" name="password" id="Password" type="password"  required>
+                                                </div>
                                                 <button class="btn btn-primary btn-block" type="submit">Tạo mới</button>
                                             </div>
                                         </div>
