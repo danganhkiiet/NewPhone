@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('khach_hang_id');
             $table->integer('admin_id');
-            $table->float('tong_tien');
+            $table->decimal('tong_tien');
             $table->integer('trang_thai_don_hang_id');
             $table->timestamps();
             $table->softDeletes();

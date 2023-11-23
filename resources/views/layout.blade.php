@@ -137,6 +137,12 @@
     <script src="/assets/js/bootstrap-editable.js"></script>
     <script src="/assets/js/address-editable.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	@yield('js-jquery')
+
 </body>
 
 </html>
