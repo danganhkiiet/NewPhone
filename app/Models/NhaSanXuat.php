@@ -10,5 +10,6 @@ class NhaSanXuat extends Model
     use HasFactory;
     protected $table="nha_san_xuat";
 
+    protected $fillable=['ten'];
     
 }
