@@ -9,4 +9,7 @@ class MauSac extends Model
 {
     use HasFactory;
     protected $table='mau_sac';
+    public function chiTietDienThoai(){
+        return $this->hasMany(ChiTietDienThoai::class);
+    }
 }

@@ -10,5 +10,8 @@ class NhaSanXuat extends Model
     use HasFactory;
     protected $table="nha_san_xuat";
 
-    
+    public function dienThoai()
+    {
+        return $this->hasMany(DienThoai::class);
+    }
 }
