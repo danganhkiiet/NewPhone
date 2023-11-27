@@ -21,13 +21,18 @@ use App\Http\Controllers\NhaSanXuatController;
 */
 //dien thoai
 Route::middleware(['auth'])->group(function () {
-    Route::get('/',[NhaCungCapController::class,'danhSach'])->name('dien-thoai.danh-sach');
-    Route::get('/them-moi',[DienThoaiController::class,'themMoi'])->name('dien-thoai.them-moi');
-    Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
+    Route::prefix('dien-thoai')->group(function () {
+        Route::name('dien-thoai.')->group(function () {
+            Route::get('/danh-sach', [DienThoaiController::class, 'danHSach'])->name('danh-sach');
+            Route::get('/them-moi', [DienThoaiController::class, 'themMoi'])->name('them-moi');
+            Route::post('/them-moi', [DienThoaiController::class, 'xuLyThemMoi'])->name('xu-ly-them-moi');
+            Route::get('/cap-nhat{id}', [DienThoaiController::class, 'capNhat'])->name('cap-nhat');
+        });
+    });
 });
 Route::middleware(['guest'])->group(function () {
-    Route::get('/dang-nhap', [AdminController::class, 'dangNhap'])->name('admin.dang-nhap');
-    Route::post('/dang-nhap', [AdminController::class, 'xuLyDangNhap'])->name('admin.xu-ly-dang-nhap');
+    Route::get('/', [AdminController::class, 'dangNhap'])->name('admin.dang-nhap');
+    Route::post('/', [AdminController::class, 'xuLyDangNhap'])->name('admin.xu-ly-dang-nhap');
 });
 
 
@@ -45,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/danh-sach-dien-thoai-theo-nha-san-xuat',[PhieuNhapController::class,'danhSachDienThoaiTheoNhaSanXuat'])->name('danh-sach-dien-thoai-theo-nha-san-xuat');
         });
     });
+    Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
 });
 
 
