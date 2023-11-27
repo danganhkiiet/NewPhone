@@ -3,42 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Mau;
+use App\Models\MauSac;
 class MauController extends Controller
 {
     //
     public function danhSach(){
-        $lst_mau = Mau::paginate(5);
+        $lst_mau = MauSac::paginate(5);
         if($ten = request()->ten)
         {
             $lst_mau = Mau::where('ten','like','%'.$ten)->paginate(5);
         }
-        return view('thong-so-dien-thoai/mau/danh-sach', compact('lst_mau'));
+        return view('san-pham.mau-sac.danh-sach', compact('lst_mau'));
     }
-    public function themMoi(){
-        return view('thong-so-dien-thoai/mau/them-moi');
-    }
-    public function xuLyThemMoi(Request $request){
-       $mau = new Mau();
-       $mau->ten = $request->ten;
-       $mau->save();
-       return redirect()->route('mau.danh-sach')->with('thong_bao','Thêm mới thành công');
+    public function themMoi(Request $request){
+        $mau = new MauSac();
+        $mau->ten = $request->ten;
+        $mau->save();
+        return response()->json(['message'=>'Thêm Thành Công']);
     }
     
     public function capNhat($id){
-        $mau = Mau::find($id);
-        return view('thong-so-dien-thoai/mau/cap-nhat', compact('mau'));
+        $mau = MauSac::find($id);
+        
+        return $mau;
     }
     
-    public function xuLyCapNhat(Request $request, $id){
-        $mau = Mau::find($id);
+    public function xuLyCapNhat(Request $request){
+        $mau = MauSac::find($request->id);
         $mau->ten = $request->ten;
         $mau->save();
-        return redirect()->route('mau.danh-sach')->with('thong_bao','Cập nhật thành công');
+        return response()->json(['message'=>'Cập Nhâtj Thành Công']);
     }
-     public function xoa($id){
-        $mau = Mau::find($id);
+    public function xoa($id){
+        $mau = MauSac::find($id);
+        
         $mau->delete();
-        return redirect()->route('mau.danh-sach')->with('thong_bao','Xóa thành công');
+        return redirect()->route('mau-sac.danh-sach')->with('thong_bao','Xóa thành công');
     }
 }

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('nha_san_xuat', function (Blueprint $table) {
             $table->id();
             $table->string('ten');
+            $table->string('dia_chi');
+            $table->string('email');
+            $table->string('so_dien_thoai');
             $table->timestamps();
             $table->softDeletes();
         });

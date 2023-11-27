@@ -7,11 +7,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Nhà Sản Xuất</h1>
+                        <h1 class="page-title">Màu Sắc</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Nhà Sản Xuất</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Màu Sắc</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
                         </ol>
                     </div>
@@ -68,27 +68,21 @@
                                             <thead>
                                                 <tr>
                                                     <th>Tên</th>
-                                                    <th>Địa Chỉ</th>
-                                                    <th>Email</th>
-                                                    <th>Số Điện Thoại</th>
                                                     <th>#</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_nhasanxuat as $nhasanxuat)
+                                                @foreach ($lst_mau as $mau)
                                                     <tr>
-                                                        <td>{{ $nhasanxuat->ten }}</td>
-                                                        <td>{{ $nhasanxuat->dia_chi }}</td>
-                                                        <td>{{ $nhasanxuat->email }}</td>
-                                                        <td>{{ $nhasanxuat->so_dien_thoai }}</td>
+                                                        <td>{{ $mau->ten }}</td>
                                                         <td style="display: flex;">
                                                             <button type="button" class="btn btn-primary btn-edit"
                                                                 data-toggle="modal" data-target="#myModal"
-                                                                data-id="{{ $nhasanxuat->id }}">
+                                                                data-id="{{ $mau->id }}">
                                                                 <i class="fe fe-edit"></i>
                                                             </button> 
                                                             <form method="POST"
-                                                                action="{{ route('nha-cung-cap.xoa', ['id' => $nhasanxuat->id]) }}">
+                                                                action="{{ route('mau-sac.xoa', ['id' => $mau->id]) }}">
                                                                 @csrf
                                                                 <button type="submit"
                                                                     class="btn btn-danger fs-14 text-white delete-icn"
@@ -101,7 +95,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        {{ $lst_nhasanxuat->links() }}
+                                        {{ $lst_mau->links() }}
                                     </div>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -116,7 +110,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" action="" id="myForm">
+                                                    <form method="POST" id="myForm">
                                                         @csrf
                                                         <div class="card card-body pd-20 pd-md-40 border shadow-none">
                                                             <h4 class="card-title">Nhập thông tin</h4>
@@ -126,18 +120,6 @@
                                                                 <label class="form-label" for="ten">Họ tên</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="dia_chi">Địa chỉ</label>
-                                                                <input class="form-control"  name="dia_chi" id="dia_chi" type="text" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="Email">Email</label>
-                                                                <input class="form-control"  name="email" id="Email" type="email" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="so_dien_thoai">Số điện thoại</label>
-                                                                <input class="form-control"  name="so_dien_thoai" pattern="[0-9]{10}" id="so_dien_thoai" type="tel" required>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -182,7 +164,7 @@
                 if ($('#id').val() == "") {
                     $.ajax({
                         method: "POST",
-                        url: "{{ route('nha-san-xuat.them-moi') }}",
+                        url: "{{ route('mau-sac.them-moi') }}",
                         data: $('#myForm').serialize(),
                         // data: formData,
                         // contentType: false,
@@ -193,7 +175,7 @@
                 } else if ($('#id').val() != "") {
                     $.ajax({
                         method: "POST",
-                        url: "{{ route('nha-san-xuat.xu-ly-cap-nhat') }}",
+                        url: "{{ route('mau-sac.xu-ly-cap-nhat') }}",
                         data: $('#myForm').serialize(),
                     }).done(function() {
                         $('#myModal').modal('hide');
@@ -209,14 +191,11 @@
                 $('#id').val(id);
                 $.ajax({
                     method: "GET",
-                    url: "{{ route('nha-san-xuat.cap-nhat', '') }}/" + id,
+                    url: "{{ route('mau-sac.cap-nhat', '') }}/" + id,
 
                 }).done(function($data) {
                     console.log($data);
                     $('#ten').val($data.ten);
-                    $('#dia_chi').val($data.dia_chi);
-                    $('#Email').val($data.email);
-                    $('#so_dien_thoai').val($data.so_dien_thoai);
                     $('#myModel').modal("show");
                 })
             })

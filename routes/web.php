@@ -1,6 +1,6 @@
 <?php
-use App\Http\Controllers\MauController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MauController;
 use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
@@ -119,6 +119,12 @@ Route::post('/nha-san-xuat/them-moi',[NhaSanXuatController::class,'themMoi'])->n
 Route::get('/nha-san-xuat/cap-nhat/{id}',[NhaSanXuatController::class,'capNhat'])->name('nha-san-xuat.cap-nhat');
 Route::post('/nha-san-xuat/cap-nhat',[NhaSanXuatController::class,'xuLyCapNhat'])->name('nha-san-xuat.xu-ly-cap-nhat');
 
+//Màu
+Route::get('/mau-sac/danh-sach',[MauController::class,'danhSach'])->name('mau-sac.danh-sach');
+Route::post('/mau-sac/them-moi',[MauController::class,'themMoi'])->name('mau-sac.them-moi');
+Route::get('/mau-sac/cap-nhat/{id}',[MauController::class,'capNhat'])->name('mau-sac.cap-nhat');
+Route::post('/mau-sac/cap-nhat',[MauController::class,'xuLyCapNhat'])->name('mau-sac.xu-ly-cap-nhat');
+Route::post('/mau-sac/xoa/{id}',[MauController::class,'xoa'])->name('mau-sac.xoa');
 
 
 

@@ -45,9 +45,11 @@
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
                         <li><a href="{{route('dien-thoai.them-moi')}}" class="slide-item">Điện thoại</a></li>
                         <li><a href="{{route('thong-so.danh-sach')}}" class="slide-item">Thông số</a></li>
+                        <li><a href="{{route('mau-sac.danh-sach')}}" class="slide-item">Màu Sắc</a></li>
+                        <li><a href="{{route('thong-so.danh-sach')}}" class="slide-item">Dung Lượng</a></li>
                     </ul>
                 </li>
-                <li class="slide">
+                {{-- <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide"
                     href="{{ route('nha-cung-cap.danh-sach') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
@@ -57,7 +59,7 @@
                     </svg>
                     <span class="side-menu__label">Điện Thoại</span>
                 </a>
-                </li>
+                </li> --}}
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide"
                         href="{{ route('nha-san-xuat.danh-sach') }}">

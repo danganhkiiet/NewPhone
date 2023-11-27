@@ -12,12 +12,12 @@ class NhaSanXuatController extends Controller
 
         if($ten = request()->ten)
         {
-            $lst_nhacungcap=NhaSanXuat::where('ten','like','%'.$ten)->paginate(5);
+            $lst_nhasanxuat=NhaSanXuat::where('ten','like','%'.$ten)->paginate(5);
         }
         return view('nha-san-xuat.danh-sach',compact('lst_nhasanxuat'));
     }
     public function themMoi(Request $request){
-        $nha_san_xuat=NhaSanXuat::create(['ten'=>$request->ten]);
+        $nha_san_xuat=NhaSanXuat::create(['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
 
         return response()->json(['message'=>'Thêm Thành Công']);
     }
@@ -29,7 +29,7 @@ class NhaSanXuatController extends Controller
     }
     public function xuLyCapNhat(Request $request){
 
-        $nha_san_xuat=NhaSanXuat::where('id',$request->id)->update(['ten'=>$request->ten]);
+        $nha_san_xuat=NhaSanXuat::where('id',$request->id)->update(['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
 
         return response()->json(['message'=>'Cập Nhật Thành Công']);
     }
