@@ -79,7 +79,7 @@
                                                         <td>{{$ts->gia_ban}}</td>
                                                         <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{ route('dien-thoai.cap-nhat',['id' => $ts->dien_thoai_id]) }}" >
+                                                                title="Edit" href="{{ route('dien-thoai.cap-nhat',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
                                                             <a class="btn btn-danger fs-14 text-white delete-icn"

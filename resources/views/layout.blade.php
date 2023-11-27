@@ -148,7 +148,13 @@
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- INTERNAL Summernote Editor js -->
+    <script src="/assets/plugins/summernote-editor/summernote1.js"></script>
+    <script src="/assets/js/summernote.js"></script>
 
+    <!-- WYSIWYG Editor JS -->
+    <script src="/assets/plugins/wysiwyag/jquery.richtext.js"></script>
+    <script src="/assets/plugins/wysiwyag/wysiwyag.js"></script>
     @yield('js-jquery')
 
 </body>

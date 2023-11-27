@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/them-moi', [DienThoaiController::class, 'themMoi'])->name('them-moi');
             Route::post('/them-moi', [DienThoaiController::class, 'xuLyThemMoi'])->name('xu-ly-them-moi');
             Route::get('/cap-nhat{id}', [DienThoaiController::class, 'capNhat'])->name('cap-nhat');
+            Route::post('/cap-nhat{id}', [DienThoaiController::class, 'xuLyCapNhat'])->name('xu-ly-cap-nhat');
         });
     });
 });

@@ -12,44 +12,55 @@
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('thong-so.danh-sach') }}">Điện Thoại</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dien-thoai.danh-sach') }}">Điện Thoại</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Cập nhật thông tin</li>
                         </ol>
                     </div>
                 </div>
-                <!-- PAGE-HEADER END --><!-- row -->
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="card">
-                                <div class="card-header border-bottom">
-                                    <h3 class="card-title">Cập nhật thông tin điện thoại</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <form method="POST" action="">
-                                            @csrf
-                                            <div class="col-md-10 col-lg-8 col-xl-6 mx-auto d-block">
-                                                <div class="card card-body pd-20 pd-md-40 border shadow-none">
-                                                    <h4 class="card-title">Nhập thông tin</h4>
-                                                    <div class="form-group">
-                                                        <label class="form-label" for="ten">Tên Điện Thoại</label>
-                                                        <input class="form-control"  name="ten" id="ten" value="{{$dien_thoai->ten}}" type="text" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label" for="ten">Giá Bán</label>
-                                                        <input class="form-control"  name="gia_ban" id="gia_ban" value="{{$dien_thoai->gia_ban}}" type="text" required>
-                                                    </div>
-                                                    <button class="btn btn-primary btn-block" type="submit">Cập nhật</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                <!-- PAGE-HEADER END -->
+                <!-- Row -->
+                <div class="row row-deck">
+                    <div class="col-lg-3 col-md-">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title">Thông tin điện thoại</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex flex-column">
+                               
+                                    @csrf
+									<div class="form-group">
+										<label class="form-label" for="ten">Tên Điện Thoại</label>
+										<input class="form-control"  name="ten" id="ten_dien_thoai_id" value="{{ $dien_thoai->ten }}" type="text" required>
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="ten">Giá bán</label>
+										<input class="form-control"  name="gia_ban" id="gia_ban" value="{{ $chi_tiet_dien_thoai->gia_ban }}" type="text" required>
+									</div>
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
-    <!-- /row -->
+                    <div class="col-lg-9 col-md-12">
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            @csrf
+							<div class="col-md-12">
+								<div class="card">
+										<div class="card-header border-bottom">
+											<h3 class="card-title">Mô tả</h3>
+										</div> 
+										<div class="card-body">
+											<input name="mo_ta" type="summernote" id="summernote" />
+										</div>
+								</div>
+							</div>
+                            <button class="btn btn-danger" type="submit"> Cập Nhật </button>
+                            </form>
+                        </div>
+                <!-- /row -->
         </div>
     </div>
 </div>
 @endsection
+

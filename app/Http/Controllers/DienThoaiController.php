@@ -66,9 +66,15 @@ class DienThoaiController extends Controller
      */
     public function capNhat($id)
     {
-        $dien_thoai = DienThoai::find($id);
-        // $chi_tiet_dien_thoai = ChiTietDienThoai::find($id);
-        return view('san-pham/dien-thoai/cap-nhat',compact('dien_thoai'));
+        $chi_tiet_dien_thoai = ChiTietDienThoai::find($id);
+        $dien_thoai = DienThoai::find($chi_tiet_dien_thoai -> dien_thoai_id);
+      
+        return view('san-pham/dien-thoai/cap-nhat',compact('dien_thoai','chi_tiet_dien_thoai'));
+    }
+    public function xuLyCapNhat(Request $request, $id)
+    {
+        dd($request->files);      
+        return view('san-pham/dien-thoai/cap-nhat',compact('dien_thoai','chi_tiet_dien_thoai'));
     }
 
     /**
