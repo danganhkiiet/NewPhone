@@ -1,12 +1,13 @@
 <?php
-use App\Http\Controllers\MauController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MauController;
 use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\ThongSoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PhieuNhapController;
+use App\Http\Controllers\NhaSanXuatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,18 +104,33 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 //tài khoản
-Route::get('/tai-khoan/danh-sach',[AdminController::class,'danhSach'])->name('tai-khoan.danh-sach');
-Route::get('/tai-khoan/them-moi',[AdminController::class,'themMoi'])->name('tai-khoan.them-moi');
-Route::post('/tai-khoan/them-moi',[AdminController::class,'xuLyThemMoi'])->name('tai-khoan.xu-ly-them-moi');
-Route::get('/tai-khoan/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('tai-khoan.cap-nhat');
-Route::post('/tai-khoan/cap-nhat/{id}',[AdminController::class,'xuLyCapNhat'])->name('tai-khoan.xu-ly-cap-nhat');
-Route::post('/tai-khoan/xoa/{id}',[AdminController::class,'xoa'])->name('tai-khoan.xoa');
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('tai-khoan')->group(function () {
+        Route::name('tai-khoan.')->group(function () {
+            Route::get('/danh-sach',[AdminController::class,'danhSach'])->name('danh-sach');
+            Route::get('/them-moi',[AdminController::class,'themMoi'])->name('them-moi');
+            Route::post('/them-moi',[AdminController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
+            Route::get('/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/cap-nhat/{id}',[AdminController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
+            Route::post('/xoa/{id}',[AdminController::class,'xoa'])->name('xoa');
+        });
+    });
+});
 
 
 
+//Nhà Sản Xuất
+Route::get('/nha-san-xuat/danh-sach',[NhaSanXuatController::class,'danhSach'])->name('nha-san-xuat.danh-sach');
+Route::post('/nha-san-xuat/them-moi',[NhaSanXuatController::class,'themMoi'])->name('nha-san-xuat.them-moi');
+Route::get('/nha-san-xuat/cap-nhat/{id}',[NhaSanXuatController::class,'capNhat'])->name('nha-san-xuat.cap-nhat');
+Route::post('/nha-san-xuat/cap-nhat',[NhaSanXuatController::class,'xuLyCapNhat'])->name('nha-san-xuat.xu-ly-cap-nhat');
 
-//dien thoai
-
+//Màu
+Route::get('/mau-sac/danh-sach',[MauController::class,'danhSach'])->name('mau-sac.danh-sach');
+Route::post('/mau-sac/them-moi',[MauController::class,'themMoi'])->name('mau-sac.them-moi');
+Route::get('/mau-sac/cap-nhat/{id}',[MauController::class,'capNhat'])->name('mau-sac.cap-nhat');
+Route::post('/mau-sac/cap-nhat',[MauController::class,'xuLyCapNhat'])->name('mau-sac.xu-ly-cap-nhat');
+Route::post('/mau-sac/xoa/{id}',[MauController::class,'xoa'])->name('mau-sac.xoa');
 
 
 

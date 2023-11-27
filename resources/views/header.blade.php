@@ -513,7 +513,7 @@
                                         </svg>
                                         Lock Screen
                                     </a>
-                                    <a class="dropdown-item" href="login.html">
+                                    <a class="dropdown-item" href="{{route('admin.dangxuat')}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-inner-icn"
                                             enable-background="new 0 0 24 24" viewBox="0 0 24 24">
                                             <path

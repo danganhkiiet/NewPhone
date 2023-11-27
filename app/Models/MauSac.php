@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class MauSac extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table='mau_sac';
     public function chiTietDienThoai(){
         return $this->hasMany(ChiTietDienThoai::class);
