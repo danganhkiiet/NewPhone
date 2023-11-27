@@ -157,7 +157,6 @@
 
             $('.btnAdd').click(function() {
                 $('#myForm').trigger('reset');
-                $('#myModal').modal('show');
             })
             $('.btnSave').click(function() {
                 // var formData = new FormData($('#myForm')[0]);
@@ -196,7 +195,6 @@
                 }).done(function($data) {
                     console.log($data);
                     $('#ten').val($data.ten);
-                    $('#myModel').modal("show");
                 })
             })
         });

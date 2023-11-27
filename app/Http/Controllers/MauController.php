@@ -32,7 +32,7 @@ class MauController extends Controller
         $mau = MauSac::find($request->id);
         $mau->ten = $request->ten;
         $mau->save();
-        return response()->json(['message'=>'Cập Nhâtj Thành Công']);
+        return response()->json(['message'=>'Cập Nhật Thành Công']);
     }
     public function xoa($id){
         $mau = MauSac::find($id);

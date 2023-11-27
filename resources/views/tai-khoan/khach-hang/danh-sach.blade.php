@@ -78,15 +78,21 @@
                                                         <td>{{$kh->dia_chi}}</td>
                                                         <td>{{$kh->email}}</td>
                                                         <td>{{$kh->so_dien_thoai}}</td>
-                                                        <td>
-                                                            <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{ route('khach-hang.cap-nhat',['id' => $kh->id]) }}" >
+                                                        <td style="display: flex;">
+                                                            <button type="button" class="btn btn-primary btn-edit"
+                                                                data-toggle="modal" data-target="#myModal"
+                                                                data-id="{{ $kh->id }}">
                                                                 <i class="fe fe-edit"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger fs-14 text-white delete-icn"
-                                                                title="Delete" href="{{ route('khach-hang.xoa',['id' => $kh->id]) }}" >
-                                                                <i class="fe fe-delete"></i>
-                                                            </a>
+                                                            </button> 
+                                                            <form method="POST"
+                                                                action="{{ route('khach-hang.xoa', ['id' => $kh->id]) }}">
+                                                                @csrf
+                                                                <button type="submit"
+                                                                    class="btn btn-danger fs-14 text-white delete-icn"
+                                                                    title="Delete">
+                                                                    <i class="fe fe-delete"></i>
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -94,7 +100,56 @@
                                         </table>
                                         {{ $lst_khach_hang->links() }}
                                     </div>
-                                  
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" id="myForm" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="card card-body pd-20 pd-md-40 border shadow-none">
+                                                            <h4 class="card-title">Nhập thông tin</h4>
+                                                            <div class="form-group">
+                                                                <input class="form-control" name="id" id="id"
+                                                                    type="hidden" required>
+                                                                <label class="form-label" for="ten">Họ tên</label>
+                                                                <input class="form-control" name="ho_ten" id="ten"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="email">Email</label>
+                                                                <input class="form-control" name="email" id="email"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="password">Mật khẩu</label>
+                                                                <input class="form-control" name="password" id="password"
+                                                                    type="text">
+                                                                <label class="form-label" for="so_dien_thoai">Số điện thoại</label>
+                                                                <input class="form-control" name="so_dien_thoai" id="so_dien_thoai"
+                                                                    type="text" required>
+                                                                <!-- <label class="form-label" for="avatar">Avatar</label>
+                                                                <input class="form-control" name="avatar" id="avatar"
+                                                                    type="file" required> -->
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="button"
+                                                                    class="btn btn-primary btn-add btnSave">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>  
                                 </div>
                             </div>
                         </div>
@@ -104,4 +159,56 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js-jquery')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.btnAdd').click(function() {
+                $('#myForm').trigger('reset');
+            })
+            $('.btnSave').click(function() {
+                if ($('#id').val() == "") {
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ route('khach-hang.them-moi') }}",
+                        data: $('#myForm').serialize(),
+                    }).done(function() {
+                        location.reload();
+                    })
+                } else if ($('#id').val() != "") {
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ route('khach-hang.xu-ly-cap-nhat','') }}/"+id,
+                        data: $('#myForm').serialize(),
+                    }).done(function() {
+                        $('#myModal').modal('hide');
+                        location.reload();
+                    })
+                }
+
+            })
+            $('.btn-edit').click(function() {
+                var id = $(this).data('id');
+                console.log(id);
+
+                $('#id').val(id);
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('khach-hang.cap-nhat', '') }}/" + id,
+
+                }).done(function($data) {
+                    console.log($data);
+                    $('#ten').val($data.ho_ten);
+                    $('#email').val($data.email);
+                    $('#so_dien_thoai').val($data.so_dien_thoai);
+                })
+            })
+        });
+    </script>
 @endsection
