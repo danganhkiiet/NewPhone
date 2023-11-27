@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Noa – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>Quản Trị NewPhone</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="{{ asset('./assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />

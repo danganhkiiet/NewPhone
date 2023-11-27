@@ -35,6 +35,10 @@
                                                         <label class="form-label" for="ten">Tên Điện Thoại</label>
                                                         <input class="form-control"  name="ten" id="ten" value="{{$dien_thoai->ten}}" type="text" required>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="ten">Giá Bán</label>
+                                                        <input class="form-control"  name="gia_ban" id="gia_ban" value="{{$dien_thoai->gia_ban}}" type="text" required>
+                                                    </div>
                                                     <button class="btn btn-primary btn-block" type="submit">Cập nhật</button>
                                                 </div>
                                             </div>

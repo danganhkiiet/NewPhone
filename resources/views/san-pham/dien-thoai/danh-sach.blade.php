@@ -40,7 +40,7 @@
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn"  style="position: relative;left: 78%;">
-                                        <a href="{{ route('thong-so.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
+                                        <a href="{{ route('dien-thoai.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
                                     </div>
                                     <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form" style="position: relative;left: 45%;">
