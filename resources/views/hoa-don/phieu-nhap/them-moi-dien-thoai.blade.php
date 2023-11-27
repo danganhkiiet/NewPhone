@@ -85,7 +85,7 @@
                                         <input type="number" name="gia_ban" id="gia_ban" class="form-control text-center"
                                             value="1" required>
                                     </td>
-                                    {{-- <button class="btn btn-primary btn-block" type="button" onclick="themThongSo(document.getElementById('thong_so_id').value,document.getElementById('thong_so_id').options[document.getElementById('thong_so_id').selectedIndex].text )">Thêm thông số</button> --}}
+                                    <!-- {{-- <button class="btn btn-primary btn-block" type="button" onclick="themThongSo(document.getElementById('thong_so_id').value,document.getElementById('thong_so_id').options[document.getElementById('thong_so_id').selectedIndex].text )">Thêm thông số</button> --}} -->
                                     <button class="btn btn-primary" id="btn-them">Thêm điện thoại</button>
                                 </div>
                             </div>
@@ -129,23 +129,6 @@
 
 @section('js-jquery')
     <script>
-        // function themThongSo(id,ten)
-        // {
-        //         // Truy cập bảng
-        //         var table = document.getElementById('thong-so');
-        //         // Tạo một hàng mới
-        //         var newRow = table.insertRow();
-        //         // Tạo các ô (cell) cho hàng mới
-        //         var ID  = newRow.insertCell(0);
-        //         var Ten = newRow.insertCell(1);
-        //         var GiaTri = newRow.insertCell(2);
-        //         var ChucNang = newRow.insertCell(3);
-        //         //Đặt nội dung cho các ô
-        //         ID.innerHTML = '<td><input required readOnly type="text" name="id[]" id="id" value="' + id + '"></td>';;
-        //         Ten.innerHTML = '<td><input required type="text" name="ten[]" id="ten" value="' + ten + '"></td>';
-        //         GiaTri.innerHTML = '<td><input required type="text" name="gia_tri[]" id="gia_tri" value="' + 'Điền giá trị tại đây' + '"></td>';
-        //         ChucNang.innerHTML = '<button class="btn btn-danger" onclick="xoaHang(this)">Xóa</button>';;
-        // }
         function xoaHang(button) {
             // Lấy hàng chứa nút "Xóa" và xóa hàng đó
             var row = button.parentNode.parentNode;
@@ -176,7 +159,7 @@
                 <td>${gianhap}<input type="hidden" name="gia_nhap[]" value="${gianhap}"></td></td>
                 <td>${giaban}<input type="hidden" name="gia_ban[]" value="${giaban}"></td></td>
                 <td>${thanhtien}</td>
-                <td><button onclick="xoaHang(this)">Xóa</button></td>
+                <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
                 </tr>`;
 
                 $("#phieu-nhap").append(row);
@@ -191,16 +174,6 @@
                     data: {
                         nha_san_xuat_id: nha_san_xuat_id
                     },
-
-                    // success: function(data){
-                    //     // Xóa các option hiện tại trong select thứ hai
-                    //     $("#dien_thoai_id").empty();
-
-                    //     // Thêm các option mới từ dữ liệu trả về
-                    //     $.each(data, function(key, value){
-                    //         $("#dien_thoai_id").append('<option value="' + value.id + '">' + value.ten + '</option>');
-                    //     });
-                    // },
                    
                 }).done(function(response) {
                     console.log(response)

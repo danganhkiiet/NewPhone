@@ -1,97 +1,154 @@
 @extends('layout')
 @section('content')
-    
-<div class="app-content main-content mt-0">
+    <div class="app-content main-content mt-0">
         <div class="side-app">
             <!-- CONTAINER -->
             <div class="main-container container-fluid">
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Thông số điện thoại</h1>
+                        <h1 class="page-title">Điện thoại</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Thông số</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+                            <li class="breadcrumb-item"><a href="#">Điện thoại</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Thêm mới điện thoại</li>
                         </ol>
                     </div>
                 </div>
                 <!-- PAGE-HEADER END -->
-						<!-- row -->
-							<div class="row">
-								<div class="col-lg-12 col-md-12">
-									<div class="card">
-										<div class="card-header border-bottom">
-											<h3 class="card-title">Thêm mới</h3>
-										</div>
-										<div class="card-body">
-											<div class="row">
-												<div class="col-md-10 col-lg-8 col-xl-6 mx-auto d-block">
-													<div class="card card-body pd-20 pd-md-40 border shadow-none">
-														<h4 class="card-title">Nhập thông tin sản phẩm</h4>
-														<div class="form-group">
-															<label class="form-label" for="card-name">Name on Card</label>
-															<input class="form-control" id="card-name" type="text" placeholder="Enter Your Name" required>
-														</div>
-														<div class="form-group">
-															<label class="form-label" for="ssnMask-card">Card Number</label>
-															<div class="main-parent">
-																<input class="form-control" id="ssnMask-card" placeholder="xxxx - xxxx - xxxx" type="text" required>
-																<div class="d-flex main-child">
-																	<img alt="visa" src="../assets/images/pngs/visa.png">
-																	<img alt="mastercard" src="../assets/images/pngs/mastercard.png">
-																</div>
-															</div>
-														</div>
-														<div class="form-group">
-															<div class="row row-sm">
-																<div class="col-sm-9">
-																	<label class="form-label">Expiration Date</label>
-																	<div class="row row-sm">
-																		<div class="col-sm-7 mb-3">
-																			<select class="form-control select2 form-select" data-placeholder="month">
-																				<option label="Choose one"></option>
-																				<option value="January">January</option>
-																				<option value="February">February</option>
-																				<option value="March">March</option>
-																				<option value="April">April</option>
-																				<option value="May">May</option>
-																			</select>
-																		</div>
-																		<div class="col-sm-5 mb-3">
-																			<select class="form-control select2 form-select" data-placeholder="year">
-																				<option label="Choose one"></option>
-																				<option value="2018">2018</option>
-																				<option value="2019">2019</option>
-																				<option value="2020">2020</option>
-																				<option value="2021">2021</option>
-																				<option value="2022">2022</option>
-																			</select>
-																		</div>
-																	</div>
-																</div>
-																<div class="col-sm-3">
-																	<label class="form-label" for="ssnMask-cvv">CVV</label>
-																	<input class="form-control" id="ssnMask-cvv" placeholder="xxx" type="text" required>
-																</div>
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="ckbox"><input checked type="checkbox">
-																<span>Save my card for future purchases</span>
-															</label>
-														</div>
-														<button class="btn btn-primary btn-block">Complete Payment</button>
-													</div>
-												</div>
-											</div>
-										</div>
+                <!-- row -->
+                <div class="row row-deck">
+                    <div class="col-lg-3 col-md-">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title">Thông tin điện thoại</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex flex-column">
+									<div class="form-group">
+										<label class="form-label" for="ten">Tên Điện Thoại</label>
+										<input class="form-control"  name="ten" id="ten_dien_thoai_id" type="text" required>
 									</div>
-								</div>
-							</div>
-						<!-- /row -->
+									<div class="form-group">
+                                        <label class="form-label" for="nha_san_xuat">Màu sắc</label>
+                                        <select class="form-control form-select" id="mau_sac_id" name="mau_sac_id"
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_mau_sac as $ts)
+                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+									<div class="form-group">
+                                        <label class="form-label" for="nha_san_xuat">Dung Lượng</label>
+                                        <select class="form-control form-select" name="dung_luong_id" id="dung_luong_id"
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_dung_luong as $ts)
+                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="nha_san_xuat">Thông số</label>
+                                        <select class="form-control form-select" name="thong_so_id" id="thong_so_id"
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_thong_so as $ts)
+                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+										<label class="form-label" for="ten">Giá Trị</label>
+										<input class="form-control"  name="gia_tri" id="gia_tri" type="text" required>
+									</div>
+									<div class="form-group">
+                                        <label class="form-label" for="nha_san_xuat">Nhà sản xuất</label>
+                                        <select class="form-control form-select" id="nha_san_xuat_id" 
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_nha_san_xuat as $ts)
+                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-primary" id="btn-them">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title">Danh Sách Thông Số</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="form-horizontal" method="POST" action="{{ route('dien-thoai.xu-ly-them-moi') }}">
+                                    @csrf
+                                    <table class="table border text-nowrap text-md-nowrap table-hover" id="thong-so">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tên Điện Thoại</th>
+                                                <th>Màu</th>
+                                                <th>Dung Lượng</th>
+                                                <th>Thông số</th>
+                                                <th>Giá trị</th>
+                                                <th>Nhà Sản Xuất</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-primary" type="submit">Thêm điện thoại</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
-</div>
+@endsection
+
+
+@section('js-jquery')
+    <script>
+        function xoaHang(button) {
+            // Lấy hàng chứa nút "Xóa" và xóa hàng đó
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+        $(document).ready(function() {
+            var stt = 0;
+            $("#btn-them").click(function() {
+                stt = stt + 1;
+                var tendienthoai=$('#ten_dien_thoai_id').val();
+                console.log(tendienthoai)
+                var tenmau = $("#mau_sac_id").find(":selected").text();
+                var mau = $('#mau_sac_id').find(':selected').val();
+                var tendungluong = $("#dung_luong_id").find(":selected").text();
+                var duongluongid = $('#dung_luong_id').find(':selected').val();
+                var tenthongso = $("#thong_so_id").find(":selected").text();
+                var thongsoid = $('#thong_so_id').find(':selected').val();
+                var tengiatri=$('#gia_tri').val();
+                var tennhasanxuat= $("#nha_san_xuat_id").find(":selected").text();
+                var nhasanxuatid = $('#nha_san_xuat_id').find(':selected').val();
+
+                var row = `<tr>
+                <td>${stt}</td>
+                <td>${tendienthoai}<input type="hidden" name="ten" value="${tendienthoai}"></td>
+                <td>${tenmau}<input type="hidden" name="mau_sac_id[]" value="${mau}"></td>
+                <td>${tendungluong}<input type="hidden" name="dung_luong_id[]" value="${duongluongid}"></td>
+                <td>${tenthongso}<input type="hidden" name="thong_so_id[]" value="${thongsoid}"></td></td>
+                <td>${tengiatri}<input type="hidden" name="gia_tri[]" value="${tengiatri}"></td></td>
+                <td>${tennhasanxuat}<input type="hidden" name="nha_san_xuat_id" value="${nhasanxuatid}"></td>
+                <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
+                </tr>`;
+
+                $("#thong-so").append(row);
+            });
+
+        });
+    </script>
 @endsection
