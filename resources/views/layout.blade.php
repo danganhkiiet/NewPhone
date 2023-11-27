@@ -77,10 +77,10 @@
 
     <!-- BOOTSTRAP JS -->
     <script src="{{ asset('./assets/plugins/bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('./assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- SIDE-MENU JS-->
-    <script src="{{ asset('./assets/plugins/sidemenu/sidemenu.js') }}"></script>
+    {{-- <script src="{{ asset('./assets/plugins/sidemenu/sidemenu.js') }}"></script> --}}
 
     <!-- APEXCHART JS -->
     <script src="{{ asset('./assets/js/apexcharts.js') }}"></script>
@@ -100,20 +100,19 @@
     <script src="{{ asset('./assets/js/index1.js') }}"></script>
 
     <!-- REPLY JS-->
-    <script src="{{ asset('assets/js/reply.js') }}"></script>
+    <script src="{{ asset('./assets/js/reply.js') }}"></script>
     <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
     <!-- INTERNAl JQUERY.STEPS JS -->
     <script src="/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
     <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
     <!-- INTERNAL ACCORDION-WIZARD-FORM JS-->
     <script src="/assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js"></script>
-    <script src="/assets/js/form-wizard.js"></script>
+
     <!-- FORM WIZARD JS-->
-    <script src="/assets/plugins/formwizard/fromwizard.js"></script>
-    <script src="/assets/plugins/formwizard/jquery.smartWizard.js"></script>
+    {{-- <script src="/assets/plugins/formwizard/fromwizard.js"></script>
+    <script src="/assets/plugins/formwizard/jquery.smartWizard.js"></script> --}}
     <!-- PERFECT SCROLLBAR JS-->
-    <script src="{{ asset('assets/plugins/p-scroll/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('assets/plugins/p-scroll/pscroll.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/p-scroll/pscroll.js') }}"></script> --}}
 
     <!-- STICKY JS -->
     <script src="{{ asset('assets/js/sticky.js') }}"></script>
@@ -135,17 +134,13 @@
     <!-- SELECT2 JS -->
     <script src="/assets/plugins/select2/select2.full.min.js"></script>
     <!-- BOOTSTRAP EDITABLE JS -->
-    <script src="/assets/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+    {{-- <script src="/assets/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
     <script src="/assets/js/bootstrap-editable.js"></script>
-    <script src="/assets/js/address-editable.js"></script>
+    <script src="/assets/js/address-editable.js"></script> --}}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
-
-
+ 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
