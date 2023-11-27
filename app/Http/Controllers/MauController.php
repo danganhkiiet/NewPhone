@@ -19,7 +19,7 @@ class MauController extends Controller
         $mau = new MauSac();
         $mau->ten = $request->ten;
         $mau->save();
-        return response()->json(['message'=>'Thêm Thành Công']);
+        return response()->json(['message'=>'Thêm Thành Công','data'=>MauSac::all()]);
     }
     
     public function capNhat($id){
