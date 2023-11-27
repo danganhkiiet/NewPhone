@@ -157,7 +157,6 @@
 
             $('.btnAdd').click(function() {
                 $('#myForm').trigger('reset');
-                $('#myModal').modal('show');
             })
             $('.btnSave').click(function() {
                 // var formData = new FormData($('#myForm')[0]);
@@ -169,8 +168,9 @@
                         // data: formData,
                         // contentType: false,
                         // processData: false
-                    }).done(function() {
-                        location.reload();
+                    }).done(function(res) {
+                       // location.reload();
+                       console.log(res);
                     })
                 } else if ($('#id').val() != "") {
                     $.ajax({
@@ -196,7 +196,6 @@
                 }).done(function($data) {
                     console.log($data);
                     $('#ten').val($data.ten);
-                    $('#myModel').modal("show");
                 })
             })
         });

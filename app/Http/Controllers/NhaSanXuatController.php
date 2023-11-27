@@ -19,7 +19,7 @@ class NhaSanXuatController extends Controller
     public function themMoi(Request $request){
         $nha_san_xuat=NhaSanXuat::create(['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
 
-        return response()->json(['message'=>'Thêm Thành Công']);
+        return response()->json(['message'=>'Thêm Thành Công','data'=>NhaSanXuat::all()]);
     }
     public function capNhat($id){
 

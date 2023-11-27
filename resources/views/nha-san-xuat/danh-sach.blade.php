@@ -175,7 +175,6 @@
 
             $('.btnAdd').click(function() {
                 $('#myForm').trigger('reset');
-                $('#myModal').modal('show');
             })
             $('.btnSave').click(function() {
                 // var formData = new FormData($('#myForm')[0]);
@@ -187,8 +186,9 @@
                         // data: formData,
                         // contentType: false,
                         // processData: false
-                    }).done(function() {
-                        location.reload();
+                    }).done(function(res) {
+                        //location.reload();
+                        console.log(res);
                     })
                 } else if ($('#id').val() != "") {
                     $.ajax({
@@ -217,7 +217,6 @@
                     $('#dia_chi').val($data.dia_chi);
                     $('#Email').val($data.email);
                     $('#so_dien_thoai').val($data.so_dien_thoai);
-                    $('#myModel').modal("show");
                 })
             })
         });
