@@ -7,11 +7,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Tài Khoản</h1>
+                        <h1 class="page-title">Dung Lượng</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Tài Khoản</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Dung Lượng</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
                         </ol>
                     </div>
@@ -67,24 +67,22 @@
                                         <table class="table editable-table table-nowrap table-bordered table-edit">
                                             <thead>
                                                 <tr>
-                                                    <th>Họ Tên</th>
-                                                    <th>Email</th>
-                                                    <th>Cập Nhật</th>
+                                                    <th>Tên</th>
+                                                    <th>#</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_admin as $admin)
+                                                @foreach ($lst_dluong as $dluong)
                                                     <tr>
-                                                        <td>{{ $admin->ho_ten }}</td>
-                                                        <td>{{ $admin->email }}</td>
+                                                        <td>{{ $dluong->ten }}</td>
                                                         <td style="display: flex;">
                                                             <button type="button" class="btn btn-primary btn-edit"
                                                                 data-toggle="modal" data-target="#myModal"
-                                                                data-id="{{ $admin->id }}">
+                                                                data-id="{{ $dluong->id }}">
                                                                 <i class="fe fe-edit"></i>
                                                             </button> 
                                                             <form method="POST"
-                                                                action="{{ route('quan-tri-vien.xoa', ['id' => $admin->id]) }}">
+                                                                action="{{ route('dung-luong.xoa', ['id' => $dluong->id]) }}">
                                                                 @csrf
                                                                 <button type="submit"
                                                                     class="btn btn-danger fs-14 text-white delete-icn"
@@ -97,7 +95,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        {{ $lst_admin->links() }}
+                                        {{ $lst_dluong->links() }}
                                     </div>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -112,7 +110,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" id="myForm" enctype="multipart/form-data">
+                                                    <form method="POST" id="myForm">
                                                         @csrf
                                                         <div class="card card-body pd-20 pd-md-40 border shadow-none">
                                                             <h4 class="card-title">Nhập thông tin</h4>
@@ -120,20 +118,8 @@
                                                                 <input class="form-control" name="id" id="id"
                                                                     type="hidden" required>
                                                                 <label class="form-label" for="ten">Họ tên</label>
-                                                                <input class="form-control" name="ho_ten" id="ten"
+                                                                <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
-                                                                <label class="form-label" for="email">Email</label>
-                                                                <input class="form-control" name="email" id="email"
-                                                                    type="text" required>
-                                                                <label class="form-label" for="password">Mật khẩu</label>
-                                                                <input class="form-control" name="password" id="password"
-                                                                    type="text">
-                                                                <label class="form-label" for="so_dien_thoai">Số điện thoại</label>
-                                                                <input class="form-control" name="so_dien_thoai" id="so_dien_thoai"
-                                                                    type="text" required>
-                                                                <!-- <label class="form-label" for="avatar">Avatar</label>
-                                                                <input class="form-control" name="avatar" id="avatar"
-                                                                    type="file" required> -->
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -150,6 +136,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -172,18 +159,22 @@
                 $('#myForm').trigger('reset');
             })
             $('.btnSave').click(function() {
+                // var formData = new FormData($('#myForm')[0]);
                 if ($('#id').val() == "") {
                     $.ajax({
                         method: "POST",
-                        url: "{{ route('quan-tri-vien.them-moi') }}",
+                        url: "{{ route('dung-luong.them-moi') }}",
                         data: $('#myForm').serialize(),
+                        // data: formData,
+                        // contentType: false,
+                        // processData: false
                     }).done(function() {
                         location.reload();
                     })
                 } else if ($('#id').val() != "") {
                     $.ajax({
                         method: "POST",
-                        url: "{{ route('quan-tri-vien.xu-ly-cap-nhat') }}",
+                        url: "{{ route('dung-luong.xu-ly-cap-nhat') }}",
                         data: $('#myForm').serialize(),
                     }).done(function() {
                         $('#myModal').modal('hide');
@@ -199,16 +190,13 @@
                 $('#id').val(id);
                 $.ajax({
                     method: "GET",
-                    url: "{{ route('quan-tri-vien.cap-nhat', '') }}/" + id,
+                    url: "{{ route('dung-luong.cap-nhat', '') }}/" + id,
 
                 }).done(function($data) {
                     console.log($data);
-                    $('#ten').val($data.ho_ten);
-                    $('#email').val($data.email);
-                    $('#so_dien_thoai').val($data.so_dien_thoai);
+                    $('#ten').val($data.ten);
                 })
             })
         });
     </script>
 @endsection
-

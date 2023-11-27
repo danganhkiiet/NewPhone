@@ -46,7 +46,7 @@
                         <li><a href="{{route('dien-thoai.danh-sach')}}" class="slide-item">Điện thoại</a></li>
                         <li><a href="{{route('thong-so.danh-sach')}}" class="slide-item">Thông số</a></li>
                         <li><a href="{{route('mau-sac.danh-sach')}}" class="slide-item">Màu Sắc</a></li>
-                        <li><a href="{{route('thong-so.danh-sach')}}" class="slide-item">Dung Lượng</a></li>
+                        <li><a href="{{route('dung-luong.danh-sach')}}" class="slide-item">Dung Lượng</a></li>
                     </ul>
                 </li>
                 {{-- <li class="slide">
@@ -110,7 +110,7 @@
                         <span class="side-menu__label">Tài khoản</span><i class="angle fa fa-angle-right"></i>
                     </a>
                     <ul class="slide-menu">
-                        <li><a href="{{route('tai-khoan.danh-sach')}}" class="slide-item">Quản Trị Viên</a></li>
+                        <li><a href="{{route('quan-tri-vien.danh-sach')}}" class="slide-item">Quản Trị Viên</a></li>
                         <li><a href="{{ route('khach-hang.danh-sach') }}" class="slide-item">Khách hàng</a></li>
                     </ul>
                 </li>
