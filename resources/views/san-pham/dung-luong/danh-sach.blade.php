@@ -80,7 +80,7 @@
                                                                 data-toggle="modal" data-target="#myModal"
                                                                 data-id="{{ $dluong->id }}">
                                                                 <i class="fe fe-edit"></i>
-                                                            </button> 
+                                                            </button>
                                                             <form method="POST"
                                                                 action="{{ route('dung-luong.xoa', ['id' => $dluong->id]) }}">
                                                                 @csrf
@@ -157,31 +157,61 @@
 
             $('.btnAdd').click(function() {
                 $('#myForm').trigger('reset');
+                $('#id').val(""); 
             })
             $('.btnSave').click(function() {
-                // var formData = new FormData($('#myForm')[0]);
                 if ($('#id').val() == "") {
-                    $.ajax({
-                        method: "POST",
-                        url: "{{ route('dung-luong.them-moi') }}",
-                        data: $('#myForm').serialize(),
-                        // data: formData,
-                        // contentType: false,
-                        // processData: false
-                    }).done(function() {
-                        location.reload();
-                    })
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                method: "POST",
+                                url: "{{ route('dung-luong.them-moi') }}",
+                                data: $('#myForm').serialize(),
+                            }).done(function() {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+                                location.reload();
+                            })
+                        }
+                    });
                 } else if ($('#id').val() != "") {
-                    $.ajax({
-                        method: "POST",
-                        url: "{{ route('dung-luong.xu-ly-cap-nhat') }}",
-                        data: $('#myForm').serialize(),
-                    }).done(function() {
-                        $('#myModal').modal('hide');
-                        location.reload();
-                    })
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                method: "POST",
+                                url: "{{ route('dung-luong.xu-ly-cap-nhat') }}",
+                                data: $('#myForm').serialize(),
+                            }).done(function() {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+                                // $('#myModal').modal('hide');
+                                location.reload();
+                            })
+                        }
+                    });
                 }
-
             })
             $('.btn-edit').click(function() {
                 var id = $(this).data('id');
