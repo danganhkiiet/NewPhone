@@ -15,15 +15,21 @@ class NhaCungCapController extends Controller
         }
         return view('nha-cung-cap.danh-sach',compact('lst_nhacungcap'));
     }
-    public function themMoi(){
-        return view('nha-cung-cap.them-moi');
+    public function themMoi(Request $request){
+        $nhacungcap = new NhaCungCap();
+        $nhacungcap->ten=$request->ten;
+        $nhacungcap->dia_chi=$request->dia_chi;
+        $nhacungcap->email=$request->email;
+        $nhacungcap->so_dien_thoai=$request->so_dien_thoai;
+        $nhacungcap->save();
+        return response()->json(['message'=>'Thêm Thành Công']);
     }
     public function xuLyThemMoi(Request $request){
         $request->validate([
             'ten' => 'required',
             'dia_chi' => 'required',
             'email' => 'required|email',
-            'so_dien_thoai' => 'required',
+            'so_dien_thoai' => 'required ',
         ]);
         $nhacungcap=NhaCungCap::create(['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
 
@@ -31,7 +37,7 @@ class NhaCungCapController extends Controller
     }
     public function capNhat($id){
         $nha_cung_cap=NhaCungCap::find($id);
-        return view('nha-cung-cap.cap-nhat',compact('nha_cung_cap'));
+        return $nha_cung_cap;
     }
     
     public function xuLyCapNhat(Request $request, $id){
