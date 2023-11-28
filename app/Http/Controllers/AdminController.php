@@ -36,54 +36,54 @@ class AdminController extends Controller
         // }
         return view('tai-khoan.quan-tri-vien.danh-sach',compact('lst_admin'));
     }
-    public function themMoi(){
-        return view('tai-khoan.quan-tri-vien.them-moi');
-    }
-    public function xuLyThemMoi(Request $request)
-    {
+    public function themMoi(Request $request){
+        $admin = new Admin();
+        $admin->ho_ten = $request->ten;
+        $admin->email=$request->email;
+        $admin->password=Hash::make($request->password);
+        $admin->so_dien_thoai=$request->so_dien_thoai;
         // dd($request);
-        $file=$request->avatar;
-        $path=$file->store('avatar');
-
-        $admin=Admin::create(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path]);
-
-        return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Thêm mới thành công');
+        // $file=$request->avatar_hinh;
+        // $path=$file->store('avatar');
+        $admin->avatar='123';
+        $admin->save();
+        return response()->json(['message'=>'Thêm Thành Công']);
     }
     public function capNhat($id){
         $admin=Admin::find($id);
-        return view('tai-khoan.quan-tri-vien.cap-nhat',compact('admin'));
+        return $admin;
     }
-    public function xuLyCapNhat(Request $request,$id)
+    public function xuLyCapNhat(Request $request)
     {
         // dd($request);
-        if(empty($request->avatar)){
+        // if(empty($request->avatar)){
             if(empty($request->password)){
                 $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
-                return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
+                return response()->json(['message'=>'Cập Nhật Thành Công']);
             }
             $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai]);
-            return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
-        }
+            return response()->json(['message'=>'Cập Nhật Thành Công']);
+        //}
 
       
         if(empty($request->password)){
 
-            $file=$request->avatar;
+            // $file=$request->avatar;
 
-            $path=$file->store('avatar');
+            // $path=$file->store('avatar');
             
-            $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path]);
+            $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
 
-            return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
+            return response()->json(['message'=>'Cập Nhật Thành Công']);
         }
 
-        $file=$request->avatar;
+        // $file=$request->avatar;
 
-        $path=$file->store('avatar');
+        // $path=$file->store('avatar');
 
-        $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path]);
+        $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai]);
         
-        return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Cập nhật thành công');
+        return response()->json(['message'=>'Cập Nhật Thành Công']);
     }
     public function xoa($id){
         $admin=Admin::find($id);
@@ -92,6 +92,6 @@ class AdminController extends Controller
             return "xóa thất bại";
         }
         $admin->delete();
-        return redirect()->route('tai-khoan.danh-sach')->with('thong_bao','Xóa thành công');
+        return redirect()->route('quan-tri-vien.danh-sach')->with('thong_bao','Xóa thành công');
     }
 }

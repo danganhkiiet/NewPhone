@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\DungLuongController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MauController;
 use App\Http\Controllers\DienThoaiController;
@@ -84,8 +85,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/danh-sach',[KhachHangController::class,'danhSach'])->name('danh-sach');
             Route::get('/them-moi',[KhachHangController::class,'themMoi'])->name('them-moi');
             Route::post('/them-moi',[KhachHangController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
-            Route::get('/cap-nhat{id}',[KhachHangController::class,'capNhat'])->name('cap-nhat');
-            Route::post('/cap-nhat{id}',[KhachHangController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
+            Route::get('/cap-nhat/{id}',[KhachHangController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/cap-nhat/{id}',[KhachHangController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
             Route::get('/xoa{id}',[KhachHangController::class,'xoa'])->name('xoa');
         });
     });
@@ -105,18 +106,18 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 //tài khoản
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('tai-khoan')->group(function () {
-        Route::name('tai-khoan.')->group(function () {
-            Route::get('/danh-sach',[AdminController::class,'danhSach'])->name('danh-sach');
-            Route::get('/them-moi',[AdminController::class,'themMoi'])->name('them-moi');
-            Route::post('/them-moi',[AdminController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
-            Route::get('/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('cap-nhat');
-            Route::post('/cap-nhat/{id}',[AdminController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
-            Route::post('/xoa/{id}',[AdminController::class,'xoa'])->name('xoa');
-        });
-    });
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::prefix('tai-khoan')->group(function () {
+//         Route::name('tai-khoan.')->group(function () {
+//             Route::get('/danh-sach',[AdminController::class,'danhSach'])->name('danh-sach');
+//             Route::get('/them-moi',[AdminController::class,'themMoi'])->name('them-moi');
+//             Route::post('/them-moi',[AdminController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
+//             Route::get('/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('cap-nhat');
+//             Route::post('/cap-nhat/{id}',[AdminController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
+//             Route::post('/xoa/{id}',[AdminController::class,'xoa'])->name('xoa');
+//         });
+//     });
+// });
 
 
 
@@ -133,9 +134,18 @@ Route::get('/mau-sac/cap-nhat/{id}',[MauController::class,'capNhat'])->name('mau
 Route::post('/mau-sac/cap-nhat',[MauController::class,'xuLyCapNhat'])->name('mau-sac.xu-ly-cap-nhat');
 Route::post('/mau-sac/xoa/{id}',[MauController::class,'xoa'])->name('mau-sac.xoa');
 
+//Dung Lượng
+Route::get('/dung-luong/danh-sach',[DungLuongController::class,'danhSach'])->name('dung-luong.danh-sach');
+Route::post('/dung-luong/them-moi',[DungLuongController::class,'themMoi'])->name('dung-luong.them-moi');
+Route::get('/dung-luong/cap-nhat/{id}',[DungLuongController::class,'capNhat'])->name('dung-luong.cap-nhat');
+Route::post('/dung-luong/cap-nhat',[DungLuongController::class,'xuLyCapNhat'])->name('dung-luong.xu-ly-cap-nhat');
+Route::post('/dung-luong/xoa/{id}',[DungLuongController::class,'xoa'])->name('dung-luong.xoa');
 
-
-
-
+//Quản trị viên
+Route::get('/quan-tri-vien/danh-sach',[AdminController::class,'danhSach'])->name('quan-tri-vien.danh-sach');
+Route::post('/quan-tri-vien/them-moi',[AdminController::class,'themMoi'])->name('quan-tri-vien.them-moi');
+Route::get('/quan-tri-vien/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('quan-tri-vien.cap-nhat');
+Route::post('/quan-tri-vien/cap-nhat',[AdminController::class,'xuLyCapNhat'])->name('quan-tri-vien.xu-ly-cap-nhat');
+Route::post('/quan-tri-vien/xoa/{id}',[AdminController::class,'xoa'])->name('quan-tri-vien.xoa');
 
 

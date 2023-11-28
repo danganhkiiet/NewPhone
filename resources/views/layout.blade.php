@@ -100,12 +100,12 @@
 
     <!-- REPLY JS-->
     <script src="{{ asset('./assets/js/reply.js') }}"></script>
-    <script src="/assets/plugins/sidemenu/sidemenu.js"></script>
+    <script src="{{ asset('./assets/plugins/sidemenu/sidemenu.js')}}"></script>
     <!-- INTERNAl JQUERY.STEPS JS -->
-    <script src="/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
-    <script src="/assets/plugins/parsleyjs/parsley.min.js"></script>
+    <script src="{{ asset('./assets/plugins/jquery-steps/jquery.steps.min.js')}}"></script>
+    <script src="{{ asset('./assets/plugins/parsleyjs/parsley.min.js')}}"></script>
     <!-- INTERNAL ACCORDION-WIZARD-FORM JS-->
-    <script src="/assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js"></script>
+    <script src="{{ asset('./assets/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js')}}"></script>
 
     <!-- FORM WIZARD JS-->
     {{-- <script src="/assets/plugins/formwizard/fromwizard.js"></script>
@@ -122,16 +122,16 @@
     <!-- CUSTOM JS -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <!-- Amaze UI Date Picker js-->
-    <script src="/assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js"></script>
+    <script src="{{ asset('./assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
 
     <!-- Simple Date Time Picker js-->
-    <script src="/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+    <script src="{{ asset('./assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
     <!-- jQuery UI Date Picker js -->
-    <script src="/assets/plugins/date-picker/jquery-ui.js"></script>
+    <script src="{{ asset('./assets/plugins/date-picker/jquery-ui.js')}}"></script>
     <!-- bootstrap-datepicker js (Date picker Style-01) -->
-    <script src="/assets/plugins/bootstrap-datepicker/js/datepicker.js"></script>
+    <script src="{{ asset('./assets/plugins/bootstrap-datepicker/js/datepicker.js')}}"></script>
     <!-- SELECT2 JS -->
-    <script src="/assets/plugins/select2/select2.full.min.js"></script>
+    <script src="{{ asset('./assets/plugins/select2/select2.full.min.js')}}"></script>
     <!-- BOOTSTRAP EDITABLE JS -->
     {{-- <script src="/assets/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.min.js"></script>
     <script src="/assets/js/bootstrap-editable.js"></script>
@@ -142,9 +142,15 @@
  
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <!-- INTERNAL Summernote Editor js -->
     <script src="/assets/plugins/summernote-editor/summernote1.js"></script>
     <script src="/assets/js/summernote.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
     @yield('js-jquery')
 
 </body>

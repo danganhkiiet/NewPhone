@@ -39,8 +39,11 @@
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn" style="position: relative;left: 78%;">
-                                        <a href="{{ route('tai-khoan.them-moi') }}" class="btn btn-primary-light ">Thêm
-                                            mới</a>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btnAdd" data-toggle="modal"
+                                            data-target="#myModal">
+                                            Thêm Mới
+                                        </button>
                                     </div>
                                     <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form"
@@ -74,15 +77,17 @@
                                                     <tr>
                                                         <td>{{ $admin->ho_ten }}</td>
                                                         <td>{{ $admin->email }}</td>
-                                                        <td>
-                                                            <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit"
-                                                                href="{{ route('tai-khoan.cap-nhat', ['id' => $admin->id]) }}">
+                                                        <td style="display: flex;">
+                                                            <button type="button" class="btn btn-primary btn-edit"
+                                                                data-toggle="modal" data-target="#myModal"
+                                                                data-id="{{ $admin->id }}">
                                                                 <i class="fe fe-edit"></i>
-                                                            </a>
-                                                            <form method="POST" action="{{route('tai-khoan.xoa',['id'=>$admin->id])}}">
+                                                            </button>
+                                                            <form method="POST"
+                                                                action="{{ route('quan-tri-vien.xoa', ['id' => $admin->id]) }}">
                                                                 @csrf
-                                                                <button type="submit" class="btn btn-danger fs-14 text-white delete-icn"
+                                                                <button type="submit"
+                                                                    class="btn btn-danger fs-14 text-white delete-icn"
                                                                     title="Delete">
                                                                     <i class="fe fe-delete"></i>
                                                                 </button>
@@ -94,13 +99,120 @@
                                         </table>
                                         {{ $lst_admin->links() }}
                                     </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Quản Trị Viên</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" id="myForm" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="card card-body pd-20 pd-md-40 border shadow-none">
+                                                            <h4 class="card-title">Nhập thông tin</h4>
+                                                            <div class="form-group">
+                                                                <input class="form-control" name="id" id="id"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="ten">Họ tên</label>
+                                                                <input class="form-control" name="ho_ten" id="ten"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="email">Email</label>
+                                                                <input class="form-control" name="email" id="email"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="password">Mật khẩu</label>
+                                                                <input class="form-control" name="password"
+                                                                    id="password" type="text">
+                                                                <label class="form-label" for="so_dien_thoai">Số điện
+                                                                    thoại</label>
+                                                                <input class="form-control" name="so_dien_thoai"
+                                                                    id="so_dien_thoai" type="text" required>
+                                                                <label class="form-label" for="avatar">Avatar</label>
+                                                                <input class="form-control" name="avatar_hinh"
+                                                                    id="avatar" type="file">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="button"
+                                                                    class="btn btn-primary btn-add btnSave">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Row -->
             </div>
         </div>
     </div>
+@endsection
+@section('js-jquery')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.btnAdd').click(function() {
+                $('#myForm').trigger('reset');
+                $('#id').val(""); 
+                // console.log($('#id').val());
+            })
+            $('.btnSave').click(function() {
+                if ($('#id').val() == "") {
+                    //Muốn Lấy Nguyên Hình dùng formdata
+                    var frm_Data = new FormData($('#myForm')[0]);
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ route('quan-tri-vien.them-moi') }}",
+                        data: frm_Data,
+                        processData: false,
+                        contentType: false,
+                    }).done(function() {
+                        location.reload();
+                    })
+                } else if ($('#id').val() != "") {
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ route('quan-tri-vien.xu-ly-cap-nhat') }}",
+                        data: $('#myForm').serialize(),
+                    }).done(function() {
+                        $('#myModal').modal('hide');
+                        location.reload();
+                    })
+                }
+
+            })
+            $('.btn-edit').click(function() {
+                var id = $(this).data('id');
+                console.log(id);
+
+                $('#id').val(id);
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('quan-tri-vien.cap-nhat', '') }}/" + id,
+
+                }).done(function($data) {
+                    console.log($data);
+                    $('#ten').val($data.ho_ten);
+                    $('#email').val($data.email);
+                    $('#so_dien_thoai').val($data.so_dien_thoai);
+                })
+            })
+        });
+    </script>
 @endsection
