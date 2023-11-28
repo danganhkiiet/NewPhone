@@ -80,7 +80,7 @@
                                                                 data-toggle="modal" data-target="#myModal"
                                                                 data-id="{{ $mau->id }}">
                                                                 <i class="fe fe-edit"></i>
-                                                            </button> 
+                                                            </button>
                                                             <form method="POST"
                                                                 action="{{ route('mau-sac.xoa', ['id' => $mau->id]) }}">
                                                                 @csrf
@@ -116,7 +116,9 @@
                                                             <h4 class="card-title">Nhập thông tin</h4>
                                                             <div class="form-group">
                                                                 <input class="form-control" name="id" id="id"
-                                                                    type="hidden" required>
+                                                                    type="hidden">
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label class="form-label" for="ten">Họ tên</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
@@ -154,33 +156,68 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             $('.btnAdd').click(function() {
                 $('#myForm').trigger('reset');
+                $('#id').val(""); 
+                console.log( $('#id'));
             })
             $('.btnSave').click(function() {
-                // var formData = new FormData($('#myForm')[0]);
                 if ($('#id').val() == "") {
-                    $.ajax({
-                        method: "POST",
-                        url: "{{ route('mau-sac.them-moi') }}",
-                        data: $('#myForm').serialize(),
-                        // data: formData,
-                        // contentType: false,
-                        // processData: false
-                    }).done(function(res) {
-                       // location.reload();
-                       console.log(res);
-                    })
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                method: "POST",
+                                url: "{{ route('mau-sac.them-moi') }}",
+                                data: $('#myForm').serialize(),
+
+                            }).done(function(res) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+
+                                location.reload();
+                                console.log(res);
+
+                            })
+                        }
+                    });
                 } else if ($('#id').val() != "") {
-                    $.ajax({
-                        method: "POST",
-                        url: "{{ route('mau-sac.xu-ly-cap-nhat') }}",
-                        data: $('#myForm').serialize(),
-                    }).done(function() {
-                        $('#myModal').modal('hide');
-                        location.reload();
-                    })
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                method: "POST",
+                                url: "{{ route('mau-sac.xu-ly-cap-nhat') }}",
+                                data: $('#myForm').serialize(),
+                            }).done(function() {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+                                // $('#myModal').modal('hide');
+                                location.reload();
+                            })
+                        }
+                    });
+
                 }
 
             })

@@ -42,8 +42,8 @@ class AdminController extends Controller
         $admin->email=$request->email;
         $admin->password=Hash::make($request->password);
         $admin->so_dien_thoai=$request->so_dien_thoai;
-        // $file=$request->avatar;
         // dd($request);
+        // $file=$request->avatar_hinh;
         // $path=$file->store('avatar');
         $admin->avatar='123';
         $admin->save();

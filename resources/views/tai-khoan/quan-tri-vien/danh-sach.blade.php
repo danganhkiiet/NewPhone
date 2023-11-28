@@ -82,7 +82,7 @@
                                                                 data-toggle="modal" data-target="#myModal"
                                                                 data-id="{{ $admin->id }}">
                                                                 <i class="fe fe-edit"></i>
-                                                            </button> 
+                                                            </button>
                                                             <form method="POST"
                                                                 action="{{ route('quan-tri-vien.xoa', ['id' => $admin->id]) }}">
                                                                 @csrf
@@ -105,7 +105,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Quản Trị Viên</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -118,7 +118,7 @@
                                                             <h4 class="card-title">Nhập thông tin</h4>
                                                             <div class="form-group">
                                                                 <input class="form-control" name="id" id="id"
-                                                                    type="hidden" required>
+                                                                    type="text" required>
                                                                 <label class="form-label" for="ten">Họ tên</label>
                                                                 <input class="form-control" name="ho_ten" id="ten"
                                                                     type="text" required>
@@ -126,14 +126,15 @@
                                                                 <input class="form-control" name="email" id="email"
                                                                     type="text" required>
                                                                 <label class="form-label" for="password">Mật khẩu</label>
-                                                                <input class="form-control" name="password" id="password"
-                                                                    type="text">
-                                                                <label class="form-label" for="so_dien_thoai">Số điện thoại</label>
-                                                                <input class="form-control" name="so_dien_thoai" id="so_dien_thoai"
-                                                                    type="text" required>
-                                                                <!-- <label class="form-label" for="avatar">Avatar</label>
-                                                                <input class="form-control" name="avatar" id="avatar"
-                                                                    type="file" required> -->
+                                                                <input class="form-control" name="password"
+                                                                    id="password" type="text">
+                                                                <label class="form-label" for="so_dien_thoai">Số điện
+                                                                    thoại</label>
+                                                                <input class="form-control" name="so_dien_thoai"
+                                                                    id="so_dien_thoai" type="text" required>
+                                                                <label class="form-label" for="avatar">Avatar</label>
+                                                                <input class="form-control" name="avatar_hinh"
+                                                                    id="avatar" type="file">
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -145,7 +146,6 @@
                                                         </div>
                                                     </form>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -154,7 +154,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Row -->
             </div>
         </div>
     </div>
@@ -170,13 +169,19 @@
 
             $('.btnAdd').click(function() {
                 $('#myForm').trigger('reset');
+                $('#id').val(""); 
+                // console.log($('#id').val());
             })
             $('.btnSave').click(function() {
                 if ($('#id').val() == "") {
+                    //Muốn Lấy Nguyên Hình dùng formdata
+                    var frm_Data = new FormData($('#myForm')[0]);
                     $.ajax({
                         method: "POST",
                         url: "{{ route('quan-tri-vien.them-moi') }}",
-                        data: $('#myForm').serialize(),
+                        data: frm_Data,
+                        processData: false,
+                        contentType: false,
                     }).done(function() {
                         location.reload();
                     })
@@ -211,4 +216,3 @@
         });
     </script>
 @endsection
-
