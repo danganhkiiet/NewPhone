@@ -5,9 +5,9 @@
                 href="#"></a>
             <!-- sidebar-toggle-->
             <a class="logo-horizontal " href="index.html">
-                <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo"
+                <img src="/assets/images/brand/logo.png" class="header-brand-img desktop-logo"
                     alt="logo">
-                <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1"
+                <img src="/assets/images/brand/logo-3.png" class="header-brand-img light-logo1"
                     alt="logo">
             </a>
             <!-- LOGO -->
@@ -73,14 +73,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- COUNTRY -->
-                            <div class="dropdown d-md-flex main-header-notification flag-dropdown">
-                                <a class="nav-link icon text-center country-nav-link"
-                                    data-bs-target="#country-selector" data-bs-toggle="modal">
-                                    <img class="header-icons language" alt=""
-                                        src="../assets/images/flags/us_flag.jpg">
-                                </a>
                             </div>
                             <!-- SEARCH -->
                             <div class="dropdown  d-flex">
@@ -297,7 +289,7 @@
                                         <a class="dropdown-item d-flex" href="chat.html">
                                             <span
                                                 class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                data-bs-image-src="../assets/images/users/1.jpg"
+                                                data-bs-image-src="/assets/images/users/1.jpg"
                                                 style="background: url(&quot;../assets/images/users/1.jpg&quot;) center center;"></span>
                                             <div class="wd-90p">
                                                 <div class="d-flex">
@@ -312,7 +304,7 @@
                                         <a class="dropdown-item d-flex" href="chat.html">
                                             <span
                                                 class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                data-bs-image-src="../assets/images/users/15.jpg"
+                                                data-bs-image-src="/assets/images/users/15.jpg"
                                                 style="background: url(&quot;../assets/images/users/15.jpg&quot;) center center;">
                                             </span>
                                             <div class="wd-90p">
@@ -328,7 +320,7 @@
                                         <a class="dropdown-item d-flex" href="chat.html">
                                             <span
                                                 class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                data-bs-image-src="../assets/images/users/12.jpg"
+                                                data-bs-image-src="/assets/images/users/12.jpg"
                                                 style="background: url(&quot;../assets/images/users/12.jpg&quot;) center center;">
                                             </span>
                                             <div class="wd-90p">
@@ -344,7 +336,7 @@
                                         <a class="dropdown-item d-flex" href="chat.html">
                                             <span
                                                 class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                data-bs-image-src="../assets/images/users/4.jpg"
+                                                data-bs-image-src="/assets/images/users/4.jpg"
                                                 style="background: url(&quot;../assets/images/users/4.jpg&quot;) center center;">
                                             </span>
                                             <div class="wd-90p">

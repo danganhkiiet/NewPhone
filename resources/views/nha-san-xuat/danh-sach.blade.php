@@ -86,7 +86,7 @@
                                                                 data-toggle="modal" data-target="#myModal"
                                                                 data-id="{{ $nhasanxuat->id }}">
                                                                 <i class="fe fe-edit"></i>
-                                                            </button> 
+                                                            </button>
                                                             <form method="POST"
                                                                 action="{{ route('nha-cung-cap.xoa', ['id' => $nhasanxuat->id]) }}">
                                                                 @csrf
@@ -129,15 +129,20 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label" for="dia_chi">Địa chỉ</label>
-                                                                <input class="form-control"  name="dia_chi" id="dia_chi" type="text" required>
+                                                                <input class="form-control" name="dia_chi" id="dia_chi"
+                                                                    type="text" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label" for="Email">Email</label>
-                                                                <input class="form-control"  name="email" id="Email" type="email" required>
+                                                                <input class="form-control" name="email" id="Email"
+                                                                    type="email" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="form-label" for="so_dien_thoai">Số điện thoại</label>
-                                                                <input class="form-control"  name="so_dien_thoai" pattern="[0-9]{10}" id="so_dien_thoai" type="tel" required>
+                                                                <label class="form-label" for="so_dien_thoai">Số điện
+                                                                    thoại</label>
+                                                                <input class="form-control" name="so_dien_thoai"
+                                                                    pattern="[0-9]{10}" id="so_dien_thoai" type="tel"
+                                                                    required>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -175,21 +180,34 @@
 
             $('.btnAdd').click(function() {
                 $('#myForm').trigger('reset');
+                $('#id').val("");
             })
             $('.btnSave').click(function() {
                 // var formData = new FormData($('#myForm')[0]);
                 if ($('#id').val() == "") {
                     $.ajax({
-                        method: "POST",
-                        url: "{{ route('nha-san-xuat.them-moi') }}",
-                        data: $('#myForm').serialize(),
-                        // data: formData,
-                        // contentType: false,
-                        // processData: false
-                    }).done(function(res) {
-                        //location.reload();
-                        console.log(res);
-                    })
+                            method: "POST",
+                            url: "{{ route('nha-san-xuat.them-moi') }}",
+                            data: $('#myForm').serialize(),
+                            // data: formData,
+                            // contentType: false,
+                            // processData: false
+                        }).done(function(res) {
+                            location.reload();
+                            console.log(res);
+                        })
+                        .fail(function(xhr, status, error) {
+                            // Handle validation errors
+                            var errors = xhr.responseJSON.errors;
+                            if (errors) {
+                                var errorHtml = '<div class="alert alert-danger"><ul>';
+                                $.each(errors, function(key, value) {
+                                    errorHtml += '<li>' + value + '</li>';
+                                });
+                                errorHtml += '</ul></div>';
+                                $('#myForm').prepend(errorHtml);
+                            }
+                        });
                 } else if ($('#id').val() != "") {
                     $.ajax({
                         method: "POST",

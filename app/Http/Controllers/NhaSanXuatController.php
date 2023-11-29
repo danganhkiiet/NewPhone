@@ -17,9 +17,17 @@ class NhaSanXuatController extends Controller
         return view('nha-san-xuat.danh-sach',compact('lst_nhasanxuat'));
     }
     public function themMoi(Request $request){
+
+        $request->validate([
+            'ten' => 'required',
+            'dia_chi' => 'required',
+            'email' => 'required|email',
+            'so_dien_thoai' => 'required|numeric',
+        ]);
+
         $nha_san_xuat=NhaSanXuat::create(['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
 
-        return response()->json(['message'=>'Thêm Thành Công','data'=>NhaSanXuat::all()]);
+        return response()->json(['message'=>'Thêm Thành Công']);
     }
     public function capNhat($id){
 

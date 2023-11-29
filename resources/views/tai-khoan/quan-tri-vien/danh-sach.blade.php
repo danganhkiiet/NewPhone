@@ -77,6 +77,8 @@
                                                     <tr>
                                                         <td>{{ $admin->ho_ten }}</td>
                                                         <td>{{ $admin->email }}</td>
+                                                        <td>{{ $admin->so_dien_thoai }}</td>
+                                                        <td><img src="{{asset($admin->avatar)}}" style="width:80px"/></td>
                                                         <td style="display: flex;">
                                                             <button type="button" class="btn btn-primary btn-edit"
                                                                 data-toggle="modal" data-target="#myModal"
@@ -118,8 +120,8 @@
                                                             <h4 class="card-title">Nhập thông tin</h4>
                                                             <div class="form-group">
                                                                 <input class="form-control" name="id" id="id"
-                                                                    type="text" required>
-                                                                <label class="form-label" for="ten">Họ tên</label>
+                                                                    type="hidden" required>
+                                                                <label class="form-label" for="ho_ten">Họ tên</label>
                                                                 <input class="form-control" name="ho_ten" id="ten"
                                                                     type="text" required>
                                                                 <label class="form-label" for="email">Email</label>
@@ -186,10 +188,13 @@
                         location.reload();
                     })
                 } else if ($('#id').val() != "") {
+                    var frm_Data = new FormData($('#myForm')[0]);
                     $.ajax({
                         method: "POST",
                         url: "{{ route('quan-tri-vien.xu-ly-cap-nhat') }}",
-                        data: $('#myForm').serialize(),
+                        data: frm_Data,
+                        processData: false,
+                        contentType: false,
                     }).done(function() {
                         $('#myModal').modal('hide');
                         location.reload();

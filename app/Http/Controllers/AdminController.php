@@ -38,14 +38,14 @@ class AdminController extends Controller
     }
     public function themMoi(Request $request){
         $admin = new Admin();
-        $admin->ho_ten = $request->ten;
+        $admin->ho_ten = $request->ho_ten;
         $admin->email=$request->email;
         $admin->password=Hash::make($request->password);
         $admin->so_dien_thoai=$request->so_dien_thoai;
         // dd($request);
-        // $file=$request->avatar_hinh;
-        // $path=$file->store('avatar');
-        $admin->avatar='123';
+        $file=$request->avatar_hinh;
+        $path=$file->store('avatar');
+        $admin->avatar=$path;
         $admin->save();
         return response()->json(['message'=>'Thêm Thành Công']);
     }
@@ -56,30 +56,30 @@ class AdminController extends Controller
     public function xuLyCapNhat(Request $request)
     {
         // dd($request);
-        // if(empty($request->avatar)){
+        if(empty($request->avatar_hinh)){
             if(empty($request->password)){
                 $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
                 return response()->json(['message'=>'Cập Nhật Thành Công']);
             }
             $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai]);
             return response()->json(['message'=>'Cập Nhật Thành Công']);
-        //}
+        }
 
       
         if(empty($request->password)){
 
-            // $file=$request->avatar;
+            $file=$request->avatar_hinh;
 
-            // $path=$file->store('avatar');
+            $path=$file->store('avatar');
             
-            $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
+            $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path]);
 
             return response()->json(['message'=>'Cập Nhật Thành Công']);
         }
 
-        // $file=$request->avatar;
+        $file=$request->avatar_hinh;
 
-        // $path=$file->store('avatar');
+        $path=$file->store('avatar');
 
         $admin=Admin::where('id',$request->id)->update(['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai]);
         

@@ -13,7 +13,7 @@
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
     <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/brand/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
     <title>Noa – Bootstrap 5 Admin & Dashboard Template </title>
@@ -35,7 +35,7 @@
 
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">
-        <img src="../assets/images/loader.svg" class="loader-img" alt="Loader">
+        <img src="/assets/images/loader.svg" class="loader-img" alt="Loader">
     </div>
     <!-- /GLOBAL-LOADER -->
 
@@ -60,9 +60,9 @@
         @include('task-modal')
         <!--TASK MODAL ENDS-->
 
-        <!-- Country-selector modal-->
+        {{-- <!-- Country-selector modal-->
         @include('country-selector-modal')
-        <!-- /Country-selector modal-->
+        <!-- /Country-selector modal--> --}}
 
         <!-- FOOTER -->
         @include('footer')
@@ -72,8 +72,10 @@
     <!-- BACK-TO-TOP -->
     <a href="#top" id="back-to-top"><i class="fa fa-long-arrow-up"></i></a>
 
-    <!-- JQUERY JS -->
+    {{-- <!-- JQUERY JS -->
     <script src="{{ asset('./assets/js/jquery.min.js') }}"></script>
+     --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- BOOTSTRAP JS -->
     <script src="{{ asset('./assets/plugins/bootstrap/js/popper.min.js') }}"></script>
@@ -115,13 +117,13 @@
     {{-- <script src="{{ asset('assets/plugins/p-scroll/pscroll.js') }}"></script> --}}
 
     <!-- STICKY JS -->
-    <script src="{{ asset('assets/js/sticky.js') }}"></script>
+    <script src="{{ asset('./assets/js/sticky.js') }}"></script>
 
     <!-- COLOR THEME JS -->
-    <script src="{{ asset('assets/js/themeColors.js') }}"></script>
+    <script src="{{ asset('./assets/js/themeColors.js') }}"></script>
 
     <!-- CUSTOM JS -->
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('./assets/js/custom.js') }}"></script>
     <!-- Amaze UI Date Picker js-->
     <script src="{{ asset('./assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
 
@@ -138,9 +140,7 @@
     <script src="/assets/js/bootstrap-editable.js"></script>
     <script src="/assets/js/address-editable.js"></script> --}}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
- 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

@@ -15,26 +15,18 @@ class ThongSoController extends Controller
         }
         return view('san-pham/thong-so/danh-sach', compact('lst_thong_so'));
     }
-    public function themMoi(){
-        return view('san-pham/thong-so/them-moi');
+    public function themMoi(Request $request){
+        $thong_so = ThongSo::create(['ten'=>$request->ten]);
+        return response()->json(['thong_bao'=>'Thêm mới thành công']);
     }
-    public function xuLyThemMoi(Request $request){
-       $mau = new ThongSo();
-       $mau->ten = $request->ten;
-       $mau->save();
-       return redirect()->route('thong-so.danh-sach')->with('thong_bao','Thêm mới thành công');
-    }
-    
     public function capNhat($id){
         $thong_so = ThongSo::find($id);
-        return view('san-pham/thong-so/cap-nhat', compact('thong_so'));
+        return $thong_so;
     }
     
-    public function xuLyCapNhat(Request $request, $id){
-        $mau = ThongSo::find($id);
-        $mau->ten = $request->ten;
-        $mau->save();
-        return redirect()->route('thong-so.danh-sach')->with('thong_bao','Cập nhật thành công');
+    public function xuLyCapNhat(Request $request){
+        $thong_so = ThongSo::where('id',$request->id)->update(['ten'=>$request->ten]);
+        return response()->json(['message' => 'Cập nhật thành công', 'thong_bao' => 'Cập nhật thành công']);
     }
      public function xoa($id){
         $mau = ThongSo::find($id);

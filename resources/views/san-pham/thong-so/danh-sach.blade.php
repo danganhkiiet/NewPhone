@@ -19,17 +19,17 @@
                 <!-- PAGE-HEADER END -->
 
                 <!-- Thong bao -->
-                @if(session('thong_bao'))
-                <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
-                    <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
-                        <span class="alert-inner--icon me-2"><i class="fe fe-thumbs-up"></i></span>
-                        <strong>Thành công</strong>
-                    </p>
-                    <p class="py-3 px-5"> {{session('thong_bao')}}</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
+                @if (session('thong_bao'))
+                    <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
+                        <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
+                            <span class="alert-inner--icon me-2"><i class="fe fe-thumbs-up"></i></span>
+                            <strong>Thành công</strong>
+                        </p>
+                        <p class="py-3 px-5"> {{ session('thong_bao') }}</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                 @endif
                 <!-- ket thuc thong bao -->
                 <!-- Row -->
@@ -39,18 +39,24 @@
                             <div class="card">
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
-                                    <div class="btn"  style="position: relative;left: 78%;">
-                                        <a href="{{ route('thong-so.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
+                                    <div class="btn" style="position: relative;left: 78%;">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btnAdd" data-toggle="modal"
+                                            data-target="#myModal">
+                                            Thêm Mới
+                                        </button>
                                     </div>
                                     <!-- form tim kiem -->
-                                    <form action="" class="form-inline" role="form" style="position: relative;left: 45%;">
+                                    <form action="" class="form-inline" role="form"
+                                        style="position: relative;left: 45%;">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="ten" placeholder="Nhập tên bạn muốn tìm"/>
+                                            <input type="text" class="form-control" name="ten"
+                                                placeholder="Nhập tên bạn muốn tìm" />
                                             <button type="submit">
-                                                <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                title="Edit" href="#" >
-                                                <i class="fe fe-search"></i>
+                                                <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit"
+                                                    href="#">
+                                                    <i class="fe fe-search"></i>
                                                 </a>
                                             </button>
                                         </div>
@@ -70,15 +76,17 @@
                                             <tbody>
                                                 @foreach ($lst_thong_so as $ts)
                                                     <tr>
-                                                        <td>{{$ts->id}}</td>
-                                                        <td>{{$ts->ten}}</td>
+                                                        <td>{{ $ts->id }}</td>
+                                                        <td>{{ $ts->ten }}</td>
                                                         <td>
-                                                            <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{ route('thong-so.cap-nhat',['id' => $ts->id]) }}" >
+                                                            <button type="button" class="btn btn-primary btn-edit"
+                                                                data-toggle="modal" data-target="#myModal"
+                                                                data-id="{{ $ts->id }}">
                                                                 <i class="fe fe-edit"></i>
-                                                            </a>
+                                                            </button>
                                                             <a class="btn btn-danger fs-14 text-white delete-icn"
-                                                                title="Delete" href="{{ route('thong-so.xoa',['id' => $ts->id]) }}" >
+                                                                title="Delete"
+                                                                href="{{ route('thong-so.xoa', ['id' => $ts->id]) }}">
                                                                 <i class="fe fe-delete"></i>
                                                             </a>
                                                         </td>
@@ -88,14 +96,142 @@
                                         </table>
                                         {{ $lst_thong_so->links() }}
                                     </div>
-                                  
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" id="myForm">
+                                                        @csrf
+                                                        <div class="card card-body pd-20 pd-md-40 border shadow-none">
+                                                            <h4 class="card-title">Nhập thông tin</h4>
+                                                            <div class="form-group">
+                                                                <input class="form-control" name="id" id="id"
+                                                                    type="hidden">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="ten">Tên Thông Số</label>
+                                                                <input class="form-control" name="ten" id="ten"
+                                                                    type="text" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="button"
+                                                                    class="btn btn-primary btn-add btnSave">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Row -->
             </div>
         </div>
     </div>
+@endsection
+@section('js-jquery')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.btnAdd').click(function() {
+                $('#myForm').trigger('reset');
+                $('#id').val("");
+                console.log($('#id'));
+            })
+            $('.btnSave').click(function() {
+                if ($('#id').val() == "") {
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                method: "POST",
+                                url: "{{ route('thong-so.them-moi') }}",
+                                data: $('#myForm').serialize(),
+                            }).done(function(res) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+
+                                location.reload();
+                                console.log(res);
+
+                            })
+                        }
+                    });
+                } else if ($('#id').val() != "") {
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                method: "POST",
+                                url: "{{ route('thong-so.xu-ly-cap-nhat') }}",
+                                data: $('#myForm').serialize(),
+                            }).done(function() {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your file has been deleted.",
+                                    icon: "success"
+                                });
+                                // $('#myModal').modal('hide');
+                                location.reload();
+                                
+                            })
+                        }
+                    });
+
+                }
+
+            })
+            $('.btn-edit').click(function() {
+                var id = $(this).data('id');
+                console.log(id);
+
+                $('#id').val(id);
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('thong-so.cap-nhat', '') }}/" + id,
+
+                }).done(function($data) {
+                    console.log($data);
+                    $('#ten').val($data.ten);
+                })
+            })
+        });
+    </script>
 @endsection

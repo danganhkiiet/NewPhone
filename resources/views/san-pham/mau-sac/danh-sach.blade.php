@@ -177,7 +177,6 @@
                                 method: "POST",
                                 url: "{{ route('mau-sac.them-moi') }}",
                                 data: $('#myForm').serialize(),
-
                             }).done(function(res) {
                                 Swal.fire({
                                     title: "Deleted!",

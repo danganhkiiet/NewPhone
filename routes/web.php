@@ -96,10 +96,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('thong-so')->group(function () {
         Route::name('thong-so.')->group(function () {
             Route::get('/danh-sach',[ThongSoController::class,'danhSach'])->name('danh-sach');
-            Route::get('/them-moi',[ThongSoController::class,'themMoi'])->name('them-moi');
-            Route::post('/them-moi',[ThongSoController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
+            Route::post('/them-moi',[ThongSoController::class,'themMoi'])->name('them-moi');
             Route::get('/cap-nhat/{id}',[ThongSoController::class,'capNhat'])->name('cap-nhat');
-            Route::post('/cap-nhat/{id}',[ThongSoController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
+            Route::post('/cap-nhat',[ThongSoController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
             Route::get('/xoa/{id}',[ThongSoController::class,'xoa'])->name('xoa');
         });
     });
