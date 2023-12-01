@@ -98,52 +98,50 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/danh-sach',[ThongSoController::class,'danhSach'])->name('danh-sach');
             Route::post('/them-moi',[ThongSoController::class,'themMoi'])->name('them-moi');
             Route::get('/cap-nhat/{id}',[ThongSoController::class,'capNhat'])->name('cap-nhat');
-            Route::post('/cap-nhat',[ThongSoController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
+            // Route::post('/cap-nhat',[ThongSoController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
             Route::get('/xoa/{id}',[ThongSoController::class,'xoa'])->name('xoa');
+            Route::post('/them-moi-cap-nhat',[ThongSoController::class,'themMoiVaCapNhat'])->name('them-moi-cap-nhap');
         });
     });
 });
-//tài khoản
-// Route::middleware(['auth'])->group(function () {
-//     Route::prefix('tai-khoan')->group(function () {
-//         Route::name('tai-khoan.')->group(function () {
-//             Route::get('/danh-sach',[AdminController::class,'danhSach'])->name('danh-sach');
-//             Route::get('/them-moi',[AdminController::class,'themMoi'])->name('them-moi');
-//             Route::post('/them-moi',[AdminController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
-//             Route::get('/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('cap-nhat');
-//             Route::post('/cap-nhat/{id}',[AdminController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
-//             Route::post('/xoa/{id}',[AdminController::class,'xoa'])->name('xoa');
-//         });
-//     });
-// });
+//Quản trị viên
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('quan-tri-vien')->group(function () {
+        Route::name('quan-tri-vien.')->group(function () {
+            Route::get('/danh-sach',[AdminController::class,'danhSach'])->name('danh-sach');
+            Route::get('/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/them-moi-cap-nhat',[AdminController::class,'themMoiVaCapNhat'])->name('them-moi-cap-nhat');
+            Route::post('/xoa/{id}',[AdminController::class,'xoa'])->name('xoa');
+        });
+    });
+});
 
 
 
 //Nhà Sản Xuất
-Route::get('/nha-san-xuat/danh-sach',[NhaSanXuatController::class,'danhSach'])->name('nha-san-xuat.danh-sach');
-Route::post('/nha-san-xuat/them-moi',[NhaSanXuatController::class,'themMoi'])->name('nha-san-xuat.them-moi');
-Route::get('/nha-san-xuat/cap-nhat/{id}',[NhaSanXuatController::class,'capNhat'])->name('nha-san-xuat.cap-nhat');
-Route::post('/nha-san-xuat/cap-nhat',[NhaSanXuatController::class,'xuLyCapNhat'])->name('nha-san-xuat.xu-ly-cap-nhat');
-
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('nha-san-xuat')->group(function () {
+        Route::name('nha-san-xuat.')->group(function () {
+            Route::get('/danh-sach',[NhaSanXuatController::class,'danhSach'])->name('danh-sach');
+            Route::get('/cap-nhat/{id}',[NhaSanXuatController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/them-moi-cap-nhat',[NhaSanXuatController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+        });
+    });
+});
 //Màu
-Route::get('/mau-sac/danh-sach',[MauController::class,'danhSach'])->name('mau-sac.danh-sach');
-Route::post('/mau-sac/them-moi',[MauController::class,'themMoi'])->name('mau-sac.them-moi');
-Route::get('/mau-sac/cap-nhat/{id}',[MauController::class,'capNhat'])->name('mau-sac.cap-nhat');
-Route::post('/mau-sac/cap-nhat',[MauController::class,'xuLyCapNhat'])->name('mau-sac.xu-ly-cap-nhat');
-Route::post('/mau-sac/xoa/{id}',[MauController::class,'xoa'])->name('mau-sac.xoa');
-
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('mau-sac')->group(function () {
+        Route::name('mau-sac.')->group(function () {
+            Route::get('/danh-sach',[MauController::class,'danhSach'])->name('danh-sach');
+            Route::get('/cap-nhat/{id}',[MauController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/them-moi-cap-nhat',[MauController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+        });
+    });
+});
 //Dung Lượng
 Route::get('/dung-luong/danh-sach',[DungLuongController::class,'danhSach'])->name('dung-luong.danh-sach');
 Route::post('/dung-luong/them-moi',[DungLuongController::class,'themMoi'])->name('dung-luong.them-moi');
 Route::get('/dung-luong/cap-nhat/{id}',[DungLuongController::class,'capNhat'])->name('dung-luong.cap-nhat');
 Route::post('/dung-luong/cap-nhat',[DungLuongController::class,'xuLyCapNhat'])->name('dung-luong.xu-ly-cap-nhat');
 Route::post('/dung-luong/xoa/{id}',[DungLuongController::class,'xoa'])->name('dung-luong.xoa');
-
-//Quản trị viên
-Route::get('/quan-tri-vien/danh-sach',[AdminController::class,'danhSach'])->name('quan-tri-vien.danh-sach');
-Route::post('/quan-tri-vien/them-moi',[AdminController::class,'themMoi'])->name('quan-tri-vien.them-moi');
-Route::get('/quan-tri-vien/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('quan-tri-vien.cap-nhat');
-Route::post('/quan-tri-vien/cap-nhat',[AdminController::class,'xuLyCapNhat'])->name('quan-tri-vien.xu-ly-cap-nhat');
-Route::post('/quan-tri-vien/xoa/{id}',[AdminController::class,'xoa'])->name('quan-tri-vien.xoa');
-
 

@@ -4,40 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MauSac;
+use Yajra\DataTables\DataTables;
 class MauController extends Controller
 {
     //
-    public function danhSach(){
-        $lst_mau = MauSac::paginate(5);
-        if($ten = request()->ten)
-        {
-            $lst_mau = Mau::where('ten','like','%'.$ten)->paginate(5);
+    public function danhSach(Request $request){
+        //Kiểm tra xem yêu cầu hiện tại có phải là một yêu cầu Ajax không
+        if($request->ajax()){
+            $mau_sac=MauSac::all();
+            //Sử dụng DataTables để xử lý và trả về dữ liệu dưới dạng JSON cho DataTable
+            return DataTables::of($mau_sac)
+                //Thêm một cột số thứ tự cho từng bản ghi
+                ->addIndexColumn()
+                //Thêm cột action cho từng bản
+                ->addColumn('Action',function($row){
+                    $temp=
+                    '<button type="button" class="btn btn-primary btn-edit"
+                        ata-toggle="modal" data-target="#myModal" data-id="'. $row->id .'">
+                            <i class="fe fe-edit"></i>
+                    </button>';
+                    return $temp;
+                })
+                //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
+                ->rawColumns(['Action'])
+                //Tạo và trả về JSON để hiển thị trong DataTable
+                ->make(true);
         }
-        return view('san-pham.mau-sac.danh-sach', compact('lst_mau'));
+        return view('san-pham.mau-sac.danh-sach');
     }
-    public function themMoi(Request $request){
-        $mau = new MauSac();
-        $mau->ten = $request->ten;
-        $mau->save();
-        return response()->json(['message'=>'Thêm Thành Công','data'=>MauSac::all()]);
-    }
-    
     public function capNhat($id){
-        $mau = MauSac::find($id);
-        
-        return $mau;
+        $mau_sac = MauSac::find($id);
+        return $mau_sac;
     }
-    
-    public function xuLyCapNhat(Request $request){
-        $mau = MauSac::find($request->id);
-        $mau->ten = $request->ten;
-        $mau->save();
-        return response()->json(['message'=>'Cập Nhật Thành Công']);
-    }
-    public function xoa($id){
-        $mau = MauSac::find($id);
-        
-        $mau->delete();
-        return redirect()->route('mau-sac.danh-sach')->with('thong_bao','Xóa thành công');
+    public function themMoiVaCapNhat(Request $request){
+        $mau_sac = MauSac::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten]);
+        return response()->json(['message' => 'Thành công']);
     }
 }
