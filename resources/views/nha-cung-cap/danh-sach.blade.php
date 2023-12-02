@@ -39,8 +39,11 @@
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn" style="position: relative;left: 78%;">
-                                        <a href="{{ route('nha-cung-cap.them-moi') }}" class="btn btn-primary-light ">Thêm
-                                            mới</a>
+                                    <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btnAdd" data-toggle="modal"
+                                            data-target="#myModal">
+                                            Thêm Mới
+                                        </button>
                                     </div>
                                     <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form"
@@ -57,7 +60,7 @@
                                             </button>
                                         </div>
                                     </form>
-                                    <!-- ket thuc form tim kiem -->
+                                    <!-- ket thuc form tim kiem --> 
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -77,15 +80,17 @@
                                                         <td>{{ $nhacungcap->dia_chi }}</td>
                                                         <td>{{ $nhacungcap->email }}</td>
                                                         <td>{{ $nhacungcap->so_dien_thoai }}</td>
-                                                        <td>
-                                                            <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit"
-                                                                href="{{ route('nha-cung-cap.cap-nhat', ['id' => $nhacungcap->id]) }}">
-                                                                <i class="fe fe-edit"></i>
-                                                            </a>
-                                                            <form method="POST" action="{{route('nha-cung-cap.xoa',['id'=>$nhacungcap->id])}}">
+                                                        <td style="display: flex;">
+                                                            <button type="button" class="btn btn-primary btn-edit"
+                                                                data-toggle="modal" data-target="#myModal"
+                                                                data-id="{{ $nhacungcap->id }}">
+                                                                <i class="fe fe-edit" ></i>
+                                                            </button> 
+                                                            <form method="POST"
+                                                                action="{{ route('nha-cung-cap.xoa', ['id' => $nhacungcap->id]) }}">
                                                                 @csrf
-                                                                <button type="submit" class="btn btn-danger fs-14 text-white delete-icn"
+                                                                <button type="submit"
+                                                                    class="btn btn-danger fs-14 text-white delete-icn"
                                                                     title="Delete">
                                                                     <i class="fe fe-delete"></i>
                                                                 </button>
@@ -97,6 +102,53 @@
                                         </table>
                                         {{ $lst_nhacungcap->links() }}
                                     </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" id="myForm">
+                                                        @csrf
+                                                        <div class="card card-body pd-20 pd-md-40 border shadow-none">
+                                                            <h4 class="card-title">Nhập thông tin</h4>
+                                                            <div class="form-group">
+                                                                <input class="form-control" name="id" id="id"
+                                                                    type="hidden" required>
+                                                                <label class="form-label" for="ten">Tên</label>
+                                                                <input class="form-control" name="ten" id="ten"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="dia_chi">Địa chỉ</label>
+                                                                <input class="form-control" name="dia_chi" id="dia_chi"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="email">Email</label>
+                                                                <input class="form-control" name="email" id="email"
+                                                                    type="text" required>
+                                                                <label class="form-label" for="so_dien_thoai">Số điện thoại</label>
+                                                                <input class="form-control" name="so_dien_thoai" id="so_dien_thoai"
+                                                                    type="text" required>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="button"
+                                                                    class="btn btn-primary btn-add btnSave">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,4 +158,62 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js-jquery')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.btnAdd').click(function() {
+                $('#myForm').trigger('reset');
+            })
+            $('.btnSave').click(function() {
+                // var formData = new FormData($('#myForm')[0]);
+                if ($('#id').val() == "") {
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ route('nha-cung-cap.them-moi') }}",
+                        data: $('#myForm').serialize(),
+                        // data: formData,
+                        // contentType: false,
+                        // processData: false
+                    }).done(function() {
+                        location.reload();
+                    })
+                } else if ($('#id').val() != "") {
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ route('nha-cung-cap.xu-ly-cap-nhat', '')}}/"+id,
+                        data: $('#myForm').serialize(),
+                    }).done(function() {
+                        $('#myModal').modal('hide');
+                        location.reload();
+                    })
+                }
+
+            })
+            $('.btn-edit').click(function() {
+                var id = $(this).data('id');
+                console.log(id);
+
+                $('#id').val(id);
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('nha-cung-cap.cap-nhat', '') }}/" + id,
+
+                }).done(function($data) {
+                    console.log($data);
+                    $('#ten').val($data.ten);
+                    $('#dia_chi').val($data.dia_chi);
+                    $('#email').val($data.email);
+                    $('#so_dien_thoai').val($data.so_dien_thoai);
+
+                })
+            })
+        });
+    </script>
 @endsection
