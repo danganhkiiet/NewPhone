@@ -44,22 +44,6 @@
                                             Thêm Mới
                                         </button>
                                     </div>
-                                    {{-- <!-- form tim kiem -->
-                                    <form action="" class="form-inline" role="form"
-                                        style="position: relative;left: 45%;">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="ten"
-                                                placeholder="Nhập tên bạn muốn tìm" />
-                                            <button type="submit">
-                                                <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit"
-                                                    href="#">
-                                                    <i class="fe fe-search"></i>
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <!-- ket thuc form tim kiem --> --}}
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">

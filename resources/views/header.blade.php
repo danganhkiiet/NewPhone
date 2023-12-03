@@ -472,7 +472,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <a class="dropdown-item" href="profile.html">
+                                    <a class="dropdown-item" href="{{route('quan-tri-vien.thong-tin-ca-nhan',['id'=>Auth()->user()->id])}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-inner-icn"
                                             enable-background="new 0 0 24 24" viewBox="0 0 24 24">
                                             <path

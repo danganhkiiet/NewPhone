@@ -3,7 +3,8 @@
     <div class="app-sidebar">
         <div class="side-header">
             <a class="header-brand1" href="index.html">
-                <img src="/assets/images/brand/test_logo_dark_mode.png" class="header-brand-img desktop-logo" alt="logo">
+                <img src="/assets/images/brand/test_logo_dark_mode.png" class="header-brand-img desktop-logo"
+                    alt="logo">
                 <img src="/assets/images/brand/test_logo.png" class="header-brand-img light-logo1" alt="logo">
             </a><!-- LOGO -->
         </div>
@@ -41,10 +42,10 @@
                     </a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)"></a></li>
-                        <li><a href="{{route('dien-thoai.danh-sach')}}" class="slide-item">Điện thoại</a></li>
-                        <li><a href="{{route('thong-so.danh-sach')}}" class="slide-item">Thông số</a></li>
-                        <li><a href="{{route('mau-sac.danh-sach')}}" class="slide-item">Màu Sắc</a></li>
-                        <li><a href="{{route('dung-luong.danh-sach')}}" class="slide-item">Dung Lượng</a></li>
+                        <li><a href="{{ route('dien-thoai.danh-sach') }}" class="slide-item">Điện thoại</a></li>
+                        <li><a href="{{ route('thong-so.danh-sach') }}" class="slide-item">Thông số</a></li>
+                        <li><a href="{{ route('mau-sac.danh-sach') }}" class="slide-item">Màu Sắc</a></li>
+                        <li><a href="{{ route('dung-luong.danh-sach') }}" class="slide-item">Dung Lượng</a></li>
                     </ul>
                 </li>
                 {{-- <li class="slide">
@@ -90,28 +91,32 @@
                         </svg>
                         <span class="side-menu__label">Hóa đơn</span><i class="angle fa fa-angle-right"></i></a>
                     <ul class="slide-menu">
-                        <li><a href="{{route('phieu-nhap.danh-sach')}}" class="slide-item">Phiếu Nhập</a></li>
+                        <li><a href="{{ route('phieu-nhap.danh-sach') }}" class="slide-item">Phiếu Nhập</a></li>
                         <li><a href="maps2.html" class="slide-item">Phiếu Xuất</a></li>
                     </ul>
                 </li>
-                <li>
-                    <h3>Admin</h3>
-                </li>
+                @can('is-admin')
+                    <li>
+                        <h3>Admin</h3>
+                    </li>
 
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
-                            enable-background="new 0 0 24 24" viewBox="0 0 24 24">
-                            <path
-                                d="M21.5,13h-8.0005493C13.2234497,13.0001831,12.9998169,13.223999,13,13.5v8.0005493C13.0001831,21.7765503,13.223999,22.0001831,13.5,22h8.0006104C21.7765503,21.9998169,22.0001831,21.776001,22,21.5v-8.0006104C21.9998169,13.2234497,21.776001,12.9998169,21.5,13z M21,21h-7v-7h7V21z M10.5,2H2.4993896C2.2234497,2.0001831,1.9998169,2.223999,2,2.5v8.0005493C2.0001831,10.7765503,2.223999,11.0001831,2.5,11h8.0006104C10.7765503,10.9998169,11.0001831,10.776001,11,10.5V2.4993896C10.9998169,2.2234497,10.776001,1.9998169,10.5,2z M10,10H3V3h7V10z M10.5,13H2.4993896C2.2234497,13.0001831,1.9998169,13.223999,2,13.5v8.0005493C2.0001831,21.7765503,2.223999,22.0001831,2.5,22h8.0006104C10.7765503,21.9998169,11.0001831,21.776001,11,21.5v-8.0006104C10.9998169,13.2234497,10.776001,12.9998169,10.5,13z M10,21H3v-7h7V21z M21.5,2h-8.0005493C13.2234497,2.0001831,12.9998169,2.223999,13,2.5v8.0005493C13.0001831,10.7765503,13.223999,11.0001831,13.5,11h8.0006104C21.7765503,10.9998169,22.0001831,10.776001,22,10.5V2.4993896C21.9998169,2.2234497,21.776001,1.9998169,21.5,2z M21,10h-7V3h7V10z" />
-                        </svg>
-                        <span class="side-menu__label">Tài khoản</span><i class="angle fa fa-angle-right"></i>
-                    </a>
-                    <ul class="slide-menu">
-                        <li><a href="{{route('quan-tri-vien.danh-sach')}}" class="slide-item">Quản Trị Viên</a></li>
-                        <li><a href="{{ route('khach-hang.danh-sach') }}" class="slide-item">Khách hàng</a></li>
-                    </ul>
-                </li>
+
+                    <li class="slide">
+                        <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                enable-background="new 0 0 24 24" viewBox="0 0 24 24">
+                                <path
+                                    d="M21.5,13h-8.0005493C13.2234497,13.0001831,12.9998169,13.223999,13,13.5v8.0005493C13.0001831,21.7765503,13.223999,22.0001831,13.5,22h8.0006104C21.7765503,21.9998169,22.0001831,21.776001,22,21.5v-8.0006104C21.9998169,13.2234497,21.776001,12.9998169,21.5,13z M21,21h-7v-7h7V21z M10.5,2H2.4993896C2.2234497,2.0001831,1.9998169,2.223999,2,2.5v8.0005493C2.0001831,10.7765503,2.223999,11.0001831,2.5,11h8.0006104C10.7765503,10.9998169,11.0001831,10.776001,11,10.5V2.4993896C10.9998169,2.2234497,10.776001,1.9998169,10.5,2z M10,10H3V3h7V10z M10.5,13H2.4993896C2.2234497,13.0001831,1.9998169,13.223999,2,13.5v8.0005493C2.0001831,21.7765503,2.223999,22.0001831,2.5,22h8.0006104C10.7765503,21.9998169,11.0001831,21.776001,11,21.5v-8.0006104C10.9998169,13.2234497,10.776001,12.9998169,10.5,13z M10,21H3v-7h7V21z M21.5,2h-8.0005493C13.2234497,2.0001831,12.9998169,2.223999,13,2.5v8.0005493C13.0001831,10.7765503,13.223999,11.0001831,13.5,11h8.0006104C21.7765503,10.9998169,22.0001831,10.776001,22,10.5V2.4993896C21.9998169,2.2234497,21.776001,1.9998169,21.5,2z M21,10h-7V3h7V10z" />
+                            </svg>
+                            <span class="side-menu__label">Tài khoản</span><i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu">
+                            <li><a href="{{ route('quan-tri-vien.danh-sach') }}" class="slide-item">Quản Trị Viên</a></li>
+                            <li><a href="{{ route('khach-hang.danh-sach') }}" class="slide-item">Khách hàng</a></li>
+                        </ul>
+                    </li>
+                @endcan
+
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                     width="24" height="24" viewBox="0 0 24 24">

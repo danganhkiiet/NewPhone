@@ -86,7 +86,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Quản Trị Viên</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Bảng Nhập</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -108,16 +108,18 @@
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror
                                                                 <label class="form-label" for="email">Email</label>
-                                                                <input class="form-control @error('email') is-invalid @enderror" name="email" id="email"
-                                                                    type="text" required>
+                                                                <input
+                                                                    class="form-control @error('email') is-invalid @enderror"
+                                                                    name="email" id="email" type="text" required>
                                                                 @error('email')
                                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror
                                                                 <label class="form-label" for="password">Mật khẩu</label>
                                                                 <input class="form-control" name="password" id="password"
                                                                     type="text">
-                                                                <label class="form-label @error('so_dien_thoai') is-invalid @enderror" for="so_dien_thoai">Số điện
-                                                                    thoại</label>
+                                                                <label
+                                                                    class="form-label @error('so_dien_thoai') is-invalid @enderror"
+                                                                    for="so_dien_thoai">Số điện thoại</label>
                                                                 <input class="form-control" name="so_dien_thoai"
                                                                     id="so_dien_thoai" type="text" required>
                                                                 @error('so_dien_thoai')
@@ -126,6 +128,16 @@
                                                                 <label class="form-label" for="avatar">Avatar</label>
                                                                 <input class="form-control" name="avatar" id="avatar"
                                                                     type="file">
+                                                                <div class="col-auto">
+                                                                    <label class="colorinput" style="display: flex">
+                                                                        <input type="checkbox" class="colorinput-input"
+                                                                            name="is_admin" id="is_admin" />
+                                                                        <span class="colorinput-color bg-teal"></span>
+                                                                        <label class="form-label" for="is_admin"
+                                                                            style="padding: 0px 0px 0px 5px;">Là
+                                                                            Admin</label>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -234,6 +246,12 @@
                     $('#ho_ten').val(data.ho_ten);
                     $('#email').val(data.email);
                     $('#so_dien_thoai').val(data.so_dien_thoai);
+                    // Gán giá trị cho checkbox
+                    if (data.is_admin) {
+                        $('#is_admin').prop('checked', true);
+                    } else {
+                        $('#is_admin').prop('checked', false);
+                    }
                     $('#myModal').modal('show');
                 })
 
@@ -300,6 +318,25 @@
                             });
                             table.draw();
                         })
+                    }
+                })
+            })
+            $(document).on('click', '#is_admin', function() {
+                Swal.fire({
+                    title: "Bạn có chắc không?",
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: "warning",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Chắc chắn!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Thành công!",
+                            text: "Thực hiện chức năng thành công.",
+                            icon: "success"
+                        });
+
                     }
                 })
             })

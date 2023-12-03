@@ -1,6 +1,6 @@
 <?php
-use App\Http\Controllers\DungLuongController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DungLuongController;
 use App\Http\Controllers\MauController;
 use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
@@ -9,6 +9,7 @@ use App\Http\Controllers\ThongSoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\NhaSanXuatController;
+use App\Http\Controllers\GuiMailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', [AdminController::class, 'dangNhap'])->name('admin.dang-nhap');
     Route::post('/', [AdminController::class, 'xuLyDangNhap'])->name('admin.xu-ly-dang-nhap');
 });
-
+Route::get('/quen-mat-khau', [GuiMailController::class, 'quenMatKhau'])->name('admin.quen-mat-khau');
 
 
 //phieu nhap
@@ -62,11 +63,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('nha-cung-cap')->group(function () {
         Route::name('nha-cung-cap.')->group(function () {
             Route::get('/danh-sach',[NhaCungCapController::class,'danhSach'])->name('danh-sach');
-            Route::get('/them-moi',[NhaCungCapController::class,'themMoi'])->name('them-moi');
-            Route::post('/them-moi',[NhaCungCapController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
             Route::get('/cap-nhat/{id}',[NhaCungCapController::class,'capNhat'])->name('cap-nhat');
-            Route::post('/cap-nhat/{id}',[NhaCungCapController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
-            Route::post('/xoa/{id}',[NhaCungCapController::class,'xoa'])->name('xoa');
+            Route::post('/them-moi-cap-nhat',[NhaCungCapController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+            // Route::post('/xoa/{id}',[NhaCungCapController::class,'xoa'])->name('xoa');
         });
     });
 });
@@ -98,9 +97,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/danh-sach',[ThongSoController::class,'danhSach'])->name('danh-sach');
             Route::post('/them-moi',[ThongSoController::class,'themMoi'])->name('them-moi');
             Route::get('/cap-nhat/{id}',[ThongSoController::class,'capNhat'])->name('cap-nhat');
-            // Route::post('/cap-nhat',[ThongSoController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
-            Route::get('/xoa/{id}',[ThongSoController::class,'xoa'])->name('xoa');
             Route::post('/them-moi-cap-nhat',[ThongSoController::class,'themMoiVaCapNhat'])->name('them-moi-cap-nhap');
+            Route::get('/xoa/{id}',[ThongSoController::class,'xoa'])->name('xoa');
         });
     });
 });
@@ -112,6 +110,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('cap-nhat');
             Route::post('/them-moi-cap-nhat',[AdminController::class,'themMoiVaCapNhat'])->name('them-moi-cap-nhat');
             Route::post('/xoa/{id}',[AdminController::class,'xoa'])->name('xoa');
+            Route::get('/thong-tin-ca-nhan/{id}',[AdminController::class,'thongTinCaNhanQuanTriVien'])->name('thong-tin-ca-nhan');
+            Route::post('/thong-tin-ca-nhan/{id}',[AdminController::class,'capNhatThongTinCaNhanQuanTriVien'])->name('xu-ly-cap-nhat-thong-tin-ca-nhan');
         });
     });
 });
@@ -139,9 +139,12 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 //Dung Lượng
-Route::get('/dung-luong/danh-sach',[DungLuongController::class,'danhSach'])->name('dung-luong.danh-sach');
-Route::post('/dung-luong/them-moi',[DungLuongController::class,'themMoi'])->name('dung-luong.them-moi');
-Route::get('/dung-luong/cap-nhat/{id}',[DungLuongController::class,'capNhat'])->name('dung-luong.cap-nhat');
-Route::post('/dung-luong/cap-nhat',[DungLuongController::class,'xuLyCapNhat'])->name('dung-luong.xu-ly-cap-nhat');
-Route::post('/dung-luong/xoa/{id}',[DungLuongController::class,'xoa'])->name('dung-luong.xoa');
-
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('dung-luong')->group(function () {
+        Route::name('dung-luong.')->group(function () {
+            Route::get('/danh-sach',[DungLuongController::class,'danhSach'])->name('danh-sach');
+            Route::get('/cap-nhat/{id}',[DungLuongController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/them-moi-cap-nhat',[DungLuongController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+        });
+    });
+});

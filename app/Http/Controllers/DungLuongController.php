@@ -4,36 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\DungLuong;
 use Illuminate\Http\Request;
-
+use Yajra\DataTables\DataTables;
 class DungLuongController extends Controller
 {
-    //
-    public function danhSach(){
-        $lst_dluong = DungLuong::paginate(5);
-        if($ten = request()->ten)
-        {
-            $lst_dluong = DungLuong::where('ten','like','%'.$ten)->paginate(5);
+    public function danhSach(Request $request){
+        if($request->ajax()){
+            $dung_luong=DungLuong::all();
+
+            return DataTables::of($dung_luong)
+                //Thêm một cột số thứ tự cho từng bản ghi
+                ->addIndexColumn()
+                //Thêm cột action cho từng bản
+                ->addColumn('Action',function($row){
+                    $temp=
+                    '<button type="button" class="btn btn-primary btn-edit"
+                        ata-toggle="modal" data-target="#myModal" data-id="'. $row->id .'">
+                            <i class="fe fe-edit"></i>
+                    </button>';
+                    return $temp;
+                })
+                //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
+                ->rawColumns(['Action'])
+                //Tạo và trả về JSON để hiển thị trong DataTable
+                ->make(true);
         }
-        return view('san-pham.dung-luong.danh-sach', compact('lst_dluong'));
+        return view('san-pham.dung-luong.danh-sach');
     }
-    public function themMoi(Request $request){
-        $dluong = new DungLuong();
-        $dluong->ten = $request->ten;
-        $dluong->save();
-        return response()->json(['message'=>'Thêm Thành Công']);
-    }
-    
     public function capNhat($id){
-        $dluong = DungLuong::find($id);
-        
-        return $dluong;
+        $dung_luong = DungLuong::find($id);
+        return $dung_luong;
     }
-    
-    public function xuLyCapNhat(Request $request){
-        $dluong = DungLuong::find($request->id);
-        $dluong->ten = $request->ten;
-        $dluong->save();
-        return response()->json(['message'=>'Cập Nhật Thành Công']);
+    public function themMoiVaCapNhat(Request $request){
+        $dung_luong = DungLuong::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten]);
+        return response()->json(['message' => 'Thành công']);
     }
     public function xoa($id){
         $dluong = DungLuong::find($id);

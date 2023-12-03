@@ -45,7 +45,7 @@
                                             Thêm Mới
                                         </button>
                                     </div>
-                                    <!-- form tim kiem -->
+                                    {{-- <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form"
                                         style="position: relative;left: 45%;">
                                         @csrf
@@ -60,7 +60,7 @@
                                             </button>
                                         </div>
                                     </form>
-                                    <!-- ket thuc form tim kiem -->
+                                    <!-- ket thuc form tim kiem --> --}}
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
