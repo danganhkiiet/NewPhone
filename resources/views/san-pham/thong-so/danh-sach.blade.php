@@ -77,10 +77,6 @@
                                                                 title="Edit" href="{{ route('thong-so.cap-nhat',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
-                                                            <a class="btn btn-danger fs-14 text-white delete-icn"
-                                                                title="Delete" href="{{ route('thong-so.xoa',['id' => $ts->id]) }}" >
-                                                                <i class="fe fe-delete"></i>
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

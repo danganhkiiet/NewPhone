@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChiTietDienThoai;
 use App\Models\DienThoaiThongSo;
+use App\Models\HinhAnh;
 use App\Models\ThongSo;
 use App\Models\MauSac;
 use App\Models\DienThoai;
@@ -25,24 +26,38 @@ class DienThoaiController extends Controller
     }
     public function xuLyThemMoi(Request $request)
     {
+        // dd($request);
         //them dien thoai moi
         $dien_thoai = new DienThoai();
         $dien_thoai->ten = $request->ten;
         $dien_thoai->nha_san_xuat_id= $request->nha_san_xuat_id;
         $dien_thoai->save();
-
-        //duyet toan bo rq
+       
+        // thêm hình ảnh sản phẩm
+        $files = $request->hinh_anh;
+        $paths=[];
+        foreach ($files as $file){
+            $hinh_anh = new HinhAnh();
+            $hinh_anh->dien_thoai_id = $dien_thoai->id;
+            $path= $file->store('hinh_anh');
+            $hinh_anh->duong_dan=$path;
+            $paths[]=$path;
+            $hinh_anh->save();
+        }
+        //duyệt bảng để thêm
         for($i = 0; $i < count($request->thong_so_id); $i = $i +1 )
         {
             // tao chi tiet dien thoai moi
-            $chi_tiet_dien_thoai = new ChiTietDienThoai();
-            $chi_tiet_dien_thoai->dien_thoai_id = $dien_thoai->id;
-            $chi_tiet_dien_thoai->mau_sac_id = $request->mau_sac_id[$i];
-            $chi_tiet_dien_thoai->dung_luong_id = $request->dung_luong_id[$i];
-            $chi_tiet_dien_thoai->so_luong = 0;
-            $chi_tiet_dien_thoai->gia_ban = 0;
-            $chi_tiet_dien_thoai -> save();
-
+            if(!empty($request->dung_luong_id[$i]))
+            {
+                $chi_tiet_dien_thoai = new ChiTietDienThoai();
+                $chi_tiet_dien_thoai->dien_thoai_id = $dien_thoai->id;
+                $chi_tiet_dien_thoai->mau_sac_id = $request->mau_sac_id[$i];
+                $chi_tiet_dien_thoai->dung_luong_id = $request->dung_luong_id[$i];
+                $chi_tiet_dien_thoai->so_luong = 0;
+                $chi_tiet_dien_thoai->gia_ban = 0;
+                $chi_tiet_dien_thoai -> save();
+            }
             //tao dien thoai thong so
             $dien_thoai_thong_so = new DienThoaiThongSo();
             $dien_thoai_thong_so -> dien_thoai_id = $dien_thoai->id;
@@ -50,7 +65,7 @@ class DienThoaiController extends Controller
             $dien_thoai_thong_so -> gia_tri = $request->gia_tri[$i];
             $dien_thoai_thong_so -> save();
         }
-        return 'them thanh cong';
+        return redirect()->route('dien-thoai.danh-sach')->with('thong_bao','Thêm mới thành công');
     }
     /**
      * Show the form for creating a new resource.
@@ -58,7 +73,8 @@ class DienThoaiController extends Controller
     public function danhSach()
     {
         $lst_chi_tiet_dien_thoai = ChiTietDienThoai::paginate(5);
-        return view('san-pham/dien-thoai/danh-sach',compact('lst_chi_tiet_dien_thoai'));
+        $lst_dien_thoai = DienThoai::with('hinhAnh')->paginate(5);
+        return view('san-pham/dien-thoai/danh-sach',compact('lst_chi_tiet_dien_thoai','lst_dien_thoai'));
     }
 
     /**
@@ -66,10 +82,8 @@ class DienThoaiController extends Controller
      */
     public function capNhat($id)
     {
-        $chi_tiet_dien_thoai = ChiTietDienThoai::find($id);
-        $dien_thoai = DienThoai::find($chi_tiet_dien_thoai -> dien_thoai_id);
-      
-        return view('san-pham/dien-thoai/cap-nhat',compact('dien_thoai','chi_tiet_dien_thoai'));
+        $lst_chi_tiet_dien_thoai = ChiTietDienThoai::where('dien_thoai_id',$id)->get();
+        return view('san-pham/dien-thoai/cap-nhat',compact('lst_chi_tiet_dien_thoai'));
     }
     public function xuLyCapNhat(Request $request, $id)
     {
@@ -83,6 +97,24 @@ class DienThoaiController extends Controller
         $dien_thoai->save();
         $chi_tiet_dien_thoai->save();
         return ('thanh cong roi');
+    }
+
+    public function xoa(string $id)
+    {
+        $dien_thoai = DienThoai::find($id);
+        $dien_thoai->delete();
+        return redirect()->route('dien-thoai.danh-sach')->with('thong_bao','Xóa thành công');
+    }
+   
+
+    public function kiemTraTonTai(Request $request)
+    {
+        $ten = $request->ten;
+        $tontai = DienThoai::withTrashed()->where('ten', $ten)->first();
+        if ($tontai) {
+            return response()->json(['flag' => true], 200);
+        }
+        return response()->json(['flag' => false], 200);
     }
 
     /**

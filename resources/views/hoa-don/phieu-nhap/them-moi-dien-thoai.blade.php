@@ -38,6 +38,15 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label class="form-label" for="dien_thoai">Điện Thoại</label>
+                                        <select name="dien_thoai_id" class="form-control form-select" id="dien_thoai_id"
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_dien_thoai as $dienthoai)
+                                                <option value="{{ $dienthoai->id }}">{{ $dienthoai->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label" for="mau_id">Màu sắc</label>
                                         <select name="mau_sac_id" class="form-control form-select" id="mau_sac_id"
                                             data-bs-placeholder="Select Country">
@@ -52,15 +61,6 @@
                                             data-bs-placeholder="Select Country">
                                             @foreach ($lst_dung_luong as $dungluong)
                                                 <option value="{{ $dungluong->id }}">{{ $dungluong->ten }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="dien_thoai">Điện Thoại</label>
-                                        <select name="dien_thoai_id" class="form-control form-select" id="dien_thoai_id"
-                                            data-bs-placeholder="Select Country">
-                                            @foreach ($lst_dien_thoai as $dienthoai)
-                                                <option value="{{ $dienthoai->id }}">{{ $dienthoai->ten }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -167,7 +167,6 @@
 
             $("#nha_san_xuat_id").change(function() {
                 var nha_san_xuat_id = $(this).val();
-                console.log(nha_san_xuat_id);   
                 $.ajax({
                     method: "GET",
                     url: "{{ route('phieu-nhap.danh-sach-dien-thoai-theo-nha-san-xuat') }}",

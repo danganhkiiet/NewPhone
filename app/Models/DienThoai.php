@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class DienThoai extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table="dien_thoai";
 
     public function nha_san_xuat(){
@@ -24,5 +25,8 @@ class DienThoai extends Model
     }
     public function chiTietDienThoai(){
         return $this->hasMany(ChiTietDienThoai::class);
+    }
+    public function hinhAnh(){
+        return $this->hasMany(HinhAnh::class);
     }
 }

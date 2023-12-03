@@ -81,15 +81,6 @@
                                                                 data-id="{{ $dluong->id }}">
                                                                 <i class="fe fe-edit"></i>
                                                             </button>
-                                                            <form method="POST"
-                                                                action="{{ route('dung-luong.xoa', ['id' => $dluong->id]) }}">
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    class="btn btn-danger fs-14 text-white delete-icn"
-                                                                    title="Delete">
-                                                                    <i class="fe fe-delete"></i>
-                                                                </button>
-                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -168,7 +159,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "Yes,do it!"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
@@ -193,7 +184,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "Yes, update it!"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({

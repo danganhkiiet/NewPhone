@@ -59,31 +59,29 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table editable-table table-nowrap table-bordered table-edit">
+                                        <table class="table border text-nowrap text-md-nowrap table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Tên</th>
-                                                    <th>Màu sắc</th>
-                                                    <th>Dung Lượng</th>
-                                                    <th>Số lượng</th>
-                                                    <th>Giá bán</th>
+                                                    <th>Ảnh</th>
+                                                    <th>Tên điện thoại</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_chi_tiet_dien_thoai as $ts)
+                                                @foreach ($lst_dien_thoai as $ts)
                                                     <tr>
-                                                        <td>{{$ts->dienThoai->ten}}</td>
-                                                        <td>{{$ts->mauSac->ten}}</td>
-                                                        <td>{{$ts->dungLuong->ten}}</td>
-                                                        <td>{{$ts->so_luong}}</td>
-                                                        <td>{{$ts->gia_ban}}</td>
+                                                        <td>
+                                                            @if(!empty($ts->hinhAnh()->first()->duong_dan))   
+                                                            <img style="width:80px" src="{{ asset($ts->hinhAnh()->first()->duong_dan) }}"/>
+                                                            @endif
+                                                        </td>
+                                                        <td>{{$ts->ten}}</td>
                                                         <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
                                                                 title="Edit" href="{{ route('dien-thoai.cap-nhat',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
                                                             <a class="btn btn-danger fs-14 text-white delete-icn"
-                                                                title="Delete" href="#" >
+                                                                title="Delete" href="{{ route('dien-thoai.xoa',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-delete"></i>
                                                             </a>
                                                         </td>

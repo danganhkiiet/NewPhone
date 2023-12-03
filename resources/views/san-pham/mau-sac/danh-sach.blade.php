@@ -81,15 +81,6 @@
                                                                 data-id="{{ $mau->id }}">
                                                                 <i class="fe fe-edit"></i>
                                                             </button>
-                                                            <form method="POST"
-                                                                action="{{ route('mau-sac.xoa', ['id' => $mau->id]) }}">
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    class="btn btn-danger fs-14 text-white delete-icn"
-                                                                    title="Delete">
-                                                                    <i class="fe fe-delete"></i>
-                                                                </button>
-                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -119,7 +110,7 @@
                                                                     type="hidden">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="form-label" for="ten">Họ tên</label>
+                                                                <label class="form-label" for="ten">Tên màu</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
                                                             </div>
@@ -170,7 +161,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "Yes, do it!"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
@@ -199,7 +190,7 @@
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
+                        confirmButtonText: "Yes, update it!"
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({

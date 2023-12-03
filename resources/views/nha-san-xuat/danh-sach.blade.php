@@ -123,7 +123,7 @@
                                                             <div class="form-group">
                                                                 <input class="form-control" name="id" id="id"
                                                                     type="hidden" required>
-                                                                <label class="form-label" for="ten">Họ tên</label>
+                                                                <label class="form-label" for="ten">Tên Nhà Sản Xuất</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
                                                             </div>
@@ -187,7 +187,7 @@
                         // contentType: false,
                         // processData: false
                     }).done(function(res) {
-                        //location.reload();
+                        location.reload();
                         console.log(res);
                     })
                 } else if ($('#id').val() != "") {

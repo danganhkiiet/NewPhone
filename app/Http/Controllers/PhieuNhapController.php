@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Database\Seeders\PhieuNhapSeeder;
 use Illuminate\Http\Request;
 use App\Models\PhieuNhap;
@@ -31,6 +31,7 @@ class PhieuNhapController extends Controller
     public function themMoi()
     {
         $lst_nha_cung_cap = NhaCungCap::all();
+        
         return view('hoa-don/phieu-nhap/them-moi-phieu-nhap',compact('lst_nha_cung_cap'));
     }
 
@@ -47,32 +48,41 @@ class PhieuNhapController extends Controller
         $phieu_nhap->tong_tien = 0;
         $phieu_nhap->admin_id = Auth()->user()->id;
         $phieu_nhap->save();
+        Session::put('tao-hoa-don', 1);
         return redirect()->route('phieu-nhap.them-moi-dien-thoai');
     }
     public function themMoiDienThoai()
     {
-        $lst_nha_san_xuat = NhaSanXuat::all();
-        $lst_dung_luong = DungLuong::all();
-        $lst_mau_sac = MauSac::all();
-        $lst_dien_thoai = DienThoai::all();
-        return view('hoa-don/phieu-nhap/them-moi-dien-thoai',compact('lst_nha_san_xuat','lst_dung_luong','lst_mau_sac','lst_dien_thoai'));
+        if(Session::has('tao-hoa-don'))
+        {
+            $lst_nha_san_xuat = NhaSanXuat::all();
+            $lst_dung_luong = DungLuong::all();
+            $lst_mau_sac = MauSac::all();
+            $lst_dien_thoai = DienThoai::all();
+            Session::forget('tao-hoa-don');
+            return view('hoa-don/phieu-nhap/them-moi-dien-thoai',compact('lst_nha_san_xuat','lst_dung_luong','lst_mau_sac','lst_dien_thoai'));
+        }
+        else{
+            $lst_nha_cung_cap = NhaCungCap::all();
+            return view('hoa-don/phieu-nhap/them-moi-phieu-nhap',compact('lst_nha_cung_cap'));
+        }
     }
     public function xuLyThemMoiDienThoai(Request $request)
     {
-        // dd($request->dung_luong_id);
         $phieu_nhap=PhieuNhap::latest('id')->first();
-        // dd($phieu_nhap->id);
-        // dd($request);
         $tong_tien=0;
         for($i=0;$i<count($request->dien_thoai_id);$i++){
-            $chi_tiet_dien_thoai=ChiTietDienThoai::where('dien_thoai_id',$request->dien_thoai_id[$i])->where('mau_sac_id',$request->mau_sac_id[$i])->where('dung_luong_id',$request->dung_luong_id[$i])->first();
-            // dd($chi_tiet_dien_thoai);
-            // dd($request->so_luong[$i]);
-            $soluong=$request->so_luong[$i];
-            $chi_tiet_dien_thoai->so_luong=$chi_tiet_dien_thoai->so_luong+$soluong;
+
+            $chi_tiet_dien_thoai=ChiTietDienThoai::where('dien_thoai_id',$request->dien_thoai_id[$i])
+            ->where('mau_sac_id',$request->mau_sac_id[$i])
+            ->where('dung_luong_id',$request->dung_luong_id[$i])->first();
+
+            //cap nhat gia ban và số lượng của điện thoại
+            $chi_tiet_dien_thoai->so_luong = $chi_tiet_dien_thoai->so_luong + $request->so_luong[$i];
             $chi_tiet_dien_thoai->gia_ban=$request->gia_ban[$i];
             $chi_tiet_dien_thoai->save();
 
+            //tạo chi tiết phiếu nhập
             $chi_tiet_phieu_nhap=new ChiTietPhieuNhap();
             $chi_tiet_phieu_nhap->dien_thoai_id=$request->dien_thoai_id[$i];
             $chi_tiet_phieu_nhap->phieu_nhap_id=$phieu_nhap->id;
@@ -82,7 +92,6 @@ class PhieuNhapController extends Controller
             $chi_tiet_phieu_nhap->thanh_tien=$request->so_luong[$i]*$request->gia_nhap[$i];
             $tong_tien+=$chi_tiet_phieu_nhap->thanh_tien;
             $chi_tiet_phieu_nhap->save();
-            // $chi_tiet_phieu_nhap->phieu_nhap_id=$request->phieu_nhap_id;
         }
         $phieu_nhap->tong_tien=$tong_tien;
         $phieu_nhap->save();

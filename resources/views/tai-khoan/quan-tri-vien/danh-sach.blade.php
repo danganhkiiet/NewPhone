@@ -134,7 +134,7 @@
                                                                     id="so_dien_thoai" type="text" required>
                                                                 <label class="form-label" for="avatar">Avatar</label>
                                                                 <input class="form-control" name="avatar_hinh"
-                                                                    id="avatar" type="file">
+                                                                    id="avatar" type="file"/>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
