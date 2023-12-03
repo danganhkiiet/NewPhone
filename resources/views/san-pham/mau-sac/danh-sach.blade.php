@@ -40,12 +40,11 @@
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn" style="position: relative;left: 78%;">
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary btnAdd" data-toggle="modal"
-                                            data-target="#myModal">
+                                        <button type="button" class="btn btn-primary btnAdd">
                                             Thêm Mới
                                         </button>
                                     </div>
-                                    <!-- form tim kiem -->
+                                    {{-- <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form"
                                         style="position: relative;left: 45%;">
                                         @csrf
@@ -60,33 +59,22 @@
                                             </button>
                                         </div>
                                     </form>
-                                    <!-- ket thuc form tim kiem -->
+                                    <!-- ket thuc form tim kiem --> --}}
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table editable-table table-nowrap table-bordered table-edit">
+                                        <table class="table editable-table table-nowrap table-bordered table-edit"
+                                            id="myTable">
                                             <thead>
                                                 <tr>
+                                                    <th>STT</th>
                                                     <th>Tên</th>
                                                     <th>#</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_mau as $mau)
-                                                    <tr>
-                                                        <td>{{ $mau->ten }}</td>
-                                                        <td style="display: flex;">
-                                                            <button type="button" class="btn btn-primary btn-edit"
-                                                                data-toggle="modal" data-target="#myModal"
-                                                                data-id="{{ $mau->id }}">
-                                                                <i class="fe fe-edit"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
                                             </tbody>
                                         </table>
-                                        {{ $lst_mau->links() }}
                                     </div>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -94,7 +82,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Bảng Nhập</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -110,7 +98,8 @@
                                                                     type="hidden">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="form-label" for="ten">Tên màu</label>
+
+                                                                <label class="form-label" for="ten">Màu Sắc</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
                                                             </div>
@@ -142,90 +131,112 @@
 @section('js-jquery')
     <script>
         $(document).ready(function() {
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('.btnAdd').click(function() {
-                $('#myForm').trigger('reset');
-                $('#id').val(""); 
-                console.log( $('#id'));
-            })
-            $('.btnSave').click(function() {
-                if ($('#id').val() == "") {
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "You won't be able to revert this!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, do it!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                method: "POST",
-                                url: "{{ route('mau-sac.them-moi') }}",
-                                data: $('#myForm').serialize(),
+            var table = $('#myTable').DataTable({
+                ajax: {
+                    url: "{{ route('mau-sac.danh-sach') }}",
+                    type: "GET",
+                    /* cái type nó tự động tích hợp  headers: {
+                     'X-Requested-With': 'XMLHttpRequest' } để xác định có phải là ajax ko */
+                },
+                //hiển thị một biểu tượng "đang xử lý" (thường là vòng tròn quay) để thông báo cho người dùng rằng dữ liệu đang được tải hoặc xử lý.
+                processing: true,
+                //Phía máy chủ có nghĩa là nó sẽ gửi các yêu cầu đến máy chủ để lấy dữ liệu thay vì xử lý dữ liệu trên phía máy khách.
+                serverSide: true,
 
-                            }).done(function(res) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-
-                                location.reload();
-                                console.log(res);
-
-                            })
-                        }
-                    });
-                } else if ($('#id').val() != "") {
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "You won't be able to revert this!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, update it!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                method: "POST",
-                                url: "{{ route('mau-sac.xu-ly-cap-nhat') }}",
-                                data: $('#myForm').serialize(),
-                            }).done(function() {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-                                // $('#myModal').modal('hide');
-                                location.reload();
-                            })
-                        }
-                    });
-
+                columns: [{
+                        data: "DT_RowIndex", // Sử dụng "DT_RowIndex" để lấy số thứ tự
+                        name: "DT_RowIndex",
+                    },
+                    {
+                        data: "ten",
+                        name: "ten",
+                    },
+                    {
+                        data: "Action",
+                        name: "Action",
+                    },
+                ],
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "pageLength": 5,
+                "lengthMenu": [5, 10, 50, 100],
+                "language": {
+                    // "sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                    "sInfo": "",
+                    "sInfoEmpty": "Hiển thị 0 đến 0 của 0 mục",
+                    "sInfoFiltered": "(được lọc từ tổng số _MAX_ mục)",
+                    "sLengthMenu": "Hiển thị _MENU_ mục",
+                    "sSearch": "Tìm kiếm:",
+                    "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                    "oPaginate": {
+                        "sFirst": "Đầu",
+                        "sLast": "Cuối",
+                        "sNext": "Tiếp",
+                        "sPrevious": "Trước"
+                    }
+                },
+                "search": {
+                    "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
                 }
 
             })
-            $('.btn-edit').click(function() {
-                var id = $(this).data('id');
-                console.log(id);
+            $(document).on('click', '.btn-edit', function() {
+                $id = $(this).data('id');
 
-                $('#id').val(id);
+                $('#id').val($id);
                 $.ajax({
-                    method: "GET",
-                    url: "{{ route('mau-sac.cap-nhat', '') }}/" + id,
-
-                }).done(function($data) {
-                    console.log($data);
-                    $('#ten').val($data.ten);
+                    url: "{{ route('mau-sac.cap-nhat', '') }}/" + $id,
+                }).done(function(data) {
+                    console.log(data);
+                    $('#ten').val(data.ten);
+                    $('#myModal').modal('show');
                 })
+
             })
-        });
+            $('.btnSave').click(function() {
+                Swal.fire({
+                    title: "Bạn có chắc không?",
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Chắc chắn!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'POST',
+                            url: "{{ route('mau-sac.xu-ly-them-moi-cap-nhat') }}",
+                            data: $('#myForm').serialize(),
+                        }).done(function() {
+                            Swal.fire({
+                                title: "Thành công!",
+                                text: "Thực hiện chức năng thành công.",
+                                icon: "success"
+                            });
+                            //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
+                            table.draw();
+                            $('#myModal').modal('hide');
+                        })
+                    }
+                })
+
+            })
+            $(document).on('click', '.btnAdd', function() {
+                $('#myModal').modal('show');
+                $('#myForm').trigger('reset');
+                $('#id').val("");
+            })  
+        })
     </script>
 @endsection

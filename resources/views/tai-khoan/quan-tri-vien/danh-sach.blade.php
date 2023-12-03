@@ -7,11 +7,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Tài Khoản</h1>
+                        <h1 class="page-title">Quản Trị Viên</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Tài Khoản</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Quản Trị Viên</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
                         </ol>
                     </div>
@@ -40,12 +40,11 @@
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn" style="position: relative;left: 78%;">
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary btnAdd" data-toggle="modal"
-                                            data-target="#myModal">
+                                        <button type="button" class="btn btn-primary btnAdd">
                                             Thêm Mới
                                         </button>
                                     </div>
-                                    <!-- form tim kiem -->
+                                    {{-- <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form"
                                         style="position: relative;left: 45%;">
                                         @csrf
@@ -60,44 +59,26 @@
                                             </button>
                                         </div>
                                     </form>
-                                    <!-- ket thuc form tim kiem -->
+                                    <!-- ket thuc form tim kiem --> --}}
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table editable-table table-nowrap table-bordered table-edit">
+                                        <table class="table editable-table table-nowrap table-bordered table-edit"
+                                            id="myTable">
                                             <thead>
                                                 <tr>
+                                                    <th>STT</th>
                                                     <th>Họ Tên</th>
                                                     <th>Email</th>
+                                                    <th>Số điện thoại</th>
+                                                    <th>Avatar</th>
                                                     <th>Cập Nhật</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_admin as $admin)
-                                                    <tr>
-                                                        <td>{{ $admin->ho_ten }}</td>
-                                                        <td>{{ $admin->email }}</td>
-                                                        <td style="display: flex;">
-                                                            <button type="button" class="btn btn-primary btn-edit"
-                                                                data-toggle="modal" data-target="#myModal"
-                                                                data-id="{{ $admin->id }}">
-                                                                <i class="fe fe-edit"></i>
-                                                            </button>
-                                                            <form method="POST"
-                                                                action="{{ route('quan-tri-vien.xoa', ['id' => $admin->id]) }}">
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    class="btn btn-danger fs-14 text-white delete-icn"
-                                                                    title="Delete">
-                                                                    <i class="fe fe-delete"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+
                                             </tbody>
                                         </table>
-                                        {{ $lst_admin->links() }}
                                     </div>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -105,7 +86,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Quản Trị Viên</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Bảng Nhập</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -118,23 +99,46 @@
                                                             <h4 class="card-title">Nhập thông tin</h4>
                                                             <div class="form-group">
                                                                 <input class="form-control" name="id" id="id"
-                                                                    type="text" required>
-                                                                <label class="form-label" for="ten">Họ tên</label>
-                                                                <input class="form-control" name="ho_ten" id="ten"
-                                                                    type="text" required>
+                                                                    type="hidden" required>
+                                                                <label class="form-label" for="ho_ten">Họ tên</label>
+                                                                <input
+                                                                    class="form-control @error('ho_ten') is-invalid @enderror"
+                                                                    name="ho_ten" id="ho_ten" type="text" required>
+                                                                @error('ho_ten')
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
                                                                 <label class="form-label" for="email">Email</label>
-                                                                <input class="form-control" name="email" id="email"
-                                                                    type="text" required>
+                                                                <input
+                                                                    class="form-control @error('email') is-invalid @enderror"
+                                                                    name="email" id="email" type="text" required>
+                                                                @error('email')
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
                                                                 <label class="form-label" for="password">Mật khẩu</label>
-                                                                <input class="form-control" name="password"
-                                                                    id="password" type="text">
-                                                                <label class="form-label" for="so_dien_thoai">Số điện
-                                                                    thoại</label>
+                                                                <input class="form-control" name="password" id="password"
+                                                                    type="text">
+                                                                <label
+                                                                    class="form-label @error('so_dien_thoai') is-invalid @enderror"
+                                                                    for="so_dien_thoai">Số điện thoại</label>
                                                                 <input class="form-control" name="so_dien_thoai"
                                                                     id="so_dien_thoai" type="text" required>
+                                                                @error('so_dien_thoai')
+                                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                                @enderror
                                                                 <label class="form-label" for="avatar">Avatar</label>
-                                                                <input class="form-control" name="avatar_hinh"
-                                                                    id="avatar" type="file"/>
+
+                                                                <input class="form-control" name="avatar" id="avatar"
+                                                                    type="file">
+                                                                <div class="col-auto">
+                                                                    <label class="colorinput" style="display: flex">
+                                                                        <input type="checkbox" class="colorinput-input"
+                                                                            name="is_admin" id="is_admin" />
+                                                                        <span class="colorinput-color bg-teal"></span>
+                                                                        <label class="form-label" for="is_admin"
+                                                                            style="padding: 0px 0px 0px 5px;">Là
+                                                                            Admin</label>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
@@ -161,58 +165,182 @@
 @section('js-jquery')
     <script>
         $(document).ready(function() {
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            var table = $('#myTable').DataTable({
+                ajax: {
+                    url: "{{ route('quan-tri-vien.danh-sach') }}",
+                    type: "GET",
+                    /* cái type nó tự động tích hợp  headers: {
+                     'X-Requested-With': 'XMLHttpRequest' } để xác định có phải là ajax ko */
+                },
+                //hiển thị một biểu tượng "đang xử lý" (thường là vòng tròn quay) để thông báo cho người dùng rằng dữ liệu đang được tải hoặc xử lý.
+                processing: true,
+                //Phía máy chủ có nghĩa là nó sẽ gửi các yêu cầu đến máy chủ để lấy dữ liệu thay vì xử lý dữ liệu trên phía máy khách.
+                serverSide: true,
 
-            $('.btnAdd').click(function() {
-                $('#myForm').trigger('reset');
-                $('#id').val(""); 
-                // console.log($('#id').val());
-            })
-            $('.btnSave').click(function() {
-                if ($('#id').val() == "") {
-                    //Muốn Lấy Nguyên Hình dùng formdata
-                    var frm_Data = new FormData($('#myForm')[0]);
-                    $.ajax({
-                        method: "POST",
-                        url: "{{ route('quan-tri-vien.them-moi') }}",
-                        data: frm_Data,
-                        processData: false,
-                        contentType: false,
-                    }).done(function() {
-                        location.reload();
-                    })
-                } else if ($('#id').val() != "") {
-                    $.ajax({
-                        method: "POST",
-                        url: "{{ route('quan-tri-vien.xu-ly-cap-nhat') }}",
-                        data: $('#myForm').serialize(),
-                    }).done(function() {
-                        $('#myModal').modal('hide');
-                        location.reload();
-                    })
+                columns: [{
+                        data: "DT_RowIndex", // Sử dụng "DT_RowIndex" để lấy số thứ tự
+                        name: "DT_RowIndex",
+                    },
+                    {
+                        data: "ho_ten",
+                        name: "ten",
+                    },
+                    {
+                        data: "email",
+                        name: "email",
+                    },
+                    {
+                        data: "so_dien_thoai",
+                        name: "so_dien_thoai",
+                    },
+                    {
+                        data: "avatar",
+                        name: "avatar",
+                    },
+                    {
+                        data: "Action",
+                        name: "Action",
+                    },
+                ],
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "pageLength": 5,
+                "lengthMenu": [5, 10, 50, 100],
+                "language": {
+                    // "sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                    "sInfo": "",
+                    "sInfoEmpty": "Hiển thị 0 đến 0 của 0 mục",
+                    "sInfoFiltered": "(được lọc từ tổng số _MAX_ mục)",
+                    "sLengthMenu": "Hiển thị _MENU_ mục",
+                    "sSearch": "Tìm kiếm:",
+                    "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                    "oPaginate": {
+                        "sFirst": "Đầu",
+                        "sLast": "Cuối",
+                        "sNext": "Tiếp",
+                        "sPrevious": "Trước"
+                    }
+                },
+                "search": {
+                    "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
                 }
 
             })
-            $('.btn-edit').click(function() {
-                var id = $(this).data('id');
-                console.log(id);
+            $(document).on('click', '.btn-edit', function() {
+                $id = $(this).data('id');
 
-                $('#id').val(id);
+                $('#id').val($id);
                 $.ajax({
-                    method: "GET",
-                    url: "{{ route('quan-tri-vien.cap-nhat', '') }}/" + id,
+                    url: "{{ route('quan-tri-vien.cap-nhat', '') }}/" + $id,
+                }).done(function(data) {
+                    console.log(data);
+                    $('#ho_ten').val(data.ho_ten);
+                    $('#email').val(data.email);
+                    $('#so_dien_thoai').val(data.so_dien_thoai);
+                    // Gán giá trị cho checkbox
+                    if (data.is_admin) {
+                        $('#is_admin').prop('checked', true);
+                    } else {
+                        $('#is_admin').prop('checked', false);
+                    }
+                    $('#myModal').modal('show');
+                })
 
-                }).done(function($data) {
-                    console.log($data);
-                    $('#ten').val($data.ho_ten);
-                    $('#email').val($data.email);
-                    $('#so_dien_thoai').val($data.so_dien_thoai);
+            })
+            $('.btnSave').click(function() {
+                Swal.fire({
+                    title: "Bạn có chắc không?",
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Chắc chắn!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var frm_Data = new FormData($('#myForm')[0]);
+                        $.ajax({
+                            method: 'POST',
+                            url: "{{ route('quan-tri-vien.them-moi-cap-nhat') }}",
+                            data: frm_Data,
+                            processData: false,
+                            contentType: false,
+                        }).done(function() {
+                            Swal.fire({
+                                title: "Thành công!",
+                                text: "Thực hiện chức năng thành công.",
+                                icon: "success"
+                            });
+                            //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
+                            table.draw();
+                            $('#password').val("");
+                            $('#myModal').modal('hide');
+
+                        })
+                    }
+                })
+
+            })
+            $(document).on('click', '.btnAdd', function() {
+                $('#myModal').modal('show');
+                $('#myForm').trigger('reset');
+                $('#id').val("");
+            })
+            $(document).on('click', '.btn-delete', function() {
+                Swal.fire({
+                    title: "Bạn có chắc không?",
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Có, xóa nó đi!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $id = $(this).data('id');
+                        $.ajax({
+                            method: 'POST',
+                            url: "{{ route('quan-tri-vien.xoa', '') }}/" + $id,
+                        }).done(function() {
+                            Swal.fire({
+                                title: "Đã xóa!",
+                                text: "Tập tin của bạn đã bị xóa.",
+                                icon: "success"
+                            });
+                            table.draw();
+                        })
+                    }
                 })
             })
-        });
+            $(document).on('click', '#is_admin', function() {
+                Swal.fire({
+                    title: "Bạn có chắc không?",
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: "warning",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Chắc chắn!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Thành công!",
+                            text: "Thực hiện chức năng thành công.",
+                            icon: "success"
+                        });
+
+                    }
+                })
+            })
+        })
     </script>
 @endsection

@@ -4,33 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NhaSanXuat;
+use Yajra\DataTables\DataTables;
 class NhaSanXuatController extends Controller
 {
-    //
-    public function danhSach(){
-        $lst_nhasanxuat=NhaSanXuat::paginate(5);
-
-        if($ten = request()->ten)
-        {
-            $lst_nhasanxuat=NhaSanXuat::where('ten','like','%'.$ten)->paginate(5);
+    public function danhSach(Request $request){
+        //Kiểm tra xem yêu cầu hiện tại có phải là một yêu cầu Ajax không
+        if($request->ajax()){
+            $nha_san_xuat=NhaSanXuat::all();
+            //Sử dụng DataTables để xử lý và trả về dữ liệu dưới dạng JSON cho DataTable
+            return DataTables::of($nha_san_xuat)
+                //Thêm một cột số thứ tự cho từng bản ghi
+                ->addIndexColumn()
+                //Thêm cột action cho từng bản
+                ->addColumn('Action',function($row){
+                    $temp=
+                    '<button type="button" class="btn btn-primary btn-edit"
+                        ata-toggle="modal" data-target="#myModal" data-id="'. $row->id .'">
+                            <i class="fe fe-edit"></i>
+                    </button>';
+                    return $temp;
+                })
+                //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
+                ->rawColumns(['Action'])
+                //Tạo và trả về JSON để hiển thị trong DataTable
+                ->make(true);
         }
-        return view('nha-san-xuat.danh-sach',compact('lst_nhasanxuat'));
-    }
-    public function themMoi(Request $request){
-        $nha_san_xuat=NhaSanXuat::create(['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
-
-        return response()->json(['message'=>'Thêm Thành Công','data'=>NhaSanXuat::all()]);
+        return view('nha-san-xuat.danh-sach');
     }
     public function capNhat($id){
-
-        $lst_nhacungcap=NhaSanXuat::find($id);
-
-        return $lst_nhacungcap;
+        $nha_san_xuat = NhaSanXuat::find($id);
+        return $nha_san_xuat;
     }
-    public function xuLyCapNhat(Request $request){
-
-        $nha_san_xuat=NhaSanXuat::where('id',$request->id)->update(['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
-
-        return response()->json(['message'=>'Cập Nhật Thành Công']);
+    public function themMoiVaCapNhat(Request $request){
+        $nha_san_xuat = NhaSanXuat::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
+        return response()->json(['message' => 'Thành công']);
     }
 }
