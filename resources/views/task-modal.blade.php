@@ -19,7 +19,7 @@
                         <div class="m-0 wp-70 text-dark d-flex align-items-center">
                             <div class="me-2">
                                 <img alt="User Avatar" class="rounded-circle avatar-sm"
-                                    src="../assets/images/users/7.jpg">
+                                    src="/assets/images/users/7.jpg">
                             </div>
                             <div>
                                 <p class="mb-1">Daniel Obrien</p>
@@ -285,7 +285,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="me-2">
                                                     <img alt="User Avatar" class="rounded-circle avatar-md"
-                                                        src="../assets/images/users/8.jpg">
+                                                        src="/assets/images/users/8.jpg">
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1">Skyler Hilda</h6>
@@ -303,7 +303,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="me-2">
                                                     <img alt="User Avatar" class="rounded-circle avatar-md"
-                                                        src="../assets/images/users/2.jpg">
+                                                        src="/assets/images/users/2.jpg">
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1">Lisa Morgan</h6>
@@ -321,7 +321,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="me-2">
                                                     <img alt="User Avatar" class="rounded-circle avatar-md"
-                                                        src="../assets/images/users/11.jpg">
+                                                        src="/assets/images/users/11.jpg">
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1">Tyler Durder</h6>
@@ -339,7 +339,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="me-2">
                                                     <img alt="User Avatar" class="rounded-circle avatar-lg"
-                                                        src="../assets/images/users/14.jpg">
+                                                        src="/assets/images/users/14.jpg">
                                                 </div>
                                                 <div>
                                                     <h6 class="mb-1">Jorah Randy</h6>
@@ -364,7 +364,7 @@
                                     <div class="me-3">
                                         <a href="profile.html"> <img
                                                 class="media-object rounded-circle thumb-sm" alt="64x64"
-                                                src="../assets/images/users/5.jpg"> </a>
+                                                src="/assets/images/users/5.jpg"> </a>
                                     </div>
                                     <div class="media-body overflow-visible">
                                         <div class="border mb-5 p-4 br-5">
@@ -411,7 +411,7 @@
                                             <div class="me-3">
                                                 <a href="profile.html"> <img
                                                         class="media-object rounded-circle thumb-sm"
-                                                        alt="64x64" src="../assets/images/users/2.jpg">
+                                                        alt="64x64" src="/assets/images/users/2.jpg">
                                                 </a>
                                             </div>
                                             <div class="media-body border p-4 overflow-visible br-5">

@@ -10,105 +10,105 @@
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block active">
                             <span class="country-selector"><img alt="unitedstates"
-                                    src="../assets/images/flags/us_flag.jpg"
+                                    src="/assets/images/flags/us_flag.jpg"
                                     class="me-2 language"></span>United States
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="italy"
-                                    src="../assets/images/flags/italy_flag.jpg"
+                                    src="/assets/images/flags/italy_flag.jpg"
                                     class="me-2 language"></span>Italy
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="spain"
-                                    src="../assets/images/flags/spain_flag.jpg"
+                                    src="/assets/images/flags/spain_flag.jpg"
                                     class="me-2 language"></span>Spain
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="india"
-                                    src="../assets/images/flags/india_flag.jpg"
+                                    src="/assets/images/flags/india_flag.jpg"
                                     class="me-2 language"></span>India
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="french"
-                                    src="../assets/images/flags/french_flag.jpg"
+                                    src="/assets/images/flags/french_flag.jpg"
                                     class="me-2 language"></span>French
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="russia"
-                                    src="../assets/images/flags/russia_flag.jpg"
+                                    src="/assets/images/flags/russia_flag.jpg"
                                     class="me-2 language"></span>Russia
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="germany"
-                                    src="../assets/images/flags/germany_flag.jpg"
+                                    src="/assets/images/flags/germany_flag.jpg"
                                     class="me-2 language"></span>Germany
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="argentina"
-                                    src="../assets/images/flags/argentina_flag.jpg"
+                                    src="/assets/images/flags/argentina_flag.jpg"
                                     class="me-2 language"></span>Argentina
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="uae"
-                                    src="../assets/images/flags/uae_flag.jpg"
+                                    src="/assets/images/flags/uae_flag.jpg"
                                     class="me-2 language"></span>UAE
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="austria"
-                                    src="../assets/images/flags/austria_flag.jpg"
+                                    src="/assets/images/flags/austria_flag.jpg"
                                     class="me-2 language"></span>Austria
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="mexico"
-                                    src="../assets/images/flags/mexico_flag.jpg"
+                                    src="/assets/images/flags/mexico_flag.jpg"
                                     class="me-2 language"></span>Mexico
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="china"
-                                    src="../assets/images/flags/china_flag.jpg"
+                                    src="/assets/images/flags/china_flag.jpg"
                                     class="me-2 language"></span>China
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="poland"
-                                    src="../assets/images/flags/poland_flag.jpg"
+                                    src="/assets/images/flags/poland_flag.jpg"
                                     class="me-2 language"></span>Poland
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="canada"
-                                    src="../assets/images/flags/canada_flag.jpg"
+                                    src="/assets/images/flags/canada_flag.jpg"
                                     class="me-2 language"></span>Canada
                         </a>
                     </li>
                     <li class="col-lg-4 mb-2">
                         <a class="btn btn-country btn-lg btn-block">
                             <span class="country-selector"><img alt="malaysia"
-                                    src="../assets/images/flags/malaysia_flag.jpg"
+                                    src="/assets/images/flags/malaysia_flag.jpg"
                                     class="me-2 language"></span>Malaysia
                         </a>
                     </li>

@@ -9,6 +9,7 @@ class DungLuong extends Model
 {
     use HasFactory;
     protected $table='dung_luong';
+    protected $fillable=['ten'];
     public function chiTietDienThoai(){
         return $this->hasMany(ChiTietDienThoai::class);
     }

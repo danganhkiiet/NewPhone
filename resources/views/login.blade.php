@@ -42,7 +42,7 @@
 				    <!-- CONTAINER OPEN -->
 					<div class="col col-login mx-auto text-center">
 						<a href="index.html" class="text-center">
-							<img src="../assets/images/brand/logo.png" class="header-brand-img" alt="">
+							<img src="../assets/images/brand/test_logo.png" class="header-brand-img" alt="">
 						</a>
 					</div>
 					<div class="container-login100">
@@ -68,7 +68,7 @@
 										</span>
 									</div>
 									<div class="text-end pt-1">
-										<p class="mb-0"><a href="forgot-password.html" class="text-primary ms-1">Forgot Password?</a></p>
+										<p class="mb-0"><a href="{{route('admin.quen-mat-khau')}}" class="text-primary ms-1">Forgot Password?</a></p>
 									</div>
 									<div class="container-login100-form-btn">
 										<button type="submit" class="login100-form-btn btn-primary">

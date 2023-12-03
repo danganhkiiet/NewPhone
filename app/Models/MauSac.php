@@ -10,6 +10,7 @@ class MauSac extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table='mau_sac';
+    public $fillable=['ten'];
     public function chiTietDienThoai(){
         return $this->hasMany(ChiTietDienThoai::class);
     }

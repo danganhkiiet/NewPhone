@@ -12,7 +12,7 @@ class Admin extends Authenticatable
     use HasFactory;
     use SoftDeletes;
     protected $table="admin";
-    protected $fillable=['ho_ten','email','password','so_dien_thoai','avatar'];
+    protected $fillable=['ho_ten','email','password','so_dien_thoai','avatar','is_admin'];
     public function phieuNhap()
     {
         return $this->hasMany(PhieuNhap::class);
