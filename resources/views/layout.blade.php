@@ -17,7 +17,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico" />
 
     <!-- TITLE -->
-    <title>Noa – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>Quản Trị NewPhone</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="{{ asset('./assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -29,7 +29,6 @@
     <!--- FONT-ICONS CSS -->
     <link href="{{ asset('./assets/css/icons.css') }}" rel="stylesheet" />
 
-    <link href="https://cdn.datatables.net/v/dt/dt-1.13.5/datatables.min.css" rel="stylesheet">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 </head>
 
@@ -135,8 +134,13 @@
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- INTERNAL Summernote Editor js -->
+    <script src="/assets/plugins/summernote-editor/summernote1.js"></script>
+    <script src="/assets/js/summernote.js"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     @yield('js-jquery')
 
 </body>

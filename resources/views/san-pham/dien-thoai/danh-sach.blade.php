@@ -40,7 +40,7 @@
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
                                     <div class="btn"  style="position: relative;left: 78%;">
-                                        <a href="{{ route('thong-so.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
+                                        <a href="{{ route('dien-thoai.them-moi') }}" class="btn btn-primary-light ">Thêm mới</a>
                                     </div>
                                     <!-- form tim kiem -->
                                     <form action="" class="form-inline" role="form" style="position: relative;left: 45%;">
@@ -79,7 +79,7 @@
                                                         <td>{{$ts->gia_ban}}</td>
                                                         <td>
                                                             <a class="btn btn-primary fs-14 text-white edit-icn"
-                                                                title="Edit" href="{{ route('dien-thoai.cap-nhat',['id' => $ts->dien_thoai_id]) }}" >
+                                                                title="Edit" href="{{ route('dien-thoai.cap-nhat',['id' => $ts->id]) }}" >
                                                                 <i class="fe fe-edit"></i>
                                                             </a>
                                                             <a class="btn btn-danger fs-14 text-white delete-icn"
