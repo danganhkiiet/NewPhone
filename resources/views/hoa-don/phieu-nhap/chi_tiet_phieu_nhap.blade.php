@@ -60,9 +60,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table editable-table table-nowrap table-bordered table-edit">
+                                        <table id="myTable" class="table editable-table table-nowrap table-bordered table-edit">
                                             <thead>
                                                 <tr>
+                                                    <th>STT</th>
                                                     <th>Điện thoại</th>
                                                     <th>Số lượng</th>
                                                     <th>Giá nhập</th>
@@ -71,18 +72,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_chi_tiet_phieu_nhap as $ctpn)
-                                                    <tr>
-                                                        <td>{{ $ctpn->dienThoai->ten }}</td>
-                                                        <td>{{ $ctpn->so_luong }}</td>
-                                                        <td>{{ $ctpn->gia_nhap }}</td>
-                                                        <td>{{ $ctpn->gia_ban }}</td>
-                                                        <td>{{ $ctpn->thanh_tien }}</td>
-                                                    </tr>
-                                                @endforeach
+
                                             </tbody>
                                         </table>
-                                        {{ $lst_chi_tiet_phieu_nhap->links() }}
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -93,4 +86,80 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js-jquery')
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // Lấy ID từ localStorage
+            var id = localStorage.getItem('ID_phieu_nhap');
+            //tạo chuỗi urlchi_tiet_
+            var url = "{{ route('phieu-nhap.xem-chi-tiet', ['id' => ':id']) }}";
+            //thay thế :id bằng biến id lấy từ local
+            url = url.replace(':id', id);
+            var table = $('#myTable').DataTable({
+                ajax: {
+                    url: url
+                },
+                processing:true,
+                serverSide:true,
+                columns:[
+                    {
+                        data: "DT_RowIndex",
+                        name:"DT_RowIndex",
+                    },
+                    {
+                        data: "dien_thoai",
+                        name:"dien_thoai",
+                    },
+                    {
+                        data: "so_luong",
+                        name:"so_luong",
+                    },
+                    {
+                        data: "gia_nhap",
+                        name:"gia_nhap",
+                    },
+                    {
+                        data: "gia_ban",
+                        name:"gia_ban",
+                    },
+                    {
+                        data: "thanh_tien",
+                        name: "thanh_tien",
+                    },
+                ],
+                "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "pageLength": 5,
+                    "lengthMenu": [5, 10, 50, 100],
+                    "language": {
+                        // "sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                        "sInfo": "",
+                        "sInfoEmpty": "Hiển thị 0 đến 0 của 0 mục",
+                        "sInfoFiltered": "(được lọc từ tổng số _MAX_ mục)",
+                        "sLengthMenu": "Hiển thị _MENU_ mục",
+                        "sSearch": "Tìm kiếm:",
+                        "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                        "oPaginate": {
+                            "sFirst": "Đầu",
+                            "sLast": "Cuối",
+                            "sNext": "Tiếp",
+                            "sPrevious": "Trước"
+                        }
+                    },
+                    "search": {
+                        "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
+                    },
+            })
+        });
+    </script>
 @endsection

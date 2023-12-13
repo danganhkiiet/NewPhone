@@ -126,6 +126,7 @@
 
                                                                 </div>
                                                                 <label class="form-label" for="avatar">Avatar</label>
+
                                                                 <input class="form-control" name="avatar" id="avatar"
                                                                     type="file">
                                                                 <div class="invalid-feedback avatar_error">

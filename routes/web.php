@@ -25,11 +25,18 @@ use App\Http\Controllers\GuiMailController;
 Route::middleware(['auth'])->group(function () {
     Route::prefix('dien-thoai')->group(function () {
         Route::name('dien-thoai.')->group(function () {
-            Route::get('/danh-sach', [DienThoaiController::class, 'danHSach'])->name('danh-sach');
+            Route::get('/danh-sach', [DienThoaiController::class, 'danhSach'])->name('danh-sach');
+            Route::get('/danh-sach-da-xoa', [DienThoaiController::class, 'danhSachDaXoa'])->name('danh-sach-da-xoa');
+            Route::get('/chi-tiet/{id}', [DienThoaiController::class, 'chiTietDienThoai'])->name('xem-chi-tiet');
             Route::get('/them-moi', [DienThoaiController::class, 'themMoi'])->name('them-moi');
             Route::post('/them-moi', [DienThoaiController::class, 'xuLyThemMoi'])->name('xu-ly-them-moi');
             Route::get('/cap-nhat{id}', [DienThoaiController::class, 'capNhat'])->name('cap-nhat');
             Route::post('/cap-nhat{id}', [DienThoaiController::class, 'xuLyCapNhat'])->name('xu-ly-cap-nhat');
+            Route::get('/kiem-tra-ton-tai', [DienThoaiController::class, 'kiemTraTonTai'])->name('kiem-tra-ton-tai');
+            Route::POST('/xoa/{id}', [DienThoaiController::class, 'xoa'])->name('xoa');
+            Route::POST('/restore/{id}', [DienThoaiController::class, 'restore'])->name('restore');
+
+            Route::get('/them-hinh-anh', [DienThoaiController::class, 'themHinhAnh'])->name('them-hinh-anh');
         });
     });
 });
@@ -43,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('phieu-nhap')->group(function () {
         Route::name('phieu-nhap.')->group(function () {
             Route::get('/danh-sach',[PhieuNhapController::class,'danhSach'])->name('danh-sach');
-            Route::get('/xem-chi-tiet{id}',[PhieuNhapController::class,'chiTietPhieuNhap'])->name('xem-chi-tiet');
+            Route::get('/xem-chi-tiet/{id}',[PhieuNhapController::class,'chiTietPhieuNhap'])->name('xem-chi-tiet');
             Route::get('/them-moi-phieu-nhap',[PhieuNhapController::class,'themMoi'])->name('them-moi-phieu-nhap');
             Route::post('/them-moi-phieu-nhap',[PhieuNhapController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
             Route::get('/them-moi-dien-thoai',[PhieuNhapController::class,'themMoiDienThoai'])->name('them-moi-dien-thoai');

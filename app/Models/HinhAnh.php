@@ -9,4 +9,7 @@ class HinhAnh extends Model
 {
     use HasFactory;
     protected $table="hinh_anh";
+    public function dienThoai(){
+        return $this->belongsTo(DienThoai::class);
+    }
 }

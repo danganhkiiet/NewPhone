@@ -44,22 +44,6 @@
                                             Thêm Mới
                                         </button>
                                     </div>
-                                    {{-- <!-- form tim kiem -->
-                                    <form action="" class="form-inline" role="form"
-                                        style="position: relative;left: 45%;">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="ten"
-                                                placeholder="Nhập tên bạn muốn tìm" />
-                                            <button type="submit">
-                                                <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit"
-                                                    href="#">
-                                                    <i class="fe fe-search"></i>
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <!-- ket thuc form tim kiem --> --}}
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -73,7 +57,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -99,6 +82,7 @@
                                                                     type="hidden">
                                                             </div>
                                                             <div class="form-group">
+
                                                                 <label class="form-label" for="ten">Màu Sắc</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
@@ -131,95 +115,6 @@
         </div>
     </div>
 @endsection
-{{-- @section('js-jquery')
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $('.btnAdd').click(function() {
-                $('#myForm').trigger('reset');
-                $('#id').val(""); 
-                console.log( $('#id'));
-            })
-            $('.btnSave').click(function() {
-                if ($('#id').val() == "") {
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "You won't be able to revert this!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                method: "POST",
-                                url: "{{ route('mau-sac.them-moi') }}",
-                                data: $('#myForm').serialize(),
-                            }).done(function(res) {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-
-                                location.reload();
-                                console.log(res);
-
-                            })
-                        }
-                    });
-                } else if ($('#id').val() != "") {
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "You won't be able to revert this!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                method: "POST",
-                                url: "{{ route('mau-sac.xu-ly-cap-nhat') }}",
-                                data: $('#myForm').serialize(),
-                            }).done(function() {
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-                                // $('#myModal').modal('hide');
-                                location.reload();
-                            })
-                        }
-                    });
-
-                }
-
-            })
-            $('.btn-edit').click(function() {
-                var id = $(this).data('id');
-                console.log(id);
-
-                $('#id').val(id);
-                $.ajax({
-                    method: "GET",
-                    url: "{{ route('mau-sac.cap-nhat', '') }}/" + id,
-
-                }).done(function($data) {
-                    console.log($data);
-                    $('#ten').val($data.ten);
-                })
-            })
-        });
-    </script>
-@endsection --}}
 @section('js-jquery')
     <script>
         $(document).ready(function() {
