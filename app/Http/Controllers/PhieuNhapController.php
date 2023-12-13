@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
+use Yajra\DataTables\DataTables;
 use Database\Seeders\PhieuNhapSeeder;
 use Illuminate\Http\Request;
 use App\Models\PhieuNhap;
@@ -17,16 +18,50 @@ class PhieuNhapController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function danhSach()
+    public function danhSach(Request $request)
     {
-        $lst_phieu_nhap = PhieuNhap::paginate(5);
-        return view('hoa-don/phieu-nhap/danh-sach',compact('lst_phieu_nhap'));
+        
+        if($request->ajax())
+        {
+            $lst_phieu_nhap = PhieuNhap::all();
+            return DataTables::of($lst_phieu_nhap)
+                ->addIndexColumn()
+                ->addColumn('Admin', function($row) {
+                    return $row->Admin->ho_ten; 
+                })
+                ->addColumn('nhaCungCap', function($row) {
+                    return $row->nhaCungCap->ten;
+                })
+                ->addColumn('Action',function($row){
+                    $col = '
+                    <a target="_blank" href="'.route('phieu-nhap.xem-chi-tiet', ['id' => $row->id]).'">
+                        <button type="button" class="btn btn-primary btn-edit"  >
+                            <i class="fe fe-info"></i>
+                        </button>
+                    </a>';
+                return $col;
+                })
+                ->rawColumns(['Action'])
+                ->make(true);
+        }
+        return view('hoa-don/phieu-nhap/danh-sach');
     }
-    public function chiTietPhieuNhap($id)
+    public function chiTietPhieuNhap($id, Request $request)
     {
-        $lst_chi_tiet_phieu_nhap = ChiTietPhieuNhap::where('phieu_nhap_id', $id)->paginate(5);
+        if($request->ajax())
+        {
+            $lst_chi_tiet_phieu_nhap = ChiTietPhieuNhap::where('phieu_nhap_id', $id)->get();
+            return DataTables::of($lst_chi_tiet_phieu_nhap)
+                ->addIndexColumn()
+                ->addColumn('dien_thoai', function($row) {
+                    return $row->dienThoai->ten; 
+                })
+                ->make(true);
+        }
+        return view('hoa-don/phieu-nhap/chi_tiet_phieu_nhap');
+        
 
-        return view('hoa-don/phieu-nhap/chi_tiet_phieu_nhap',compact('lst_chi_tiet_phieu_nhap'));
+        
     }
     public function themMoi()
     {

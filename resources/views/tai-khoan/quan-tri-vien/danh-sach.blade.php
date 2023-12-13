@@ -189,7 +189,7 @@
                     },
                     {
                         data: "ho_ten",
-                        name: "ten",
+                        name: "ho_ten",
                     },
                     {
                         data: "email",

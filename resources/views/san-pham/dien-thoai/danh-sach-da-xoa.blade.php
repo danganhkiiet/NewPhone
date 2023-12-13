@@ -7,28 +7,30 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Chi tiết phiếu nhập hàng</h1>
+                        <h1 class="page-title">Điện Thoại Đã Xóa</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('phieu-nhap.danh-sach') }}">Phiếu Nhập Hàng</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Chi Tiết Nhập Hàng</li>
+                            <li class="breadcrumb-item"><a href="#">Điện Thoại</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dien-thoai.danh-sach') }}">Danh Sách</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Điện Thoại Đã Xóa </li>
                         </ol>
                     </div>
                 </div>
                 <!-- PAGE-HEADER END -->
+
                 <!-- Thong bao -->
-                @if (session('thong_bao'))
-                    <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
-                        <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
-                            <span class="alert-inner--icon me-2"><i class="fe fe-thumbs-up"></i></span>
-                            <strong>Thành công</strong>
-                        </p>
-                        <p class="py-3 px-5"> {{ session('thong_bao') }}</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
+                @if(session('thong_bao'))
+                <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
+                    <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
+                        <span class="alert-inner--icon me-2"><i class="fe fe-thumbs-up"></i></span>
+                        <strong>Thành công</strong>
+                    </p>
+                    <p class="py-3 px-5"> {{session('thong_bao')}}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
                 @endif
                 <!-- ket thuc thong bao -->
                 <!-- Row -->
@@ -38,45 +40,24 @@
                             <div class="card">
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
-                                    <div class="btn" style="position: relative;left: 78%;">
-                                        <a href="{{ route('phieu-nhap.them-moi-phieu-nhap') }}" class="btn btn-primary-light ">Thêm mới</a>
-                                    </div>
-                                    <!-- form tim kiem -->
-                                    <form action="" class="form-inline" role="form"
-                                        style="position: relative;left: 45%;">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="ten"
-                                                placeholder="Nhập tên bạn muốn tìm" />
-                                            <button type="submit">
-                                                <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit"
-                                                    href="#">
-                                                    <i class="fe fe-search"></i>
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <!-- ket thuc form tim kiem -->
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="myTable" class="table editable-table table-nowrap table-bordered table-edit">
+                                        <table id="myTable" class="table border text-nowrap text-md-nowrap table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>STT</th>
-                                                    <th>Điện thoại</th>
-                                                    <th>Số lượng</th>
-                                                    <th>Giá nhập</th>
-                                                    <th>Giá bán</th>
-                                                    <th>Thành tiền</th>
+                                                    <th>Tên điện thoại</th>
+                                                    <th>Thương Hiệu</th>
+                                                    <th>#</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                             </tbody>
                                         </table>
-                                       
+                                        
                                     </div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -95,15 +76,10 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            // Lấy ID từ localStorage
-            var id = localStorage.getItem('ID_phieu_nhap');
-            //tạo chuỗi urlchi_tiet_
-            var url = "{{ route('phieu-nhap.xem-chi-tiet', ['id' => ':id']) }}";
-            //thay thế :id bằng biến id lấy từ local
-            url = url.replace(':id', id);
             var table = $('#myTable').DataTable({
                 ajax: {
-                    url: url
+                    url: "{{route('dien-thoai.danh-sach-da-xoa')}}",
+                    type:"GET"
                 },
                 processing:true,
                 serverSide:true,
@@ -113,24 +89,16 @@
                         name:"DT_RowIndex",
                     },
                     {
-                        data: "dien_thoai",
-                        name:"dien_thoai",
+                        data: "ten",
+                        name:"ten",
                     },
                     {
-                        data: "so_luong",
-                        name:"so_luong",
+                        data: "nha_san_xuat_id",
+                        name:"nha_san_xuat_id",
                     },
                     {
-                        data: "gia_nhap",
-                        name:"gia_nhap",
-                    },
-                    {
-                        data: "gia_ban",
-                        name:"gia_ban",
-                    },
-                    {
-                        data: "thanh_tien",
-                        name: "thanh_tien",
+                        data: "Action",
+                        name: "Action",
                     },
                 ],
                 "paging": true,
@@ -160,6 +128,42 @@
                         "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
                     },
             })
+            //Bắt sự kiện khi một hàng được chọn trong DataTables
+            $('#myTable tbody').on('click', 'tr', function () {
+                var data = table.row(this).data();
+                var id = data['id']; // Giả sử ID của hàng được lưu trong cột 'id'
+                
+                // Lưu ID vào localStorage
+                localStorage.setItem('ID_dien_thoai-da-xoa', id);
+            });
+            $(document).on('click', '.btn-restore', function() {
+                
+                Swal.fire({
+                    title: "Bạn có chắc không?",
+                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Có, khôi phục nó đi!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $id = $(this).data('id');
+                        $.ajax({
+                            method: 'POST',
+                            url: "{{ route('dien-thoai.restore', '') }}/" + $id,
+                        }).done(function() {
+                            Swal.fire({
+                                title: "Đã khôi phục!",
+                                text: "Tập tin của bạn đã được khôi phục.",
+                                icon: "success"
+                            });
+                            table.draw();
+                        })
+                    }
+                })
+            });
         });
+
     </script>
 @endsection

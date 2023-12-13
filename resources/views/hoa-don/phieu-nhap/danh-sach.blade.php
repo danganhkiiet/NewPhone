@@ -42,57 +42,29 @@
                                         <a href="{{ route('phieu-nhap.them-moi-phieu-nhap') }}" class="btn btn-primary-light ">Thêm
                                             mới</a>
                                     </div>
-                                    <!-- form tim kiem -->
-                                    <form action="" class="form-inline" role="form"
-                                        style="position: relative;left: 45%;">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="ten"
-                                                placeholder="Nhập tên bạn muốn tìm" />
-                                            <button type="submit">
-                                                <a class="btn btn-primary fs-14 text-white edit-icn" title="Edit"
-                                                    href="#">
-                                                    <i class="fe fe-search"></i>
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <!-- ket thuc form tim kiem -->
+                                    <div class="btn" style="position: relative;left: 78%;">
+                                        <a href="{{ route('phieu-nhap.them-moi-phieu-nhap') }}" class="btn btn-primary-light ">Các sản phẩm đã xóa
+                                            </a>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table editable-table table-nowrap table-bordered table-edit">
+                                        <table id="myTable" class="table editable-table table-nowrap table-bordered table-edit">
                                             <thead>
                                                 <tr>
+                                                    <th>STT</th>
                                                     <th>Người tạo</th>
                                                     <th>Thông tin nhân viên giao hàng</th>
                                                     <th>Nhà cung cấp</th>
                                                     <th>Tổng tiền</th>
                                                     <th>Ngày nhập hàng</th>
+                                                    <th>#</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($lst_phieu_nhap as $pn)
-                                                    <tr>
-                                                        <td>{{ $pn->Admin->ho_ten }}</td>
-                                                        <td>{{ $pn->thong_tin_nguoi_giao }}</td>
-                                                        <td>{{ $pn->nhaCungCap->ten }}</td>
-                                                        <td>{{ $pn->tong_tien }}</td>
-                                                        <td>{{ $pn->ngay_nhap_hang }}</td>
-                                                        <td>
-                                                            <form method="GET" action="{{ route('phieu-nhap.xem-chi-tiet',['id'=>$pn->id]) }}">
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-warning fs-14 text-white delete-icn"
-                                                                    title="Xem chi tiết">
-                                                                    <i class="fe fe-info"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                            
                                             </tbody>
                                         </table>
-                                        {{ $lst_phieu_nhap->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -103,4 +75,87 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js-jquery')
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var table = $('#myTable').DataTable({
+                ajax: {
+                    url: "{{route('phieu-nhap.danh-sach')}}"
+                },
+                processing:true,
+                serverSide:true,
+                columns:[
+                    {
+                        data: "DT_RowIndex",
+                        name:"DT_RowIndex",
+                    },
+                    {
+                        data: "Admin",
+                        name:"Admin",
+                    },
+                    {
+                        data: "thong_tin_nguoi_giao",
+                        name:"thong_tin_nguoi_giao",
+                    },
+                    {
+                        data: "nhaCungCap",
+                        name:"nhaCungCap",
+                    },
+                    {
+                        data: "tong_tien",
+                        name:"tong_tien",
+                    },
+                    {
+                        data: "ngay_nhap_hang",
+                        name:"ngay_nhap_hang",
+                    },
+                    {
+                        data: "Action",
+                        name: "Action",
+                    },
+                ],
+                "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "pageLength": 5,
+                    "lengthMenu": [5, 10, 50, 100],
+                    "language": {
+                        // "sInfo": "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
+                        "sInfo": "",
+                        "sInfoEmpty": "Hiển thị 0 đến 0 của 0 mục",
+                        "sInfoFiltered": "(được lọc từ tổng số _MAX_ mục)",
+                        "sLengthMenu": "Hiển thị _MENU_ mục",
+                        "sSearch": "Tìm kiếm:",
+                        "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                        "oPaginate": {
+                            "sFirst": "Đầu",
+                            "sLast": "Cuối",
+                            "sNext": "Tiếp",
+                            "sPrevious": "Trước"
+                        }
+                    },
+                    "search": {
+                        "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
+                    },
+            })
+            // Bắt sự kiện khi một hàng được chọn trong DataTables
+            $('#myTable tbody').on('click', 'tr', function () {
+                var data = table.row(this).data();
+                var id = data['id']; // Giả sử ID của hàng được lưu trong cột 'id'
+                
+                // Lưu ID vào localStorage
+                localStorage.setItem('ID_phieu_nhap', id);
+            });
+        });
+
+    </script>
 @endsection
