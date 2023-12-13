@@ -33,15 +33,21 @@
                                                 <h4 class="card-title">Thông tin phiếu nhập</h4>
                                                 <div class="form-group">
                                                     <label class="form-label" for="thong_tin_nguoi_giao">Thông tin người giao</label>
-                                                    <input class="form-control"  name="thong_tin_nguoi_giao" id="thong_tin_nguoi_giao" type="text" required>
+                                                    <input class="form-control @error('thong_tin_nguoi_giao') is-invalid @enderror"  name="thong_tin_nguoi_giao" id="thong_tin_nguoi_giao" type="text" required>
+                                                    @error('thong_tin_nguoi_giao')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
 													<label class="form-label" for="nha_cung_cap_id">Nhà cung cấp</label>
-													<select name="nha_cung_cap_id" class="form-control form-select" value="1" id="nha_cung_cap_id" data-bs-placeholder="Select Country">
+													<select name="nha_cung_cap_id" class="form-control form-select  @error('nha_cung_cap_id') is-invalid @enderror" value="1" id="nha_cung_cap_id" data-bs-placeholder="Select Country">
 														@foreach($lst_nha_cung_cap as $ncc)
                                                         <option value="{{$ncc->id}}">{{$ncc->ten}}</option>
                                                         @endforeach
 													</select>
+                                                    @error('nha_cung_cap_id')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
 												</div>
                                                 <div class="form-group">
 													<div class="example">
@@ -50,8 +56,11 @@
 															<div class="input-group-text bg-primary-transparent text-primary">
 																<i class="fe fe-calendar text-20"></i>
 															</div>
-															<input required  class="form-control" id="ngay_nhap_hang" name="ngay_nhap_hang" type="date">
+															<input required  class="form-control  @error('ngay_nhap_hang') is-invalid @enderror" id="ngay_nhap_hang" name="ngay_nhap_hang" type="date">
 														</div>
+                                                        @error('ngay_nhap_hang')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
 													</div>
                                                 </div>
                                                 <button class="btn btn-primary btn-block" type="submit">Tạo hóa đơn mới</button>

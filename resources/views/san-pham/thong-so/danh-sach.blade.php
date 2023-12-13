@@ -87,7 +87,7 @@
                                                     <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
+                                                        <span aria-hidden="true" id="btn-closeX">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
@@ -104,13 +104,16 @@
                                                                     Số</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
+                                                                <div class="invalid-feedback ten_error">
+
+                                                                </div>
                                                             </div>
 
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
+                                                    <button type="button" class="btn btn-secondary" id="btn-close"
                                                         data-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary btn-add btnSave">Save
                                                         changes</button>
@@ -316,7 +319,16 @@
                             });
                             //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
                             table.draw();
+                            $("#myForm").removeClass('was-validated');
                             $('#myModal').modal('hide');
+                        }).fail(function(response) {
+                            errors = response.responseJSON.errors;
+
+                            console.log(errors);
+                            $("#myForm").addClass('was-validated');
+                            $.each(errors, function(key, value) {
+                                $('.' + key + '_error').text(value[0]);
+                            })
                         })
                     }
                 })
@@ -326,7 +338,7 @@
                 $('#myModal').modal('show');
                 $('#myForm').trigger('reset');
                 $('#id').val("");
-            })  
+            })
             $(document).on('click', '.btn-delete', function() {
                 Swal.fire({
                     title: "Bạn có chắc không?",
@@ -351,6 +363,15 @@
                         })
                     }
                 })
+            })
+            $('#btn-close').click(function() {
+                $("#myForm").removeClass('was-validated');
+                $('#myModal').modal('hide');
+
+            })
+            $('#btn-closeX').click(function() {
+                $("#myForm").removeClass('was-validated');
+                $('#myModal').modal('hide');
             })
         })
     </script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ThongSo;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\MauSacDungLuongThongSoRequest;
 class ThongSoController extends Controller
 {
     public function danhSach(Request $request){
@@ -40,7 +41,7 @@ class ThongSoController extends Controller
         $thong_so = ThongSo::find($id);
         return $thong_so;
     }
-    public function themMoiVaCapNhat(Request $request){
+    public function themMoiVaCapNhat(MauSacDungLuongThongSoRequest $request){
         $thong_so = ThongSo::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten]);
         return response()->json(['message' => 'Thành công']);
     }

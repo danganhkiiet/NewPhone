@@ -25,4 +25,7 @@ class DienThoai extends Model
     public function chiTietDienThoai(){
         return $this->hasMany(ChiTietDienThoai::class);
     }
+    public function hinhAnh(){
+        return $this->hasMany(HinhAnh::class);
+    }
 }

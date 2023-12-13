@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NhaSanXuat;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\NhaSanXuatRequest;
 class NhaSanXuatController extends Controller
 {
     public function danhSach(Request $request){
@@ -35,7 +36,8 @@ class NhaSanXuatController extends Controller
         $nha_san_xuat = NhaSanXuat::find($id);
         return $nha_san_xuat;
     }
-    public function themMoiVaCapNhat(Request $request){
+    public function themMoiVaCapNhat(NhaSanXuatRequest $request){
+        
         $nha_san_xuat = NhaSanXuat::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
         return response()->json(['message' => 'Thành công']);
     }
