@@ -72,7 +72,7 @@
                                                     <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
+                                                        <span aria-hidden="true" id="btn-closeX">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
@@ -86,16 +86,25 @@
                                                                 <label class="form-label" for="ten">Họ tên</label>
                                                                 <input class="form-control" name="ten" id="ten"
                                                                     type="text" required>
+                                                                <div class="invalid-feedback ten_error">
+
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label" for="dia_chi">Địa chỉ</label>
                                                                 <input class="form-control" name="dia_chi" id="dia_chi"
                                                                     type="text" required>
+                                                                <div class="invalid-feedback dia_chi_error">
+
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label" for="Email">Email</label>
                                                                 <input class="form-control" name="email" id="Email"
                                                                     type="email" required>
+                                                                <div class="invalid-feedback email_error">
+
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label" for="so_dien_thoai">Số điện
@@ -103,10 +112,13 @@
                                                                 <input class="form-control" name="so_dien_thoai"
                                                                     pattern="[0-9]{10}" id="so_dien_thoai" type="tel"
                                                                     required>
+                                                                <div class="invalid-feedback so_dien_thoai_error">
+
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
+                                                                    id="btn-close" data-dismiss="modal">Close</button>
                                                                 <button type="button"
                                                                     class="btn btn-primary btn-add btnSave">Save
                                                                     changes</button>
@@ -242,7 +254,19 @@
                             });
                             //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
                             table.draw();
+                            $("#myForm").removeClass('was-validated');
                             $('#myModal').modal('hide');
+                        }).fail(function(response) {
+                            errors = response.responseJSON.errors;
+                            console.log(errors);
+
+                            $("#myForm").addClass('was-validated');
+                            $.each(errors, function(key, value) {
+                                $('.' + key + "_error").text(value[0]);
+                                $('.' + key + "_error").text(value[1]);
+                                $('.' + key + "_error").text(value[2]);
+                                $('.' + key + "_error").text(value[3]);
+                            })
                         })
                     }
                 })
@@ -252,6 +276,15 @@
                 $('#myModal').modal('show');
                 $('#myForm').trigger('reset');
                 $('#id').val("");
+            })
+            $('#btn-close').click(function() {
+                $("#myForm").removeClass('was-validated');
+                $('#myModal').modal('hide');
+
+            })
+            $('#btn-closeX').click(function() {
+                $("#myForm").removeClass('was-validated');
+                $('#myModal').modal('hide');
             })
         })
     </script>

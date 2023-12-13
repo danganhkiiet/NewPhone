@@ -89,7 +89,7 @@
                                                     <h5 class="modal-title" id="exampleModalLabel">Bảng Nhập</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
+                                                        <span aria-hidden="true" id="btn-closeX">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
@@ -101,34 +101,37 @@
                                                                 <input class="form-control" name="id" id="id"
                                                                     type="hidden" required>
                                                                 <label class="form-label" for="ho_ten">Họ tên</label>
-                                                                <input
-                                                                    class="form-control @error('ho_ten') is-invalid @enderror"
-                                                                    name="ho_ten" id="ho_ten" type="text" required>
-                                                                @error('ho_ten')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror
+                                                                <input class="form-control" name="ho_ten" id="ho_ten"
+                                                                    type="text" required>
+                                                                <div class="invalid-feedback ho_ten_error">
+
+                                                                </div>
                                                                 <label class="form-label" for="email">Email</label>
-                                                                <input
-                                                                    class="form-control @error('email') is-invalid @enderror"
-                                                                    name="email" id="email" type="text" required>
-                                                                @error('email')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror
+                                                                <input class="form-control" name="email" id="email"
+                                                                    type="email" required>
+                                                                <div class="invalid-feedback email_error">
+
+                                                                </div>
+                                                                <label class="form-label" for="so_dien_thoai">Số điện
+                                                                    thoại</label>
+                                                                <input class="form-control" name="so_dien_thoai"
+                                                                    id="so_dien_thoai" type="tel" required>
+                                                                <div class="invalid-feedback so_dien_thoai_error">
+
+                                                                </div>
                                                                 <label class="form-label" for="password">Mật khẩu</label>
                                                                 <input class="form-control" name="password" id="password"
-                                                                    type="text">
-                                                                <label
-                                                                    class="form-label @error('so_dien_thoai') is-invalid @enderror"
-                                                                    for="so_dien_thoai">Số điện thoại</label>
-                                                                <input class="form-control" name="so_dien_thoai"
-                                                                    id="so_dien_thoai" type="text" required>
-                                                                @error('so_dien_thoai')
-                                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                                @enderror
+                                                                    type="text" required>
+                                                                <div class="invalid-feedback password_error">
+
+                                                                </div>
                                                                 <label class="form-label" for="avatar">Avatar</label>
 
                                                                 <input class="form-control" name="avatar" id="avatar"
                                                                     type="file">
+                                                                <div class="invalid-feedback avatar_error">
+
+                                                                </div>
                                                                 <div class="col-auto">
                                                                     <label class="colorinput" style="display: flex">
                                                                         <input type="checkbox" class="colorinput-input"
@@ -141,8 +144,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary "
+                                                                    id="btn-close" data-dismiss="modal">Close</button>
                                                                 <button type="button"
                                                                     class="btn btn-primary btn-add btnSave">Save
                                                                     changes</button>
@@ -234,9 +237,9 @@
                 "search": {
                     "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
                 }
-
             })
             $(document).on('click', '.btn-edit', function() {
+
                 $id = $(this).data('id');
 
                 $('#id').val($id);
@@ -258,38 +261,103 @@
 
             })
             $('.btnSave').click(function() {
-                Swal.fire({
-                    title: "Bạn có chắc không?",
-                    text: "Bạn sẽ không thể hoàn nguyên điều này!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Chắc chắn!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var frm_Data = new FormData($('#myForm')[0]);
-                        $.ajax({
-                            method: 'POST',
-                            url: "{{ route('quan-tri-vien.them-moi-cap-nhat') }}",
-                            data: frm_Data,
-                            processData: false,
-                            contentType: false,
-                        }).done(function() {
-                            Swal.fire({
-                                title: "Thành công!",
-                                text: "Thực hiện chức năng thành công.",
-                                icon: "success"
+                // event.preventDefault();
+                // if ($('#myForm')[0].checkValidity()) {
+                if ($("#id").val() == "") {
+                    Swal.fire({
+                        title: "Bạn có chắc không?",
+                        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Chắc chắn!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var frm_Data = new FormData($('#myForm')[0]);
+                            $.ajax({
+                                method: 'POST',
+                                url: "{{ route('quan-tri-vien.them-moi') }}",
+                                data: frm_Data,
+                                processData: false,
+                                contentType: false,
+                            }).done(function() {
+                                Swal.fire({
+                                    title: "Thành công!",
+                                    text: "Thực hiện chức năng thành công.",
+                                    icon: "success"
+                                });
+                                //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
+                                table.draw();
+                                $('#password').val("");
+                                $('#myModal').modal('hide');
+
+                            }).fail(function(response) {
+                                // Xử lý lỗi validation
+                                var errors = response.responseJSON.errors;
+                                console.log(errors);
+                                $('#myForm').addClass('was-validated');
+                                // Hiển thị lỗi cho từng trường cụ thể
+                                $.each(errors, function(key, value) {
+                                    // $('#' + key).addClass('was-validated');
+                                    $('.' + key + '_error').text(value[0]);
+                                    $('.' + key + '_error').text(value[1]);
+                                    $('.' + key + '_error').text(value[2]);
+                                    $('.' + key + '_error').text(value[3]);
+                                    $('.' + key + '_error').text(value[4]);
+                                });
                             });
-                            //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
-                            table.draw();
-                            $('#password').val("");
-                            $('#myModal').modal('hide');
+                        }
+                    })
+                } else if ($("#id").val() != "") {
+                    Swal.fire({
+                        title: "Bạn có chắc không?",
+                        text: "Bạn sẽ không thể hoàn nguyên điều này!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Chắc chắn!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var frm_Data = new FormData($('#myForm')[0]);
+                            $.ajax({
+                                method: 'POST',
+                                url: "{{ route('quan-tri-vien.xu-ly-cap-nhat') }}",
+                                data: frm_Data,
+                                processData: false,
+                                contentType: false,
+                            }).done(function() {
+                                Swal.fire({
+                                    title: "Thành công!",
+                                    text: "Thực hiện chức năng thành công.",
+                                    icon: "success"
+                                });
+                                //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
+                                table.draw();
+                                $('#password').val("");
+                                $('#myModal').modal('hide');
 
-                        })
-                    }
-                })
+                            }).fail(function(response) {
+                                // Xử lý lỗi validation
+                                var errors = response.responseJSON.errors;
+                                console.log(errors);
+                                $('#myForm').addClass('was-validated');
+                                // Hiển thị lỗi cho từng trường cụ thể
+                                $.each(errors, function(key, value) {
+                                    // $('#' + key).addClass('was-validated');
+                                    $('.' + key + '_error').text(value[0]);
+                                    $('.' + key + '_error').text(value[1]);
+                                    $('.' + key + '_error').text(value[2]);
+                                    // $('.' + key + '_error').text(value[3]);
+                                    $('.' + key + '_error').text(value[4]);
+                                });
+                            });
+                        }
+                    })
+                }
 
+                // }
             })
             $(document).on('click', '.btnAdd', function() {
                 $('#myModal').modal('show');
@@ -340,6 +408,15 @@
 
                     }
                 })
+            })
+            $('#btn-close').click(function() {
+                $("#myForm").removeClass('was-validated');
+                $('#myModal').modal('hide');
+
+            })
+            $('#btn-closeX').click(function() {
+                $("#myForm").removeClass('was-validated');
+                $('#myModal').modal('hide');
             })
         })
     </script>

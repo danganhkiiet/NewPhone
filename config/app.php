@@ -171,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // sử dụng datatable
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ])->toArray(),
 
     /*

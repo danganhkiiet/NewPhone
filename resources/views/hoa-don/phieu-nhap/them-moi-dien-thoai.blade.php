@@ -122,69 +122,82 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('js-jquery')
-    <script>
-        function xoaHang(button) {
-            // Lấy hàng chứa nút "Xóa" và xóa hàng đó
-            var row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        }
-        $(document).ready(function() {
-            var stt = 0;
-            $("#btn-them").click(function() {
-                stt = stt + 1;
-                var tenmau = $("#mau_sac_id").find(":selected").text();
-                var mau = $('#mau_sac_id').find(':selected').val();
-                var tendienthoai = $("#dien_thoai_id").find(":selected").text();
-                var dienthoai = $('#dien_thoai_id').find(':selected').val();
-                var dungluong = $("#dung_luong_id").find(":selected").text();
-                var duongluongid = $('#dung_luong_id').find(':selected').val();
-                var soluong = $("#so_luong").val();
-                var gianhap = $("#gia_nhap").val();
-                var giaban = $("#gia_ban").val();
-                var thanhtien = soluong * gianhap;
+    @section('js-jquery')
+        <script>
+            function xoaHang(button) {
+                // Lấy hàng chứa nút "Xóa" và xóa hàng đó
+                var row = button.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            }
+            $(document).ready(function() {
+                var stt = 0;
+                $("#btn-them").click(function() {
+                    if ($("#so_luong").val() == "" || $("#gia_ban").val()=="" || $("#gia_nhap").val()=="") {
+                        Swal.fire({
+                            title: "Lỗi?",
+                            text: "Vui lòng không thể để trống!",
+                            icon: "error",
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Chắc chắn!"
+                        })
+
+                    } else {
+                        stt = stt + 1;
+                        var tenmau = $("#mau_sac_id").find(":selected").text();
+                        var mau = $('#mau_sac_id').find(':selected').val();
+                        var tendienthoai = $("#dien_thoai_id").find(":selected").text();
+                        var dienthoai = $('#dien_thoai_id').find(':selected').val();
+                        var dungluong = $("#dung_luong_id").find(":selected").text();
+                        var duongluongid = $('#dung_luong_id').find(':selected').val();
+                        var soluong = $("#so_luong").val();
+                        var gianhap = $("#gia_nhap").val();
+                        var giaban = $("#gia_ban").val();
+                        var thanhtien = soluong * gianhap;
 
 
-                var row = `<tr>
-                <td>${stt}</td>
-                <td>${tendienthoai}<input type="hidden" name="dien_thoai_id[]" value="${dienthoai}"></td>
-                <td>${tenmau}<input type="hidden" name="mau_sac_id[]" value="${mau}"></td>
-                <td>${dungluong}<input type="hidden" name="dung_luong_id[]" value="${duongluongid}"></td>
-                <td>${soluong}<input type="hidden" name="so_luong[]" value="${soluong}"></td></td>
-                <td>${gianhap}<input type="hidden" name="gia_nhap[]" value="${gianhap}"></td></td>
-                <td>${giaban}<input type="hidden" name="gia_ban[]" value="${giaban}"></td></td>
-                <td>${thanhtien}</td>
-                <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
-                </tr>`;
+                        var row = `<tr>
+                        <td>${stt}</td>
+                        <td>${tendienthoai}<input type="hidden" name="dien_thoai_id[]" value="${dienthoai}"></td>
+                        <td>${tenmau}<input type="hidden" name="mau_sac_id[]" value="${mau}"></td>
+                        <td>${dungluong}<input type="hidden" name="dung_luong_id[]" value="${duongluongid}"></td>
+                        <td>${soluong}<input type="hidden" name="so_luong[]" value="${soluong}"></td></td>
+                        <td>${gianhap}<input type="hidden" name="gia_nhap[]" value="${gianhap}"></td></td>
+                        <td>${giaban}<input type="hidden" name="gia_ban[]" value="${giaban}"></td></td>
+                        <td>${thanhtien}</td>
+                        <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
+                        </tr>`;
 
-                $("#phieu-nhap").append(row);
+                        $("#phieu-nhap").append(row);
+                    }
+
+                });
+
+                $("#nha_san_xuat_id").change(function() {
+                    var nha_san_xuat_id = $(this).val();
+                    console.log(nha_san_xuat_id);
+                    $.ajax({
+                        method: "GET",
+                        url: "{{ route('phieu-nhap.danh-sach-dien-thoai-theo-nha-san-xuat') }}",
+                        data: {
+                            nha_san_xuat_id: nha_san_xuat_id
+                        },
+                    }).done(function(response) {
+                        console.log(response)
+                        $("#dien_thoai_id").empty();
+
+                        // Thêm các option mới từ dữ liệu trả về
+                        $.each(response, function(key, item) {
+                            $("#dien_thoai_id").append('<option value="' + item.id + '">' +
+                                item.ten + '</option>');
+                        });
+                    })
+                });
             });
-
-            $("#nha_san_xuat_id").change(function() {
-                var nha_san_xuat_id = $(this).val();
-                $.ajax({
-                    method: "GET",
-                    url: "{{ route('phieu-nhap.danh-sach-dien-thoai-theo-nha-san-xuat') }}",
-                    data: {
-                        nha_san_xuat_id: nha_san_xuat_id
-                    },
-                   
-                }).done(function(response) {
-                    console.log(response)
-                    $("#dien_thoai_id").empty();
-
-                    // Thêm các option mới từ dữ liệu trả về
-                    $.each(response, function(key,item) {
-                        $("#dien_thoai_id").append('<option value="' + item.id + '">' +
-                            item.ten + '</option>');
-                    });
-                })
-            });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection

@@ -44,8 +44,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', [AdminController::class, 'dangNhap'])->name('admin.dang-nhap');
     Route::post('/', [AdminController::class, 'xuLyDangNhap'])->name('admin.xu-ly-dang-nhap');
 });
-Route::get('/quen-mat-khau', [GuiMailController::class, 'quenMatKhau'])->name('admin.quen-mat-khau');
-
 
 //phieu nhap
 Route::middleware(['auth'])->group(function () {
@@ -115,11 +113,13 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('quan-tri-vien')->group(function () {
         Route::name('quan-tri-vien.')->group(function () {
             Route::get('/danh-sach',[AdminController::class,'danhSach'])->name('danh-sach');
+            Route::post('/them-moi',[AdminController::class,'themMoi'])->name('them-moi');
             Route::get('/cap-nhat/{id}',[AdminController::class,'capNhat'])->name('cap-nhat');
-            Route::post('/them-moi-cap-nhat',[AdminController::class,'themMoiVaCapNhat'])->name('them-moi-cap-nhat');
+            Route::post('/cap-nhat',[AdminController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
             Route::post('/xoa/{id}',[AdminController::class,'xoa'])->name('xoa');
             Route::get('/thong-tin-ca-nhan/{id}',[AdminController::class,'thongTinCaNhanQuanTriVien'])->name('thong-tin-ca-nhan');
             Route::post('/thong-tin-ca-nhan/{id}',[AdminController::class,'capNhatThongTinCaNhanQuanTriVien'])->name('xu-ly-cap-nhat-thong-tin-ca-nhan');
+           
         });
     });
 });
@@ -153,6 +153,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/danh-sach',[DungLuongController::class,'danhSach'])->name('danh-sach');
             Route::get('/cap-nhat/{id}',[DungLuongController::class,'capNhat'])->name('cap-nhat');
             Route::post('/them-moi-cap-nhat',[DungLuongController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+
         });
     });
 });
+

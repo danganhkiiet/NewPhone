@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\AdminCreateRequest;
+use App\Http\Requests\AdminUpdateRequest;
+use App\Http\Requests\DangNhapRequest;
 class AdminController extends Controller
 {
     public function dangNhap(){
        return view('login');
     }
-    public function xuLyDangNhap(Request $request){
+    public function xuLyDangNhap(DangNhapRequest $request){
         $admin=Admin::where('email',$request->email)->first();
         if($admin){
             if(Hash::check($request->password, $admin->password)){
@@ -66,54 +69,37 @@ class AdminController extends Controller
         return redirect()->route('nha-cung-cap.danh-sach')->with(['thong_bao'=>'bạn không được truy cập tới danh sách quản trị viên']);
        
     }
+    public function themMoi(AdminCreateRequest $request){
+        $is_admin = $request->has('is_admin') ? 1 : 0;
+
+        if($is_admin==1){{
+            $file=$request->avatar;
+        
+            $path=$file->store('avatar');
+            $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path,'is_admin'=>$is_admin]);
+        
+            return response()->json(['message' => 'Thành công']);
+          
+        }}
+        else{
+
+            $file=$request->avatar;
+            $path=$file->store('avatar');
+            $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path,'is_admin'=>$is_admin]);
+        
+            return response()->json(['message' => 'Thành công']);
+        }
+    }
     public function capNhat($id){
         $admin = Admin::find($id);
         return $admin;
     }
-    public function themMoiVaCapNhat(Request $request){
-    //   dd($request);
-        //check coi có đc thành admin hay ko
+    public function xuLyCapNhat(AdminUpdateRequest $request){
+        //   dd($request);
         $is_admin = $request->has('is_admin') ? 1 : 0;
 
         if($is_admin==1){{
-            if(empty($request->id)){
-
-                $request->validate([
-                    'ho_ten' => 'required',
-                    'email' => 'email|required',
-                    'password' => 'required',
-                    'so_dien_thoai' => 'numeric|required|min:10',
-                ],[
-                    'ho_ten.required' => 'Họ tên không được bỏ trống.',
-                    'email.email' => 'Email không hợp lệ.',
-                    'email.required' => 'Email không được bỏ trống.',
-                    'password.required' => 'Mật khẩu không được bỏ trống.',
-                    'so_dien_thoai.numeric' => 'Số điện thoại phải là số.',
-                    'so_dien_thoai.required' => 'Số điện thoại không được bỏ trống.',
-                    'so_dien_thoai.min' => 'Số điện thoại phải có ít nhất 10 ký tự.',
-                ]);
-    
-                $file=$request->avatar;
-        
-                $path=$file->store('avatar');
-                $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path,'is_admin'=>$is_admin]);
-        
-                return response()->json(['message' => 'Thành công']);
-            }
-            else{
-           
-                $request->validate([
-                    'ho_ten' => 'required',
-                    'email' => 'email|required',
-                    'so_dien_thoai' => 'numeric|required|min:10',
-                ], [
-                    'ho_ten.required' => 'Họ tên không được bỏ trống.',
-                    'email.email' => 'Email không hợp lệ.',
-                    'email.required' => 'Email không được bỏ trống.',
-                    'so_dien_thoai.numeric' => 'Số điện thoại phải là số.',
-                    'so_dien_thoai.required' => 'Số điện thoại không được bỏ trống.',
-                    'so_dien_thoai.min' => 'Số điện thoại phải có ít nhất 10 ký tự.',
-                ]);
+         
                 if(empty($request->avatar)){
                     if(empty($request->password)){
                         $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai,'is_admin'=>$is_admin]);
@@ -141,47 +127,9 @@ class AdminController extends Controller
                 $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path,'is_admin'=>$is_admin]);
         
                 return response()->json(['message' => 'Thành công']);
-            }
         }}
         else{
-            if(empty($request->id)){
 
-                $request->validate([
-                    'ho_ten' => 'required',
-                    'email' => 'email|required',
-                    'password' => 'required',
-                    'so_dien_thoai' => 'numeric|required|min:10',
-                ],[
-                    'ho_ten.required' => 'Họ tên không được bỏ trống.',
-                    'email.email' => 'Email không hợp lệ.',
-                    'email.required' => 'Email không được bỏ trống.',
-                    'password.required' => 'Mật khẩu không được bỏ trống.',
-                    'so_dien_thoai.numeric' => 'Số điện thoại phải là số.',
-                    'so_dien_thoai.required' => 'Số điện thoại không được bỏ trống.',
-                    'so_dien_thoai.min' => 'Số điện thoại phải có ít nhất 10 ký tự.',
-                ]);
-    
-                $file=$request->avatar;
-        
-                $path=$file->store('avatar');
-                $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path,'is_admin'=>$is_admin]);
-        
-                return response()->json(['message' => 'Thành công']);
-            }
-            else{
-           
-                $request->validate([
-                    'ho_ten' => 'required',
-                    'email' => 'email|required',
-                    'so_dien_thoai' => 'numeric|required|min:10',
-                ], [
-                    'ho_ten.required' => 'Họ tên không được bỏ trống.',
-                    'email.email' => 'Email không hợp lệ.',
-                    'email.required' => 'Email không được bỏ trống.',
-                    'so_dien_thoai.numeric' => 'Số điện thoại phải là số.',
-                    'so_dien_thoai.required' => 'Số điện thoại không được bỏ trống.',
-                    'so_dien_thoai.min' => 'Số điện thoại phải có ít nhất 10 ký tự.',
-                ]);
                 if(empty($request->avatar)){
                     if(empty($request->password)){
                         $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai,'is_admin'=>$is_admin]);
@@ -190,7 +138,6 @@ class AdminController extends Controller
                     $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'is_admin'=>$is_admin]);
                     return response()->json(['message'=>'Cập Nhật Thành Công']);
                 }
-        
               
                 if(empty($request->password)){
         
@@ -209,7 +156,7 @@ class AdminController extends Controller
                 $admin = Admin::updateOrCreate(['id'=>$request->id],['ho_ten'=>$request->ho_ten,'email'=>$request->email,'password'=>Hash::make($request->password),'so_dien_thoai'=>$request->so_dien_thoai,'avatar'=>$path,'is_admin'=>$is_admin]);
         
                 return response()->json(['message' => 'Thành công']);
-            }
+            
         }
    
     }
@@ -234,7 +181,7 @@ class AdminController extends Controller
             return redirect()->route('quan-tri-vien.thong-tin-ca-nhan',$id)->with(['thong_bao'=>'Cập nhật thành công']);
         }
 
-    //   dd($request);
+         //   dd($request);
         if(empty($request->password)){
 
             $file=$request->avatar;

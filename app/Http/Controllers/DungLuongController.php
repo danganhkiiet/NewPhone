@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DungLuong;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\MauSacDungLuongThongSoRequest;
 class DungLuongController extends Controller
 {
     public function danhSach(Request $request){
@@ -34,7 +35,8 @@ class DungLuongController extends Controller
         $dung_luong = DungLuong::find($id);
         return $dung_luong;
     }
-    public function themMoiVaCapNhat(Request $request){
+    public function themMoiVaCapNhat(MauSacDungLuongThongSoRequest $request){
+        
         $dung_luong = DungLuong::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten]);
         return response()->json(['message' => 'Thành công']);
     }

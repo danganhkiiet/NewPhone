@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MauSac;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\MauSacDungLuongThongSoRequest;
 class MauController extends Controller
 {
     //
@@ -36,7 +37,8 @@ class MauController extends Controller
         $mau_sac = MauSac::find($id);
         return $mau_sac;
     }
-    public function themMoiVaCapNhat(Request $request){
+    public function themMoiVaCapNhat(MauSacDungLuongThongSoRequest $request){
+        
         $mau_sac = MauSac::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten]);
         return response()->json(['message' => 'Thành công']);
     }

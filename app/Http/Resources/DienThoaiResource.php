@@ -19,6 +19,7 @@ class DienThoaiResource extends JsonResource
             'ten' => $this->ten,
             'nha_san_xuat' => $this->nha_san_xuat,
             'chi_tiet_dien_thoai' => $this->chi_tiet_dien_thoai,
+            'hinh_anh'=>$this->hinhAnh,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
