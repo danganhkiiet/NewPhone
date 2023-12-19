@@ -19,6 +19,15 @@ class APIDienThoaiController extends Controller
         }
         return $this->apiResource();
     }
+    public function danhSachTheoNhaSanXuat($id){
+        $dien_thoai=DienThoai::where('nha_san_xuat_id',$id);
+        $api_dien_thoai=DienThoaiResource::collection($dien_thoai);
+        // $api_dien_thoai=null;
+        if($api_dien_thoai){
+            return $this->apiResource(true,200,$api_dien_thoai,'Danh Sách Điện Thoại Theo Nhà Sản Xuất');
+        }
+        return $this->apiResource();
+    }
     public function danhSachChiTiet($id){
         $dien_thoai=DienThoai::find($id);
         $api_dien_thoai=new DienThoaiResource($dien_thoai);

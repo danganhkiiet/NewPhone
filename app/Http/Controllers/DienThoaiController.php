@@ -16,6 +16,13 @@ class DienThoaiController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function capNhatMoTa(Request $request, $id)
+    {
+        $dien_thoai = DienThoai::find($id);
+        $dien_thoai->mo_ta=$request->mo_ta;
+        $dien_thoai->save();
+        return redirect()->back();
+    }
     public function themMoi()
     {
         $lst_thong_so = ThongSo::all();
@@ -69,9 +76,31 @@ class DienThoaiController extends Controller
     }
     public function themHinhAnh(Request $request)
     {
-        dd($request);
+        //lay id san pham
+        $id = $request->input('id');
         
-        return response()->json();
+        //kiem tra rq co ảnh không
+        if($request->hasFile('images')) {
+            // thêm hình ảnh sản phẩm
+            $paths=[];
+            foreach ($request->file('images') as $image) {
+                $hinh_anh = new HinhAnh();
+                $hinh_anh->dien_thoai_id = $id;
+                $path = $image->store('hinh_anh');
+                $hinh_anh->duong_dan=$path;
+                $paths[]=$path;
+                $hinh_anh->save();
+            }
+            $lst_hinh_anh = HinhAnh::where('dien_thoai_id', $id)->get();
+            return response()->json(['message' => 'Thêm ảnh thành công', 'lst_hinh_anh' => $lst_hinh_anh]);
+        }
+    }
+    public function xoaHinhAnh(Request $request)
+    {
+        $hinh_anh = HinhAnh::find($request->id);
+        $hinh_anh->delete();
+        $lst_hinh_anh = HinhAnh::where('dien_thoai_id', $request->id_dien_thoai)->get();
+        return response()->json(['message' => 'Thêm ảnh thành công', 'lst_hinh_anh' => $lst_hinh_anh]);
     }
     /**
      * Show the form for creating a new resource.
@@ -131,7 +160,7 @@ class DienThoaiController extends Controller
     }
     public function chiTietDienThoai(Request $request, $id)
     {
-        $lst_hinh_anh = HinhAnh::where('dien_thoai_id',$id)->get();
+        
         if($request->ajax())
         {
             $lst_chi_tiet_dien_thoai = ChiTietDienThoai::where('dien_thoai_id',$id)->get();
@@ -148,7 +177,9 @@ class DienThoaiController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('san-pham/dien-thoai/chi-tiet',compact('lst_hinh_anh'));
+        $lst_hinh_anh = HinhAnh::where('dien_thoai_id',$id)->get();
+        $dien_thoai = DienThoai::find($id);
+        return view('san-pham/dien-thoai/chi-tiet',compact('lst_hinh_anh','dien_thoai'));
     }
     /**
      * Store a newly created resource in storage.
@@ -199,15 +230,6 @@ class DienThoaiController extends Controller
         }
         return response()->json(['flag' => false], 200);
     }
-    // public function themMoiHinhAnh(Request $request)
-    // {
-    //     $ten = $request->ten;
-    //     $tontai = DienThoai::withTrashed()->where('ten', $ten)->first();
-    //     if ($tontai) {
-    //         return response()->json(['flag' => true], 200);
-    //     }
-    //     return response()->json(['flag' => false], 200);
-    // }
     /**
      * Display the specified resource.
      */

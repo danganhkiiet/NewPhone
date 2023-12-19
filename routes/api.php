@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIDienThoaiController;
 use App\Http\Controllers\APIKhachHangController;
 use App\Http\Controllers\APIMauSacController;
+use App\Http\Controllers\APINhaSanXuatController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,3 +39,7 @@ Route::middleware(['api'])->group(function () {
 });
 
 Route::get('/mau-sac', [APIMauSacController::class, 'danhSach'])->name('mau-sac.danh-sach');
+
+//nha san xuat
+
+Route::get('/nha-san-xuat', [APINhaSanXuatController::class, 'danhSach'])->name('nha-san-xuat.danh-sach');
