@@ -29,4 +29,5 @@ class DienThoai extends Model
     public function hinhAnh(){
         return $this->hasMany(HinhAnh::class);
     }
+    protected $hidden=['nha_san_xuat_id','created_at','updated_at','deleted_at'];
 }
