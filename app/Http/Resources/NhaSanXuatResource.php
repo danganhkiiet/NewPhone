@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MauResource extends JsonResource
+class NhaSanXuatResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,6 +22,7 @@ class MauResource extends JsonResource
             'so_dien_thoai' => $this->so_dien_thoai,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'dienThoai' => DienThoaiResource::collection($this->dienThoai) // Sử dụng resource của DienThoai
         ];
     }
 }
