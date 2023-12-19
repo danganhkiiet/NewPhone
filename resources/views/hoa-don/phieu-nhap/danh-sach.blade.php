@@ -42,10 +42,10 @@
                                         <a href="{{ route('phieu-nhap.them-moi-phieu-nhap') }}" class="btn btn-primary-light ">Thêm
                                             mới</a>
                                     </div>
-                                    <div class="btn" style="position: relative;left: 78%;">
+                                    {{-- <div class="btn" style="position: relative;left: 78%;">
                                         <a href="{{ route('phieu-nhap.them-moi-phieu-nhap') }}" class="btn btn-primary-light ">Các sản phẩm đã xóa
                                             </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">

@@ -94,7 +94,7 @@
                                 </a>
                             </div>
                             <!-- Theme-Layout -->
-                            <div class="dropdown d-md-flex source-container">
+                            {{-- <div class="dropdown d-md-flex source-container">
                                 <a class="nav-link icon shortcut-icn" data-bs-toggle="dropdown">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         enable-background="new 0 0 24 24" viewBox="0 0 24 24">
@@ -249,7 +249,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- SHORTCUTS -->
                             <div class="dropdown d-md-flex">
                                 <a class="nav-link icon full-screen-link nav-link-bg">
@@ -320,7 +320,7 @@
                                         <a class="dropdown-item d-flex" href="chat.html">
                                             <span
                                                 class="avatar avatar-md brround me-3 align-self-center cover-image"
-                                                data-bs-image-src="/assets/images/users/12.jpg"
+                                                data-bs-image-src="/assets/images/users/1.jpg"
                                                 style="background: url(&quot;../assets/images/users/12.jpg&quot;) center center;">
                                             </span>
                                             <div class="wd-90p">

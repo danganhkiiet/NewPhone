@@ -12,7 +12,7 @@
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Điện Thoại</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('dien-thoai.danh-sach') }}">Danh Sách</a></li>
+                            {{-- <li class="breadcrumb-item"><a href="{{ route('dien-thoai.danh-sach') }}">Danh Sách</a></li> --}}
                             <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
                         </ol>
                     </div>

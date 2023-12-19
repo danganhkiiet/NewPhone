@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\DataTables;
-use Database\Seeders\PhieuNhapSeeder;
 use Illuminate\Http\Request;
 use App\Models\PhieuNhap;
 use App\Models\ChiTietPhieuNhap;
@@ -14,6 +13,7 @@ use App\Models\DungLuong;
 use App\Models\DienThoai;
 use App\Models\ChiTietDienThoai;
 use App\Http\Requests\PhieuNhapCreateRequest;
+
 class PhieuNhapController extends Controller
 {
     /**
@@ -68,14 +68,15 @@ class PhieuNhapController extends Controller
     {
         $lst_nha_cung_cap = NhaCungCap::all();
         
-        return view('hoa-don/phieu-nhap/them-moi-phieu-nhap',compact('lst_nha_cung_cap'));
+        return view('hoa-don.phieu-nhap.them-moi-phieu-nhap',compact('lst_nha_cung_cap'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function xuLyThemMoi(PhieuNhapCreateRequest $request)
+    public function xuLyThemMoi(Request $request)
     {
+        // dd($request);
         //them moi phieu nhap
         $phieu_nhap = new PhieuNhap();
         $phieu_nhap->thong_tin_nguoi_giao = $request->thong_tin_nguoi_giao;

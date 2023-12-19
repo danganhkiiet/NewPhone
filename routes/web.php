@@ -9,7 +9,6 @@ use App\Http\Controllers\ThongSoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\NhaSanXuatController;
-use App\Http\Controllers\GuiMailController;
 
 /*
 |--------------------------------------------------------------------------
