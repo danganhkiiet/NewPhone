@@ -13,4 +13,5 @@ class DungLuong extends Model
     public function chiTietDienThoai(){
         return $this->hasMany(ChiTietDienThoai::class);
     }
+    protected $hidden=['created_at','updated_at','deleted_at'];
 }
