@@ -26,7 +26,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <form method="POST">
+                                    <form method="POST" action="{{route('phieu-nhap.xu-ly-them-moi')}}"> 
                                         @csrf
                                         <div class="col-md-10 col-lg-8 col-xl-6 mx-auto d-block">
                                             <div class="card card-body pd-20 pd-md-40 border shadow-none">

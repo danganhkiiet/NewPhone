@@ -132,7 +132,7 @@ class PhieuNhapController extends Controller
         }
         $phieu_nhap->tong_tien=$tong_tien;
         $phieu_nhap->save();
-        return redirect()->route('nha-cung-cap.danh-sach');
+        return redirect()->route('phieu-nhap.danh-sach');
     }
     public function danhSachDienThoaiTheoNhaSanXuat(Request $request){
         $dien_thoai = DienThoai::where('nha_san_xuat_id', $request->nha_san_xuat_id)->get();

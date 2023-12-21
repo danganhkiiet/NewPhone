@@ -11,15 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('phieu_nhap', function (Blueprint $table) {
             $table->id();
-            $table->integer('admin_id');
-            $table->integer('nha_cung_cap_id');
+            $table->unsignedBigInteger('admin_id');
+            $table->unsignedBigInteger('nha_cung_cap_id');
             $table->string('thong_tin_nguoi_giao');
-            $table->decimal('tong_tien',10,0);
+            $table->decimal('tong_tien', 10, 0);
             $table->dateTime('ngay_nhap_hang');
             $table->timestamps();
             $table->softDeletes();
+
+            // Khai báo khóa ngoại cho admin_id
+            $table->foreign('admin_id')->references('id')->on('admin');
+
+            // Khai báo khóa ngoại cho nha_cung_cap_id
+            $table->foreign('nha_cung_cap_id')->references('id')->on('nha_cung_cap');
         });
     }
 

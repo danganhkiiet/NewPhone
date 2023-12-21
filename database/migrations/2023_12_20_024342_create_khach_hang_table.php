@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nha_cung_cap', function (Blueprint $table) {
+        Schema::create('khach_hang', function (Blueprint $table) {
             $table->id();
             $table->string('ten');
             $table->string('dia_chi');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('so_dien_thoai');
+            $table->string('password');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nha_cung_cap');
+        Schema::dropIfExists('khach_hang');
     }
 };
