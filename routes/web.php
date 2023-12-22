@@ -9,8 +9,7 @@ use App\Http\Controllers\ThongSoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\NhaSanXuatController;
-use App\Http\Controllers\GuiMailController;
-
+use App\Http\Controllers\BannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,7 +99,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/them-moi',[KhachHangController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
             Route::get('/cap-nhat/{id}',[KhachHangController::class,'capNhat'])->name('cap-nhat');
             Route::post('/cap-nhat/{id}',[KhachHangController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
-            Route::get('/xoa{id}',[KhachHangController::class,'xoa'])->name('xoa');
+            Route::get('/xoa/{id}',[KhachHangController::class,'xoa'])->name('xoa');
         });
     });
 });
@@ -167,3 +166,14 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+//Banner
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('banner')->group(function () {
+        Route::name('banner.')->group(function () {
+            Route::get('/danh-sach',[BannerController::class,'danhSach'])->name('danh-sach');
+            Route::get('/cap-nhat/{id}',[BannerController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/them-moi-cap-nhat',[BannerController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+            Route::post('/xoa/{id}',[BannerController::class,'xoa'])->name('xoa');
+        });
+    });
+});

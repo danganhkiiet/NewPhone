@@ -13,13 +13,19 @@ return new class extends Migration
     {
         Schema::create('chi_tiet_phieu_xuat', function (Blueprint $table) {
             $table->id();
-            $table->integer('dien_thoai_id');
-            $table->integer('phieu_xuat_id');
+            $table->unsignedBigInteger('dien_thoai_id');
+            $table->unsignedBigInteger('phieu_xuat_id');
             $table->integer('so_luong');
-            $table->decimal('gia_ban',10,0);
-            $table->decimal('thanh_tien',10,0);
+            $table->decimal('gia_ban', 10, 0);
+            $table->decimal('thanh_tien', 10, 0);
             $table->timestamps();
             $table->softDeletes();
+
+            // Khai báo khóa ngoại cho dien_thoai_id
+            $table->foreign('dien_thoai_id')->references('id')->on('dien_thoai');
+
+            // Khai báo khóa ngoại cho phieu_xuat_id
+            $table->foreign('phieu_xuat_id')->references('id')->on('phieu_xuat');
         });
     }
 

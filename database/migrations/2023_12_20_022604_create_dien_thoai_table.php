@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('khach_hang', function (Blueprint $table) {
+        Schema::create('dien_thoai', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('nha_san_xuat_id'); // Sử dụng unsignedBigInteger vì đây là khóa ngoại
             $table->string('ten');
-            $table->string('dia_chi');
-            $table->string('email');
-            $table->string('so_dien_thoai');
-            $table->string('password');
+            $table->string('mo_ta');
             $table->timestamps();
             $table->softDeletes();
+
+            // Khai báo khóa ngoại
+            $table->foreign('nha_san_xuat_id')->references('id')->on('nha_san_xuat');
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('khach_hang');
+        Schema::dropIfExists('dien_thoai');
     }
 };

@@ -6,6 +6,7 @@ use App\Http\Controllers\APIDienThoaiController;
 use App\Http\Controllers\APIKhachHangController;
 use App\Http\Controllers\APIMauSacController;
 use App\Http\Controllers\APINhaSanXuatController;
+use App\Http\Controllers\APIBannerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,3 +44,7 @@ Route::get('/mau-sac', [APIMauSacController::class, 'danhSach'])->name('mau-sac.
 //nha san xuat
 
 Route::get('/nha-san-xuat', [APINhaSanXuatController::class, 'danhSach'])->name('nha-san-xuat.danh-sach');
+
+//banner
+
+Route::get('/banner', [APIBannerController::class, 'danhSach'])->name('banner.danh-sach');

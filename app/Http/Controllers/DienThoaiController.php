@@ -116,7 +116,7 @@ class DienThoaiController extends Controller
             })
             ->addColumn('Action',function($row){
                 $col = '
-                    <a target="_blank" href="'.route('dien-thoai.xem-chi-tiet', ['id' => $row->id]).'">
+                    <a href="'.route('dien-thoai.xem-chi-tiet', ['id' => $row->id]).'">
                         <button type="button" class="btn btn-primary btn-edit"  >
                             <i class="fe fe-info"></i>
                         </button>
