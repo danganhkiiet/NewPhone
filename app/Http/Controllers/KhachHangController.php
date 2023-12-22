@@ -17,14 +17,7 @@ class khachhangController extends Controller
         return view('tai-khoan.khach-hang.danh-sach', compact('lst_khach_hang'));
     }
     public function themMoi(Request $request){
-        $khach_hang= new khachhang();
-        $khach_hang->ten = $request->ten;
-        $khach_hang->dia_chi = $request->dia_chi;
-        $khach_hang->email=$request->email;
-        $khach_hang->password=Hash::make($request->password);
-        $khach_hang->so_dien_thoai=$request->so_dien_thoai;
-        $khach_hang->save();
-        return response()->json(['message'=>'Thêm Thành Công']);
+
     }
     public function xuLyThemMoi(Request $request){
        $khach_hang = new khachhang();

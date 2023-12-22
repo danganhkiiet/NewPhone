@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Banner;
 use Yajra\DataTables\DataTables;
@@ -51,6 +52,7 @@ class BannerController extends Controller
     }
     public function themMoiVaCapNhat(Request $request)
     {
+
         if(empty($request->hinh_anh)){
             $banner = Banner::updateOrCreate(['id' => $request->id], ['ten' => $request->ten]);
             return response()->json(['message' => 'Thành công']);
