@@ -7,14 +7,15 @@ use App\Models\KhachHang;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Mail;
 
 class APIKhachHangController extends Controller
 {
+
     public function dangKy(Request $request){
 
 
         $token = Str::random(8);
-
         $validator = Validator::make(request()->all(), [
             'email' => 'required|email',
             'password' => 'required|min:3',
@@ -36,28 +37,53 @@ class APIKhachHangController extends Controller
 
         $khach_hang_moi = $validator->validated();
         $khach_hang_moi['password'] = Hash::make(request('password'));
-        $khach_hang_moi['token'] = $token;
+        
 
-        // $khach_hang = new KhachHang();
-        // $khach_hang->ten = $request->ten;
-        // $khach_hang->so_dien_thoai = $request->so_dien_thoai;
-        // $khach_hang->dia_chi = $request->dia_chi;
-        // $khach_hang->email = $request->email;
-        // $khach_hang->password = $request->password;
-        // $khach_hang->token = $token;
+        $khach_hang = KhachHang::create($khach_hang_moi);
+
+        //tạo token xác thực đăng ký
+        $khach_hang->token = Str::random(8);
+        $khach_hang->save();
+
+        
+
+        $mail = $khach_hang->email;
+        Mail::send('tai-khoan/khach-hang/mail', ['token' => $khach_hang->token], function ($email) use ($mail) {
+            $email->to($mail) // Địa chỉ email nhận được từ khách
+                ->subject('MÃ XÁC NHẬN ĐĂNG KÝ TÀI KHOẢN');
+        });
         return response()->json([
             'success' => true,
             'status' => 200,
+            'data' => $khach_hang,
             'message' => 'Đã đăng ký thành công',
         ]);
     }
+
+    public function xacThucDangKy(Request $request){
+
+        $token = $request->input('token');
+        $khach_hang = KhachHang::where('token',$token)->first();
+
+        if (!empty($khach_hang)) 
+        {
+            $khach_hang->trang_thai = 1;
+            $khach_hang->token=null;
+            $khach_hang->save();
+            return response()->json(['message' => 'Xác minh thành công'], 200);
+        }
+    
+        return response()->json(['message' => 'Mã xác minh không hợp lệ'], 400);
+    }
+    
+    
 
 
     //Đăng Nhập Khách Hàng
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login','dangKy','xacThucDangKy']]);
     }
     public function login()
     {
