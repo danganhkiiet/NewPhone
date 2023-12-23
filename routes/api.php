@@ -36,6 +36,8 @@ Route::middleware(['api'])->group(function () {
     Route::prefix('khach-hang')->group(function () {
         Route::post('/dang-nhap',[APIKhachHangController::class,'login']);
         Route::post('/dang-xuat', [APIKhachHangController::class,'logout']);
+        //đăng ký mail
+        // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
     });
 });
 
