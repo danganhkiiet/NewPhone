@@ -39,7 +39,9 @@ Route::middleware(['api'])->group(function () {
         Route::get('/thong-tin', [APIKhachHangController::class,'me']);
         Route::post('/dang-xuat', [APIKhachHangController::class,'logout']);
         Route::get('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
-        
+        //đăng ký mail
+        // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
+
     });
 });
 

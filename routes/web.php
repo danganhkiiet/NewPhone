@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\NhaSanXuatController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -177,3 +178,5 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
+
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\khachhang;
 use Illuminate\Support\Facades\Hash;
+use Mail;
 class khachhangController extends Controller
 {
     //
@@ -51,3 +52,4 @@ class khachhangController extends Controller
         return redirect()->route('khach-hang.danh-sach')->with('thong_bao','Xóa thành công');
     }
 }
+
