@@ -65,4 +65,8 @@ class APIKhachHangController extends Controller
         return response()->json(['thong_bao' => 'Đăng xuất thành công']);
     }
     
+    public function me()
+    {
+        return response()->json(auth('api')->user());
+    }
 }
