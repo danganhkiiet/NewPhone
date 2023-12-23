@@ -86,7 +86,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Bảng Nhập</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true" id="btn-closeX">&times;</span>
@@ -250,6 +250,7 @@
                     $('#ho_ten').val(data.ho_ten);
                     $('#email').val(data.email);
                     $('#so_dien_thoai').val(data.so_dien_thoai);
+                    $('#exampleModalLabel').text("Cập nhật");
                     // Gán giá trị cho checkbox
                     if (data.is_admin) {
                         $('#is_admin').prop('checked', true);
@@ -361,6 +362,7 @@
             })
             $(document).on('click', '.btnAdd', function() {
                 $('#myModal').modal('show');
+                $('#exampleModalLabel').text("Thêm mới");
                 $('#myForm').trigger('reset');
                 $('#id').val("");
             })

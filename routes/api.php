@@ -7,6 +7,7 @@ use App\Http\Controllers\APIKhachHangController;
 use App\Http\Controllers\APIMauSacController;
 use App\Http\Controllers\APINhaSanXuatController;
 use App\Http\Controllers\APIBannerController;
+use App\Http\Controllers\APIGioHangController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,11 +36,17 @@ Route::get('/dien-thoai-loc-danh-sach', [APIDienThoaiController::class, 'danhSac
 Route::middleware(['api'])->group(function () {
     Route::prefix('khach-hang')->group(function () {
         Route::post('/dang-nhap',[APIKhachHangController::class,'login']);
+        Route::get('/thong-tin', [APIKhachHangController::class,'me']);
         Route::post('/dang-xuat', [APIKhachHangController::class,'logout']);
+
         Route::post('/dang-ky', [APIKhachHangController::class, 'dangKy']);
         Route::post('/xac-thuc-dang-ky', [APIKhachHangController::class, 'xacThucDangKy']);
+
+        Route::get('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
+
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
+
     });
 });
 

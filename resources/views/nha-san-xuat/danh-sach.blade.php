@@ -69,7 +69,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true" id="btn-closeX">&times;</span>
@@ -225,6 +225,7 @@
                     $('#dia_chi').val(data.dia_chi);
                     $('#Email').val(data.email);
                     $('#so_dien_thoai').val(data.so_dien_thoai);
+                    $('#exampleModalLabel').text("Cập nhật");
                     $('#myModal').modal('show');
                 })
 
@@ -272,6 +273,7 @@
             })
             $(document).on('click', '.btnAdd', function() {
                 $('#myModal').modal('show');
+                $('#exampleModalLabel').text("Thêm mới");
                 $('#myForm').trigger('reset');
                 $('#id').val("");
             })
