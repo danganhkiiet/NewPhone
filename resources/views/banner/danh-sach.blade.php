@@ -67,7 +67,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm Mới</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true" id="btn-closeX">&times;</span>
@@ -208,6 +208,7 @@
                     $('#ten').val(data.ten);
                     $('#duong_dan').attr('src', data.duong_dan).show();
                     $('#mo_tas').val(data.mo_ta);
+                    $('#exampleModalLabel').text("Cập nhật");
                     $('#myModal').modal('show');
 
                 })
@@ -248,6 +249,7 @@
             })
             $(document).on('click', '.btnAdd', function() {
                 $('#myModal').modal('show');
+                $('#exampleModalLabel').text("Thêm mới");
                 $('.btn-outline-danger').hide();
                 $('#myForm').trigger('reset');
                 $('#id').val("");
