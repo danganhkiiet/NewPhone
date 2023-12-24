@@ -7,21 +7,23 @@ use App\Models\KhachHang;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+
 
 class APIKhachHangController extends Controller
 {
 
-    public function dangKy(Request $request){
+    public function dangKy(Request $request)
+    {
 
 
         $token = Str::random(8);
         $validator = Validator::make(request()->all(), [
             'email' => 'required|email',
             'password' => 'required|min:3',
-            'dia_chi' => 'required', 
-            'so_dien_thoai' => 'required', 
-            'ten' => 'required', 
+            'dia_chi' => 'required',
+            'so_dien_thoai' => 'required',
+            'ten' => 'required',
         ], [
             'email.required' => 'Email không thể để trống',
             'email.email' => 'Email không hợp lệ',
@@ -37,7 +39,7 @@ class APIKhachHangController extends Controller
 
         $khach_hang_moi = $validator->validated();
         $khach_hang_moi['password'] = Hash::make(request('password'));
-        
+
 
         $khach_hang = KhachHang::create($khach_hang_moi);
 
@@ -45,7 +47,7 @@ class APIKhachHangController extends Controller
         $khach_hang->token = Str::random(8);
         $khach_hang->save();
 
-        
+
 
         $mail = $khach_hang->email;
         Mail::send('tai-khoan/khach-hang/mail', ['token' => $khach_hang->token], function ($email) use ($mail) {
@@ -59,23 +61,47 @@ class APIKhachHangController extends Controller
             'message' => 'Đã đăng ký thành công',
         ]);
     }
-    public function xacThucDangKy(Request $request){
+    public function xacThucDangKy(Request $request)
+    {
 
         $token = $request->input('token');
-        $khach_hang = KhachHang::where('token',$token)->first();
+        $khach_hang = KhachHang::where('token', $token)->first();
 
-        if (!empty($khach_hang)) 
-        {
+        if (!empty($khach_hang)) {
             $khach_hang->trang_thai = 1;
-            $khach_hang->token=null;
+            $khach_hang->token = null;
             $khach_hang->save();
             return response()->json(['message' => 'Xác minh thành công'], 200);
         }
-    
+
         return response()->json(['message' => 'Mã xác minh không hợp lệ'], 400);
     }
-    
-    
+
+    public function quenMatKhau()
+    {
+        $validator = Validator::make(request()->all(), [
+            'email' => 'required|email',
+        ], [
+            'email.required' => 'Email không thể để trống',
+            'email.email' => 'Email không hợp lệ',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422); // Trả về toàn bộ lỗi
+        }
+
+        $khach_hang_quen_mat_khau = $validator->validated();
+        $khach_hang_quen_mat_khau = KhachHang::where('email', request('email'))->first();
+
+        if (!empty($khach_hang_quen_mat_khau)) {
+
+            $mail = $khach_hang_quen_mat_khau->email;
+            Mail::send('tai-khoan/khach-hang/mail-quen-mat-khau', [], function ($email) use ($mail) {
+                $email->to($mail) // Địa chỉ email nhận được từ khách
+                    ->subject('MÃ XÁC NHẬN ĐĂNG KÝ TÀI KHOẢN');
+            });
+        }
+    }
 
     //Đăng Nhập Khách Hàng
 
@@ -83,8 +109,7 @@ class APIKhachHangController extends Controller
     {
 
 
-        $this->middleware('auth:api', ['except' => ['login','dangKy','xacThucDangKy']]);
-
+        $this->middleware('auth:api', ['except' => ['login', 'dangKy', 'xacThucDangKy', 'quenMatKhau', 'xacThucQuenMatKhau']]);
     }
 
     public function login()
@@ -93,21 +118,21 @@ class APIKhachHangController extends Controller
         $validator = Validator::make(request(['email', 'password']), [
             'email' => 'required|email', // Kiểm tra email có đúng định dạng hay không
             'password' => 'required|min:3',
-        ],[
-            'email.required'=>'Email không thể để trống',
-            'email.email'=>'Email không hợp lệ',
-            'password.required'=>'Password không thể để trống',
+        ], [
+            'email.required' => 'Email không thể để trống',
+            'email.email' => 'Email không hợp lệ',
+            'password.required' => 'Password không thể để trống',
 
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json(['lỗi' => $validator->errors()->first()], 422);
         }
-    
+
         $khach_hang = $validator->validated();
         // dd($validator);
 
-        if (! $token = auth('api')->attempt($khach_hang)) {
+        if (!$token = auth('api')->attempt($khach_hang)) {
             return response()->json(['lỗi' => 'Email hoặc Mật khẩu sai'], 401);
         }
 
@@ -127,5 +152,4 @@ class APIKhachHangController extends Controller
 
         return response()->json(['thong_bao' => 'Đăng xuất thành công']);
     }
-      
 }

@@ -43,6 +43,8 @@ Route::middleware(['api'])->group(function () {
 
         Route::get('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
 
+
+        Route::post('/cap-nhat-mat-khau', [APIKhachHangController::class, 'quenMatKhau']);
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
 

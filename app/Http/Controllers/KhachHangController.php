@@ -51,5 +51,23 @@ class khachhangController extends Controller
         $khach_hang->delete();
         return redirect()->route('khach-hang.danh-sach')->with('thong_bao','Xóa thành công');
     }
+    public function quenMatKhau()
+    {
+        return view('tai-khoan.khach-hang.quen-mat-khau');
+    }
+    public function xacThucCapNhatQuenMatKhau(Request $request)
+    {
+        $khach_hang=KhachHang::where('email',$request->email)->first();
+        if ($request->password === $request->xacnhanmatkhau) {
+            if (!empty($khach_hang)) {
+
+                $khach_hang->password = Hash::make($request->password);
+                $khach_hang->save();
+                return response()->json(['message' => 'Doi Thanh Cong'], 200);
+            }
+        }
+
+        return response()->json(['message' => 'Đổi mật khẩu không thành công'], 400);
+    }
 }
 
