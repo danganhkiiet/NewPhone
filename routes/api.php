@@ -41,7 +41,7 @@ Route::middleware(['api'])->group(function () {
         Route::post('/dang-ky', [APIKhachHangController::class, 'dangKy']);
         Route::post('/xac-thuc-dang-ky', [APIKhachHangController::class, 'xacThucDangKy']);
 
-        Route::get('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
+        Route::post('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
 
 
         Route::post('/cap-nhat-mat-khau', [APIKhachHangController::class, 'quenMatKhau']);

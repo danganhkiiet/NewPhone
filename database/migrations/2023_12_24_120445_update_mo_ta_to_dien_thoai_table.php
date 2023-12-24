@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasColumn('khach_hang', 'trang_thai')) {
-            Schema::table('khach_hang', function (Blueprint $table) {
-                $table->integer('trang_thai')->nullable()->after('token')->default(0); 
-            });
-        }
+        Schema::table('dien_thoai', function (Blueprint $table) {
+            $table->longText('mo_ta')->nullable()->change();
+        });
     }
 
     /**
@@ -23,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('khach_hang', function (Blueprint $table) {
+        Schema::table('dien_thoai', function (Blueprint $table) {
             //
         });
     }
