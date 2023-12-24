@@ -23,4 +23,9 @@ class APIMauSacController extends Controller
             'messages'=> $data==null && $messages==null ?'Không Tìm Thấy Dữ Liệu' : $messages
          ]);
     }
+    public function dangKy(){
+        return response()->json([
+            'messages'=>'thông báo'
+        ]);
+    }
 }

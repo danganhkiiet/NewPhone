@@ -31,14 +31,16 @@ Route::get('/dien-thoai-loc-danh-sach', [APIDienThoaiController::class, 'danhSac
 // Route::get('/dien-thoai-theo-gia-mau-dung-luong-hang', [APIDienThoaiController::class, 'danhSachTheoGiaMauDungLuongHang'])->name('dien-thoai.danh-sach-theo-gia-mau-dung-luong-hang');
 
 
-Route::post('/khach-hang/dang-ky', [APIKhachHangController::class, 'dangKy'])->name('khach-hang.dang-ky');
 
 Route::middleware(['api'])->group(function () {
     Route::prefix('khach-hang')->group(function () {
-        Route::post('/dang-nhap',[APIKhachHangController::class,'login']);
-        Route::get('/thong-tin', [APIKhachHangController::class,'me']);
-        Route::post('/dang-xuat', [APIKhachHangController::class,'logout']);
-        Route::get('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
+        Route::post('/dang-nhap', [APIKhachHangController::class, 'login']);
+        Route::get('/thong-tin', [APIKhachHangController::class, 'me']);
+        Route::post('/dang-xuat', [APIKhachHangController::class, 'logout']);
+        Route::post('/dang-ky', [APIKhachHangController::class, 'signup']);
+        Route::get('/gio-hang-them-moi', [APIGioHangController::class, 'themMoi']);
+
+
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
 
@@ -54,5 +56,3 @@ Route::get('/nha-san-xuat', [APINhaSanXuatController::class, 'danhSach'])->name(
 //banner
 
 Route::get('/banner', [APIBannerController::class, 'danhSach'])->name('banner.danh-sach');
-
-

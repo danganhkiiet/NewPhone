@@ -52,13 +52,12 @@ class APIKhachHangController extends Controller
         ]);
     }
 
-
     //Đăng Nhập Khách Hàng
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
+        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+    }    
     public function login()
     {
 
@@ -73,7 +72,7 @@ class APIKhachHangController extends Controller
         ]);
     
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422); // Trả về toàn bộ lỗi
+            return response()->json(['lỗi' => $validator->errors()->first()], 422);
         }
     
         $khach_hang = $validator->validated();
@@ -89,15 +88,15 @@ class APIKhachHangController extends Controller
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
+    public function me()
+    {
+        return response()->json(auth('api')->user());
+    }
     public function logout()
     {
         auth()->logout();
 
         return response()->json(['thong_bao' => 'Đăng xuất thành công']);
     }
-    
-    public function me()
-    {
-        return response()->json(auth('api')->user());
-    }
+      
 }
