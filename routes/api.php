@@ -32,7 +32,6 @@ Route::get('/dien-thoai-loc-danh-sach', [APIDienThoaiController::class, 'danhSac
 
 
 
-
 Route::middleware(['api'])->group(function () {
     Route::prefix('khach-hang')->group(function () {
         Route::post('/dang-nhap',[APIKhachHangController::class,'login']);
@@ -44,6 +43,8 @@ Route::middleware(['api'])->group(function () {
 
         Route::get('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
 
+
+        Route::post('/cap-nhat-mat-khau', [APIKhachHangController::class, 'quenMatKhau']);
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
 
@@ -59,5 +60,3 @@ Route::get('/nha-san-xuat', [APINhaSanXuatController::class, 'danhSach'])->name(
 //banner
 
 Route::get('/banner', [APIBannerController::class, 'danhSach'])->name('banner.danh-sach');
-
-
