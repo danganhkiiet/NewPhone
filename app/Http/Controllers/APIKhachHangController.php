@@ -132,14 +132,14 @@ class APIKhachHangController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['lỗi' => $validator->errors()->first()], 422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $khach_hang = $validator->validated();
         // dd($validator);
 
         if (! $token = auth('api')->attempt($khach_hang)) {
-            return response()->json(['error' => 'Sai Tài Khoản Hoặc Mật Khẩu'], 401);
+            return response()->json(['errors' => 'Sai Tài Khoản Hoặc Mật Khẩu'], 401);
         }
 
         return response()->json([

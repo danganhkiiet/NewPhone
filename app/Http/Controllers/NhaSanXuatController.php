@@ -37,7 +37,6 @@ class NhaSanXuatController extends Controller
         return $nha_san_xuat;
     }
     public function themMoiVaCapNhat(NhaSanXuatRequest $request){
-        
         $nha_san_xuat = NhaSanXuat::updateOrCreate(['id'=>$request->id],['ten'=>$request->ten,'dia_chi'=>$request->dia_chi,'email'=>$request->email,'so_dien_thoai'=>$request->so_dien_thoai]);
         return response()->json(['message' => 'Thành công']);
     }
