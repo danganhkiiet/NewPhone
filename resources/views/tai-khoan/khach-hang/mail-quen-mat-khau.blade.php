@@ -54,7 +54,7 @@
 
         <p>Bạn muốn cập nhật lại mật khẩu, vui lòng click vào link ở dưới.</p>
 
-        <a href="{{route('cap-nhat-mat-khau')}}">Cập Nhật Lại Mật Khẩu</a>
+        <a href="{{ route('cap-nhat-mat-khau', ['token' => $token]) }}">Cập Nhật Lại Mật Khẩu</a>
 
         <p>Đây là một email tự động, vui lòng không phản hồi.</p>
 

@@ -108,7 +108,7 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
-Route::get('/cap-nhat-mat-khau', [KhachHangController::class, 'quenMatKhau'])->name('cap-nhat-mat-khau');
+Route::get('/cap-nhat-mat-khau/{token}', [KhachHangController::class, 'quenMatKhau'])->name('cap-nhat-mat-khau');
 Route::post('/cap-nhat-mat-khau', [KhachHangController::class, 'xacThucCapNhatQuenMatKhau'])->name('xu-ly-cap-nhat-mat-khau');
 //thong so
 Route::middleware(['auth'])->group(function () {

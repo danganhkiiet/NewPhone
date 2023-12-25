@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <form method="POST" action="{{route('xu-ly-cap-nhat-mat-khau')}}">
+    <form method="POST" action="{{ route('xu-ly-cap-nhat-mat-khau')}}">
         @csrf
         <div class="card text-center" style="width: 300px;">
             <div class="card-header h5 text-white bg-primary">Cập Nhật Mật Khẩu</div>
@@ -25,6 +25,8 @@
                 <p class="card-text py-2">
                     Vui lòng điền lại mật khẩu
                 </p>
+                <!-- ... Các trường và nút submit ... -->
+                <input type="hidden" name="token" value="{{ $token }}">
                 <div class="form-outline">
                     <input type="password" id="password" name="password" class="form-control my-3" />
                     <label class="form-label" for="typePassword">Nhập mật khẩu</label>
