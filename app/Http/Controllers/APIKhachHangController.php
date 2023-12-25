@@ -37,6 +37,12 @@ class APIKhachHangController extends Controller
             return response()->json(['errors' => $validator->errors()], 422); // Trả về toàn bộ lỗi
         }
 
+        $khach_hang_find = KhachHang::where('email',$request->email)->first();
+        if($khach_hang_find)
+        {
+            return response()->json(['errors_email' => "Email đã tồn tại"], 422); // Trả về toàn bộ lỗi
+        }
+
         $khach_hang_moi = $validator->validated();
         $khach_hang_moi['password'] = Hash::make(request('password'));
 
@@ -130,14 +136,14 @@ class APIKhachHangController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['lỗi' => $validator->errors()->first()], 422);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $khach_hang = $validator->validated();
         // dd($validator);
 
-        if (!$token = auth('api')->attempt($khach_hang)) {
-            return response()->json(['lỗi' => 'Email hoặc Mật khẩu sai'], 401);
+        if (! $token = auth('api')->attempt($khach_hang)) {
+            return response()->json(['errors' => 'Sai Tài Khoản Hoặc Mật Khẩu'], 401);
         }
 
         return response()->json([
