@@ -110,6 +110,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/cap-nhat-mat-khau/{token}', [KhachHangController::class, 'quenMatKhau'])->name('cap-nhat-mat-khau');
 Route::post('/cap-nhat-mat-khau', [KhachHangController::class, 'xacThucCapNhatQuenMatKhau'])->name('xu-ly-cap-nhat-mat-khau');
+Route::get('/cap-nhat-mat-khau-thanh-cong', [KhachHangController::class, 'quenMatKhauThanhCong'])->name('cap-nhat-mat-khau-thanh-cong');
+
 //thong so
 Route::middleware(['auth'])->group(function () {
     Route::prefix('thong-so')->group(function () {

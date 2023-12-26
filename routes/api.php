@@ -8,6 +8,7 @@ use App\Http\Controllers\APIMauSacController;
 use App\Http\Controllers\APINhaSanXuatController;
 use App\Http\Controllers\APIBannerController;
 use App\Http\Controllers\APIGioHangController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,10 +42,14 @@ Route::middleware(['api'])->group(function () {
         Route::post('/dang-ky', [APIKhachHangController::class, 'dangKy']);
         Route::post('/xac-thuc-dang-ky', [APIKhachHangController::class, 'xacThucDangKy']);
 
+        Route::get('/danh-sach-gio-hang', [APIGioHangController::class,'danhSachGioHangKhachHang']);
+        Route::post('/cap-nhat-gio-hang', [APIGioHangController::class,'capNhatSoLuongGioHang']);
+        Route::post('/xoa-gio-hang', [APIGioHangController::class,'xoaGioHang']);
         Route::post('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
 
-
         Route::post('/cap-nhat-mat-khau', [APIKhachHangController::class, 'quenMatKhau']);
+
+     
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
 
