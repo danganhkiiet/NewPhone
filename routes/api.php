@@ -8,6 +8,7 @@ use App\Http\Controllers\APIMauSacController;
 use App\Http\Controllers\APINhaSanXuatController;
 use App\Http\Controllers\APIBannerController;
 use App\Http\Controllers\APIGioHangController;
+use App\Http\Controllers\APIDienThoaiThongSoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -60,3 +61,7 @@ Route::get('/nha-san-xuat', [APINhaSanXuatController::class, 'danhSach'])->name(
 //banner
 
 Route::get('/banner', [APIBannerController::class, 'danhSach'])->name('banner.danh-sach');
+
+//thong_So
+
+Route::get('/thong-so/{id}', [APIDienThoaiThongSoController::class, 'thongSoTheoDienThoai']);

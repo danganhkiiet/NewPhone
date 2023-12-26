@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MauSac;
-use App\Http\Resources\MauResource;
+use App\Http\Resources\MauSacResource;
 class APIMauSacController extends Controller
 {
     public function danhSach(){
@@ -12,7 +12,7 @@ class APIMauSacController extends Controller
         if(empty($mau_sac)){
             return $this->apiResource();
         }
-        $apimau_sac=MauResource::collection($mau_sac);
+        $apimau_sac=MauSacResource::collection($mau_sac);
         return $this->apiResource(true,200,$apimau_sac,"Danh sách màu sắc");
     }
     public function apiResource($success=false,$status=200,$data=null,$messages=null){

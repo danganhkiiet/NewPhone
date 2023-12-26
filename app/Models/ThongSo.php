@@ -11,4 +11,11 @@ class ThongSo extends Model
     use SoftDeletes;
     protected $fillable=['ten'];
     protected $table='thong_so';
+    public function dienThoaiThongSo()
+    {
+        return $this->hasMany(DienThoaiThongSo::class, 'thong_so_id');
+    }
+    public function dienThoai(){
+        return $this->belongsToMany(DienThoaiThongSo::class);
+    }
 }

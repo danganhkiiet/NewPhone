@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MauSac;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\MauSacDungLuongThongSoRequest;
-class MauController extends Controller
+class MauSacController extends Controller
 {
     //
     public function danhSach(Request $request){
