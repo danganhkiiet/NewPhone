@@ -6,37 +6,41 @@ use Illuminate\Http\Request;
 use App\Models\khachhang;
 use Illuminate\Support\Facades\Hash;
 use Mail;
+
 class khachhangController extends Controller
 {
     //
-    public function danhSach(){
+    public function danhSach()
+    {
         $lst_khach_hang = khachhang::paginate(5);
-        if($ten = request()->ten)
-        {
-            $lst_khach_hang = khachhang::where('ten','like','%'.$ten)->paginate(5);
+        if ($ten = request()->ten) {
+            $lst_khach_hang = khachhang::where('ten', 'like', '%' . $ten)->paginate(5);
         }
         return view('tai-khoan.khach-hang.danh-sach', compact('lst_khach_hang'));
     }
-    public function themMoi(Request $request){
+    public function themMoi(Request $request)
+    {
+    }
+    public function xuLyThemMoi(Request $request)
+    {
+        $khach_hang = new khachhang();
+        $khach_hang->ten = $request->ten;
+        $khach_hang->email = $request->email;
+        $khach_hang->dia_chi = $request->dia_chi;
+        $khach_hang->so_dien_thoai = $request->so_dien_thoai;
+        $khach_hang->password = Hash::make($request->password);
+        $khach_hang->save();
+        return redirect()->route('khach-hang.danh-sach')->with('thong_bao', 'Thêm mới thành công');
+    }
 
-    }
-    public function xuLyThemMoi(Request $request){
-       $khach_hang = new khachhang();
-       $khach_hang->ten = $request->ten;
-       $khach_hang->email = $request->email;
-       $khach_hang->dia_chi = $request->dia_chi;
-       $khach_hang->so_dien_thoai = $request->so_dien_thoai;
-       $khach_hang->password = Hash::make($request->password);
-       $khach_hang->save();
-       return redirect()->route('khach-hang.danh-sach')->with('thong_bao','Thêm mới thành công');
-    }
-    
-    public function capNhat($id){
+    public function capNhat($id)
+    {
         $khach_hang = khachhang::find($id);
         return view('tai-khoan.khach-hang.cap-nhat', compact('khach_hang'));
     }
-    
-    public function xuLyCapNhat(Request $request, $id){
+
+    public function xuLyCapNhat(Request $request, $id)
+    {
         $khach_hang = khachhang::find($id);
         $khach_hang->ten = $request->ten;
         $khach_hang->email = $request->email;
@@ -44,30 +48,35 @@ class khachhangController extends Controller
         $khach_hang->so_dien_thoai = $request->so_dien_thoai;
         $khach_hang->password = 1;
         $khach_hang->save();
-        return redirect()->route('khach-hang.danh-sach')->with('thong_bao','Cập nhật thành công');
+        return redirect()->route('khach-hang.danh-sach')->with('thong_bao', 'Cập nhật thành công');
     }
-     public function xoa($id){
+    public function xoa($id)
+    {
         $khach_hang = khachhang::find($id);
         $khach_hang->delete();
-        return redirect()->route('khach-hang.danh-sach')->with('thong_bao','Xóa thành công');
+        return redirect()->route('khach-hang.danh-sach')->with('thong_bao', 'Xóa thành công');
     }
-    public function quenMatKhau()
+    public function quenMatKhau($token)
     {
-        return view('tai-khoan.khach-hang.quen-mat-khau');
+        return view('tai-khoan.khach-hang.quen-mat-khau', compact('token'));
     }
     public function xacThucCapNhatQuenMatKhau(Request $request)
     {
-        $khach_hang=KhachHang::where('email',$request->email)->first();
+        $khach_hang = KhachHang::where('token', $request->token)->first();
         if ($request->password === $request->xacnhanmatkhau) {
             if (!empty($khach_hang)) {
 
                 $khach_hang->password = Hash::make($request->password);
+                $khach_hang->token = null;
                 $khach_hang->save();
-                return response()->json(['message' => 'Doi Thanh Cong'], 200);
+                return redirect()->route('cap-nhat-mat-khau-thanh-cong')->with((['thong_bao' => 'đổi mật khẩu thành công']));
             }
         }
 
-        return response()->json(['message' => 'Đổi mật khẩu không thành công'], 400);
+        return view();
+    }
+    public function quenMatKhauThanhCong()
+    {
+        return view('tai-khoan.khach-hang.quen-mat-khau-thanh-cong');
     }
 }
-

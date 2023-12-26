@@ -50,13 +50,23 @@
 
     <div class="container">
 
-        <p>Xin chào,</p>
+        <!-- Thong bao -->
+        @if (session('thong_bao'))
+            <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
+                <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
+                    <span class="alert-inner--icon me-2"><i class="fe fe-thumbs-up"></i></span>
+                    <strong>Thành công</strong>
+                </p>
+                <p class="py-3 px-5" style="color: green"> {{ session('thong_bao') }}</p>
+            </div>
+        @endif
+        <!-- ket thuc thong bao -->
+        <p>Cảm ơn,</p>
 
-        <p>Bạn muốn cập nhật lại mật khẩu, vui lòng click vào link ở dưới.</p>
+        <p>Bạn đổi mật khẩu thành công.</p>
 
-        <a href="{{ route('cap-nhat-mat-khau', ['token' => $token]) }}">Cập Nhật Lại Mật Khẩu</a>
 
-        <p>Đây là một email tự động, vui lòng không phản hồi.</p>
+        <p>Có thể quay lại web đăng nhập.</p>
 
         <footer>
             <p>Trân trọng,</p>

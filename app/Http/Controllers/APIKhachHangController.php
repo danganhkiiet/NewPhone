@@ -85,6 +85,8 @@ class APIKhachHangController extends Controller
 
     public function quenMatKhau()
     {
+        $token = Str::random(6); // Tạo mã token ngẫu nhiên
+
         $validator = Validator::make(request()->all(), [
             'email' => 'required|email',
         ], [
@@ -99,10 +101,12 @@ class APIKhachHangController extends Controller
         $khach_hang_quen_mat_khau = $validator->validated();
         $khach_hang_quen_mat_khau = KhachHang::where('email', request('email'))->first();
 
+        $khach_hang_quen_mat_khau->token = $token;
+        $khach_hang_quen_mat_khau->save();
         if (!empty($khach_hang_quen_mat_khau)) {
 
             $mail = $khach_hang_quen_mat_khau->email;
-            Mail::send('tai-khoan/khach-hang/mail-quen-mat-khau', [], function ($email) use ($mail) {
+            Mail::send('tai-khoan/khach-hang/mail-quen-mat-khau', compact('token'), function ($email) use ($mail) {
                 $email->to($mail) // Địa chỉ email nhận được từ khách
                     ->subject('MÃ XÁC NHẬN ĐĂNG KÝ TÀI KHOẢN');
             });
