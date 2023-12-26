@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DungLuongController;
-use App\Http\Controllers\MauController;
+use App\Http\Controllers\MauSacController;
 use App\Http\Controllers\DienThoaiController;
 use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\KhachHangController;
@@ -156,9 +156,9 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::prefix('mau-sac')->group(function () {
         Route::name('mau-sac.')->group(function () {
-            Route::get('/danh-sach',[MauController::class,'danhSach'])->name('danh-sach');
-            Route::get('/cap-nhat/{id}',[MauController::class,'capNhat'])->name('cap-nhat');
-            Route::post('/them-moi-cap-nhat',[MauController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+            Route::get('/danh-sach',[MauSacController::class,'danhSach'])->name('danh-sach');
+            Route::get('/cap-nhat/{id}',[MauSacController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/them-moi-cap-nhat',[MauSacController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
         });
     });
 });

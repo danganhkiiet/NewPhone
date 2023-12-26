@@ -21,6 +21,7 @@ class APIDienThoaiController extends Controller
     }
     public function danhSachChiTiet($id){
         $dien_thoai=DienThoai::find($id);
+ 
         $api_dien_thoai=new DienThoaiResource($dien_thoai);
         // $api_dien_thoai=null;
         if($api_dien_thoai){
