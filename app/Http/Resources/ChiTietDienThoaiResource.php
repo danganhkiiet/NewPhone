@@ -17,7 +17,8 @@ class ChiTietDienThoaiResource extends JsonResource
         return [
             'id' => $this->id,
             'dien_thoai_id' => $this->dienThoai,
-            // 'dien_thoai_id'=>$this->dienThoai->nha_san_xuat,
+            'nha_san_xuat_id'=>$this->dienThoai->nha_san_xuat,
+            // 'hinh_anh_id'=>$this->dienThoai->hinhAnh,
             'mau_sac_id' => $this->mauSac,
             'dung_luong_id' => $this->dungLuong,
             'so_luong'=>$this->so_luong,

@@ -7,44 +7,48 @@ use App\Models\DienThoai;
 use App\Models\ChiTietDienThoai;
 use App\Http\Resources\DienThoaiResource;
 use App\Http\Resources\ChiTietDienThoaiResource;
+
 class APIDienThoaiController extends Controller
 {
     //
-    public function danhSach(){
-        $dien_thoai=DienThoai::all();
-        $api_dien_thoai=DienThoaiResource::collection($dien_thoai);
+    public function danhSach()
+    {
+        $dien_thoai = DienThoai::all();
+        $api_dien_thoai = DienThoaiResource::collection($dien_thoai);
         // $api_dien_thoai=null;
-        if($api_dien_thoai){
-            return $this->apiResource(true,200,$api_dien_thoai,'Danh Sách Điện Thoại');
+        if ($api_dien_thoai) {
+            return $this->apiResource(true, 200, $api_dien_thoai, 'Danh Sách Điện Thoại');
         }
         return $this->apiResource();
     }
-    public function danhSachChiTiet($id){
-        $dien_thoai=DienThoai::find($id);
- 
-        $api_dien_thoai=new DienThoaiResource($dien_thoai);
+    public function danhSachChiTiet($id)
+    {
+        $dien_thoai = DienThoai::find($id);
+
+        $api_dien_thoai = new DienThoaiResource($dien_thoai);
         // $api_dien_thoai=null;
-        if($api_dien_thoai){
-            return $this->apiResource(true,200,$api_dien_thoai,'Danh Sách Chi Tiết Điện Thoại');
+        if ($api_dien_thoai) {
+            return $this->apiResource(true, 200, $api_dien_thoai, 'Danh Sách Chi Tiết Điện Thoại');
         }
         return $this->apiResource();
     }
-    public function danhSachLoc(Request $request){
+    public function danhSachLoc(Request $request)
+    {
         // Lấy các giá trị từ request
         $filters = $request->input('filters');
 
         $query = ChiTietDienThoai::query();
 
-  
-        if(isset($filters['gia_ban'])){
-          $query->where('gia_ban', '>=', $filters['gia_ban']['gia_dau'])
-          ->where('gia_ban', '<=', $filters['gia_ban']['gia_cuoi']);   
+
+        if (isset($filters['gia_ban'])) {
+            $query->where('gia_ban', '>=', $filters['gia_ban']['gia_dau'])
+                ->where('gia_ban', '<=', $filters['gia_ban']['gia_cuoi']);
         }
         // Kiểm tra và thêm điều kiện về mau_sac
         if (isset($filters['mau_sac'])) {
             $mau_sac_values = $filters['mau_sac'];
-           // Sử dụng Closure để quản lý điều kiện liên quan đến 'mau_sac'
-           //lý do sử dụng closure giúp định rõ phạm vi và sự tương tác giữa các điều kiện.
+            // Sử dụng Closure để quản lý điều kiện liên quan đến 'mau_sac'
+            //lý do sử dụng closure giúp định rõ phạm vi và sự tương tác giữa các điều kiện.
             $query->where(function ($query) use ($mau_sac_values) {
                 foreach ($mau_sac_values as $mau) {
                     // Kiểm tra sự tồn tại của 'mau_sac_id' trong mỗi điều kiện
@@ -67,38 +71,50 @@ class APIDienThoaiController extends Controller
                 }
             });
         }
-        if(isset($filters['nha_san_xuat'])){
+        if (isset($filters['nha_san_xuat'])) {
 
             $nha_san_xuat = collect($filters['nha_san_xuat'])->values(); // Lấy giá trị của mảng
             // dd($nha_san_xuat);
             // Sử dụng whereIn để thêm điều kiện về nha_san_xuat_id từ bảng DienThoai
             $query->whereIn('dien_thoai_id', function ($query) use ($nha_san_xuat) {
-                 // Trong Closure này, chúng ta đang tạo một câu truy vấn con
+                // Trong Closure này, chúng ta đang tạo một câu truy vấn con
                 $query->select('id')->from('dien_thoai')->whereIn('nha_san_xuat_id', $nha_san_xuat);
             });
-            
         }
-        
+
 
         $filteredProductsType = $query->get();
-    //   dd($filteredProductsType);
-        $api_dien_thoai_theo_gia=ChiTietDienThoaiResource::collection($filteredProductsType);
+        //   dd($filteredProductsType);
+        $api_dien_thoai_theo_gia = ChiTietDienThoaiResource::collection($filteredProductsType);
         // $api_dien_thoai=null;
-        if($api_dien_thoai_theo_gia){
-            return $this->apiResource(true,200,$api_dien_thoai_theo_gia,'Danh Sách Điện Thoại Lọc');
+        if ($api_dien_thoai_theo_gia) {
+            return $this->apiResource(true, 200, $api_dien_thoai_theo_gia, 'Danh Sách Điện Thoại Lọc');
         }
-      
-        return $this->apiResource();
-        
-    }
-  
 
-    public function apiResource($success=false,$status=200,$data=null,$messages=null){
+        return $this->apiResource();
+    }
+    public function dienThoaiLienQuan()
+    {
+        // Lấy tất cả điện thoại có cùng nha_san_xuat_id nhưng id khác với dien_thoai_id
+        $dien_thoai_lien_quan = DienThoai::where('nha_san_xuat_id', request('nha_san_xuat_id'))
+            ->where('id', '!=', request('dien_thoai_id'))
+            ->get();
+        // dd($dien_thoai_lien_quan);
+        $api_dien_thoai = DienThoaiResource::collection($dien_thoai_lien_quan);
+        if ($api_dien_thoai) {
+            return $this->apiResource(true, 200, $api_dien_thoai, 'Danh Sách Điện Thoại Liên Quan');
+        }
+
+        return $this->apiResource();
+    }
+
+    public function apiResource($success = false, $status = 200, $data = null, $messages = null)
+    {
         return response()->json([
-            'success'=>$success,
-            'data'=>$data,
-            'status'=>$data==null ? 404 : $status,
-            'messages'=> $data==null && $messages==null ?'Không Tìm Thấy Dữ Liệu' : $messages
-         ]);
+            'success' => $success,
+            'data' => $data,
+            'status' => $data == null ? 404 : $status,
+            'messages' => $data == null && $messages == null ? 'Không Tìm Thấy Dữ Liệu' : $messages
+        ]);
     }
 }

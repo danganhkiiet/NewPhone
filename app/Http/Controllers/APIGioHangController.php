@@ -26,6 +26,7 @@ class APIGioHangController extends Controller
             ]
         );
     }
+  
     public function danhSachGioHangKhachHang()
     {
         $gio_hang = GioHang::where("khach_hang_id", request('khach_hang_id'))->get();

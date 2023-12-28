@@ -53,7 +53,7 @@
                                                 <div class="control-group form-group" style="text-align:center">
                                                     <label class="form-label" for="avatar">Avatar</label>
                                                     <img src="{{ asset($admin->avatar) }}"
-                                                        style="width: 55%; height: 8em;" />
+                                                        style="width: 55%; height: 12em;" />
                                                     <input type="file" class="form-control" name="avatar"
                                                         id="avatar">
                                                 </div>
@@ -67,8 +67,6 @@
                     </div>
                 </div>
                 <!-- /row -->
-
-
             </div>
         </div>
     </div>
