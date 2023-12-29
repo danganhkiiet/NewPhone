@@ -38,6 +38,34 @@
     </div>
     <!-- /GLOABAL LOADER -->
 
+    <!-- Thong bao -->
+    @if (session('thong_bao_that_bai'))
+        <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
+            <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
+                <i class="fa fa-times-circle" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-times-circle" aria-label="fa fa-times-circle"></i>
+                <strong>Thất Bại</strong>
+            </p>
+            <p style="color: rgb(227, 25, 25)"> {{ session('thong_bao') }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    @endif
+    <!-- ket thuc thong bao -->
+      <!-- Thong bao -->
+      @if(session('thong_bao_thanh_cong'))
+      <div class="alert alert-success alert-dismissible fade show p-0 mb-4" role="alert">
+          <p class="py-3 px-5 mb-0 border-bottom border-bottom-success-light">
+              <span class="alert-inner--icon me-2"><i class="fe fe-thumbs-up"></i></span>
+              <strong>Thành công</strong>
+          </p>
+          <p class="py-3 px-5"> {{session('thong_bao_thanh_cong')}}</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+      @endif
+      <!-- ket thuc thong bao -->
     <!-- PAGE -->
     <div class="page">
         <div>
@@ -64,9 +92,9 @@
                                     <i class="zmdi zmdi-email" aria-hidden="true"></i>
                                 </span>
                             </div>
-							@error('email')
-								<div class="alert alert-danger">{{ $message }}</div>
-							@enderror
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <div class="wrap-input100 validate-input" data-bs-validate = "Password is required">
                                 <input class="input100 @error('password') is-invalid @enderror" type="password"
                                     name="password" placeholder="Password">
@@ -75,9 +103,9 @@
                                     <i class="zmdi zmdi-lock" aria-hidden="true"></i>
                                 </span>
                             </div>
-							@error('password')
-								<div class="alert alert-danger">{{ $message }}</div>
-							@enderror
+                            @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <div class="text-end pt-1">
                                 <p class="mb-0"><a href="#" class="text-primary ms-1">Forgot Password?</a></p>
                             </div>

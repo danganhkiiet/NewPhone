@@ -27,6 +27,7 @@ use App\Http\Controllers\APIDienThoaiThongSoController;
 Route::get('/dien-thoai', [APIDienThoaiController::class, 'danhSach'])->name('dien-thoai.danh-sach');
 Route::get('/dien-thoai-chi-tiet/{id}', [APIDienThoaiController::class, 'danhSachChiTiet'])->name('dien-thoai.danh-sach-chi-tiet');
 Route::get('/dien-thoai-loc-danh-sach', [APIDienThoaiController::class, 'danhSachLoc'])->name('dien-thoai.danh-sach-loc');
+Route::get('/dien-thoai-lien-quan', [APIDienThoaiController::class, 'dienThoaiLienQuan']);
 // Route::get('/dien-thoai-theo-gia', [APIDienThoaiController::class, 'danhSachTheoGia'])->name('dien-thoai.danh-sach-theo-gia');
 // Route::get('/dien-thoai-theo-gia-mau', [APIDienThoaiController::class, 'danhSachTheoGiaMau'])->name('dien-thoai.danh-sach-theo-gia-mau');
 // Route::get('/dien-thoai-theo-gia-mau-dung-luong', [APIDienThoaiController::class, 'danhSachTheoGiaMauDungLuong'])->name('dien-thoai.danh-sach-theo-gia-mau-dung-luong');

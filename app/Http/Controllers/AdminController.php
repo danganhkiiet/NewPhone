@@ -21,15 +21,18 @@ class AdminController extends Controller
         if($admin){
             if(Hash::check($request->password, $admin->password)){
                 if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                    return redirect()->route('dien-thoai.danh-sach');
+                    return redirect()->route('dien-thoai.danh-sach')->with('thong_bao','Đăng Nhập Thành Công');;
                 }
             }
+            else{
+                return redirect()->route('admin.dang-nhap')->with('thong_bao_that_bai','Mật Khẩu Hoặc Email Sai');
+            }
         }
-        return redirect()->route('admin.dang-nhap')->with('thong_bao','Đăng nhập thất bại');
+        return redirect()->route('admin.dang-nhap')->with('thong_bao_that_bai','Đăng nhập thất bại');
     }
     public function dangXuat(){
         $admin=Auth::logout();
-        return redirect()->route('admin.dang-nhap')->with('thong_bao','Đăng xuất thành công');
+        return redirect()->route('admin.dang-nhap')->with('thong_bao_thanh_cong','Đăng xuất thành công');
     }
     public function danhSach(Request $request){
         if(Gate::check('is-admin')){
