@@ -31,7 +31,7 @@ class APIDienThoaiController extends Controller
     }
     public function danhSachLoc(Request $request){
         // Lấy các giá trị từ request
-        $filters = $request->input('filters');
+        $filters = $request->filters;
 
         $query = ChiTietDienThoai::query();
 
