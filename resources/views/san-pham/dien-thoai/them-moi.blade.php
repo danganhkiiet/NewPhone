@@ -22,37 +22,20 @@
                     <div class="col-lg-3 col-md-">
                         <div class="card custom-card">
                             <div class="card-header border-bottom">
-                                <h3 class="card-title">Thông tin điện thoại</h3>
+                                <h3 class="card-title">Thông số điện thoại</h3>
                             </div>
                             <div class="card-body">
                                 <div class="d-flex flex-column">
-									<div class="form-group">
-										<label class="form-label" for="ten">Tên Điện Thoại</label>
-										<input class="form-control"  name="ten" id="ten_dien_thoai_id" type="text" required>
-									</div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="ten">Tên Điện Thoại</label>
+                                        <input class="form-control" name="ten" id="ten_dien_thoai_id" type="text"
+                                            required>
+                                    </div>
                                     <div class="form-group">
                                         <label class="form-label" for="nha_san_xuat">Nhà sản xuất</label>
-                                        <select class="form-control form-select" id="nha_san_xuat_id" 
+                                        <select class="form-control form-select" id="nha_san_xuat_id"
                                             data-bs-placeholder="Select Country">
                                             @foreach ($lst_nha_san_xuat as $ts)
-                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-									<div class="form-group">
-                                        <label class="form-label" for="nha_san_xuat">Màu sắc</label>
-                                        <select class="form-control form-select" id="mau_sac_id" name="mau_sac_id"
-                                            data-bs-placeholder="Select Country">
-                                            @foreach ($lst_mau_sac as $ts)
-                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-									<div class="form-group">
-                                        <label class="form-label" for="nha_san_xuat">Dung Lượng</label>
-                                        <select class="form-control form-select" name="dung_luong_id" id="dung_luong_id"
-                                            data-bs-placeholder="Select Country">
-                                            @foreach ($lst_dung_luong as $ts)
                                                 <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
                                             @endforeach
                                         </select>
@@ -67,10 +50,10 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-										<label class="form-label" for="ten">Giá Trị</label>
-										<input class="form-control"  name="gia_tri" id="gia_tri" type="text" required>
-									</div>
-                                    <button class="btn btn-primary" id="btn-them">Thêm</button>
+                                        <label class="form-label" for="ten">Giá Trị</label>
+                                        <input class="form-control" name="gia_tri" id="gia_tri" type="text" required>
+                                    </div>
+                                    <button class="btn btn-primary" id="btn-them-bang1">Thêm</button>
                                 </div>
                             </div>
                         </div>
@@ -81,22 +64,89 @@
                                 <h3 class="card-title">Danh Sách Thông Số</h3>
                             </div>
                             <div class="card-body">
-                                <form class="form-horizontal" method="POST"  enctype="multipart/form-data" action="{{ route('dien-thoai.xu-ly-them-moi') }}">
+                                <form class="form-horizontal" id="myForm" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <label class="form-label" for="ten">Hình Ảnh</label>
-                                        <input type="file" id="fromFile" required   name="hinh_anh[]" multiple class="form-control" />
+                                        <input type="file" id="fromFile" required name="hinh_anh[]" multiple
+                                            class="form-control" />
                                     </div>
-                                    <table class="table border text-nowrap text-md-nowrap table-hover" id="thong-so">
+                                </form>
+                                <table class="table border text-nowrap text-md-nowrap table-hover" id="thong-so">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên Điện Thoại</th>
+                                            <th>Thông số</th>
+                                            <th>Giá trị</th>
+                                            <th>Nhà Sản Xuất</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="app-content main-content mt-0">
+        <div class="side-app">
+            <!-- CONTAINER -->
+            <div class="main-container container-fluid">
+                <!-- row -->
+                <div class="row row-deck">
+                    <div class="col-lg-3 col-md-">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title">Màu Dung Lượng điện thoại</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex flex-column">
+                                    <div class="form-group">
+                                        <label class="form-label" for="nha_san_xuat">Màu sắc</label>
+                                        <select class="form-control form-select" id="mau_sac_id" name="mau_sac_id"
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_mau_sac as $ts)
+                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="nha_san_xuat">Dung Lượng</label>
+                                        <select class="form-control form-select" name="dung_luong_id" id="dung_luong_id"
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_dung_luong as $ts)
+                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-primary" id="btn-them-bang2">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title">Danh Sách Màu Dung Lượng</h3>
+                            </div>
+                            <div class="card-body">
+                                <form class="form-horizontal" method="POST">
+                                    @csrf
+                                    <table class="table border text-nowrap text-md-nowrap table-hover"
+                                        id="bang-mau-dung_luong">
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Tên Điện Thoại</th>
                                                 <th>Màu</th>
                                                 <th>Dung Lượng</th>
-                                                <th>Thông số</th>
-                                                <th>Giá trị</th>
-                                                <th>Nhà Sản Xuất</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -105,13 +155,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button class="btn btn-primary" type="submit">Thêm điện thoại</button>
                                 </form>
+                                <button class="btn btn-primary btn-ThemDienThoai" type="submit">Thêm điện thoại</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            
+
             </div>
         </div>
     </div>
@@ -126,65 +176,118 @@
             row.parentNode.removeChild(row);
         }
         $(document).ready(function() {
+            var ten = "";
+            var thong_so_id = [];
+            var gia_tri = [];
+            var nha_san_xuat_id = "";
+            var mau_sac_id = [];
+            var dung_luong_id = [];
+
             $('#thong_so_id').change(function() {
                 var ten = $("#thong_so_id").find(":selected").text();
                 $('#thong-so tr').each(function() {
-                var tenthongso = $(this).find('td:eq(4)').text();
-                if (tenthongso == ten) {
+                    var tenthongso = $(this).find('td:eq(4)').text();
+                    if (tenthongso == ten) {
                         alert('Thông số đã có, vui lòng chọn lại');
                     }
-                })
+                });
             });
-            var stt = 0;
-            $("#btn-them").click(function() {
-                stt = stt + 1;
-                var tendienthoai=$('#ten_dien_thoai_id').val();
+
+            var stt1 = 0;
+            var stt2 = 0;
+
+            $("#btn-them-bang1").click(function() {
+                stt1 = stt1 + 1;
+                var tendienthoai = $('#ten_dien_thoai_id').val();
+                var tenthongso = $("#thong_so_id").find(":selected").text();
+                var thongsoid = $('#thong_so_id').find(':selected').val();
+                var tengiatri = $('#gia_tri').val();
+                var tennhasanxuat = $("#nha_san_xuat_id").find(":selected").text();
+                var nhasanxuatid = $('#nha_san_xuat_id').find(':selected').val();
+
+                // Thêm dữ liệu
+                ten = tendienthoai;
+                thong_so_id.push(thongsoid);
+                gia_tri.push(tengiatri);
+                nha_san_xuat_id = nhasanxuatid;
+
+                var row = `<tr>
+            <td>${stt1}</td>
+            <td>${tendienthoai}</td>
+            <td>${tenthongso}</td>
+            <td>${tengiatri}</td>
+            <td>${tennhasanxuat}</td>
+            <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
+        </tr>`;
+
+                $("#thong-so").append(row);
+
+                // Chỉ cho nhập 1 lần 1 điện thoại
+                $("#ten_dien_thoai_id").prop("readOnly", true);
+                $("#nha_san_xuat_id").prop("disabled", true);
+            });
+
+            $("#btn-them-bang2").click(function() {
+                stt2 = stt2 + 1;
                 var tenmau = $("#mau_sac_id").find(":selected").text();
                 var mau = $('#mau_sac_id').find(':selected').val();
                 var tendungluong = $("#dung_luong_id").find(":selected").text();
                 var duongluongid = $('#dung_luong_id').find(':selected').val();
-                var tenthongso = $("#thong_so_id").find(":selected").text();
-                var thongsoid = $('#thong_so_id').find(':selected').val();
-                var tengiatri=$('#gia_tri').val();
-                var tennhasanxuat= $("#nha_san_xuat_id").find(":selected").text();
-                var nhasanxuatid = $('#nha_san_xuat_id').find(':selected').val();
 
-                var flag = false;
-                $('#thong-so tr').each(function() {
-                var tenMauSac = $(this).find('td:eq(2)').text();
-                var tenDungLuong = $(this).find('td:eq(3)').text();
-                if (tenMauSac == tenmau && tenDungLuong == tendungluong) {
-                        return flag = true;
-                    }
-                })
+                // Thêm dữ liệu vào
+                mau_sac_id.push(mau);
+                dung_luong_id.push(duongluongid);
+
                 var row = `<tr>
-                <td>${stt}</td>
-                <td>${tendienthoai}<input type="hidden" name="ten" value="${tendienthoai}"></td>
-                `
-                if(flag == false)
-                {
-                row=row+`<td>${tenmau}<input type="hidden" name="mau_sac_id[]" value="${mau}"></td>
-                <td>${tendungluong}<input type="hidden" name="dung_luong_id[]" value="${duongluongid}"></td>`
-                }
-                else
-                {
-                    row=row+`<td><input type="hidden" name="mau_sac_id[]"></td>
-                    <td><input type="hidden" name="dung_luong_id[]"></td>`
-                }
-                row=row+`
-                <td>${tenthongso}<input type="hidden" name="thong_so_id[]" value="${thongsoid}"></td></td>
-                <td>${tengiatri}<input type="hidden" name="gia_tri[]" value="${tengiatri}"></td></td>
-                <td>${tennhasanxuat}<input type="hidden" name="nha_san_xuat_id" value="${nhasanxuatid}"></td>
-                <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
-                </tr>`;
+            <td>${stt2}</td>
+            <td>${tenmau}</td>
+            <td>${tendungluong}</td>
+            <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
+        </tr>`;
 
-                $("#thong-so").append(row);
-           
-                //chỉ cho nhập 1 lần 1 điện thoại
-                $("#ten_dien_thoai_id").prop("readOnly", true);
-                $("#nha_san_xuat_id").prop("disabled", true);
+                $("#bang-mau-dung_luong").append(row);
             });
-            //kiem tra dien thoai da ton tai chua
+
+            $(".btn-ThemDienThoai").click(function() {
+                var frm_Data = new FormData($('#myForm')[0]);
+                frm_Data.append('nha_san_xuat_id', nha_san_xuat_id);
+                frm_Data.append('ten', ten);
+
+                // Append each value separately and use square brackets to ensure they are sent as arrays
+                for (var i = 0; i < thong_so_id.length; i++) {
+                    frm_Data.append('thong_so_id[]', thong_so_id[i]);
+                    frm_Data.append('gia_tri[]', gia_tri[i]);
+                }
+
+                for (var i = 0; i < mau_sac_id.length; i++) {
+                    frm_Data.append('mau_sac_id[]', mau_sac_id[i]);
+                    frm_Data.append('dung_luong_id[]', dung_luong_id[i]);
+                }
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    type: 'POST',
+                    url: "{{ route('dien-thoai.xu-ly-them-moi') }}",
+                    data: frm_Data,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Xử lý kết quả thành công nếu cần
+                        console.log(response);
+
+                        // Reload trang sau khi thêm điện thoại thành công
+                        location.reload();
+                    },
+                    error: function(error) {
+                        // Xử lý lỗi nếu có
+                        console.error(error);
+                    }
+                });
+            });
+
+            // Kiểm tra điện thoại đã tồn tại chưa
             $('#ten_dien_thoai_id').change(function() {
                 var productName = $(this).val();
                 $.ajax({
@@ -193,9 +296,9 @@
                     data: {
                         'ten': productName
                     },
-                }).done(function(response){
-                    if(response.flag){
-                        alert("sản phẩm đã tồn tại, vui lòng nhập lại!!")
+                }).done(function(response) {
+                    if (response.flag) {
+                        alert("Sản phẩm đã tồn tại, vui lòng nhập lại!!");
                         $('#ten_dien_thoai_id').val(""); // Gán lại giá trị rỗng cho input
                     }
                 });
@@ -203,4 +306,3 @@
         });
     </script>
 @endsection
-

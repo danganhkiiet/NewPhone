@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Yajra\DataTables\DataTables;
 use App\Models\ChiTietDienThoai;
 use App\Models\DienThoaiThongSo;
@@ -11,6 +12,7 @@ use App\Models\DienThoai;
 use App\Models\DungLuong;
 use App\Models\NhaSanXuat;
 use Illuminate\Http\Request;
+
 class DienThoaiController extends Controller
 {
     /**
@@ -19,7 +21,7 @@ class DienThoaiController extends Controller
     public function capNhatMoTa(Request $request, $id)
     {
         $dien_thoai = DienThoai::find($id);
-        $dien_thoai->mo_ta=$request->mo_ta;
+        $dien_thoai->mo_ta = $request->mo_ta;
         $dien_thoai->save();
         return redirect()->back();
     }
@@ -29,66 +31,66 @@ class DienThoaiController extends Controller
         $lst_dung_luong = DungLuong::all();
         $lst_mau_sac = MauSac::all();
         $lst_nha_san_xuat = NhaSanXuat::all();
-        return view('san-pham/dien-thoai/them-moi',compact('lst_thong_so','lst_dung_luong','lst_mau_sac','lst_nha_san_xuat'));
+        return view('san-pham/dien-thoai/them-moi', compact('lst_thong_so', 'lst_dung_luong', 'lst_mau_sac', 'lst_nha_san_xuat'));
     }
     public function xuLyThemMoi(Request $request)
     {
+        // dd(count($request->mau_sac_id));
         // dd($request);
         //them dien thoai moi
         $dien_thoai = new DienThoai();
         $dien_thoai->ten = $request->ten;
-        $dien_thoai->nha_san_xuat_id= $request->nha_san_xuat_id;
+        $dien_thoai->nha_san_xuat_id = $request->nha_san_xuat_id;
         $dien_thoai->save();
-       
+
         // thêm hình ảnh sản phẩm
         $files = $request->hinh_anh;
-        $paths=[];
-        foreach ($files as $file){
+        $paths = [];
+        foreach ($files as $file) {
             $hinh_anh = new HinhAnh();
             $hinh_anh->dien_thoai_id = $dien_thoai->id;
-            $path= $file->store('hinh_anh');
-            $hinh_anh->duong_dan=$path;
-            $paths[]=$path;
+            $path = $file->store('hinh_anh');
+            $hinh_anh->duong_dan = $path;
+            $paths[] = $path;
             $hinh_anh->save();
         }
         //duyệt bảng để thêm
-        for($i = 0; $i < count($request->thong_so_id); $i = $i +1 )
-        {
-            // tao chi tiet dien thoai moi
-            if(!empty($request->dung_luong_id[$i]))
-            {
-                $chi_tiet_dien_thoai = new ChiTietDienThoai();
-                $chi_tiet_dien_thoai->dien_thoai_id = $dien_thoai->id;
-                $chi_tiet_dien_thoai->mau_sac_id = $request->mau_sac_id[$i];
-                $chi_tiet_dien_thoai->dung_luong_id = $request->dung_luong_id[$i];
-                $chi_tiet_dien_thoai->so_luong = 0;
-                $chi_tiet_dien_thoai->gia_ban = 0;
-                $chi_tiet_dien_thoai -> save();
-            }
+        for ($i = 0; $i < count($request->mau_sac_id); $i = $i + 1) {
+
+            $chi_tiet_dien_thoai = new ChiTietDienThoai();
+            $chi_tiet_dien_thoai->dien_thoai_id = $dien_thoai->id;
+            $chi_tiet_dien_thoai->mau_sac_id = $request->mau_sac_id[$i];
+            $chi_tiet_dien_thoai->dung_luong_id = $request->dung_luong_id[$i];
+            $chi_tiet_dien_thoai->so_luong = 0;
+            $chi_tiet_dien_thoai->gia_ban = 0;
+            $chi_tiet_dien_thoai->save();
+        }
+        for ($i = 0; $i < count($request->thong_so_id); $i = $i + 1) {
             //tao dien thoai thong so
             $dien_thoai_thong_so = new DienThoaiThongSo();
-            $dien_thoai_thong_so -> dien_thoai_id = $dien_thoai->id;
-            $dien_thoai_thong_so -> thong_so_id = $request->thong_so_id[$i];
-            $dien_thoai_thong_so -> gia_tri = $request->gia_tri[$i];
-            $dien_thoai_thong_so -> save();
+            $dien_thoai_thong_so->dien_thoai_id = $dien_thoai->id;
+            $dien_thoai_thong_so->thong_so_id = $request->thong_so_id[$i];
+            $dien_thoai_thong_so->gia_tri = $request->gia_tri[$i];
+            $dien_thoai_thong_so->save();
         }
-        return redirect()->route('dien-thoai.danh-sach')->with('thong_bao','Thêm mới thành công');
+
+        return redirect()->route('dien-thoai.danh-sach')->with('thong_bao', 'Thêm mới thành công');
     }
     public function themHinhAnh(Request $request)
     {
         //lay id san pham
         $id = $request->input('id');
-        
+
         //kiem tra rq co ảnh không
-        if($request->hasFile('images')) {
+        if ($request->hasFile('images')) {
             // thêm hình ảnh sản phẩm
-            $paths=[];
+            $paths = [];
             foreach ($request->file('images') as $image) {
                 $hinh_anh = new HinhAnh();
                 $hinh_anh->dien_thoai_id = $id;
                 $path = $image->store('hinh_anh');
-                $hinh_anh->duong_dan=$path;
-                $paths[]=$path;
+                $hinh_anh->duong_dan = $path;
+                $paths[] = $path;
                 $hinh_anh->save();
             }
             $lst_hinh_anh = HinhAnh::where('dien_thoai_id', $id)->get();
@@ -107,27 +109,26 @@ class DienThoaiController extends Controller
      */
     public function danhSach(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $lst_dien_thoai = DienThoai::all();
             return datatables::of($lst_dien_thoai)
-            ->addColumn('nha_san_xuat_id', function($row) {
-                return $row->nha_san_xuat->ten; 
-            })
-            ->addColumn('Action',function($row){
-                $col = '
-                    <a href="'.route('dien-thoai.xem-chi-tiet', ['id' => $row->id]).'">
+                ->addColumn('nha_san_xuat_id', function ($row) {
+                    return $row->nha_san_xuat->ten;
+                })
+                ->addColumn('Action', function ($row) {
+                    $col = '
+                    <a href="' . route('dien-thoai.xem-chi-tiet', ['id' => $row->id]) . '">
                         <button type="button" class="btn btn-primary btn-edit"  >
                             <i class="fe fe-info"></i>
                         </button>
                     </a>
                     <button type="button" class="btn btn-danger fs-14 text-white delete-icn btn-delete"
-                    ata-toggle="modal" data-target="#myModal" data-id="'. $row->id .'">
+                    ata-toggle="modal" data-target="#myModal" data-id="' . $row->id . '">
                         <i class="fe fe-delete"></i>
                     </button>';
-                return $col;
-            })
-            ->rawColumns(['Action'])
+                    return $col;
+                })
+                ->rawColumns(['Action'])
                 ->addIndexColumn()
                 ->make(true);
         }
@@ -135,22 +136,20 @@ class DienThoaiController extends Controller
     }
     public function danhSachDaXoa(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $lst_dien_thoai_da_xoa = DienThoai::onlyTrashed()->get();
-        
+
             return datatables::of($lst_dien_thoai_da_xoa)
-                ->addColumn('nha_san_xuat_id', function($row) {
-                    return $row->nha_san_xuat->ten; 
+                ->addColumn('nha_san_xuat_id', function ($row) {
+                    return $row->nha_san_xuat->ten;
                 })
-                ->addColumn('Action',function($row){
+                ->addColumn('Action', function ($row) {
                     $col = '
                     <button type="button" class="btn btn-success fs-14 text-white delete-icn btn-restore"
-                    ata-toggle="modal" data-target="#myModal" data-id="'. $row->id .'">
+                    ata-toggle="modal" data-target="#myModal" data-id="' . $row->id . '">
                         <i class="fa fa-rotate-left"></i>
-                    </button>'
-                    ;
-                return $col;
+                    </button>';
+                    return $col;
                 })
                 ->rawColumns(['Action'])
                 ->addIndexColumn()
@@ -160,40 +159,39 @@ class DienThoaiController extends Controller
     }
     public function chiTietDienThoai(Request $request, $id)
     {
-        
-        if($request->ajax())
-        {
-            $lst_chi_tiet_dien_thoai = ChiTietDienThoai::where('dien_thoai_id',$id)->get();
+
+        if ($request->ajax()) {
+            $lst_chi_tiet_dien_thoai = ChiTietDienThoai::where('dien_thoai_id', $id)->get();
             return datatables::of($lst_chi_tiet_dien_thoai)
-                ->addColumn('dien_thoai_id', function($row) {
-                    return $row->dienThoai->ten; 
+                ->addColumn('dien_thoai_id', function ($row) {
+                    return $row->dienThoai->ten;
                 })
-                ->addColumn('mau_sac_id', function($row) {
-                    return $row->mauSac->ten; 
+                ->addColumn('mau_sac_id', function ($row) {
+                    return $row->mauSac->ten;
                 })
-                ->addColumn('dung_luong_id', function($row) {
-                    return $row->dungLuong->ten; 
+                ->addColumn('dung_luong_id', function ($row) {
+                    return $row->dungLuong->ten;
                 })
                 ->addIndexColumn()
                 ->make(true);
         }
-        $lst_hinh_anh = HinhAnh::where('dien_thoai_id',$id)->get();
+        $lst_hinh_anh = HinhAnh::where('dien_thoai_id', $id)->get();
         $dien_thoai = DienThoai::find($id);
-        return view('san-pham/dien-thoai/chi-tiet',compact('lst_hinh_anh','dien_thoai'));
+        return view('san-pham/dien-thoai/chi-tiet', compact('lst_hinh_anh', 'dien_thoai'));
     }
     /**
      * Store a newly created resource in storage.
      */
     public function capNhat($id)
     {
-        $lst_chi_tiet_dien_thoai = ChiTietDienThoai::where('dien_thoai_id',$id)->get();
-        return view('san-pham/dien-thoai/cap-nhat',compact('lst_chi_tiet_dien_thoai'));
+        $lst_chi_tiet_dien_thoai = ChiTietDienThoai::where('dien_thoai_id', $id)->get();
+        return view('san-pham/dien-thoai/cap-nhat', compact('lst_chi_tiet_dien_thoai'));
     }
     public function xuLyCapNhat(Request $request, $id)
     {
         $chi_tiet_dien_thoai = ChiTietDienThoai::find($id);
-        $dien_thoai = DienThoai::find($chi_tiet_dien_thoai -> dien_thoai_id);
-        
+        $dien_thoai = DienThoai::find($chi_tiet_dien_thoai->dien_thoai_id);
+
         $dien_thoai->mo_ta = $request->mo_ta;
         $dien_thoai->ten = $request->ten;
         $chi_tiet_dien_thoai->gia_ban = $request->gia_ban;
@@ -211,15 +209,14 @@ class DienThoaiController extends Controller
     }
     public function restore(string $id)
     {
-        $dien_thoai = DienThoai::onlyTrashed()->where('id',$id)->first();
-      
-        if(!empty($dien_thoai))
-        {
+        $dien_thoai = DienThoai::onlyTrashed()->where('id', $id)->first();
+
+        if (!empty($dien_thoai)) {
             $dien_thoai->restore();
             return redirect()->route('dien-thoai.danh-sach-da-xoa');
-        }        
+        }
     }
-   
+
 
     public function kiemTraTonTai(Request $request)
     {
