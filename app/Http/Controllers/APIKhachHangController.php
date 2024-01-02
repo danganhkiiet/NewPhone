@@ -37,9 +37,8 @@ class APIKhachHangController extends Controller
             return response()->json(['errors' => $validator->errors()], 422); // Trả về toàn bộ lỗi
         }
 
-        $khach_hang_find = KhachHang::where('email',$request->email)->first();
-        if($khach_hang_find)
-        {
+        $khach_hang_find = KhachHang::where('email', $request->email)->first();
+        if ($khach_hang_find) {
             return response()->json(['errors_email' => "Email đã tồn tại"], 422); // Trả về toàn bộ lỗi
         }
 
@@ -142,7 +141,7 @@ class APIKhachHangController extends Controller
         $khach_hang = $validator->validated();
         // dd($validator);
 
-        if (! $token = auth('api')->attempt($khach_hang)) {
+        if (!$token = auth('api')->attempt($khach_hang)) {
             return response()->json(['errors' => 'Sai Tài Khoản Hoặc Mật Khẩu'], 401);
         }
 
@@ -161,5 +160,19 @@ class APIKhachHangController extends Controller
         auth()->logout();
 
         return response()->json(['thong_bao' => 'Đăng xuất thành công']);
+    }
+    public function capNhat()
+    {
+        $khach_hang = KhachHang::where('id', request('khach_hang_id'))->update(['ten' => request('ten'), 'email' => request('email'), 'dia_chi' => request('dia_chi'), 'so_dien_thoai' => request('so_dien_thoai')]);
+        if($khach_hang){
+            $ket_qua_cap_nhat=KhachHang::find(request('khach_hang_id'));
+            return response()->json([
+                'success' => 200,
+                'data' => $ket_qua_cap_nhat,
+                'messages' => "Cập nhật thành công"
+            ]);
+        }
+     
+        
     }
 }
