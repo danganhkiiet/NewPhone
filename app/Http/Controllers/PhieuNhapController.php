@@ -106,13 +106,13 @@ class PhieuNhapController extends Controller
     }
     public function xuLyThemMoiDienThoai(Request $request)
     {
+        
         $phieu_nhap=PhieuNhap::latest('id')->first();
         $tong_tien=0;
-        for($i=0;$i<count($request->dien_thoai_id);$i++){
+        for($i=0;$i<count($request->chi_tiet_id);$i++){
 
-            $chi_tiet_dien_thoai=ChiTietDienThoai::where('dien_thoai_id',$request->dien_thoai_id[$i])
-            ->where('mau_sac_id',$request->mau_sac_id[$i])
-            ->where('dung_luong_id',$request->dung_luong_id[$i])->first();
+            $chi_tiet_dien_thoai=ChiTietDienThoai::where('id',$request->chi_tiet_id[$i])->first();
+
 
             //cap nhat gia ban và số lượng của điện thoại
             $chi_tiet_dien_thoai->so_luong = $chi_tiet_dien_thoai->so_luong + $request->so_luong[$i];
@@ -137,6 +137,10 @@ class PhieuNhapController extends Controller
     public function danhSachDienThoaiTheoNhaSanXuat(Request $request){
         $dien_thoai = DienThoai::where('nha_san_xuat_id', $request->nha_san_xuat_id)->get();
         return response()->json($dien_thoai);
+    }
+    public function danhSachChiTietDienThoaiTheoDienThoai(Request $request){
+        $chi_tiet_dien_thoai = ChiTietDienThoai::with('mauSac','dungLuong')->where('dien_thoai_id', $request->dien_thoai_id)->get();
+        return response()->json($chi_tiet_dien_thoai);
     }
 
     /**

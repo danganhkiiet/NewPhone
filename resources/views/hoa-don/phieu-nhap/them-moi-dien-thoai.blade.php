@@ -47,21 +47,9 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="mau_id">Màu sắc</label>
-                                        <select name="mau_sac_id" class="form-control form-select" id="mau_sac_id"
+                                        <label class="form-label" for="dung_luong_id">Phiên bản điện thoại</label>
+                                        <select name="chi_tiet_id" class="form-control form-select" id="chi_tiet_id"
                                             data-bs-placeholder="Select Country">
-                                            @foreach ($lst_mau_sac as $mau)
-                                                <option value="{{ $mau->id }}">{{ $mau->ten }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="dung_luong_id">Dung lượng</label>
-                                        <select name="dung_luong_id" class="form-control form-select" id="dung_luong_id"
-                                            data-bs-placeholder="Select Country">
-                                            @foreach ($lst_dung_luong as $dungluong)
-                                                <option value="{{ $dungluong->id }}">{{ $dungluong->ten }}</option>
-                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -104,8 +92,7 @@
                                             <tr>
                                                 <th>STT</th>
                                                 <th>Tên Điện Thoại</th>
-                                                <th>Màu</th>
-                                                <th>Dung Lượng</th>
+                                                <th>Phiên bản điện thoại</th>
                                                 <th>Số Lượng</th>
                                                 <th>Giá nhập</th>
                                                 <th>Giá Bán</th>
@@ -149,23 +136,20 @@
 
                     } else {
                         stt = stt + 1;
-                        var tenmau = $("#mau_sac_id").find(":selected").text();
-                        var mau = $('#mau_sac_id').find(':selected').val();
                         var tendienthoai = $("#dien_thoai_id").find(":selected").text();
                         var dienthoai = $('#dien_thoai_id').find(':selected').val();
-                        var dungluong = $("#dung_luong_id").find(":selected").text();
-                        var duongluongid = $('#dung_luong_id').find(':selected').val();
                         var soluong = $("#so_luong").val();
                         var gianhap = $("#gia_nhap").val();
                         var giaban = $("#gia_ban").val();
+                        var phienban_id = $("#chi_tiet_id").find(':selected').val();
+                        var phienban = $("#chi_tiet_id").find(':selected').text();
                         var thanhtien = soluong * gianhap;
 
 
                         var row = `<tr>
                         <td>${stt}</td>
                         <td>${tendienthoai}<input type="hidden" name="dien_thoai_id[]" value="${dienthoai}"></td>
-                        <td>${tenmau}<input type="hidden" name="mau_sac_id[]" value="${mau}"></td>
-                        <td>${dungluong}<input type="hidden" name="dung_luong_id[]" value="${duongluongid}"></td>
+                        <td>${phienban}<input type="hidden" name="chi_tiet_id[]" value="${phienban_id}"></td>
                         <td>${soluong}<input type="hidden" name="so_luong[]" value="${soluong}"></td></td>
                         <td>${gianhap}<input type="hidden" name="gia_nhap[]" value="${gianhap}"></td></td>
                         <td>${giaban}<input type="hidden" name="gia_ban[]" value="${giaban}"></td></td>
@@ -188,13 +172,33 @@
                             nha_san_xuat_id: nha_san_xuat_id
                         },
                     }).done(function(response) {
-                        console.log(response)
+                        console.log('dien thoai'+ response)
                         $("#dien_thoai_id").empty();
 
                         // Thêm các option mới từ dữ liệu trả về
                         $.each(response, function(key, item) {
                             $("#dien_thoai_id").append('<option value="' + item.id + '">' +
                                 item.ten + '</option>');
+                        });
+                    })
+                });
+                $("#dien_thoai_id").click(function() {
+                    var dien_thoai_id = $(this).val();
+                    console.log(dien_thoai_id);
+                    $.ajax({
+                        method: "GET",
+                        url: "{{ route('phieu-nhap.danh-sach-chi-tiet-dien-thoai-theo-dien-thoai') }}",
+                        data: {
+                            dien_thoai_id: dien_thoai_id
+                        },
+                    }).done(function(response) {
+                        console.log(response)
+                        $("#chi_tiet_id").empty();
+
+                        // Thêm các option mới từ dữ liệu trả về
+                        $.each(response, function(key, item) {
+                            $("#chi_tiet_id").append('<option value="' + item.id + '">' +
+                                item.mau_sac.ten + " " + item.dung_luong.ten + '</option>');
                         });
                     })
                 });

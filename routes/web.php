@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/them-moi-dien-thoai',[PhieuNhapController::class,'themMoiDienThoai'])->name('them-moi-dien-thoai');
             Route::post('/them-moi-dien-thoai',[PhieuNhapController::class,'xuLyThemMoiDienThoai'])->name('xu-ly-them-moi-dien-thoai');
             Route::get('/danh-sach-dien-thoai-theo-nha-san-xuat',[PhieuNhapController::class,'danhSachDienThoaiTheoNhaSanXuat'])->name('danh-sach-dien-thoai-theo-nha-san-xuat');
+            Route::get('/danh-sach-chi-tiet-dien-thoai-theo-dien-thoai',[PhieuNhapController::class,'danhSachChiTietDienThoaiTheoDienThoai'])->name('danh-sach-chi-tiet-dien-thoai-theo-dien-thoai');
         });
     });
     Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');

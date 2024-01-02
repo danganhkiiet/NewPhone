@@ -9,6 +9,7 @@ use App\Http\Controllers\APINhaSanXuatController;
 use App\Http\Controllers\APIBannerController;
 use App\Http\Controllers\APIGioHangController;
 use App\Http\Controllers\APIDienThoaiThongSoController;
+use App\Http\Controllers\APIDungLuongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::middleware(['api'])->group(function () {
 
 Route::get('/mau-sac', [APIMauSacController::class, 'danhSach'])->name('mau-sac.danh-sach');
 
+Route::get('/dung-luong', [APIDungLuongController::class, 'danhSach'])->name('dung-luong.danh-sach');
 //nha san xuat
 
 Route::get('/nha-san-xuat', [APINhaSanXuatController::class, 'danhSach'])->name('nha-san-xuat.danh-sach');
