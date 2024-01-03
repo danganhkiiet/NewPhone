@@ -9,4 +9,8 @@ class ChiTietPhieuXuat extends Model
 {
     use HasFactory;
     protected $table="chi_tiet_phieu_xuat";
+
+    public function chi_tiet_dien_thoai(){
+        return $this->belongsTo(ChiTietDienThoai::class);
+    }
 }

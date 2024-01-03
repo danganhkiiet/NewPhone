@@ -8,6 +8,7 @@ use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\ThongSoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PhieuNhapController;
+use App\Http\Controllers\PhieuXuatController;
 use App\Http\Controllers\NhaSanXuatController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\MailController;
@@ -69,6 +70,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/danh-sach-chi-tiet-dien-thoai-theo-dien-thoai',[PhieuNhapController::class,'danhSachChiTietDienThoaiTheoDienThoai'])->name('danh-sach-chi-tiet-dien-thoai-theo-dien-thoai');
         });
     });
+    Route::get('/phieu-xuat/danh-sach-da-xac-nhan',[PhieuXuatController::class,'danhSachDaXacNhan'])->name('phieu-xuat.danh-sach-da-xac-nhan');
+    Route::get('/phieu-xuat/danh-sach-cho-xac-nhan',[PhieuXuatController::class,'danhSachChoXacNhan'])->name('phieu-xuat.danh-sach-cho-xac-nhan');
+    Route::get('/phieu-xuat/danh-sach-van-chuyen',[PhieuXuatController::class,'danhSachVanChuyen'])->name('phieu-xuat.danh-sach-van-chuyen');
+    Route::get('/phieu-xuat/danh-sach-da-huy',[PhieuXuatController::class,'danhSachDaHuy'])->name('phieu-xuat.danh-sach-da-huy');
+    Route::get('/phieu-xuat/danh-sach-thanh-cong',[PhieuXuatController::class,'danhSacThanhCong'])->name('phieu-xuat.danh-sach-thanh-cong');
+    Route::get('/phieu-xuat/danh-sach-chi-tiet/{id}',[PhieuXuatController::class,'danhSachChiTiet'])->name('phieu-xuat.danh-sach-chi-tiet');
+    Route::post('/phieu-xuat/cap-nhat-cho-xac-nhan/{id}',[PhieuXuatController::class,'capNhatChoXacNhan'])->name('phieu-xuat.cap-nhat-cho-xac-nhan');
+    Route::post('/phieu-xuat/cap-nhat-da-xac-nhan/{id}',[PhieuXuatController::class,'capNhatDaXacNhan'])->name('phieu-xuat.cap-nhat-da-xac-nhan');
     Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
 });
 
