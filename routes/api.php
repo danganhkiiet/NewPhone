@@ -77,4 +77,4 @@ Route::get('/thong-so/{id}', [APIDienThoaiThongSoController::class, 'thongSoTheo
 
 //phieu xuat
 
-Route::get('/phieu-xuat/them-moi', [APIPhieuXuatController::class, 'themMoi']);
+Route::post('/phieu-xuat/them-moi', [APIPhieuXuatController::class, 'themMoi']);
