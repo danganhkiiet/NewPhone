@@ -53,7 +53,8 @@ Route::middleware(['api'])->group(function () {
 
         Route::post('/cap-nhat-mat-khau', [APIKhachHangController::class, 'quenMatKhau']);
 
-     
+        Route::post('/cap-nhat-thong-tin', [APIKhachHangController::class, 'capNhat']);
+
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
 
