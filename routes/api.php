@@ -10,6 +10,7 @@ use App\Http\Controllers\APIBannerController;
 use App\Http\Controllers\APIGioHangController;
 use App\Http\Controllers\APIDienThoaiThongSoController;
 use App\Http\Controllers\APIDungLuongController;
+use App\Http\Controllers\APIPhieuXuatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +74,7 @@ Route::get('/banner', [APIBannerController::class, 'danhSach'])->name('banner.da
 //thong_So
 
 Route::get('/thong-so/{id}', [APIDienThoaiThongSoController::class, 'thongSoTheoDienThoai']);
+
+//phieu xuat
+
+Route::get('/phieu-xuat/them-moi', [APIPhieuXuatController::class, 'themMoi']);
