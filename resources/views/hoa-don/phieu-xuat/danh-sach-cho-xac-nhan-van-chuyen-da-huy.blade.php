@@ -71,6 +71,8 @@
                                                 <tr>
                                                     <th>STT</th>
                                                     <th>Điện Thoại</th>
+                                                    <th>Màu Sắc</th>
+                                                    <th>Dung Lượng</th>
                                                     <th>Số Lượng</th>
                                                     <th>Giá Bán</th>
                                                     <th>Thành Tiền</th>
@@ -183,12 +185,12 @@
                         name: "khach_hang_id",
                     },
                     {
-                        data: "admin_id",
-                        name: "admin_id",
-                    },
-                    {
                         data: "trang_thai_don_hang_id",
                         name: "trang_thai_don_hang_id",
+                    },
+                    {
+                        data: "admin_id",
+                        name: "admin_id",
                     },
                     {
                         data: "tong_tien",
@@ -373,6 +375,8 @@
                         var row = `<tr>
                                     <td>${stt}</td>
                                     <td>${item.chi_tiet_dien_thoai.dien_thoai.ten}</td>
+                                    <td>${item.chi_tiet_dien_thoai.mau_sac.ten}</td>
+                                    <td>${item.chi_tiet_dien_thoai.dung_luong.ten}</td>
                                     <td>${item.so_luong}</td>
                                     <td>${item.gia_ban}</td>
                                     <td>${item.thanh_tien}</td>
@@ -395,13 +399,13 @@
                 event.preventDefault(); // Ngăn chặn sự kiện submit mặc định của form
 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: "Bạn chắc chứ?",
+                    text: "Có chuyển qua đã xác nhận không!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Tôi chắc chắn!"
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $id = $("#phieu_xuat_id").val();
@@ -412,12 +416,12 @@
                                 $id,
                             method: 'POST',
                             data: {
-                                trang_thai_don_hang_id: 3
+                                trang_thai_don_hang_id: 2
                             }
                         }).done(function(response) {
                             Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                title: "Chuyển!",
+                                text: "Chuyển thành công.",
                                 icon: "success"
 
                             })

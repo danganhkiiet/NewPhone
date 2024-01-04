@@ -24,6 +24,9 @@ class PhieuXuatController extends Controller
                 ->addColumn('trang_thai_don_hang_id', function ($row) {
                     return $row->trang_thai_don_hang->ten;
                 })
+                ->addColumn('admin_id', function ($row) {
+                    return "Chưa ai xác nhận";
+                })
                 ->addColumn('Action', function ($row) {
                     $temp =
                         '<button type="button" class="btn btn-primary btn-detail"
@@ -53,6 +56,9 @@ class PhieuXuatController extends Controller
                 })
                 ->addColumn('trang_thai_don_hang_id', function ($row) {
                     return $row->trang_thai_don_hang->ten;
+                })
+                ->addColumn('admin_id', function ($row) {
+                    return $row->admin->ho_ten;
                 })
                 ->addColumn('Action', function ($row) {
                     $temp =
@@ -160,7 +166,7 @@ class PhieuXuatController extends Controller
     }
     public function danhSachChiTiet($id)
     {
-        $phieu_xuat = ChiTietPhieuXuat::with('chi_tiet_dien_thoai.dienThoai:id,ten')->where('phieu_xuat_id', $id)->get();
+        $phieu_xuat = ChiTietPhieuXuat::with('chi_tiet_dien_thoai.dienThoai:id,ten')->with('chi_tiet_dien_thoai.mauSac:id,ten')->with('chi_tiet_dien_thoai.dungLuong:id,ten')->where('phieu_xuat_id', $id)->get();
 
         return response()->json($phieu_xuat);
     }
@@ -168,6 +174,7 @@ class PhieuXuatController extends Controller
     {
         $phieu_xuat = PhieuXuat::find($id);
         $phieu_xuat->trang_thai_don_hang_id = $request->trang_thai_don_hang_id;
+        $phieu_xuat->admin_id = Auth()->user()->id;
         $phieu_xuat->save();
 
         $phieu_xuat_xac_nhan = PhieuXuat::with('khach_hang:id,ten')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id',1)->get();
