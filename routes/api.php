@@ -11,7 +11,7 @@ use App\Http\Controllers\APIGioHangController;
 use App\Http\Controllers\APIDienThoaiThongSoController;
 use App\Http\Controllers\APIDungLuongController;
 use App\Http\Controllers\APIPhieuXuatController;
-
+use App\Http\Controllers\ThanhToanController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -79,3 +79,7 @@ Route::get('/thong-so/{id}', [APIDienThoaiThongSoController::class, 'thongSoTheo
 //phieu xuat
 
 Route::post('/phieu-xuat/them-moi', [APIPhieuXuatController::class, 'themMoi']);
+
+//test thanh toan vnpay
+//Route::get('/views-thanh-toan-vnpay',[ThanhToanController::class,'views'])->name('views-vnpay');
+Route::post('/thanh-toan-vnpay',[ThanhToanController::class,'thanhToanVNPAY'])->name('vnpay');
