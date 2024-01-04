@@ -30,7 +30,7 @@ class APIPhieuXuatController extends Controller
             $ctpx -> gia_ban = $gh->chi_tiet_dien_thoai->gia_ban;
             $ctpx -> thanh_tien = $gh->chi_tiet_dien_thoai->gia_ban * $gh -> so_luong;
             $ctpx->save();
-
+            $gh->delete();
         }
         return response()->json([
             'status'=>200,
