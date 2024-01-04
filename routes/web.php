@@ -12,6 +12,7 @@ use App\Http\Controllers\PhieuXuatController;
 use App\Http\Controllers\NhaSanXuatController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ThanhToanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
