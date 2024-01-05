@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChiTietDienThoai;
 use Illuminate\Http\Request;
 use App\Models\PhieuXuat;
 use App\Models\ChiTietPhieuXuat;
@@ -16,6 +17,10 @@ class APIPhieuXuatController extends Controller
         $phieu_xuat -> khach_hang_id = $request->khach_hang_id;
         $phieu_xuat -> trang_thai_don_hang_id = 1;
         $phieu_xuat -> tong_tien = $request -> tong_tien;
+        if($request->trang_thai_thanh_toan)
+        {
+          $phieu_xuat -> trang_thai_thanh_toan = $request -> trang_thai_thanh_toan;
+        }
         $phieu_xuat->save();
 
       //tạo chi tiết phiếu xuất
@@ -23,6 +28,7 @@ class APIPhieuXuatController extends Controller
         foreach($gio_hang as $gh)
         {
     
+
             $ctpx = new ChiTietPhieuXuat();
             $ctpx -> chi_tiet_dien_thoai_id = $gh -> chi_tiet_dien_thoai_id;
             $ctpx -> phieu_xuat_id = $phieu_xuat->id;
@@ -30,6 +36,13 @@ class APIPhieuXuatController extends Controller
             $ctpx -> gia_ban = $gh->chi_tiet_dien_thoai->gia_ban;
             $ctpx -> thanh_tien = $gh->chi_tiet_dien_thoai->gia_ban * $gh -> so_luong;
             $ctpx->save();
+
+            
+            //cap nhat lai so luong
+            $ctdt = ChiTietDienThoai::find($gh -> chi_tiet_dien_thoai_id);
+            $ctdt->so_luong = $ctdt->so_luong - $gh -> so_luong;
+            $ctdt->save();
+            
             $gh->delete();
         }
         return response()->json([
