@@ -20,6 +20,7 @@ class ChiTietDienThoaiResource extends JsonResource
             'nha_san_xuat_id'=>$this->dienThoai->nha_san_xuat,
             'mau_sac_id' => $this->mauSac,
             'dung_luong_id' => $this->dungLuong,
+            'ram_id' => $this->ram,
             'so_luong'=>$this->so_luong,
             'gia_ban'=>$this->gia_ban,
             'created_at' => $this->created_at,

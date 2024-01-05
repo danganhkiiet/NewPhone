@@ -22,5 +22,8 @@ class ChiTietDienThoai extends Model
     public function dungLuong(){
         return $this->belongsTo(DungLuong::class);
     }
+    public function ram(){
+        return $this->belongsTo(Ram::class);
+    }
 
 }
