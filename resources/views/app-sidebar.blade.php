@@ -57,6 +57,7 @@
                         <li><a href="{{ route('dien-thoai.danh-sach') }}" class="slide-item">Điện thoại</a></li>
                         <li><a href="{{ route('thong-so.danh-sach') }}" class="slide-item">Thông số</a></li>
                         <li><a href="{{ route('mau-sac.danh-sach') }}" class="slide-item">Màu Sắc</a></li>
+                        <li><a href="{{ route('ram.danh-sach') }}" class="slide-item">Ram</a></li>
                         <li><a href="{{ route('dung-luong.danh-sach') }}" class="slide-item">Dung Lượng</a></li>
                     </ul>
                 </li>

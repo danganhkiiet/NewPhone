@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\RamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DungLuongController;
 use App\Http\Controllers\MauSacController;
@@ -180,6 +181,18 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/danh-sach',[DungLuongController::class,'danhSach'])->name('danh-sach');
             Route::get('/cap-nhat/{id}',[DungLuongController::class,'capNhat'])->name('cap-nhat');
             Route::post('/them-moi-cap-nhat',[DungLuongController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
+
+        });
+    });
+});
+
+//Ram
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('ram')->group(function () {
+        Route::name('ram.')->group(function () {
+            Route::get('/danh-sach',[RamController::class,'danhSach'])->name('danh-sach');
+            Route::get('/cap-nhat/{id}',[RamController::class,'capNhat'])->name('cap-nhat');
+            Route::post('/them-moi-cap-nhat',[RamController::class,'themMoiVaCapNhat'])->name('xu-ly-them-moi-cap-nhat');
 
         });
     });

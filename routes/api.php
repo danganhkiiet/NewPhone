@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\APIRamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIDienThoaiController;
@@ -64,6 +65,8 @@ Route::middleware(['api'])->group(function () {
 Route::get('/mau-sac', [APIMauSacController::class, 'danhSach'])->name('mau-sac.danh-sach');
 
 Route::get('/dung-luong', [APIDungLuongController::class, 'danhSach'])->name('dung-luong.danh-sach');
+
+Route::get('/ram', [APIRamController::class, 'danhSach'])->name('ram.danh-sach');
 //nha san xuat
 
 Route::get('/nha-san-xuat', [APINhaSanXuatController::class, 'danhSach'])->name('nha-san-xuat.danh-sach');
