@@ -13,4 +13,8 @@ class ChiTietPhieuXuat extends Model
     public function chi_tiet_dien_thoai(){
         return $this->belongsTo(ChiTietDienThoai::class);
     }
+    public function phieu_xuat()
+    {
+        return $this->belongsTo(PhieuXuat::class, 'phieu_xuat_id');
+    }
 }

@@ -20,4 +20,8 @@ class PhieuXuat extends Model
     public function admin(){
         return $this->belongsTo(Admin::class);
     }
+    public function chi_tiet_phieu_xuat()
+    {
+        return $this->hasMany(ChiTietPhieuXuat::class, 'phieu_xuat_id');
+    }
 }
