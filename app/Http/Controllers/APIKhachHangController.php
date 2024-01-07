@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChiTietPhieuXuat;
 use Illuminate\Http\Request;
 use App\Models\KhachHang;
+use App\Models\PhieuXuat;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -164,15 +166,23 @@ class APIKhachHangController extends Controller
     public function capNhat()
     {
         $khach_hang = KhachHang::where('id', request('khach_hang_id'))->update(['ten' => request('ten'), 'email' => request('email'), 'dia_chi' => request('dia_chi'), 'so_dien_thoai' => request('so_dien_thoai')]);
-        if($khach_hang){
-            $ket_qua_cap_nhat=KhachHang::find(request('khach_hang_id'));
+        if ($khach_hang) {
+            $ket_qua_cap_nhat = KhachHang::find(request('khach_hang_id'));
             return response()->json([
                 'success' => 200,
                 'data' => $ket_qua_cap_nhat,
                 'messages' => "Cập nhật thành công"
             ]);
         }
-     
-        
+    }
+    public function donHang()
+    {
+        $phieu_xuat = PhieuXuat::with('chi_tiet_phieu_xuat')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.mauSac')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dungLuong')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai.hinhAnh')->where('khach_hang_id', request('khach_hang_id'))->get();
+
+        return response()->json([
+            'success' => 200,
+            'data' => $phieu_xuat,
+            'messages' => "Đơn Hàng"
+        ]);
     }
 }

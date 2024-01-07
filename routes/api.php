@@ -56,6 +56,8 @@ Route::middleware(['api'])->group(function () {
 
         Route::post('/cap-nhat-thong-tin', [APIKhachHangController::class, 'capNhat']);
 
+        Route::get('/don-hang', [APIKhachHangController::class, 'donHang']);
+
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
 
@@ -86,3 +88,4 @@ Route::post('/phieu-xuat/them-moi', [APIPhieuXuatController::class, 'themMoi']);
 //test thanh toan vnpay
 //Route::get('/views-thanh-toan-vnpay',[ThanhToanController::class,'views'])->name('views-vnpay');
 Route::post('/thanh-toan-vnpay',[ThanhToanController::class,'thanhToanVNPAY'])->name('vnpay');
+

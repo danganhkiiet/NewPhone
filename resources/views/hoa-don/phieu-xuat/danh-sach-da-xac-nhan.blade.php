@@ -70,6 +70,8 @@
                                                 <tr>
                                                     <th>STT</th>
                                                     <th>Điện Thoại</th>
+                                                    <th>Màu Sắc</th>
+                                                    <th>Dung Lượng</th>
                                                     <th>Số Lượng</th>
                                                     <th>Giá Bán</th>
                                                     <th>Thành Tiền</th>
@@ -184,6 +186,8 @@
                         var row = `<tr>
                                     <td>${stt}</td>
                                     <td>${item.chi_tiet_dien_thoai.dien_thoai.ten}</td>
+                                    <td>${item.chi_tiet_dien_thoai.mau_sac.ten}</td>
+                                    <td>${item.chi_tiet_dien_thoai.dung_luong.ten}</td>
                                     <td>${item.so_luong}</td>
                                     <td>${item.gia_ban}</td>
                                     <td>${item.thanh_tien}</td>
@@ -252,11 +256,11 @@
                                     </tr>`;
                                 // Thêm dòng mới vào tbody
                                 $('#myTable tbody').append(row);
-                                // Xóa dữ liệu cũ trong tbody
-                                $('#table-detail tbody').empty();
-                                // Ẩn phần xác nhận trạng thái
-                                $('#confirmationCard').hide();
                             });
+                            // Xóa dữ liệu cũ trong tbody
+                            $('#table-detail tbody').empty();
+                            // Ẩn phần xác nhận trạng thái
+                            $('#confirmationCard').hide();
                         })
 
 

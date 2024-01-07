@@ -138,24 +138,22 @@
                                 <h3 class="card-title">Danh Sách Màu Dung Lượng</h3>
                             </div>
                             <div class="card-body">
-                                <form class="form-horizontal" method="POST">
-                                    @csrf
-                                    <table class="table border text-nowrap text-md-nowrap table-hover"
-                                        id="bang-mau-dung_luong">
-                                        <thead>
-                                            <tr>
-                                                <th>STT</th>
-                                                <th>Màu</th>
-                                                <th>Dung Lượng</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
+
+                                <table class="table border text-nowrap text-md-nowrap table-hover"
+                                    id="bang-mau-dung_luong">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Màu</th>
+                                            <th>Dung Lượng</th>
+                                            <th>#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <button class="btn btn-primary btn-ThemDienThoai" type="submit">Thêm điện thoại</button>
                             </div>
                         </div>
@@ -182,7 +180,8 @@
             var nha_san_xuat_id = "";
             var mau_sac_id = [];
             var dung_luong_id = [];
-
+            // Hàm xóa hàng
+          
             $('#thong_so_id').change(function() {
                 var ten = $("#thong_so_id").find(":selected").text();
                 $('#thong-so tr').each(function() {
@@ -197,7 +196,8 @@
             var stt2 = 0;
 
             $("#btn-them-bang1").click(function() {
-                stt1 = stt1 + 1;
+
+   
                 var tendienthoai = $('#ten_dien_thoai_id').val();
                 var tenthongso = $("#thong_so_id").find(":selected").text();
                 var thongsoid = $('#thong_so_id').find(':selected').val();
@@ -205,20 +205,42 @@
                 var tennhasanxuat = $("#nha_san_xuat_id").find(":selected").text();
                 var nhasanxuatid = $('#nha_san_xuat_id').find(':selected').val();
 
+                if ($('#ten_dien_thoai_id').val() == "") {
+                    Swal.fire({
+                        title: "Tên điện thoại",
+                        text: "Vui lòng không để trống?",
+                        icon: "error"
+                    });
+                    return;
+                }
+                if ($('#gia_tri').val() == "") {
+                    Swal.fire({
+                        title: "Giá trị",
+                        text: "Vui lòng không để trống?",
+                        icon: "error"
+                    });
+                    return;
+                }
+                if (gia_tri.includes(tengiatri)) {
+                    alert("Giá trị đã tồn tại. Vui lòng chọn giá trị khác khác.");
+                    return;
+                }
                 // Thêm dữ liệu
                 ten = tendienthoai;
                 thong_so_id.push(thongsoid);
                 gia_tri.push(tengiatri);
                 nha_san_xuat_id = nhasanxuatid;
-
+                // console.log(gia_tri);
+                // console.log(thong_so_id);
+                stt1 = stt1 + 1;
                 var row = `<tr>
-            <td>${stt1}</td>
-            <td>${tendienthoai}</td>
-            <td>${tenthongso}</td>
-            <td>${tengiatri}</td>
-            <td>${tennhasanxuat}</td>
-            <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
-        </tr>`;
+                    <td>${stt1}</td>
+                    <td>${tendienthoai}</td>
+                    <td>${tenthongso}</td>
+                    <td>${tengiatri}</td>
+                    <td>${tennhasanxuat}</td>
+                    <td><button class="btn btn-danger btn-xoa" onclick="xoaHang(this)">Xóa</button></td>
+                </tr>`;
 
                 $("#thong-so").append(row);
 
@@ -228,63 +250,83 @@
             });
 
             $("#btn-them-bang2").click(function() {
-                stt2 = stt2 + 1;
+               
                 var tenmau = $("#mau_sac_id").find(":selected").text();
                 var mau = $('#mau_sac_id').find(':selected').val();
                 var tendungluong = $("#dung_luong_id").find(":selected").text();
-                var duongluongid = $('#dung_luong_id').find(':selected').val();
+                var dungluongid = $('#dung_luong_id').find(':selected').val();
+
+                // Kiểm tra xem màu và dung lượng đã tồn tại hay không
+                if (mau_sac_id.includes(mau) && dung_luong_id.includes(dungluongid)) {
+                    Swal.fire({
+                        title: "Màu và Dung Lượng",
+                        text: "Đã tồn tại trong bảng. Vui lòng chọn màu và dung lượng khác.?",
+                        icon: "error"
+                    });
+                    return;
+                }
 
                 // Thêm dữ liệu vào
                 mau_sac_id.push(mau);
-                dung_luong_id.push(duongluongid);
-
+                dung_luong_id.push(dungluongid);
+                stt2 = stt2 + 1;
                 var row = `<tr>
-            <td>${stt2}</td>
-            <td>${tenmau}</td>
-            <td>${tendungluong}</td>
-            <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
-        </tr>`;
+                    <td>${stt2}</td>
+                    <td>${tenmau}</td>
+                    <td>${tendungluong}</td>
+                    <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
+                    </tr>`;
 
                 $("#bang-mau-dung_luong").append(row);
             });
 
             $(".btn-ThemDienThoai").click(function() {
-                var frm_Data = new FormData($('#myForm')[0]);
-                frm_Data.append('nha_san_xuat_id', nha_san_xuat_id);
-                frm_Data.append('ten', ten);
+                if ($('#fromFile').val() == "") {
+                    Swal.fire({
+                        title: "Hình Ảnh",
+                        text: "Vui lòng không để trống?",
+                        icon: "error"
+                    });
+                    return;
+                } else {
+                    var frm_Data = new FormData($('#myForm')[0]);
+                    frm_Data.append('nha_san_xuat_id', nha_san_xuat_id);
+                    frm_Data.append('ten', ten);
 
-                // Append each value separately and use square brackets to ensure they are sent as arrays
-                for (var i = 0; i < thong_so_id.length; i++) {
-                    frm_Data.append('thong_so_id[]', thong_so_id[i]);
-                    frm_Data.append('gia_tri[]', gia_tri[i]);
-                }
-
-                for (var i = 0; i < mau_sac_id.length; i++) {
-                    frm_Data.append('mau_sac_id[]', mau_sac_id[i]);
-                    frm_Data.append('dung_luong_id[]', dung_luong_id[i]);
-                }
-
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    type: 'POST',
-                    url: "{{ route('dien-thoai.xu-ly-them-moi') }}",
-                    data: frm_Data,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        // Xử lý kết quả thành công nếu cần
-                        console.log(response);
-
-                        // Reload trang sau khi thêm điện thoại thành công
-                        location.reload();
-                    },
-                    error: function(error) {
-                        // Xử lý lỗi nếu có
-                        console.error(error);
+                    // Append each value separately and use square brackets to ensure they are sent as arrays
+                    for (var i = 0; i < thong_so_id.length; i++) {
+                        frm_Data.append('thong_so_id[]', thong_so_id[i]);
+                        frm_Data.append('gia_tri[]', gia_tri[i]);
                     }
-                });
+
+                    for (var i = 0; i < mau_sac_id.length; i++) {
+                        frm_Data.append('mau_sac_id[]', mau_sac_id[i]);
+                        frm_Data.append('dung_luong_id[]', dung_luong_id[i]);
+                    }
+
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        type: 'POST',
+                        url: "{{ route('dien-thoai.xu-ly-them-moi') }}",
+                        data: frm_Data,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            // Xử lý kết quả thành công nếu cần
+                            console.log(response);
+
+                            // Reload trang sau khi thêm điện thoại thành công
+                            location.reload();
+                        },
+                        error: function(error) {
+                            // Xử lý lỗi nếu có
+                            console.error(error);
+                        }
+                    });
+                }
+
             });
 
             // Kiểm tra điện thoại đã tồn tại chưa
@@ -303,6 +345,8 @@
                     }
                 });
             });
+
+
         });
     </script>
 @endsection
