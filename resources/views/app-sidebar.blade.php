@@ -19,7 +19,7 @@
                     <h3>Menu</h3>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
+                    <a class="side-menu__item has-link" href="{{ route('dashboard') }}" data-bs-toggle="slide">
                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
                             enable-background="new 0 0 24 24" viewBox="0 0 24 24">
                             <path

@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DungLuongController;
@@ -209,6 +210,11 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/xoa/{id}',[BannerController::class,'xoa'])->name('xoa');
         });
     });
+});
+//dashboard
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/thong-so-ban-hang',[DashboardController::class,'thongSoBanHang'])->name('dashboard-thong-so');
 });
 
 
