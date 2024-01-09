@@ -181,7 +181,7 @@
             var mau_sac_id = [];
             var dung_luong_id = [];
             // Hàm xóa hàng
-          
+
             $('#thong_so_id').change(function() {
                 var ten = $("#thong_so_id").find(":selected").text();
                 $('#thong-so tr').each(function() {
@@ -196,14 +196,13 @@
             var stt2 = 0;
 
             $("#btn-them-bang1").click(function() {
-
-   
                 var tendienthoai = $('#ten_dien_thoai_id').val();
                 var tenthongso = $("#thong_so_id").find(":selected").text();
                 var thongsoid = $('#thong_so_id').find(':selected').val();
                 var tengiatri = $('#gia_tri').val();
                 var tennhasanxuat = $("#nha_san_xuat_id").find(":selected").text();
                 var nhasanxuatid = $('#nha_san_xuat_id').find(':selected').val();
+
 
                 if ($('#ten_dien_thoai_id').val() == "") {
                     Swal.fire({
@@ -221,43 +220,82 @@
                     });
                     return;
                 }
-                if (gia_tri.includes(tengiatri)) {
-                    alert("Giá trị đã tồn tại. Vui lòng chọn giá trị khác khác.");
+                // Kiểm tra xem giá trị đã tồn tại trong bảng chưa
+                var isExist = false;
+                $("#thong-so tbody tr").each(function() {
+                    var existingGiaTri = $(this).find("td:eq(3)").text();
+
+                    if (existingGiaTri == tengiatri) {
+                        isExist = true;
+                        return false; // Thoát khỏi vòng lặp nếu đã tồn tại giá trị
+                    }
+                });
+
+                // Nếu giá trị chưa tồn tại, thì mới thêm vào
+                if (!isExist) {
+                    ten = tendienthoai;
+                    thong_so_id.push(thongsoid);
+                    gia_tri.push(tengiatri);
+                    nha_san_xuat_id = nhasanxuatid;
+                    stt1 = stt1 + 1;
+                    var row = `<tr>
+            <td>${stt1}</td>
+            <td>${tendienthoai}</td>
+            <td>${tenthongso}</td>
+            <td>${tengiatri}</td>
+            <td>${tennhasanxuat}</td>
+            <td><button class="btn btn-danger btn-xoa" onclick="xoaHang(this)">Xóa</button></td>
+        </tr>`;
+
+                    $("#thong-so tbody").append(row);
+
+                    // Chỉ cho nhập 1 lần 1 điện thoại
+                    $("#ten_dien_thoai_id").prop("readOnly", true);
+                    $("#nha_san_xuat_id").prop("disabled", true);
+                } else {
+                    // Hiển thị thông báo hoặc thực hiện hành động phù hợp khi giá trị đã tồn tại
+                    Swal.fire({
+                        title: "Giá Trị",
+                        text: "Đã tồn tại trong bảng. Vui lòng chọn giá trị thông số khác.?",
+                        icon: "error"
+                    });
                     return;
                 }
-                // Thêm dữ liệu
-                ten = tendienthoai;
-                thong_so_id.push(thongsoid);
-                gia_tri.push(tengiatri);
-                nha_san_xuat_id = nhasanxuatid;
-                // console.log(gia_tri);
-                // console.log(thong_so_id);
-                stt1 = stt1 + 1;
-                var row = `<tr>
-                    <td>${stt1}</td>
-                    <td>${tendienthoai}</td>
-                    <td>${tenthongso}</td>
-                    <td>${tengiatri}</td>
-                    <td>${tennhasanxuat}</td>
-                    <td><button class="btn btn-danger btn-xoa" onclick="xoaHang(this)">Xóa</button></td>
-                </tr>`;
-
-                $("#thong-so").append(row);
-
-                // Chỉ cho nhập 1 lần 1 điện thoại
-                $("#ten_dien_thoai_id").prop("readOnly", true);
-                $("#nha_san_xuat_id").prop("disabled", true);
             });
 
+
             $("#btn-them-bang2").click(function() {
-               
                 var tenmau = $("#mau_sac_id").find(":selected").text();
                 var mau = $('#mau_sac_id').find(':selected').val();
                 var tendungluong = $("#dung_luong_id").find(":selected").text();
                 var dungluongid = $('#dung_luong_id').find(':selected').val();
 
-                // Kiểm tra xem màu và dung lượng đã tồn tại hay không
-                if (mau_sac_id.includes(mau) && dung_luong_id.includes(dungluongid)) {
+                // Kiểm tra xem giá trị đã tồn tại trong bảng chưa
+                var isExist = false;
+                $("#bang-mau-dung_luong tbody tr").each(function() {
+                    var existingMau = $(this).find("td:eq(1)").text();
+                    var existingDungLuong = $(this).find("td:eq(2)").text();
+
+                    if (existingMau == tenmau && existingDungLuong == tendungluong) {
+                        isExist = true;
+                        return false; // Thoát khỏi vòng lặp nếu đã tồn tại giá trị
+                    }
+                });
+
+                // Nếu giá trị chưa tồn tại, thì mới thêm vào
+                if (!isExist) {
+                    mau_sac_id.push(mau);
+                    dung_luong_id.push(dungluongid);
+                    stt2 = stt2 + 1;
+                    var row = `<tr>
+                    <td>${stt2}</td>
+                    <td>${tenmau}</td>
+                    <td>${tendungluong}</td>
+                    <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
+                    </tr>`;
+
+                    $("#bang-mau-dung_luong tbody").append(row);
+                } else {
                     Swal.fire({
                         title: "Màu và Dung Lượng",
                         text: "Đã tồn tại trong bảng. Vui lòng chọn màu và dung lượng khác.?",
@@ -265,20 +303,8 @@
                     });
                     return;
                 }
-
-                // Thêm dữ liệu vào
-                mau_sac_id.push(mau);
-                dung_luong_id.push(dungluongid);
-                stt2 = stt2 + 1;
-                var row = `<tr>
-                    <td>${stt2}</td>
-                    <td>${tenmau}</td>
-                    <td>${tendungluong}</td>
-                    <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
-                    </tr>`;
-
-                $("#bang-mau-dung_luong").append(row);
             });
+
 
             $(".btn-ThemDienThoai").click(function() {
                 if ($('#fromFile').val() == "") {

@@ -94,15 +94,17 @@
                         <div class="card">
                             <div class="card-header border-bottom">
                                 <h3 class="card-title">Phiếu Vận Chuyển</h3>
-                                <div class="btn" style="position: relative;left: 69%;">
+                                <div class="btn" style="position: relative;left: 61%;">
                                     <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success btn-pdf">In Ra PDF</button>
+
                                     <a href="{{ route('phieu-xuat.danh-sach-thanh-cong') }}"
                                         class="btn btn-primary-light ">Phiếu Thành Công
                                     </a>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table class="table border text-nowrap text-md-nowrap table-hover" id="myTableVanChuyen">
+                                <table class="table editable-table table-nowrap table-bordered table-edit" id="myTableVanChuyen">
                                     <thead>
                                         <tr>
                                             <th>STT</th>
@@ -110,8 +112,9 @@
                                             <th>Địa Chỉ</th>
                                             <th>Số Điện Thoại</th>
                                             <th>Trạng Thái Đơn Hàng</th>
+                                            <th>Trạng Thái Thanh Toán</th>
                                             <th>Tổng Tiền</th>
-
+                                            <th>#</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -260,8 +263,16 @@
                         name: "trang_thai_don_hang_id",
                     },
                     {
+                        data: "trang_thai_thanh_toan",
+                        name: "trang_thai_thanh_toan",
+                    },
+                    {
                         data: "tong_tien",
                         name: "tong_tien",
+                    },
+                    {
+                        data: "Action",
+                        name: "Action",
                     },
 
                 ],
@@ -290,7 +301,15 @@
                 },
                 "search": {
                     "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
-                }
+                },
+                buttons: [{
+                    extend: 'pdfHtml5',
+                    text: 'In Ra PDF',
+                    className: 'buttons-pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                }]
             })
             var table2 = $('#myTableDaHuy').DataTable({
                 ajax: {
@@ -421,7 +440,7 @@
                         }).done(function(response) {
                             Swal.fire({
                                 title: "Chuyển!",
-                                text: "Chuyển thành công.",
+                                text: "Chuyển Đã Xác Nhận.",
                                 icon: "success"
 
                             })
@@ -458,6 +477,63 @@
                 });
 
             });
+            $('.btn-pdf').on('click', function() {
+                table1.button('.buttons-pdf').trigger();
+            });
+            $(document).on('click', '.btn-thanhcong', function() {
+                Swal.fire({
+                    title: "Bạn chắc chứ?",
+                    text: "Có chuyển qua đơn hàng đã thành công không!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Tôi chắc chắn!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $id = $(this).data('id');
+
+                        $.ajax({
+                            method: "POST",
+                            url: "{{ route('phieu-xuat.cap-nhat-phieu-van-chuyen', '') }}/" +
+                                $id,
+                            data: {
+                                trang_thai_don_hang_id: 4
+                            }
+                        }).done(function(response) {
+                            Swal.fire({
+                                title: "Chuyển!",
+                                text: "Chuyển thành công.",
+                                icon: "success"
+
+                            })
+                            // console.log(response);
+                            // Xóa dữ liệu cũ trong tbody
+                            $('#myTableVanChuyen tbody').empty();
+                            var stt = 0;
+                            $.each(response, function(index, item) {
+                                stt = index +
+                                    1; // Sử dụng index để tăng số thứ tự
+                                var row = `<tr>
+                                <td>${stt}</td>
+                                <td>${item.khach_hang.ten}</td>
+                                <td>${item.khach_hang.dia_chi}</td>
+                                <td>${item.khach_hang.so_dien_thoai}</td>
+                                <td>${item.trang_thai_don_hang.ten}</td>
+                                <td>${item.trang_thai_thanh_toan==1? "Đã thanh toán" : "Chưa thanh toán"}</td>
+                                <td>${item.tong_tien}</td>
+                                <td><button type="button" class="btn btn-primary btn-detail"
+                                    data-id="${item.id}">
+                                        <i class="fe fe-check"></i>
+                                </button></td>
+                                </tr>`;
+                                // Thêm dòng mới vào tbody
+                                $('#myTableVanChuyen tbody').append(row);
+                            });
+                        })
+                    }
+                })
+            })
         })
     </script>
 @endsection
