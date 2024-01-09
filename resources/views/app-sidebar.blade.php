@@ -104,7 +104,7 @@
                         <span class="side-menu__label">Hóa đơn</span><i class="angle fa fa-angle-right"></i></a>
                     <ul class="slide-menu">
                         <li><a href="{{ route('phieu-nhap.danh-sach') }}" class="slide-item">Phiếu Nhập</a></li>
-                        <li><a href="{{route('phieu-xuat.danh-sach-da-xac-nhan')}}" class="slide-item">Phiếu Xuất</a></li>
+                        <li><a href="{{route('phieu-xuat.danh-sach-cho-xac-nhan')}}" class="slide-item">Phiếu Xuất</a></li>
                     </ul>
                 </li>
                 @can('is-admin')

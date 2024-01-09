@@ -13,7 +13,7 @@ class PhieuXuatController extends Controller
     {
         //Kiểm tra xem yêu cầu hiện tại có phải là một yêu cầu Ajax không
         if ($request->ajax()) {
-            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id',1)->get();
+            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id', 1)->get();
             //Sử dụng DataTables để xử lý và trả về dữ liệu dưới dạng JSON cho DataTable
             return DataTables::of($phieu_xuat)
                 //Thêm một cột số thứ tự cho từng bản ghi
@@ -46,7 +46,7 @@ class PhieuXuatController extends Controller
     {
         //Kiểm tra xem yêu cầu hiện tại có phải là một yêu cầu Ajax không
         if ($request->ajax()) {
-            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id',2)->get();
+            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id', 2)->get();
             //Sử dụng DataTables để xử lý và trả về dữ liệu dưới dạng JSON cho DataTable
             return DataTables::of($phieu_xuat)
                 //Thêm một cột số thứ tự cho từng bản ghi
@@ -79,7 +79,7 @@ class PhieuXuatController extends Controller
     {
         //Kiểm tra xem yêu cầu hiện tại có phải là một yêu cầu Ajax không
         if ($request->ajax()) {
-            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id',3)->get();
+            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id', 3)->get();
             //Sử dụng DataTables để xử lý và trả về dữ liệu dưới dạng JSON cho DataTable
             return DataTables::of($phieu_xuat)
                 //Thêm một cột số thứ tự cho từng bản ghi
@@ -96,6 +96,19 @@ class PhieuXuatController extends Controller
                 ->addColumn('trang_thai_don_hang_id', function ($row) {
                     return $row->trang_thai_don_hang->ten;
                 })
+                ->addColumn('trang_thai_thanh_toan', function ($row) {
+                    return $row->trang_thai_thanh_toan == 1 ? "Đã thanh toán" : "Chưa thanh toán";
+                })
+                ->addColumn('Action', function ($row) {
+                    $temp =
+                        '<button type="button" class="btn btn-primary btn-thanhcong"
+                         data-id="' . $row->id . '">
+                            <i class="fe fe-check"></i>
+                    </button>';
+                    return $temp;
+                })
+                //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
+                ->rawColumns(['Action'])
                 //Tạo và trả về JSON để hiển thị trong DataTable
                 ->make(true);
         }
@@ -105,7 +118,7 @@ class PhieuXuatController extends Controller
     {
         //Kiểm tra xem yêu cầu hiện tại có phải là một yêu cầu Ajax không
         if ($request->ajax()) {
-            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id',5)->get();
+            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id', 5)->get();
             //Sử dụng DataTables để xử lý và trả về dữ liệu dưới dạng JSON cho DataTable
             return DataTables::of($phieu_xuat)
                 //Thêm một cột số thứ tự cho từng bản ghi
@@ -135,7 +148,7 @@ class PhieuXuatController extends Controller
     {
         //Kiểm tra xem yêu cầu hiện tại có phải là một yêu cầu Ajax không
         if ($request->ajax()) {
-            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id',4)->get();
+            $phieu_xuat = PhieuXuat::where('trang_thai_don_hang_id', 4)->get();
             //Sử dụng DataTables để xử lý và trả về dữ liệu dưới dạng JSON cho DataTable
             return DataTables::of($phieu_xuat)
                 //Thêm một cột số thứ tự cho từng bản ghi
@@ -177,7 +190,7 @@ class PhieuXuatController extends Controller
         $phieu_xuat->admin_id = Auth()->user()->id;
         $phieu_xuat->save();
 
-        $phieu_xuat_xac_nhan = PhieuXuat::with('khach_hang:id,ten')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id',1)->get();
+        $phieu_xuat_xac_nhan = PhieuXuat::with('khach_hang:id,ten')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id', 1)->get();
         // dd($phieu_xuat_xac_nhan);
         return response()->json($phieu_xuat_xac_nhan);
     }
@@ -187,8 +200,17 @@ class PhieuXuatController extends Controller
         $phieu_xuat->trang_thai_don_hang_id = $request->trang_thai_don_hang_id;
         $phieu_xuat->save();
 
-        $phieu_xuat_xac_nhan = PhieuXuat::with('khach_hang:id,ten')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id',2)->get();
+        $phieu_xuat_xac_nhan = PhieuXuat::with('khach_hang:id,ten')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id', 2)->get();
         // dd($phieu_xuat_xac_nhan);
         return response()->json($phieu_xuat_xac_nhan);
+    }
+    public function capNhatPhieuVanChuyen(Request $request, $id)
+    {
+        $phieu_xuat = PhieuXuat::find($id);
+        $phieu_xuat->trang_thai_don_hang_id = $request->trang_thai_don_hang_id;
+        $phieu_xuat->save();
+
+        $phieu_xuat_phieu_van_chuyen = PhieuXuat::with('khach_hang:id,ten,dia_chi,so_dien_thoai')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id', 3)->get();
+        return response()->json($phieu_xuat_phieu_van_chuyen);
     }
 }
