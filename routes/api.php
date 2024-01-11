@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\APIRamController;
+use App\Http\Controllers\APIYeuThichController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIDienThoaiController;
@@ -51,6 +52,11 @@ Route::middleware(['api'])->group(function () {
         Route::post('/cap-nhat-gio-hang', [APIGioHangController::class,'capNhatSoLuongGioHang']);
         Route::post('/xoa-gio-hang', [APIGioHangController::class,'xoaGioHang']);
         Route::post('/gio-hang-them-moi', [APIGioHangController::class,'themMoi']);
+
+        Route::get('/danh-sach-yeu-thich', [APIYeuThichController::class,'danhSachYeuThichKhachHang']);
+        Route::post('/xoa-yeu-thich', [APIYeuThichController::class,'xoaYeuThich']);
+        Route::post('/yeu-thich-them-moi', [APIYeuThichController::class,'themMoi']);
+
 
         Route::post('/cap-nhat-mat-khau', [APIKhachHangController::class, 'quenMatKhau']);
 
