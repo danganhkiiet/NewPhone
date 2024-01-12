@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('chi_tiet_dien_thoai', function (Blueprint $table) {
-            $table->foreign('ram_id')->references('id')->on('ram');
-        });
+        // Schema::table('chi_tiet_dien_thoai', function (Blueprint $table) {
+        //     $table->foreign('ram_id')->references('id')->on('ram');
+        // });
     }
 
     /**

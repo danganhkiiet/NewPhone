@@ -13,6 +13,8 @@ use App\Http\Controllers\APIDienThoaiThongSoController;
 use App\Http\Controllers\APIDungLuongController;
 use App\Http\Controllers\APIPhieuXuatController;
 use App\Http\Controllers\ThanhToanController;
+use App\Http\Controllers\APIDanhGiaController;
+use App\Http\Controllers\APIBinhLuanController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -58,11 +60,23 @@ Route::middleware(['api'])->group(function () {
 
         Route::get('/don-hang', [APIKhachHangController::class, 'donHang']);
 
+        Route::get('/xet-don-hang-da-mua', [APIPhieuXuatController::class, 'xetDonHangDaMua']);
+
+
         //đăng ký mail
         // Route::get('/mail-xac-nhan-dang-ky',[APIKhachHangController::class,'mail']);
 
     });
 });
+Route::get('/danh-sach-binh-luan', [APIBinhLuanController::class, 'danhSach']);
+
+Route::post('/them-moi-binh-luan-cap-mot', [APIBinhLuanController::class, 'themMoiCapMot']);
+
+Route::post('/them-moi-binh-luan-cap-hai', [APIBinhLuanController::class, 'themMoiCapHai']);
+
+Route::get('/danh-sach-danh-gia', [APIDanhGiaController::class, 'danhSach']);
+
+Route::post('/them-moi-danh-gia', [APIDanhGiaController::class, 'themMoi']);
 
 Route::get('/mau-sac', [APIMauSacController::class, 'danhSach'])->name('mau-sac.danh-sach');
 

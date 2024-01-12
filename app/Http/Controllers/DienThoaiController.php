@@ -11,6 +11,7 @@ use App\Models\MauSac;
 use App\Models\DienThoai;
 use App\Models\DungLuong;
 use App\Models\NhaSanXuat;
+use App\Models\Ram;
 use Illuminate\Http\Request;
 
 class DienThoaiController extends Controller
@@ -31,7 +32,8 @@ class DienThoaiController extends Controller
         $lst_dung_luong = DungLuong::all();
         $lst_mau_sac = MauSac::all();
         $lst_nha_san_xuat = NhaSanXuat::all();
-        return view('san-pham/dien-thoai/them-moi', compact('lst_thong_so', 'lst_dung_luong', 'lst_mau_sac', 'lst_nha_san_xuat'));
+        $lst_ram = Ram::all();
+        return view('san-pham/dien-thoai/them-moi', compact('lst_thong_so', 'lst_dung_luong', 'lst_mau_sac', 'lst_nha_san_xuat','lst_ram'));
     }
     public function xuLyThemMoi(Request $request)
     {
@@ -61,6 +63,7 @@ class DienThoaiController extends Controller
             $chi_tiet_dien_thoai->dien_thoai_id = $dien_thoai->id;
             $chi_tiet_dien_thoai->mau_sac_id = $request->mau_sac_id[$i];
             $chi_tiet_dien_thoai->dung_luong_id = $request->dung_luong_id[$i];
+            $chi_tiet_dien_thoai->ram_id = $request->ram_id[$i];
             $chi_tiet_dien_thoai->so_luong = 0;
             $chi_tiet_dien_thoai->gia_ban = 0;
             $chi_tiet_dien_thoai->save();
@@ -171,6 +174,9 @@ class DienThoaiController extends Controller
                 })
                 ->addColumn('dung_luong_id', function ($row) {
                     return $row->dungLuong->ten;
+                })
+                ->addColumn('ram_id', function ($row) {
+                    return $row->ram->ten;
                 })
                 ->addIndexColumn()
                 ->make(true);

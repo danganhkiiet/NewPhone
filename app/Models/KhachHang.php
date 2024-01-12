@@ -23,4 +23,8 @@ class KhachHang extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function phieu_xuat(){
+        return $this->hasMany(PhieuXuat::class);
+    }
 }
