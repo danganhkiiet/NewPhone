@@ -17,4 +17,10 @@ class PhieuNhap extends Model
     {
         return $this->belongsTo(NhaCungCap::class);
     }
+    public function chi_tiet_phieu_xuat(){
+        return $this->hasMany(ChiTietPhieuXuat::class);
+    }
+    public function khach_hang(){
+        return $this->belongsTo(KhachHang::class);
+    }
 }

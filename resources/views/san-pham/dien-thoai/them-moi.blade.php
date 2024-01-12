@@ -110,6 +110,15 @@
                             <div class="card-body">
                                 <div class="d-flex flex-column">
                                     <div class="form-group">
+                                        <label class="form-label" for="ram">Tên Ram</label>
+                                        <select class="form-control form-select" id="ram_id"
+                                            data-bs-placeholder="Select Country">
+                                            @foreach ($lst_ram as $ts)
+                                                <option value="{{ $ts->id }}">{{ $ts->ten }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label" for="nha_san_xuat">Màu sắc</label>
                                         <select class="form-control form-select" id="mau_sac_id" name="mau_sac_id"
                                             data-bs-placeholder="Select Country">
@@ -144,6 +153,7 @@
                                     <thead>
                                         <tr>
                                             <th>STT</th>
+                                            <th>Ram</th>
                                             <th>Màu</th>
                                             <th>Dung Lượng</th>
                                             <th>#</th>
@@ -180,6 +190,7 @@
             var nha_san_xuat_id = "";
             var mau_sac_id = [];
             var dung_luong_id = [];
+            var ram_id = [];
             // Hàm xóa hàng
 
             $('#thong_so_id').change(function() {
@@ -239,13 +250,13 @@
                     nha_san_xuat_id = nhasanxuatid;
                     stt1 = stt1 + 1;
                     var row = `<tr>
-            <td>${stt1}</td>
-            <td>${tendienthoai}</td>
-            <td>${tenthongso}</td>
-            <td>${tengiatri}</td>
-            <td>${tennhasanxuat}</td>
-            <td><button class="btn btn-danger btn-xoa" onclick="xoaHang(this)">Xóa</button></td>
-        </tr>`;
+                        <td>${stt1}</td>
+                        <td>${tendienthoai}</td>
+                        <td>${tenthongso}</td>
+                        <td>${tengiatri}</td>
+                        <td>${tennhasanxuat}</td>
+                        <td><button class="btn btn-danger btn-xoa" onclick="xoaHang(this)">Xóa</button></td>
+                    </tr>`;
 
                     $("#thong-so tbody").append(row);
 
@@ -267,6 +278,8 @@
             $("#btn-them-bang2").click(function() {
                 var tenmau = $("#mau_sac_id").find(":selected").text();
                 var mau = $('#mau_sac_id').find(':selected').val();
+                var tenram = $("#ram_id").find(":selected").text();
+                var ramid = $('#ram_id').find(':selected').val();
                 var tendungluong = $("#dung_luong_id").find(":selected").text();
                 var dungluongid = $('#dung_luong_id').find(':selected').val();
 
@@ -286,9 +299,11 @@
                 if (!isExist) {
                     mau_sac_id.push(mau);
                     dung_luong_id.push(dungluongid);
+                    ram_id.push(ramid);
                     stt2 = stt2 + 1;
                     var row = `<tr>
                     <td>${stt2}</td>
+                    <td>${tenram}</td>
                     <td>${tenmau}</td>
                     <td>${tendungluong}</td>
                     <td><button onclick="xoaHang(this)" class="btn btn-danger">Xóa</button></td>
@@ -319,15 +334,17 @@
                     frm_Data.append('nha_san_xuat_id', nha_san_xuat_id);
                     frm_Data.append('ten', ten);
 
-                    // Append each value separately and use square brackets to ensure they are sent as arrays
+                  
                     for (var i = 0; i < thong_so_id.length; i++) {
                         frm_Data.append('thong_so_id[]', thong_so_id[i]);
                         frm_Data.append('gia_tri[]', gia_tri[i]);
+                     
                     }
 
                     for (var i = 0; i < mau_sac_id.length; i++) {
                         frm_Data.append('mau_sac_id[]', mau_sac_id[i]);
                         frm_Data.append('dung_luong_id[]', dung_luong_id[i]);
+                        frm_Data.append('ram_id[]', ram_id[i]);
                     }
 
                     $.ajax({
