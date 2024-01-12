@@ -21,7 +21,7 @@ class AdminController extends Controller
         if($admin){
             if(Hash::check($request->password, $admin->password)){
                 if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                    return redirect()->route('dien-thoai.danh-sach')->with('thong_bao','Đăng Nhập Thành Công');;
+                    return redirect()->route('dashboard')->with('thong_bao','Đăng Nhập Thành Công');;
                 }
             }
             else{
