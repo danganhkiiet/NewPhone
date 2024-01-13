@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChiTietPhieuXuat;
+use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use App\Models\PhieuXuat;
 use Yajra\DataTables\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PhieuXuatController extends Controller
 {
@@ -66,6 +68,7 @@ class PhieuXuatController extends Controller
                          data-id="' . $row->id . '">
                             <i class="fe fe-info"></i>
                     </button>';
+
                     return $temp;
                 })
                 //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
@@ -101,10 +104,19 @@ class PhieuXuatController extends Controller
                 })
                 ->addColumn('Action', function ($row) {
                     $temp =
-                        '<button type="button" class="btn btn-primary btn-thanhcong"
+                        '<button type="button" class="btn btn-success btn-thanhcong"
                          data-id="' . $row->id . '">
                             <i class="fe fe-check"></i>
                     </button>';
+                    $temp = $temp .
+                        '<button type="button" class="btn btn-primary btn-detailtransport "
+                        data-id="' . $row->id . '">
+                            <i class="fe fe-info"></i>
+                    </button>';
+                    $temp = $temp . '<a href="' . route("phieu-xuat.in-pdf-phieu-van-chuyen", ['id' => $row->id]) . '" class="btn btn-info btn-inphieu">
+                    <i class="fe fe-info"></i>
+                     </a>';
+
                     return $temp;
                 })
                 //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
@@ -212,5 +224,16 @@ class PhieuXuatController extends Controller
 
         $phieu_xuat_phieu_van_chuyen = PhieuXuat::with('khach_hang:id,ten,dia_chi,so_dien_thoai')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id', 3)->get();
         return response()->json($phieu_xuat_phieu_van_chuyen);
+    }
+    public function inRaPhieuPDFVanChuyen($id)
+    {
+        $phieu_xuat = PhieuXuat::where('id', $id)->first();
+
+        $khach_hang = KhachHang::where('id', $phieu_xuat->khach_hang_id)->first();
+
+        $chi_tiet_phieu_xuat = ChiTietPhieuXuat::where('phieu_xuat_id', $id)->get();
+
+        $pdf = Pdf::loadView('hoa-don.phieu-xuat.phieu-hoa-don', compact('phieu_xuat', 'khach_hang', 'chi_tiet_phieu_xuat'));
+        return $pdf->stream('phieu-hoa-don.pdf');
     }
 }
