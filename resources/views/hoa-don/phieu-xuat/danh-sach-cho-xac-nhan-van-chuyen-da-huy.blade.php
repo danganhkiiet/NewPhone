@@ -104,7 +104,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table class="table editable-table table-nowrap table-bordered table-edit" id="myTableVanChuyen">
+                                <table class="table editable-table table-nowrap table-bordered table-edit"
+                                    id="myTableVanChuyen">
                                     <thead>
                                         <tr>
                                             <th>STT</th>
@@ -122,6 +123,38 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row row-sm">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h3 class="card-title">Chi Tiết Phiếu Xuất Vận Chuyển</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table editable-table table-nowrap table-bordered table-edit "
+                                            id="table-detailtransport">
+                                            <thead>
+                                                <tr>
+                                                    <th>STT</th>
+                                                    <th>Điện Thoại</th>
+                                                    <th>Màu Sắc</th>
+                                                    <th>Dung Lượng</th>
+                                                    <th>Số Lượng</th>
+                                                    <th>Giá Bán</th>
+                                                    <th>Thành Tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -413,6 +446,40 @@
                 })
 
             })
+            $(document).on('click', '.btn-detailtransport', function() {
+                $id = $(this).data('id');
+
+                $.ajax({
+                    url: "{{ route('phieu-xuat.danh-sach-chi-tiet', '') }}/" + $id,
+
+                }).done(function(response) {
+                    console.log(response);
+                    // Xóa dữ liệu cũ trong tbody
+                    $('#table-detailtransport tbody').empty();
+                    // Tăng số thứ tự
+                    var stt = 0;
+
+                    // Duyệt qua mỗi phần tử trong response và thêm vào table
+                    $.each(response, function(index, item) {
+                        // Tạo một dòng HTML mới
+                        stt = index + 1;
+                        var row = `<tr>
+                                    <td>${stt}</td>
+                                    <td>${item.chi_tiet_dien_thoai.dien_thoai.ten}</td>
+                                    <td>${item.chi_tiet_dien_thoai.mau_sac.ten}</td>
+                                    <td>${item.chi_tiet_dien_thoai.dung_luong.ten}</td>
+                                    <td>${item.so_luong}</td>
+                                    <td>${item.gia_ban}</td>
+                                    <td>${item.thanh_tien}</td>
+                                </tr>`;
+                        $('#phieu_xuat_id').val(item.phieu_xuat_id);
+                        // Thêm dòng mới vào tbody
+                        $('#table-detailtransport tbody').append(row);
+
+                    })
+                })
+
+            })
             // Xử lý sự kiện khi nhấn vào nút xác nhận
             $(document).on('click', '.btn-xac-nhan', function(event) {
                 event.preventDefault(); // Ngăn chặn sự kiện submit mặc định của form
@@ -512,6 +579,9 @@
                             $('#myTableVanChuyen tbody').empty();
                             var stt = 0;
                             $.each(response, function(index, item) {
+                                var routeUrl =
+                                    `{{ route('phieu-xuat.in-pdf-phieu-van-chuyen', [':id']) }}`;
+                                routeUrl = routeUrl.replace(':id', item.id);
                                 stt = index +
                                     1; // Sử dụng index để tăng số thứ tự
                                 var row = `<tr>
@@ -522,10 +592,17 @@
                                 <td>${item.trang_thai_don_hang.ten}</td>
                                 <td>${item.trang_thai_thanh_toan==1? "Đã thanh toán" : "Chưa thanh toán"}</td>
                                 <td>${item.tong_tien}</td>
-                                <td><button type="button" class="btn btn-primary btn-detail"
+                                <td><button type="button" class="btn btn-success btn-thanhcong"
                                     data-id="${item.id}">
                                         <i class="fe fe-check"></i>
-                                </button></td>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-detailtransport"
+                                    data-id="${item.id}">
+                                        <i class="fe fe-info"></i>
+                                </button>
+                                <a href="${routeUrl}" class="btn btn-info btn-inphieu">
+                                    <i class="fe fe-info"></i>
+                                </a></td>
                                 </tr>`;
                                 // Thêm dòng mới vào tbody
                                 $('#myTableVanChuyen tbody').append(row);
@@ -534,6 +611,7 @@
                     }
                 })
             })
+
         })
     </script>
 @endsection

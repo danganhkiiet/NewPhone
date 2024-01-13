@@ -82,6 +82,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/phieu-xuat/cap-nhat-cho-xac-nhan/{id}',[PhieuXuatController::class,'capNhatChoXacNhan'])->name('phieu-xuat.cap-nhat-cho-xac-nhan');
     Route::post('/phieu-xuat/cap-nhat-da-xac-nhan/{id}',[PhieuXuatController::class,'capNhatDaXacNhan'])->name('phieu-xuat.cap-nhat-da-xac-nhan');
     Route::post('/phieu-xuat/cap-nhat-phieu-van-chuyen/{id}',[PhieuXuatController::class,'capNhatPhieuVanChuyen'])->name('phieu-xuat.cap-nhat-phieu-van-chuyen');
+    Route::get('/phieu-xuat/pdf-phieu-van-chuyen/{id}',[PhieuXuatController::class,'inRaPhieuPDFVanChuyen'])->name('phieu-xuat.in-pdf-phieu-van-chuyen');
     Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
 });
 

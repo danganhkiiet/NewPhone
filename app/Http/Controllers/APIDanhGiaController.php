@@ -31,6 +31,11 @@ class APIDanhGiaController extends Controller
         $apidanh_gia=DanhGiaResource::collection($lst_danh_gia);
         return $this->apiResource(true,200,$apidanh_gia,"Danh sách đã thêm mới đánh giá");
     }
+    public function soSaoTrungBinhDienThoai(){
+        $danh_gia=DanhGia::where('dien_thoai_id',request('dien_thoai_id'))->avg('so_sao');
+
+        return $this->apiResource(true,200,floor($danh_gia),"Số sao trung bình đánh giá");
+    }
     public function apiResource($success=false,$status=200,$data=null,$messages=null){
         return response()->json([
             'success'=>$success,

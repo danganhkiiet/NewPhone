@@ -210,13 +210,13 @@
                 event.preventDefault(); // Ngăn chặn sự kiện submit mặc định của form
 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: "Bạn chắc chứ?",
+                    text: "Có chuyển qua vận chuyển không!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Tôi chắc chắn!"
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $id = $("#phieu_xuat_id").val();
@@ -231,8 +231,8 @@
                             }
                         }).done(function(response) {
                             Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                title: "Chuyển!",
+                                text: "Chuyển đã vận chuyển.",
                                 icon: "success"
 
                             })
