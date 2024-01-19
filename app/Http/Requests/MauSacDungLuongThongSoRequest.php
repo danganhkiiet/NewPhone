@@ -28,7 +28,7 @@ class MauSacDungLuongThongSoRequest extends FormRequest
     public function messages()
     {
         return [
-            'ten.required' => 'Họ tên không được bỏ trống.',
+            'ten.required' => 'Không được bỏ trống.',
         ];
     }
 }

@@ -56,7 +56,7 @@
                                                     <th>Địa Chỉ</th>
                                                     <th>Email</th>
                                                     <th>Số Điện Thoại</th>
-                                                    {{-- <th>#</th> --}}
+                                                    <th>#</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -180,6 +180,10 @@
                         data: "so_dien_thoai",
                         name: "so_dien_thoai",
                     },
+                    {
+                        data: "Action",
+                        name: "Action",
+                    },
                   
                 ],
                 "paging": true,
@@ -209,6 +213,32 @@
                     "input": '<input type="text" class="form-control" name="ten" placeholder="Nhập tên" />'
                 }
 
+            })
+            $(document).on('click', '.btn-camtaikhoan', function() {
+                Swal.fire({
+                    title: "Bạn có chắc không?",
+                    text: "Bạn muốn cấm tài khoản này!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Có, cấm nó đi!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $id = $(this).data('id');
+                        $.ajax({
+                            method: 'POST',
+                            url: "{{ route('khach-hang.xoa', '') }}/" + $id,
+                        }).done(function() {
+                            Swal.fire({
+                                title: "Đã cấm!",
+                                text: "Tài khoản đã được cấm.",
+                                icon: "success"
+                            });
+                            table.draw();
+                        })
+                    }
+                })
             })
             $('#btn-close').click(function() {
                 $("#myForm").removeClass('was-validated');

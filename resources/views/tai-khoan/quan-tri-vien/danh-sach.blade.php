@@ -145,10 +145,10 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary "
-                                                                    id="btn-close" data-dismiss="modal">Close</button>
+                                                                    id="btn-close" data-dismiss="modal">Đóng</button>
                                                                 <button type="button"
-                                                                    class="btn btn-primary btn-add btnSave">Save
-                                                                    changes</button>
+                                                                    class="btn btn-primary btn-add btnSave">Lưu
+                                                                    </button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -292,6 +292,7 @@
                                 table.draw();
                                 $('#password').val("");
                                 $('#myModal').modal('hide');
+                                $("#myForm").removeClass('was-validated');
 
                             }).fail(function(response) {
                                 // Xử lý lỗi validation
@@ -337,6 +338,7 @@
                                 //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
                                 table.draw();
                                 $('#password').val("");
+                                $("#myForm").removeClass('was-validated');
                                 $('#myModal').modal('hide');
 
                             }).fail(function(response) {
