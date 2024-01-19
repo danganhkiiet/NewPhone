@@ -120,8 +120,8 @@ class APIKhachHangController extends Controller
     {
 
 
-        $this->middleware('auth:api', ['except' => ['login', 'dangKy', 'xacThucDangKy', 'quenMatKhau', 'xacThucQuenMatKhau']]);
-    }
+        $this->middleware('auth:api', ['except' => ['login', 'dangKy', 'xacThucDangKy', 'quenMatKhau', 'xacThucQuenMatKhau','donHang']]);
+    }   
 
     public function login()
     {

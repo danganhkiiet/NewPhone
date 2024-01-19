@@ -104,7 +104,7 @@ Route::get('/thong-so/{id}', [APIDienThoaiThongSoController::class, 'thongSoTheo
 //phieu xuat
 
 Route::post('/phieu-xuat/them-moi', [APIPhieuXuatController::class, 'themMoi']);
-
+Route::post('phieu-xuat/cap-nhap-trang-thai', [APIPhieuXuatController::class, 'thayDoiTrangThai']);
 //test thanh toan vnpay
 //Route::get('/views-thanh-toan-vnpay',[ThanhToanController::class,'views'])->name('views-vnpay');
 Route::post('/thanh-toan-vnpay',[ThanhToanController::class,'thanhToanVNPAY'])->name('vnpay');

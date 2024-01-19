@@ -47,7 +47,8 @@ class APIPhieuXuatController extends Controller
     }
     return response()->json([
       'status' => 200,
-      'messages' => 'Đặt hàng thành công'
+      'messages' => 'Đặt hàng thành công',
+      'data' => $phieu_xuat->id
     ]);
   }
   public function xetDonHangDaMua()
@@ -69,6 +70,17 @@ class APIPhieuXuatController extends Controller
       'status' => 200,
       'data' => $chi_tiet_dien_thoai,
       'messages' => 'Phiếu đã đặt thành công'
+    ]);
+  }
+  public function thayDoiTrangThai(Request $request)
+  {
+
+    $phieu_xuat = PhieuXuat::where('id',$request->id)->first();
+    $phieu_xuat->trang_thai_thanh_toan = 1;
+    $phieu_xuat->save();
+    return response()->json([
+      'status' => 200,
+      'messages' => 'Thanh Toan Thanh Cong'
     ]);
   }
 }
