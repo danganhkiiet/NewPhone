@@ -7,6 +7,9 @@ use App\Models\DienThoai;
 use App\Models\ChiTietDienThoai;
 use App\Http\Resources\DienThoaiResource;
 use App\Http\Resources\ChiTietDienThoaiResource;
+use App\Models\ChiTietPhieuXuat;
+use App\Models\DanhGia;
+use Illuminate\Support\Facades\DB;
 
 class APIDienThoaiController extends Controller
 {
@@ -107,7 +110,40 @@ class APIDienThoaiController extends Controller
 
         return $this->apiResource();
     }
+    public function dienThoaiDuocDanhGiaNhieuNhat()
+    {
+        $dien_thoai_duoc_danh_gia_nhieu_nhat = DanhGia::select('dien_thoai_id', DB::raw('SUM(so_sao) as tong_sao'))
+            ->groupBy('dien_thoai_id')
+            ->orderByDesc('tong_sao')
+            ->limit(3)
+            ->with('dien_thoai')->with('dien_thoai.hinhAnh')->with('dien_thoai.chi_tiet_dien_thoai')->with('dien_thoai.chi_tiet_dien_thoai.mauSac')->with('dien_thoai.chi_tiet_dien_thoai.dungLuong')
+            ->get();
 
+        return $this->apiResource(true, 200, $dien_thoai_duoc_danh_gia_nhieu_nhat, "Danh Sách Điên Thoại Được Đánh Giá Nhiều Nhất");
+    }
+    public function dienThoaiLuotMuaNhieuNhat()
+    {
+        $dien_thoai_luot_mua_nhieu_nhat = ChiTietPhieuXuat::select('chi_tiet_dien_thoai_id', DB::raw('SUM(so_luong) as tong_luot_mua'))
+            ->groupBy('chi_tiet_dien_thoai_id')
+            ->orderByDesc('tong_luot_mua')
+            ->limit(3)
+            ->with('chi_tiet_dien_thoai')->with('chi_tiet_dien_thoai.mauSac')->with('chi_tiet_dien_thoai.dungLuong')->with('chi_tiet_dien_thoai.dienThoai')->with('chi_tiet_dien_thoai.dienThoai.hinhAnh')
+            ->get();
+
+        return $this->apiResource(true, 200, $dien_thoai_luot_mua_nhieu_nhat, "Danh Sách Điên Thoại Được Đánh Giá Nhiều Nhất");
+    }
+    public function dienThoaiMoiNhat()
+    {
+        
+        $dien_thoai_moi_nhat = ChiTietDienThoai::with('mauSac', 'dungLuong', 'dienThoai.hinhAnh')
+        ->where('so_luong', '>', 2)
+        ->orderBy('id', 'desc')
+        ->limit(3)
+        ->get();
+    
+
+        return $this->apiResource(true, 200, $dien_thoai_moi_nhat, "Danh Sách Điên Thoại Mới Nhất");
+    }
     public function apiResource($success = false, $status = 200, $data = null, $messages = null)
     {
         return response()->json([

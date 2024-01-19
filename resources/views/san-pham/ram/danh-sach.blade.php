@@ -69,7 +69,7 @@
                                                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
-                                                        <span aria-hidden="true" id="#btn-closeX">&times;</span>
+                                                        <span aria-hidden="true" id="btn-closeX">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
@@ -90,10 +90,9 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
-                                                                    id="#btn-close" data-dismiss="modal">Close</button>
+                                                                    id="btn-close" data-dismiss="modal">Đóng</button>
                                                                 <button type="button"
-                                                                    class="btn btn-primary btn-add btnSave">Save
-                                                                    changes</button>
+                                                                    class="btn btn-primary btn-add btnSave">Lưu</button>
                                                             </div>
                                                         </div>
                                                     </form>

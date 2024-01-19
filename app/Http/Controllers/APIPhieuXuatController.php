@@ -71,4 +71,14 @@ class APIPhieuXuatController extends Controller
       'messages' => 'Phiếu đã đặt thành công'
     ]);
   }
+  public function huyDon(){
+    $phieu_xuat = PhieuXuat::where('khach_hang_id', request('khach_hang_id'))->where('id',request('id_phieu_xuat'))->first();
+    $phieu_xuat->trang_thai_don_hang_id=request('trang_thai_don_hang_id');
+    $phieu_xuat->save();
+
+    return response()->json([
+        'success' => 200,
+        'messages' => "Đơn Hàng Đã Hủy Thành Công"
+    ]);
+  }
 }

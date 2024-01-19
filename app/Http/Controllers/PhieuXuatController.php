@@ -116,6 +116,11 @@ class PhieuXuatController extends Controller
                     $temp = $temp . '<a href="' . route("phieu-xuat.in-pdf-phieu-van-chuyen", ['id' => $row->id]) . '" class="btn btn-info btn-inphieu">
                     <i class="fe fe-info"></i>
                      </a>';
+                    $temp = $temp .
+                        '<button type="button" class="btn btn-danger btn-delete "
+                     data-id="' . $row->id . '">
+                         <i class="fe fe-delete"></i>
+                    </button>';
 
                     return $temp;
                 })
@@ -141,14 +146,18 @@ class PhieuXuatController extends Controller
                 ->addColumn('trang_thai_don_hang_id', function ($row) {
                     return $row->trang_thai_don_hang->ten;
                 })
-                ->addColumn('Action', function ($row) {
-                    $temp =
-                        '<button type="button" class="btn btn-primary "
-                         data-id="' . $row->id . '">
-                            <i class="fe fe-info"></i>
-                    </button>';
-                    return $temp;
+                ->addColumn('admin_id', function ($row) {
+                    return optional($row->admin)->ho_ten ?? " Khách hủy";
                 })
+                
+                // ->addColumn('Action', function ($row) {
+                //     $temp =
+                //         '<button type="button" class="btn btn-primary "
+                //          data-id="' . $row->id . '">
+                //             <i class="fe fe-info"></i>
+                //     </button>';
+                //     return $temp;
+                // })
                 //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
                 ->rawColumns(['Action'])
                 //Tạo và trả về JSON để hiển thị trong DataTable
@@ -217,6 +226,15 @@ class PhieuXuatController extends Controller
         return response()->json($phieu_xuat_xac_nhan);
     }
     public function capNhatPhieuVanChuyen(Request $request, $id)
+    {
+        $phieu_xuat = PhieuXuat::find($id);
+        $phieu_xuat->trang_thai_don_hang_id = $request->trang_thai_don_hang_id;
+        $phieu_xuat->save();
+
+        $phieu_xuat_phieu_van_chuyen = PhieuXuat::with('khach_hang:id,ten,dia_chi,so_dien_thoai')->with('trang_thai_don_hang:id,ten')->where('trang_thai_don_hang_id', 3)->get();
+        return response()->json($phieu_xuat_phieu_van_chuyen);
+    }
+    public function capNhatHuyPhieu(Request $request, $id)
     {
         $phieu_xuat = PhieuXuat::find($id);
         $phieu_xuat->trang_thai_don_hang_id = $request->trang_thai_don_hang_id;

@@ -69,7 +69,7 @@
                                                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
-                                                        <span aria-hidden="true" id="#btn-closeX">&times;</span>
+                                                        <span aria-hidden="true" id="btn-closeX">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
@@ -88,15 +88,14 @@
 
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    id="#btn-close" data-dismiss="modal">Close</button>
-                                                                <button type="button"
-                                                                    class="btn btn-primary btn-add btnSave">Save
-                                                                    changes</button>
-                                                            </div>
                                                         </div>
                                                     </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" id="btn-close"
+                                                            data-dismiss="modal">Đóng</button>
+                                                        <button type="button" class="btn btn-primary btn-add btnSave">Lưu
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,6 +133,7 @@
                 columns: [{
                         data: "DT_RowIndex", // Sử dụng "DT_RowIndex" để lấy số thứ tự
                         name: "DT_RowIndex",
+
                     },
                     {
                         data: "ten",
@@ -233,6 +233,7 @@
             })
             $('#btn-close').click(function() {
                 $("#myForm").removeClass('was-validated');
+
                 $('#myModal').modal('hide');
 
             })

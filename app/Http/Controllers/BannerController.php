@@ -21,7 +21,7 @@ class BannerController extends Controller
                 ->addIndexColumn()
                 //Thêm cột banner cho từng bản
                 ->addColumn('duong_dan', function ($row) {
-                    return '<img src="' . asset("{$row->duong_dan}") . '"  style="width: 100%;height: 15em;">';
+                    return '<img src="' . asset("{$row->duong_dan}") . '"  style="width: 100%;height: 10em;">';
                 })
                 //Thêm cột action cho từng bản
                 ->addColumn('Action', function ($row) {
