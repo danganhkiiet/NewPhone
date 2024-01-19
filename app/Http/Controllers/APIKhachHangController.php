@@ -120,8 +120,8 @@ class APIKhachHangController extends Controller
     {
 
 
-        $this->middleware('auth:api', ['except' => ['login', 'dangKy', 'xacThucDangKy', 'quenMatKhau', 'xacThucQuenMatKhau','donHang']]);
-    }   
+        $this->middleware('auth:api', ['except' => ['login', 'dangKy', 'xacThucDangKy', 'quenMatKhau', 'xacThucQuenMatKhau']]);
+    }
 
     public function login()
     {
@@ -177,12 +177,42 @@ class APIKhachHangController extends Controller
     }
     public function donHang()
     {
-        $phieu_xuat = PhieuXuat::with('chi_tiet_phieu_xuat')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.mauSac')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dungLuong')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai.hinhAnh')->where('khach_hang_id', request('khach_hang_id'))->get();
+        $statues = [1, 2, 3];
+        $phieu_xuat = PhieuXuat::with('chi_tiet_phieu_xuat')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.mauSac')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dungLuong')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai.hinhAnh')->where('khach_hang_id', request('khach_hang_id'))->whereIn('trang_thai_don_hang_id', $statues)->get();
 
         return response()->json([
             'success' => 200,
             'data' => $phieu_xuat,
             'messages' => "Đơn Hàng"
+        ]);
+    }
+    public function doiMatKhau()
+    {
+        $khach_hang = auth()->user();
+        // dd($khach_hang);
+        // Kiểm tra mật khẩu cũ
+        if (!Hash::check(request('password'), $khach_hang->password)) {
+            // Mật khẩu cũ không chính xác
+            return response()->json([
+                'error' => 400,
+                'messages' => 'Mật khẩu cũ không chính xác'
+            ]);
+        }
+
+        // Kiểm tra mật khẩu mới và xác nhận mật khẩu mới
+        if (request('newPassword') !== request('confirmNewPassword')) {
+            // Mật khẩu mới và xác nhận mật khẩu mới không giống nhau
+            return response()->json([
+                'error' => 400,
+                'messages' => 'Mật khẩu mới và xác nhận mật khẩu mới không giống nhau'
+            ]);
+        }
+
+        // Cập nhật mật khẩu mới
+        $khach_hang = KhachHang::where('id', $khach_hang->id)->update(['password' => Hash::make(request('newPassword'))]);
+        return response()->json([
+            'success' => 200,
+            'messages' => 'Đổi mật khẩu thành công'
         ]);
     }
 }

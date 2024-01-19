@@ -225,24 +225,33 @@
                     confirmButtonText: "Chắc chắn!"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var frm_Data = new FormData($('#myForm')[0]);
-                        $.ajax({
-                            method: 'POST',
-                            url: "{{ route('banner.xu-ly-them-moi-cap-nhat') }}",
-                            data: frm_Data,
-                            processData: false,
-                            contentType: false,
-                        }).done(function() {
+                        if ($('#hinh_anh').val() == "" || $('#ten').val() == "") {
                             Swal.fire({
-                                title: "Thành công!",
-                                text: "Thực hiện chức năng thành công.",
-                                icon: "success"
+                                title: "Hình Ảnh Hoặc Tên",
+                                text: "Vui lòng không để trống?",
+                                icon: "error"
                             });
-                            //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
-                            table.draw();
-                            $("#myForm").removeClass('was-validated');
-                            $('#myModal').modal('hide');
-                        })
+                            return;
+                        } else {
+                            var frm_Data = new FormData($('#myForm')[0]);
+                            $.ajax({
+                                method: 'POST',
+                                url: "{{ route('banner.xu-ly-them-moi-cap-nhat') }}",
+                                data: frm_Data,
+                                processData: false,
+                                contentType: false,
+                            }).done(function() {
+                                Swal.fire({
+                                    title: "Thành công!",
+                                    text: "Thực hiện chức năng thành công.",
+                                    icon: "success"
+                                });
+                                //table.draw() vẽ lại bảng dữ liệu khi có sự thay đổi trong dữ liệu
+                                table.draw();
+                                $("#myForm").removeClass('was-validated');
+                                $('#myModal').modal('hide');
+                            })
+                        }
                     }
                 })
 

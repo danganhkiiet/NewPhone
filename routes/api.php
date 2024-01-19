@@ -59,6 +59,7 @@ Route::middleware(['api'])->group(function () {
         Route::post('/xoa-yeu-thich', [APIYeuThichController::class,'xoaYeuThich']);
         Route::post('/yeu-thich-them-moi', [APIYeuThichController::class,'themMoi']);
 
+        Route::post('/doi-mat-khau', [APIKhachHangController::class, 'doiMatKhau']);
 
         Route::post('/cap-nhat-mat-khau', [APIKhachHangController::class, 'quenMatKhau']);
 
@@ -81,6 +82,8 @@ Route::post('/them-moi-binh-luan-cap-mot', [APIBinhLuanController::class, 'themM
 Route::post('/them-moi-binh-luan-cap-hai', [APIBinhLuanController::class, 'themMoiCapHai']);
 
 Route::get('/danh-sach-danh-gia', [APIDanhGiaController::class, 'danhSach']);
+
+Route::get('/so-sao-danh-gia-trung-binh', [APIDanhGiaController::class, 'soSaoTrungBinhDienThoai']);
 
 Route::post('/them-moi-danh-gia', [APIDanhGiaController::class, 'themMoi']);
 
