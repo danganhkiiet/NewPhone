@@ -38,7 +38,9 @@ Route::get('/dien-thoai-lien-quan', [APIDienThoaiController::class, 'dienThoaiLi
 // Route::get('/dien-thoai-theo-gia-mau', [APIDienThoaiController::class, 'danhSachTheoGiaMau'])->name('dien-thoai.danh-sach-theo-gia-mau');
 // Route::get('/dien-thoai-theo-gia-mau-dung-luong', [APIDienThoaiController::class, 'danhSachTheoGiaMauDungLuong'])->name('dien-thoai.danh-sach-theo-gia-mau-dung-luong');
 // Route::get('/dien-thoai-theo-gia-mau-dung-luong-hang', [APIDienThoaiController::class, 'danhSachTheoGiaMauDungLuongHang'])->name('dien-thoai.danh-sach-theo-gia-mau-dung-luong-hang');
-
+Route::get('/dien-thoai-duoc-danh-gia-nhieu-nhat', [APIDienThoaiController::class, 'dienThoaiDuocDanhGiaNhieuNhat']);
+Route::get('/dien-thoai-luot-mua-nhieu-nhat', [APIDienThoaiController::class, 'dienThoaiLuotMuaNhieuNhat']);
+Route::get('/dien-thoai-moi-nhat', [APIDienThoaiController::class, 'dienThoaiMoiNhat']);
 
 
 Route::middleware(['api'])->group(function () {
@@ -107,7 +109,12 @@ Route::get('/thong-so/{id}', [APIDienThoaiThongSoController::class, 'thongSoTheo
 //phieu xuat
 
 Route::post('/phieu-xuat/them-moi', [APIPhieuXuatController::class, 'themMoi']);
+
 Route::post('phieu-xuat/cap-nhap-trang-thai', [APIPhieuXuatController::class, 'thayDoiTrangThai']);
+
+Route::post('/phieu-xuat/huy-don', [APIPhieuXuatController::class, 'huyDon']);
+
+
 //test thanh toan vnpay
 //Route::get('/views-thanh-toan-vnpay',[ThanhToanController::class,'views'])->name('views-vnpay');
 Route::post('/thanh-toan-vnpay',[ThanhToanController::class,'thanhToanVNPAY'])->name('vnpay');

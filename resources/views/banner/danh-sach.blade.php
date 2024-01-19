@@ -38,7 +38,7 @@
                             <div class="card">
                                 <div class="card-header border-bottom">
                                     <h3 class="card-title">Danh Sách</h3>
-                                    <div class="btn" style="position: relative;left: 78%;">
+                                    <div class="btn" style="position: relative;left: 79%;">
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary btnAdd">
                                             Thêm Mới
@@ -103,7 +103,7 @@
                                                             <div class="collapse mt-4" id="boxnoidung">
                                                                 <div class="card card-body bg-warning">
                                                                     <div class="card card-body bg-warning">
-                                                                        <img src="" id="duong_dan" />
+                                                                        <img src="" id="duong_dan"  style="width: 100%;height: 16.5em;" />
                                                                     </div>
                                                                 </div>
                                                             </div>

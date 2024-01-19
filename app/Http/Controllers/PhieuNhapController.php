@@ -12,7 +12,7 @@ use App\Models\MauSac;
 use App\Models\DungLuong;
 use App\Models\DienThoai;
 use App\Models\ChiTietDienThoai;
-use App\Http\Requests\PhieuNhapCreateRequest;
+use App\Http\Requests\PhieuNhapRequest;
 
 class PhieuNhapController extends Controller
 {
@@ -74,7 +74,7 @@ class PhieuNhapController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function xuLyThemMoi(Request $request)
+    public function xuLyThemMoi(PhieuNhapRequest $request)
     {
         // dd($request);
         //them moi phieu nhap

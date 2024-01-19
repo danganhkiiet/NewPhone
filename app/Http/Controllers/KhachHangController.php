@@ -20,16 +20,16 @@ class khachhangController extends Controller
                 //Thêm một cột số thứ tự cho từng bản ghi
                 ->addIndexColumn()
                 //Thêm cột action cho từng bản
-                // ->addColumn('Action',function($row){
-                //     $temp=
-                //     '<button type="button" class="btn btn-primary btn-edit"
-                //         ata-toggle="modal" data-target="#myModal" data-id="'. $row->id .'">
-                //             <i class="fe fe-edit"></i>
-                //     </button>';
-                //     return $temp;
-                // })
-                // //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
-                // ->rawColumns(['Action'])
+                ->addColumn('Action',function($row){
+                    $temp=
+                    '<button type="button" class="btn btn-danger btn-camtaikhoan"
+                        ata-toggle="modal" data-target="#myModal" data-id="'. $row->id .'">
+                            <i class="fe fe-delete">Cấm tài khoản</i>
+                    </button>';
+                    return $temp;
+                })
+                //DataTables sẽ không trích xuất văn bản trong cột "Action" mà sẽ hiển thị toàn bộ mã trên tao đã viét.
+                ->rawColumns(['Action'])
                 //Tạo và trả về JSON để hiển thị trong DataTable
                 ->make(true);
         }
@@ -67,12 +67,12 @@ class khachhangController extends Controller
     //     $khach_hang->save();
     //     return redirect()->route('khach-hang.danh-sach')->with('thong_bao', 'Cập nhật thành công');
     // }
-    // public function xoa($id)
-    // {
-    //     $khach_hang = khachhang::find($id);
-    //     $khach_hang->delete();
-    //     return redirect()->route('khach-hang.danh-sach')->with('thong_bao', 'Xóa thành công');
-    // }
+    public function xoa($id)
+    {
+        $khach_hang = khachhang::find($id);
+        $khach_hang->delete();
+        return response()->json(['message' => 'Xóa Thành công']);
+    }
     public function quenMatKhau($token)
     {
         return view('tai-khoan.khach-hang.quen-mat-khau', compact('token'));

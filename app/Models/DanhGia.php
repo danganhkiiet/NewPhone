@@ -15,4 +15,7 @@ class DanhGia extends Model
     public function khach_hang(){
         return $this->belongsTo(KhachHang::class);
     }
+    public function dien_thoai(){
+        return $this->belongsTo(DienThoai::class);
+    }
 }

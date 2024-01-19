@@ -114,9 +114,9 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" id="btn-close"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary btn-add btnSave">Save
-                                                        changes</button>
+                                                        data-dismiss="modal">Đóng</button>
+                                                    <button type="button" class="btn btn-primary btn-add btnSave">
+                                                        Lưu</button>
                                                 </div>
 
                                             </div>

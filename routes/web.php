@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/phieu-xuat/cap-nhat-da-xac-nhan/{id}',[PhieuXuatController::class,'capNhatDaXacNhan'])->name('phieu-xuat.cap-nhat-da-xac-nhan');
     Route::post('/phieu-xuat/cap-nhat-phieu-van-chuyen/{id}',[PhieuXuatController::class,'capNhatPhieuVanChuyen'])->name('phieu-xuat.cap-nhat-phieu-van-chuyen');
     Route::get('/phieu-xuat/pdf-phieu-van-chuyen/{id}',[PhieuXuatController::class,'inRaPhieuPDFVanChuyen'])->name('phieu-xuat.in-pdf-phieu-van-chuyen');
+    Route::post('/phieu-xuat/huy-phieu/{id}',[PhieuXuatController::class,'capNhatHuyPhieu'])->name('phieu-xuat.huy-phieu-van-chuyen');
     Route::get('/dang-xuat', [AdminController::class, 'dangXuat'])->name('admin.dangxuat');
 });
 
@@ -116,9 +117,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/them-moi',[KhachHangController::class,'xuLyThemMoi'])->name('xu-ly-them-moi');
             Route::get('/cap-nhat/{id}',[KhachHangController::class,'capNhat'])->name('cap-nhat');
             Route::post('/cap-nhat/{id}',[KhachHangController::class,'xuLyCapNhat'])->name('xu-ly-cap-nhat');
-            Route::get('/xoa/{id}',[KhachHangController::class,'xoa'])->name('xoa');
-
-         
+            Route::post('/xoa/{id}',[KhachHangController::class,'xoa'])->name('xoa');
 
         });
     });

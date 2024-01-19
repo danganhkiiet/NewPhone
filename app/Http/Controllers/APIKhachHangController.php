@@ -178,7 +178,7 @@ class APIKhachHangController extends Controller
     public function donHang()
     {
         $statues = [1, 2, 3];
-        $phieu_xuat = PhieuXuat::with('chi_tiet_phieu_xuat')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.mauSac')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dungLuong')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai.hinhAnh')->where('khach_hang_id', request('khach_hang_id'))->whereIn('trang_thai_don_hang_id', $statues)->get();
+        $phieu_xuat = PhieuXuat::with('chi_tiet_phieu_xuat')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.mauSac')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.ram')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dungLuong')->with('chi_tiet_phieu_xuat.chi_tiet_dien_thoai.dienThoai.hinhAnh')->where('khach_hang_id', request('khach_hang_id'))->whereIn('trang_thai_don_hang_id', $statues)->get();
 
         return response()->json([
             'success' => 200,

@@ -42,7 +42,7 @@
                                         <a href="{{ route('phieu-nhap.them-moi-phieu-nhap') }}" class="btn btn-primary-light ">Thêm mới</a>
                                     </div>
                                     <!-- form tim kiem -->
-                                    <form action="" class="form-inline" role="form"
+                                    {{-- <form action="" class="form-inline" role="form"
                                         style="position: relative;left: 45%;">
                                         @csrf
                                         <div class="form-group">
@@ -55,7 +55,7 @@
                                                 </a>
                                             </button>
                                         </div>
-                                    </form>
+                                    </form> --}}
                                     <!-- ket thuc form tim kiem -->
                                 </div>
                                 <div class="card-body">

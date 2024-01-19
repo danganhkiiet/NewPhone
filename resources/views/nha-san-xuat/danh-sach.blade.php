@@ -118,10 +118,10 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
-                                                                    id="btn-close" data-dismiss="modal">Close</button>
+                                                                    id="btn-close" data-dismiss="modal">Đóng</button>
                                                                 <button type="button"
-                                                                    class="btn btn-primary btn-add btnSave">Save
-                                                                    changes</button>
+                                                                    class="btn btn-primary btn-add btnSave">Lưu
+                                                                    </button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -167,18 +167,22 @@
                     {
                         data: "ten",
                         name: "ten",
+                        searchable: true,
                     },
                     {
                         data: "dia_chi",
                         name: "dia_chi",
+                        searchable: false,
                     },
                     {
                         data: "email",
                         name: "email",
+                        searchable: false,
                     },
                     {
                         data: "so_dien_thoai",
                         name: "so_dien_thoai",
+                        searchable: false,
                     },
                     {
                         data: "Action",

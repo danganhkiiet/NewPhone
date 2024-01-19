@@ -118,10 +118,10 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
-                                                                    id="btn-close" data-dismiss="modal">Close</button>
+                                                                    id="btn-close" data-dismiss="modal">Đóng</button>
                                                                 <button type="button"
-                                                                    class="btn btn-primary btn-add btnSave">Save
-                                                                    changes</button>
+                                                                    class="btn btn-primary btn-add btnSave">Lưu
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -165,26 +165,32 @@
                 columns: [{
                         data: "DT_RowIndex", // Sử dụng "DT_RowIndex" để lấy số thứ tự
                         name: "DT_RowIndex",
+                        searchable: true,  // Cột này có thể tìm kiếm
                     },
                     {
                         data: "ten",
                         name: "ten",
+                        searchable: true,  // Cột này có thể tìm kiếm
                     },
                     {
                         data: "dia_chi",
                         name: "dia_chi",
+                        searchable: false,  // Cột này có thể tìm kiếm
                     },
                     {
                         data: "email",
                         name: "email",
+                        searchable: false,  // Cột này có thể tìm kiếm
                     },
                     {
                         data: "so_dien_thoai",
                         name: "so_dien_thoai",
+                        searchable: false,  // Cột này có thể tìm kiếm
                     },
                     {
                         data: "Action",
                         name: "Action",
+                        searchable: false,  // Cột này có thể tìm kiếm
                     },
                 ],
                 "paging": true,

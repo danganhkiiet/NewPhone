@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PhieuNhapCreateRequest extends FormRequest
+class PhieuNhapRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,19 +22,15 @@ class PhieuNhapCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thong_tin_nguoi_giao'=>'required',
-            'nha_cung_cap_id'=>'required',
-            'ngay_nhap_hang'=>'required',
-            'admin_id'=>'required',
+            'thong_tin_nguoi_giao' => 'required|regex:/^[^0-9]+$/',
         ];
     }
+
     public function messages()
     {
         return [
             'thong_tin_nguoi_giao.required' => 'Thông tin người giao không được bỏ trống.',
-            'nha_cung_cap_id.required'=>'Nhà cung cấp không được bỏ trống.',
-            'ngay_nhap_hang.required' => 'Ngày nhập không được bỏ trống.',
-            'admin_id.required' => 'admin không được bỏ trống.',
+            'thong_tin_nguoi_giao.regex' => 'Thông tin người giao không được chứa số.',
         ];
     }
 }
