@@ -144,6 +144,15 @@ class APIDienThoaiController extends Controller
 
         return $this->apiResource(true, 200, $dien_thoai_moi_nhat, "Danh Sách Điên Thoại Mới Nhất");
     }
+
+    public function chiTietDienThoai(Request $request)
+    {
+        
+        $dien_thoai = DienThoai::where('id',$request->id)->first();
+        $api_dien_thoai = new DienThoaiResource($dien_thoai);
+
+        return $this->apiResource(true, 200, $api_dien_thoai, "điện thoại");
+    }
     public function apiResource($success = false, $status = 200, $data = null, $messages = null)
     {
         return response()->json([

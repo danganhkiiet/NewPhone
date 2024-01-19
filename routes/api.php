@@ -41,7 +41,7 @@ Route::get('/dien-thoai-lien-quan', [APIDienThoaiController::class, 'dienThoaiLi
 Route::get('/dien-thoai-duoc-danh-gia-nhieu-nhat', [APIDienThoaiController::class, 'dienThoaiDuocDanhGiaNhieuNhat']);
 Route::get('/dien-thoai-luot-mua-nhieu-nhat', [APIDienThoaiController::class, 'dienThoaiLuotMuaNhieuNhat']);
 Route::get('/dien-thoai-moi-nhat', [APIDienThoaiController::class, 'dienThoaiMoiNhat']);
-
+Route::get('/chi-tiet-dien-thoai', [APIDienThoaiController::class, 'chiTietDienThoai']);
 
 Route::middleware(['api'])->group(function () {
     Route::prefix('khach-hang')->group(function () {
