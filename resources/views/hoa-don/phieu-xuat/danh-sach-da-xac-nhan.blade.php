@@ -60,7 +60,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header border-bottom">
-                                    <h3 class="card-title">Chi Tiết Phiếu Xuất Đã Hủy</h3>
+                                    <h3 class="card-title">Chi Tiết Phiếu Đã Xác Nhận</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">

@@ -21,10 +21,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // // Khai báo khóa ngoại cho dien_thoai_id
-            // $table->foreign('dien_thoai_id')->references('id')->on('dien_thoai')->onDelete('cascade');
+            // Khai báo khóa ngoại cho dien_thoai_id
+            $table->foreign('dien_thoai_id')->references('id')->on('dien_thoai')->onDelete('cascade');
 
-            $table->foreign('dien_thoai_id')->references('id')->on('dien_thoai');
+            // $table->foreign('dien_thoai_id')->references('id')->on('dien_thoai');
 
             // Khai báo khóa ngoại cho mau_sac_id
             $table->foreign('mau_sac_id')->references('id')->on('mau_sac');

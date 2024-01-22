@@ -602,7 +602,11 @@
                                 </button>
                                 <a href="${routeUrl}" class="btn btn-info btn-inphieu">
                                     <i class="fe fe-info"></i>
-                                </a></td>
+                                </a>
+                                <button type="button" class="btn btn-danger btn-delete"
+                                    data-id="${item.id}">
+                                        <i class="fe fe-delete"></i>
+                                </button></td>
                                 </tr>`;
                                 // Thêm dòng mới vào tbody
                                 $('#myTableVanChuyen tbody').append(row);
