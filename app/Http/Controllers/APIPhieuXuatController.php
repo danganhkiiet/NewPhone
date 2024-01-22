@@ -51,9 +51,18 @@ class APIPhieuXuatController extends Controller
       'data' => $phieu_xuat->id
     ]);
   }
+  public function huyDon(){
+    $phieu_xuat=PhieuXuat::where('khach_hang_id',request('khach_hang_id'))->where('id',request('id_phieu_xuat'))->first();
+    $phieu_xuat->trang_thai_don_hang_id=request('trang_thai_don_hang_id');
+    $phieu_xuat->save();
+    return response()->json([
+      'status' => 200,
+      'messages' => 'Hủy thành công'
+    ]);
+  }
   public function xetDonHangDaMua()
   {
-
+    // dd(request());
     $phieu_xuat = PhieuXuat::where('khach_hang_id', request('khach_hang_id'))->where('trang_thai_don_hang_id',4)->get();
     // dd($phieu_xuat);
     $chi_tiet_phieu_xuat=[];

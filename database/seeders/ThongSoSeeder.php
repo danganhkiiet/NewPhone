@@ -33,10 +33,6 @@ class ThongSoSeeder extends Seeder
         $thong_so=new ThongSo();
         $thong_so->ten="Chip";
         $thong_so->save();
-        //id=6
-        $thong_so=new ThongSo();
-        $thong_so->ten="RAM";
-        $thong_so->save();
         //id=7
         $thong_so=new ThongSo();
         $thong_so->ten="Dung lượng lưu trữ";

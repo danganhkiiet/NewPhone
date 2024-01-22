@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('chi_tiet_dien_thoai', function (Blueprint $table) {
-        //     $table->unsignedBigInteger('ram_id')->after('dung_luong_id');
-        // });
+        Schema::table('chi_tiet_dien_thoai', function (Blueprint $table) {
+            $table->unsignedBigInteger('ram_id')->after('dung_luong_id');
+        });
+        
     }
 
     /**
